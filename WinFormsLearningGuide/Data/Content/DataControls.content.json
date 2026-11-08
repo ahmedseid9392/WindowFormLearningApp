@@ -1,0 +1,77 @@
+[
+  {
+    "name": "DataGridView",
+    "purpose": "A DataGridView displays and edits tabular data in rows and columns. It can show a list of objects, a DataTable or rows you add manually.",
+    "whenToUse": [
+      "Show records with several fields, such as customers or orders.",
+      "Let users edit, sort, add and delete rows.",
+      "Bind to a list, DataTable or BindingSource."
+    ],
+    "realWorldExamples": [
+      "A customer list with Name, City and Phone columns.",
+      "An invoice screen with an editable list of line items.",
+      "A results grid that shows the rows of a SQL query."
+    ],
+    "defaultAppearance": "A grid with a header row showing column names, a row-header column on the left, thin cell borders, and alternating selection highlight. An empty 'new row' appears at the bottom when AllowUserToAddRows is true.",
+    "commonMistakes": [
+      { "mistake": "Binding a plain List<T> and seeing no updates after adding items.", "fix": "Bind a BindingList<T> or wrap the list in a BindingSource so the grid is notified of changes." },
+      { "mistake": "Loading thousands of rows by adding them one at a time.", "fix": "Bind the data source once, or use VirtualMode for very large data sets." },
+      { "mistake": "Reading CurrentRow when no row is selected, which throws NullReferenceException.", "fix": "Check for null, and check SelectedRows.Count, before using it." }
+    ],
+    "relatedNotes": [
+      { "name": "ListBox", "difference": "A simple one-column list; use DataGridView when items have several fields." },
+      { "name": "BindingSource", "difference": "Sits between the data and the grid, adding sorting, filtering and current-record tracking." },
+      { "name": "BindingNavigator", "difference": "A toolbar to move through and add or delete records in the bound data." }
+    ]
+  },
+  {
+    "name": "BindingSource",
+    "purpose": "A BindingSource is a non-visual component that sits between a data source and bound controls. It manages the current record, sorting, filtering and change notification.",
+    "whenToUse": [
+      "Bind several controls to the same list so they stay in sync.",
+      "Sort or filter data without changing the underlying collection.",
+      "Move through records with Position or a BindingNavigator."
+    ],
+    "realWorldExamples": [
+      "A master/detail screen where choosing a customer shows their orders.",
+      "A form that binds TextBoxes to the current record of a list.",
+      "A grid whose rows can be filtered by a search box."
+    ],
+    "defaultAppearance": "BindingSource has no appearance; it appears in the component tray under the form designer. It shows nothing at run time, and the controls bound to it display the data.",
+    "commonMistakes": [
+      { "mistake": "Setting DataSource to a type that is not a list and expecting rows.", "fix": "Bind to a list or collection (or a single object for one record) and set DataMember for sub-lists." },
+      { "mistake": "Using Filter with a data source that does not support it.", "fix": "Filter and Sort work with sources such as DataView or a BindingList that implements IBindingListView; otherwise filter in code." },
+      { "mistake": "Not calling EndEdit before saving, which loses the last typed value.", "fix": "Call EndEdit() on the BindingSource before reading or saving the data." }
+    ],
+    "relatedNotes": [
+      { "name": "DataGridView", "difference": "The visible grid that is commonly bound to a BindingSource." },
+      { "name": "BindingNavigator", "difference": "The toolbar that moves the BindingSource's current position." },
+      { "name": "ComboBox", "difference": "A control that can be bound to a BindingSource through DataSource, DisplayMember and ValueMember." }
+    ]
+  },
+  {
+    "name": "BindingNavigator",
+    "purpose": "A BindingNavigator is a toolbar with buttons to move to the first, previous, next and last record of a BindingSource, and to add or delete records.",
+    "whenToUse": [
+      "Browse records one at a time in a detail form.",
+      "Provide add and delete buttons for bound data.",
+      "Show 'record N of M' without writing navigation code."
+    ],
+    "realWorldExamples": [
+      "A customer detail form with record navigation at the top.",
+      "A simple data entry form for a table of products.",
+      "A tool for reviewing a list of items one by one."
+    ],
+    "defaultAppearance": "A ToolStrip docked at the top of the form with buttons for Move first, Previous, a position box ('1' of 5), Next, Last, Add new and Delete.",
+    "commonMistakes": [
+      { "mistake": "Adding a navigator and finding that it does nothing.", "fix": "Set its BindingSource property to the BindingSource that holds the data." },
+      { "mistake": "Expecting changes to be saved.", "fix": "The navigator only moves and edits the in-memory list; add your own Save button that writes to the database or file." },
+      { "mistake": "Removing a button and breaking the navigator.", "fix": "Set the item's Visible or Enabled property, or replace the item and assign it to the matching property such as DeleteItem." }
+    ],
+    "relatedNotes": [
+      { "name": "BindingSource", "difference": "Provides the data and the current position that the navigator controls." },
+      { "name": "DataGridView", "difference": "Shows many records at once; a navigator is for moving between records." },
+      { "name": "ToolStrip", "difference": "The base class that BindingNavigator extends with data buttons." }
+    ]
+  }
+]

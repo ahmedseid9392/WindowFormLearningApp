@@ -1,0 +1,105 @@
+[
+  {
+    "name": "DataGridView",
+    "category": "Data",
+    "namespace": "System.Windows.Forms",
+    "className": "DataGridView",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "DataGridView"
+    ],
+    "summary": "Displays data in a customizable grid of rows and columns, with support for editing and data binding.",
+    "importantProperties": [
+      "DataSource",
+      "Columns",
+      "Rows",
+      "AllowUserToAddRows",
+      "ReadOnly",
+      "SelectionMode",
+      "AutoSizeColumnsMode",
+      "AutoGenerateColumns"
+    ],
+    "importantEvents": [
+      "CellClick",
+      "CellValueChanged",
+      "CellEndEdit",
+      "SelectionChanged",
+      "DataError",
+      "CellFormatting"
+    ],
+    "relatedControls": [
+      "ListBox",
+      "BindingSource",
+      "BindingNavigator"
+    ]
+  },
+  {
+    "name": "BindingSource",
+    "category": "Data",
+    "namespace": "System.Windows.Forms",
+    "className": "BindingSource",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "BindingSource"
+    ],
+    "summary": "Sits between a data source and controls, providing currency management, sorting and filtering.",
+    "importantProperties": [
+      "DataSource",
+      "DataMember",
+      "Filter",
+      "Sort",
+      "Position",
+      "Current",
+      "List"
+    ],
+    "importantEvents": [
+      "CurrentChanged",
+      "ListChanged",
+      "PositionChanged",
+      "DataSourceChanged"
+    ],
+    "relatedControls": [
+      "DataGridView",
+      "BindingNavigator",
+      "ComboBox"
+    ]
+  },
+  {
+    "name": "BindingNavigator",
+    "category": "Data",
+    "namespace": "System.Windows.Forms",
+    "className": "BindingNavigator",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "ToolStrip",
+      "BindingNavigator"
+    ],
+    "summary": "A toolbar for moving through, adding to and deleting from a BindingSource.",
+    "importantProperties": [
+      "BindingSource",
+      "PositionItem",
+      "CountItem",
+      "MoveFirstItem",
+      "AddNewItem",
+      "DeleteItem"
+    ],
+    "importantEvents": [
+      "RefreshItems"
+    ],
+    "relatedControls": [
+      "BindingSource",
+      "DataGridView",
+      "ToolStrip"
+    ]
+  }
+]

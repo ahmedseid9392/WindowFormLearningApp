@@ -1,0 +1,347 @@
+[
+  {
+    "name": "MenuStrip",
+    "properties": [
+      {
+        "name": "Items",
+        "dataType": "ToolStripItemCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "ToolStripMenuItem, ToolStripComboBox, ToolStripTextBox, ToolStripSeparator",
+        "description": "The top-level entries of the menu bar.",
+        "usage": "Add menus from code.",
+        "example": "menuStrip1.Items.Add(new ToolStripMenuItem(\"File\"));",
+        "expectedEffect": "A File entry appears on the menu bar."
+      },
+      {
+        "name": "Dock",
+        "dataType": "DockStyle",
+        "defaultValue": "Top",
+        "acceptedValues": "Top, Bottom, Left, Right, Fill, None",
+        "description": "The edge of the form the menu bar attaches to.",
+        "usage": "Keep the menu at the top.",
+        "example": "menuStrip1.Dock = DockStyle.Top;",
+        "expectedEffect": "The menu spans the full width of the form."
+      },
+      {
+        "name": "RenderMode",
+        "dataType": "ToolStripRenderMode",
+        "defaultValue": "ManagerRenderMode",
+        "acceptedValues": "Custom, System, ManagerRenderMode, Professional",
+        "description": "The renderer that draws the strip.",
+        "usage": "Use System for a classic look.",
+        "example": "menuStrip1.RenderMode = ToolStripRenderMode.System;",
+        "expectedEffect": "The menu is drawn with the system look."
+      },
+      {
+        "name": "ShowItemToolTips",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Whether the items show tool tips.",
+        "usage": "Add hints to menu entries.",
+        "example": "menuStrip1.ShowItemToolTips = true;",
+        "expectedEffect": "Hovering an item shows its ToolTipText."
+      },
+      {
+        "name": "MdiWindowListItem",
+        "dataType": "ToolStripMenuItem",
+        "defaultValue": "null",
+        "acceptedValues": "A ToolStripMenuItem of this menu",
+        "description": "The menu item that lists the open MDI child windows.",
+        "usage": "Create the Window menu of an MDI application.",
+        "example": "menuStrip1.MdiWindowListItem = windowToolStripMenuItem;",
+        "expectedEffect": "Open child windows are listed in that menu."
+      }
+    ]
+  },
+  {
+    "name": "ContextMenuStrip",
+    "properties": [
+      {
+        "name": "Items",
+        "dataType": "ToolStripItemCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "ToolStripMenuItem, ToolStripSeparator and others",
+        "description": "The entries of the pop-up menu. Attach the menu to a control with its ContextMenuStrip property.",
+        "usage": "Build the menu from code and assign it to a control.",
+        "example": "listBox1.ContextMenuStrip = contextMenuStrip1;",
+        "expectedEffect": "Right-clicking the list shows the menu."
+      },
+      {
+        "name": "SourceControl",
+        "dataType": "Control",
+        "defaultValue": "null",
+        "acceptedValues": "Read-only",
+        "description": "The control that displayed the menu. Valid while the menu is open, for example in Opening or in a click handler.",
+        "usage": "Find out which control the user right-clicked.",
+        "example": "Control source = contextMenuStrip1.SourceControl;",
+        "expectedEffect": "Returns the control that opened the menu."
+      },
+      {
+        "name": "ShowImageMargin",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Shows the left column reserved for item images.",
+        "usage": "Hide the column when no entry has an icon.",
+        "example": "contextMenuStrip1.ShowImageMargin = false;",
+        "expectedEffect": "The menu becomes narrower."
+      },
+      {
+        "name": "ShowCheckMargin",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows the column reserved for check marks.",
+        "usage": "Let entries show a checked state.",
+        "example": "contextMenuStrip1.ShowCheckMargin = true;",
+        "expectedEffect": "Space for check marks appears on the left."
+      }
+    ]
+  },
+  {
+    "name": "ToolStrip",
+    "properties": [
+      {
+        "name": "Items",
+        "dataType": "ToolStripItemCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "ToolStripButton, ToolStripLabel, ToolStripComboBox, ToolStripSeparator and others",
+        "description": "The items shown on the toolbar.",
+        "usage": "Add buttons from code.",
+        "example": "toolStrip1.Items.Add(new ToolStripButton(\"Save\"));",
+        "expectedEffect": "A Save button appears on the toolbar."
+      },
+      {
+        "name": "Dock",
+        "dataType": "DockStyle",
+        "defaultValue": "Top",
+        "acceptedValues": "Top, Bottom, Left, Right, Fill, None",
+        "description": "The edge of the container the toolbar attaches to.",
+        "usage": "Place a toolbar below the menu.",
+        "example": "toolStrip1.Dock = DockStyle.Top;",
+        "expectedEffect": "The toolbar spans the container width."
+      },
+      {
+        "name": "GripStyle",
+        "dataType": "ToolStripGripStyle",
+        "defaultValue": "Visible",
+        "acceptedValues": "Visible, Hidden",
+        "description": "Whether the drag handle at the start of the strip is shown.",
+        "usage": "Hide the handle on fixed toolbars.",
+        "example": "toolStrip1.GripStyle = ToolStripGripStyle.Hidden;",
+        "expectedEffect": "The handle disappears."
+      },
+      {
+        "name": "ImageScalingSize",
+        "dataType": "Size",
+        "defaultValue": "16, 16",
+        "acceptedValues": "Any Size",
+        "description": "The size to which item images are scaled.",
+        "usage": "Use larger icons on high-resolution screens.",
+        "example": "toolStrip1.ImageScalingSize = new Size(24, 24);",
+        "expectedEffect": "Icons are shown at 24 by 24 pixels."
+      },
+      {
+        "name": "LayoutStyle",
+        "dataType": "ToolStripLayoutStyle",
+        "defaultValue": "StackWithOverflow",
+        "acceptedValues": "StackWithOverflow, HorizontalStackWithOverflow, VerticalStackWithOverflow, Flow, Table",
+        "description": "How the items are arranged.",
+        "usage": "Show a vertical toolbar.",
+        "example": "toolStrip1.LayoutStyle = ToolStripLayoutStyle.VerticalStackWithOverflow;",
+        "expectedEffect": "Items stack from top to bottom."
+      },
+      {
+        "name": "RenderMode",
+        "dataType": "ToolStripRenderMode",
+        "defaultValue": "ManagerRenderMode",
+        "acceptedValues": "Custom, System, ManagerRenderMode, Professional",
+        "description": "The renderer that draws the strip.",
+        "usage": "Switch between flat and classic looks.",
+        "example": "toolStrip1.RenderMode = ToolStripRenderMode.Professional;",
+        "expectedEffect": "The strip uses the Professional look."
+      },
+      {
+        "name": "ShowItemToolTips",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Whether the items show tool tips.",
+        "usage": "Turn off tips when they are not needed.",
+        "example": "toolStrip1.ShowItemToolTips = false;",
+        "expectedEffect": "No item tips appear."
+      }
+    ]
+  },
+  {
+    "name": "StatusStrip",
+    "properties": [
+      {
+        "name": "Items",
+        "dataType": "ToolStripItemCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "ToolStripStatusLabel, ToolStripProgressBar, ToolStripDropDownButton, ToolStripSplitButton",
+        "description": "The items shown on the status bar.",
+        "usage": "Add a message label.",
+        "example": "statusStrip1.Items.Add(new ToolStripStatusLabel(\"Ready\"));",
+        "expectedEffect": "A label with the text Ready appears."
+      },
+      {
+        "name": "Dock",
+        "dataType": "DockStyle",
+        "defaultValue": "Bottom",
+        "acceptedValues": "Top, Bottom, Left, Right, Fill, None",
+        "description": "The edge of the form the status bar attaches to.",
+        "usage": "Keep the status bar at the bottom.",
+        "example": "statusStrip1.Dock = DockStyle.Bottom;",
+        "expectedEffect": "The bar spans the bottom of the form."
+      },
+      {
+        "name": "SizingGrip",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Shows the resize handle at the right end of the bar.",
+        "usage": "Hide it on fixed-size forms.",
+        "example": "statusStrip1.SizingGrip = false;",
+        "expectedEffect": "The handle disappears."
+      },
+      {
+        "name": "Stretch",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Whether the strip stretches to fill the width of its container. With Spring on a label, items can fill the space.",
+        "usage": "Keep the bar full width.",
+        "example": "statusStrip1.Stretch = true;",
+        "expectedEffect": "The strip fills the available width."
+      }
+    ]
+  },
+  {
+    "name": "ToolStripButton",
+    "properties": [
+      {
+        "name": "Checked",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Whether the button is shown pressed.",
+        "usage": "Show an active tool such as Bold.",
+        "example": "tsbBold.Checked = true;",
+        "expectedEffect": "The button looks pressed."
+      },
+      {
+        "name": "CheckOnClick",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Makes the button toggle its Checked state when clicked.",
+        "usage": "Build toggle buttons.",
+        "example": "tsbBold.CheckOnClick = true;",
+        "expectedEffect": "Each click flips Checked and raises CheckedChanged."
+      },
+      {
+        "name": "AutoToolTip",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Shows Text as the tip when ToolTipText is empty.",
+        "usage": "Turn it off to show no tip.",
+        "example": "tsbSave.AutoToolTip = false;",
+        "expectedEffect": "Hovering shows nothing unless ToolTipText is set."
+      }
+    ]
+  },
+  {
+    "name": "ToolStripLabel",
+    "properties": [
+      {
+        "name": "IsLink",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Makes the label behave like a hyperlink.",
+        "usage": "Add a help link to a status bar or toolbar.",
+        "example": "tslHelp.IsLink = true;",
+        "expectedEffect": "The text is shown as a link and can be clicked."
+      },
+      {
+        "name": "LinkColor",
+        "dataType": "Color",
+        "defaultValue": "The system link color (usually blue)",
+        "acceptedValues": "Any Color",
+        "description": "The color of the link text when IsLink is true.",
+        "usage": "Match the link color to your design.",
+        "example": "tslHelp.LinkColor = Color.DodgerBlue;",
+        "expectedEffect": "The link is drawn in the new color."
+      },
+      {
+        "name": "LinkBehavior",
+        "dataType": "LinkBehavior",
+        "defaultValue": "SystemDefault",
+        "acceptedValues": "SystemDefault, AlwaysUnderline, HoverUnderline, NeverUnderline",
+        "description": "When the link text is underlined.",
+        "usage": "Underline only on hover.",
+        "example": "tslHelp.LinkBehavior = LinkBehavior.HoverUnderline;",
+        "expectedEffect": "The underline appears on hover."
+      }
+    ]
+  },
+  {
+    "name": "ToolStripComboBox",
+    "properties": [
+      {
+        "name": "ComboBox",
+        "dataType": "ComboBox",
+        "defaultValue": "Created automatically",
+        "acceptedValues": "Read-only",
+        "description": "The ComboBox control hosted inside the item.",
+        "usage": "Reach properties that the item itself does not expose.",
+        "example": "tscZoom.ComboBox.DropDownWidth = 160;",
+        "expectedEffect": "The hosted drop-down list is wider."
+      },
+      {
+        "name": "Items",
+        "dataType": "ComboBox.ObjectCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "Any objects",
+        "description": "The entries in the drop-down list.",
+        "usage": "Fill the list from code.",
+        "example": "tscZoom.Items.AddRange(new object[] { \"50%\", \"100%\", \"200%\" });",
+        "expectedEffect": "The list shows the three entries."
+      },
+      {
+        "name": "SelectedIndex",
+        "dataType": "int",
+        "defaultValue": "-1",
+        "acceptedValues": "-1 or an index of an entry",
+        "description": "Zero-based index of the selected entry.",
+        "usage": "Select a default value.",
+        "example": "tscZoom.SelectedIndex = 1;",
+        "expectedEffect": "The second entry is shown."
+      },
+      {
+        "name": "SelectedItem",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "Any object in Items",
+        "description": "The selected entry itself.",
+        "usage": "Read the chosen value.",
+        "example": "string zoom = (string)tscZoom.SelectedItem;",
+        "expectedEffect": "Returns the chosen entry or null."
+      },
+      {
+        "name": "DropDownStyle",
+        "dataType": "ComboBoxStyle",
+        "defaultValue": "DropDown",
+        "acceptedValues": "Simple, DropDown, DropDownList",
+        "description": "Whether the user may type or only pick from the list.",
+        "usage": "Allow only the listed values.",
+        "example": "tscZoom.DropDownStyle = ComboBoxStyle.DropDownList;",
+        "expectedEffect": "The text area becomes read-only."
+      }
+    ]
+  }
+]

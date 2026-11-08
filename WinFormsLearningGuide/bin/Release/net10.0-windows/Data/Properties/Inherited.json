@@ -1,0 +1,229 @@
+[
+  {
+    "name": "Control",
+    "properties": [
+      {
+        "name": "Name",
+        "dataType": "string",
+        "defaultValue": "\"\" (the designer assigns names such as button1)",
+        "description": "Identifier used to refer to the control in code and to find it with Controls.Find.",
+        "example": "btnSubmit.Name = \"btnSubmit\";"
+      },
+      {
+        "name": "Text",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "description": "Caption or content text. Its meaning depends on the control: a button caption, label text, tab title, window title.",
+        "example": "btnSubmit.Text = \"Submit\";"
+      },
+      {
+        "name": "BackColor",
+        "dataType": "Color",
+        "defaultValue": "Inherited from the parent (usually SystemColors.Control)",
+        "description": "Background color of the control.",
+        "example": "btnSubmit.BackColor = Color.SteelBlue;"
+      },
+      {
+        "name": "ForeColor",
+        "dataType": "Color",
+        "defaultValue": "Inherited from the parent (usually SystemColors.ControlText)",
+        "description": "Color used to draw the control's text.",
+        "example": "btnSubmit.ForeColor = Color.White;"
+      },
+      {
+        "name": "Enabled",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "description": "When false the control is grayed out and ignores mouse and keyboard input.",
+        "example": "btnSubmit.Enabled = false;"
+      },
+      {
+        "name": "Visible",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "description": "Whether the control is shown. A hidden control keeps its state but is not drawn and cannot be focused.",
+        "example": "lblError.Visible = false;"
+      },
+      {
+        "name": "Size",
+        "dataType": "Size",
+        "defaultValue": "Depends on the control type",
+        "description": "Width and height of the control in pixels.",
+        "example": "btnSubmit.Size = new Size(120, 40);"
+      },
+      {
+        "name": "Location",
+        "dataType": "Point",
+        "defaultValue": "(0, 0)",
+        "description": "Position of the control's top-left corner relative to its container.",
+        "example": "btnSubmit.Location = new Point(20, 30);"
+      },
+      {
+        "name": "Font",
+        "dataType": "Font",
+        "defaultValue": "Inherited from the parent (the form's default UI font)",
+        "description": "Typeface, size and style of the text.",
+        "example": "btnSubmit.Font = new Font(\"Arial\", 12, FontStyle.Bold);"
+      },
+      {
+        "name": "Dock",
+        "dataType": "DockStyle",
+        "defaultValue": "DockStyle.None",
+        "description": "Attaches the control to an edge of its container (Top, Bottom, Left, Right) or fills it (Fill), resizing automatically.",
+        "example": "pnlMain.Dock = DockStyle.Fill;"
+      },
+      {
+        "name": "Anchor",
+        "dataType": "AnchorStyles",
+        "defaultValue": "Top, Left",
+        "description": "Keeps the control at a fixed distance from the chosen container edges when the container is resized.",
+        "example": "txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;"
+      },
+      {
+        "name": "Margin",
+        "dataType": "Padding",
+        "defaultValue": "3, 3, 3, 3",
+        "description": "Space the control asks for around its outside. Layout panels such as FlowLayoutPanel respect it.",
+        "example": "btnSubmit.Margin = new Padding(8);"
+      },
+      {
+        "name": "Padding",
+        "dataType": "Padding",
+        "defaultValue": "0, 0, 0, 0 (some controls differ)",
+        "description": "Space between the control's edge and its content or child controls.",
+        "example": "pnlMain.Padding = new Padding(10);"
+      },
+      {
+        "name": "TabIndex",
+        "dataType": "int",
+        "defaultValue": "Order in which the control was added",
+        "description": "Position of the control in the Tab-key order. Lower numbers receive focus first.",
+        "example": "btnSubmit.TabIndex = 2;"
+      },
+      {
+        "name": "TabStop",
+        "dataType": "bool",
+        "defaultValue": "true for interactive controls, false for Label, Panel and GroupBox",
+        "description": "Whether the Tab key can move focus to the control.",
+        "example": "btnSubmit.TabStop = false;"
+      },
+      {
+        "name": "Tag",
+        "dataType": "object",
+        "defaultValue": "null",
+        "description": "A free slot for attaching any object (an ID, a record, a string) to the control.",
+        "example": "btnSubmit.Tag = customerId;"
+      },
+      {
+        "name": "Controls",
+        "dataType": "Control.ControlCollection",
+        "defaultValue": "Empty",
+        "description": "The child controls hosted by this control. Use Add to put a control inside it.",
+        "example": "pnlMain.Controls.Add(btnSubmit);"
+      }
+    ]
+  },
+  {
+    "name": "ToolStripItem",
+    "properties": [
+      {
+        "name": "Name",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "description": "Identifier used to refer to the item in code.",
+        "example": "tsbSave.Name = \"tsbSave\";"
+      },
+      {
+        "name": "Text",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "description": "Caption shown on the item.",
+        "example": "tsbSave.Text = \"Save\";"
+      },
+      {
+        "name": "Image",
+        "dataType": "Image",
+        "defaultValue": "null",
+        "description": "Icon displayed on the item.",
+        "example": "tsbSave.Image = Image.FromFile(\"save.png\");"
+      },
+      {
+        "name": "DisplayStyle",
+        "dataType": "ToolStripItemDisplayStyle",
+        "defaultValue": "Depends on the item (Image for ToolStripButton, ImageAndText for ToolStripLabel)",
+        "description": "Chooses whether the item shows only text, only its image, both, or nothing.",
+        "example": "tsbSave.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;"
+      },
+      {
+        "name": "ToolTipText",
+        "dataType": "string",
+        "defaultValue": "\"\" (the Text is shown when AutoToolTip is true)",
+        "description": "Text of the pop-up that appears when the pointer rests on the item.",
+        "example": "tsbSave.ToolTipText = \"Save the document (Ctrl+S)\";"
+      },
+      {
+        "name": "Enabled",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "description": "When false the item is grayed out and cannot be clicked.",
+        "example": "tsbSave.Enabled = false;"
+      },
+      {
+        "name": "Visible",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "description": "Whether the item is shown on the strip.",
+        "example": "tsbSave.Visible = false;"
+      },
+      {
+        "name": "BackColor",
+        "dataType": "Color",
+        "defaultValue": "Inherited from the strip",
+        "description": "Background color of the item.",
+        "example": "tsbSave.BackColor = Color.LightYellow;"
+      },
+      {
+        "name": "ForeColor",
+        "dataType": "Color",
+        "defaultValue": "SystemColors.ControlText",
+        "description": "Color of the item's text.",
+        "example": "tsbSave.ForeColor = Color.DarkRed;"
+      },
+      {
+        "name": "Font",
+        "dataType": "Font",
+        "defaultValue": "Inherited from the strip",
+        "description": "Typeface, size and style of the item's text.",
+        "example": "tsbSave.Font = new Font(\"Segoe UI\", 10);"
+      },
+      {
+        "name": "Alignment",
+        "dataType": "ToolStripItemAlignment",
+        "defaultValue": "Left",
+        "description": "Places the item at the left or right end of the strip.",
+        "example": "tsbHelp.Alignment = ToolStripItemAlignment.Right;"
+      },
+      {
+        "name": "Margin",
+        "dataType": "Padding",
+        "defaultValue": "Depends on the item",
+        "description": "Space around the item on the strip.",
+        "example": "tsbSave.Margin = new Padding(4, 1, 4, 2);"
+      },
+      {
+        "name": "Padding",
+        "dataType": "Padding",
+        "defaultValue": "0, 0, 0, 0",
+        "description": "Space between the item's edge and its content.",
+        "example": "tsbSave.Padding = new Padding(6);"
+      },
+      {
+        "name": "Tag",
+        "dataType": "object",
+        "defaultValue": "null",
+        "description": "A free slot for attaching any object to the item.",
+        "example": "tsbSave.Tag = documentId;"
+      }
+    ]
+  }
+]

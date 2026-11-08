@@ -1,0 +1,226 @@
+[
+  {
+    "name": "Panel",
+    "category": "Containers",
+    "namespace": "System.Windows.Forms",
+    "className": "Panel",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "Panel"
+    ],
+    "summary": "A plain container used to group controls, scroll content or build custom layouts.",
+    "importantProperties": [
+      "AutoScroll",
+      "BorderStyle",
+      "Dock",
+      "Padding",
+      "Controls",
+      "BackColor"
+    ],
+    "importantEvents": [
+      "Paint",
+      "Resize",
+      "ControlAdded"
+    ],
+    "relatedControls": [
+      "GroupBox",
+      "FlowLayoutPanel",
+      "TableLayoutPanel",
+      "SplitContainer"
+    ]
+  },
+  {
+    "name": "GroupBox",
+    "category": "Containers",
+    "namespace": "System.Windows.Forms",
+    "className": "GroupBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "GroupBox"
+    ],
+    "summary": "A framed container with a caption, typically used to group related options such as radio buttons.",
+    "importantProperties": [
+      "Text",
+      "FlatStyle",
+      "Controls",
+      "Padding"
+    ],
+    "importantEvents": [
+      "Enter",
+      "Paint"
+    ],
+    "relatedControls": [
+      "Panel",
+      "TabControl",
+      "RadioButton"
+    ]
+  },
+  {
+    "name": "TabControl",
+    "category": "Containers",
+    "namespace": "System.Windows.Forms",
+    "className": "TabControl",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "TabControl"
+    ],
+    "summary": "Shows several pages (tabs) in the same space so the user can switch between them.",
+    "importantProperties": [
+      "TabPages",
+      "SelectedIndex",
+      "SelectedTab",
+      "Alignment",
+      "Multiline",
+      "ImageList"
+    ],
+    "importantEvents": [
+      "SelectedIndexChanged",
+      "Selecting",
+      "Selected",
+      "Deselecting"
+    ],
+    "relatedControls": [
+      "TabPage",
+      "Panel",
+      "GroupBox"
+    ]
+  },
+  {
+    "name": "TabPage",
+    "category": "Containers",
+    "namespace": "System.Windows.Forms",
+    "className": "TabPage",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "Panel",
+      "TabPage"
+    ],
+    "summary": "A single page inside a TabControl that holds its own set of controls.",
+    "importantProperties": [
+      "Text",
+      "ImageIndex",
+      "UseVisualStyleBackColor",
+      "Controls",
+      "ToolTipText"
+    ],
+    "importantEvents": [
+      "Enter",
+      "Leave"
+    ],
+    "relatedControls": [
+      "TabControl",
+      "Panel"
+    ]
+  },
+  {
+    "name": "SplitContainer",
+    "category": "Containers",
+    "namespace": "System.Windows.Forms",
+    "className": "SplitContainer",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "ContainerControl",
+      "SplitContainer"
+    ],
+    "summary": "Divides an area into two resizable panels separated by a draggable splitter.",
+    "importantProperties": [
+      "Orientation",
+      "SplitterDistance",
+      "SplitterWidth",
+      "FixedPanel",
+      "Panel1",
+      "Panel2",
+      "IsSplitterFixed",
+      "Panel1Collapsed"
+    ],
+    "importantEvents": [
+      "SplitterMoved",
+      "SplitterMoving"
+    ],
+    "relatedControls": [
+      "Panel",
+      "TableLayoutPanel",
+      "TabControl"
+    ]
+  },
+  {
+    "name": "FlowLayoutPanel",
+    "category": "Containers",
+    "namespace": "System.Windows.Forms",
+    "className": "FlowLayoutPanel",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "Panel",
+      "FlowLayoutPanel"
+    ],
+    "summary": "Arranges its child controls in a row or column and wraps them automatically.",
+    "importantProperties": [
+      "FlowDirection",
+      "WrapContents",
+      "AutoScroll",
+      "Padding"
+    ],
+    "importantEvents": [
+      "ControlAdded",
+      "ControlRemoved"
+    ],
+    "relatedControls": [
+      "TableLayoutPanel",
+      "Panel"
+    ]
+  },
+  {
+    "name": "TableLayoutPanel",
+    "category": "Containers",
+    "namespace": "System.Windows.Forms",
+    "className": "TableLayoutPanel",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "Panel",
+      "TableLayoutPanel"
+    ],
+    "summary": "Arranges its child controls in a grid of rows and columns.",
+    "importantProperties": [
+      "RowCount",
+      "ColumnCount",
+      "ColumnStyles",
+      "RowStyles",
+      "CellBorderStyle",
+      "GrowStyle"
+    ],
+    "importantEvents": [
+      "CellPaint"
+    ],
+    "relatedControls": [
+      "FlowLayoutPanel",
+      "Panel",
+      "SplitContainer"
+    ]
+  }
+]

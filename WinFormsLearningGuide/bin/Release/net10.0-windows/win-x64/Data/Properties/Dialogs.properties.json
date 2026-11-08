@@ -1,0 +1,357 @@
+[
+  {
+    "name": "OpenFileDialog",
+    "properties": [
+      {
+        "name": "Filter",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Pairs of description and pattern separated by |; an uneven number of parts throws ArgumentException",
+        "description": "Defines the file types in the type list.",
+        "usage": "Offer only the file types your program can open.",
+        "example": "ofd.Filter = \"Text files (*.txt)|*.txt|All files (*.*)|*.*\";",
+        "expectedEffect": "The type list shows the two entries."
+      },
+      {
+        "name": "FilterIndex",
+        "dataType": "int",
+        "defaultValue": "1",
+        "acceptedValues": "1-based index of a Filter entry",
+        "description": "The entry of the type list selected at start.",
+        "usage": "Preselect the type your users use most.",
+        "example": "ofd.FilterIndex = 2;",
+        "expectedEffect": "The second filter is selected."
+      },
+      {
+        "name": "InitialDirectory",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "A valid folder path",
+        "description": "The folder the dialog opens in.",
+        "usage": "Start in the user's documents folder.",
+        "example": "ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);",
+        "expectedEffect": "The dialog opens in My Documents."
+      },
+      {
+        "name": "Multiselect",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Lets the user choose more than one file.",
+        "usage": "Import several files at once.",
+        "example": "ofd.Multiselect = true;",
+        "expectedEffect": "Ctrl and Shift selection become possible; read FileNames afterwards."
+      },
+      {
+        "name": "FileName",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "A file name or full path",
+        "description": "The name of the selected file.",
+        "usage": "Read the file that was chosen.",
+        "example": "string path = ofd.FileName;",
+        "expectedEffect": "Returns the full path after the user clicks Open."
+      },
+      {
+        "name": "FileNames",
+        "dataType": "string[]",
+        "defaultValue": "Empty array",
+        "acceptedValues": "Read-only",
+        "description": "All selected files.",
+        "usage": "Process every chosen file.",
+        "example": "foreach (string file in ofd.FileNames) { Import(file); }",
+        "expectedEffect": "Enumerates each selected path."
+      },
+      {
+        "name": "Title",
+        "dataType": "string",
+        "defaultValue": "\"\" (the system title, usually Open)",
+        "acceptedValues": "Any string",
+        "description": "The text in the title bar of the dialog.",
+        "usage": "Say what the user is opening.",
+        "example": "ofd.Title = \"Choose a picture\";",
+        "expectedEffect": "The dialog shows your title."
+      },
+      {
+        "name": "CheckFileExists",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Warns when the typed file name does not exist.",
+        "usage": "Allow new names by setting it to false.",
+        "example": "ofd.CheckFileExists = true;",
+        "expectedEffect": "A warning appears for names that do not exist."
+      }
+    ]
+  },
+  {
+    "name": "SaveFileDialog",
+    "properties": [
+      {
+        "name": "Filter",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Pairs of description and pattern separated by |",
+        "description": "Defines the file types in the type list.",
+        "usage": "Offer the formats you can write.",
+        "example": "sfd.Filter = \"CSV file (*.csv)|*.csv\";",
+        "expectedEffect": "The type list shows the CSV entry."
+      },
+      {
+        "name": "DefaultExt",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "An extension without the dot, such as \"txt\"",
+        "description": "The extension appended when the user types none (with AddExtension).",
+        "usage": "Make sure saved files have a proper extension.",
+        "example": "sfd.DefaultExt = \"csv\";",
+        "expectedEffect": "A name typed as report becomes report.csv."
+      },
+      {
+        "name": "FileName",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "A file name or full path",
+        "description": "The suggested and the chosen file name.",
+        "usage": "Suggest a name and read the result.",
+        "example": "sfd.FileName = \"report.csv\";",
+        "expectedEffect": "The name box starts with report.csv."
+      },
+      {
+        "name": "OverwritePrompt",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Asks for confirmation before replacing an existing file.",
+        "usage": "Keep the safety prompt on.",
+        "example": "sfd.OverwritePrompt = true;",
+        "expectedEffect": "The user must confirm an overwrite."
+      },
+      {
+        "name": "AddExtension",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Appends the extension automatically when it is missing.",
+        "usage": "Turn it off if you add extensions yourself.",
+        "example": "sfd.AddExtension = true;",
+        "expectedEffect": "Names without extension get DefaultExt added."
+      },
+      {
+        "name": "Title",
+        "dataType": "string",
+        "defaultValue": "\"\" (the system title, usually Save As)",
+        "acceptedValues": "Any string",
+        "description": "The text in the title bar of the dialog.",
+        "usage": "Say what is being saved.",
+        "example": "sfd.Title = \"Export report\";",
+        "expectedEffect": "The dialog shows your title."
+      },
+      {
+        "name": "InitialDirectory",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "A valid folder path",
+        "description": "The folder the dialog opens in.",
+        "usage": "Start in the last used folder.",
+        "example": "sfd.InitialDirectory = @\"C:\\Reports\";",
+        "expectedEffect": "The dialog opens in that folder."
+      }
+    ]
+  },
+  {
+    "name": "FolderBrowserDialog",
+    "properties": [
+      {
+        "name": "SelectedPath",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "A folder path",
+        "description": "The folder shown at start and the folder the user chose.",
+        "usage": "Read the chosen folder.",
+        "example": "string folder = fbd.SelectedPath;",
+        "expectedEffect": "Returns the full path after OK."
+      },
+      {
+        "name": "Description",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string",
+        "description": "A text shown above the folder tree.",
+        "usage": "Explain what the folder is used for.",
+        "example": "fbd.Description = \"Choose the backup folder\";",
+        "expectedEffect": "The text is displayed in the dialog."
+      },
+      {
+        "name": "RootFolder",
+        "dataType": "Environment.SpecialFolder",
+        "defaultValue": "Desktop",
+        "acceptedValues": "Any value of Environment.SpecialFolder",
+        "description": "The top of the tree the user can browse. The classic dialog honors it; the modern dialog may ignore it.",
+        "usage": "Restrict browsing to one area.",
+        "example": "fbd.RootFolder = Environment.SpecialFolder.MyDocuments;",
+        "expectedEffect": "The tree starts at My Documents (classic dialog)."
+      },
+      {
+        "name": "ShowNewFolderButton",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Shows the Make New Folder button in the classic dialog.",
+        "usage": "Hide the button when only existing folders may be used.",
+        "example": "fbd.ShowNewFolderButton = false;",
+        "expectedEffect": "The button is not shown."
+      },
+      {
+        "name": "UseDescriptionForTitle",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Uses Description as the title of the modern dialog.",
+        "usage": "Give the dialog a meaningful title.",
+        "example": "fbd.UseDescriptionForTitle = true;",
+        "expectedEffect": "Description appears in the title bar."
+      }
+    ]
+  },
+  {
+    "name": "ColorDialog",
+    "properties": [
+      {
+        "name": "Color",
+        "dataType": "Color",
+        "defaultValue": "Color.Black",
+        "acceptedValues": "Any Color",
+        "description": "The color shown at start and the color the user chose.",
+        "usage": "Read the chosen color.",
+        "example": "button1.BackColor = cd.Color;",
+        "expectedEffect": "The button takes the chosen color after OK."
+      },
+      {
+        "name": "AllowFullOpen",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Lets the user open the custom color section.",
+        "usage": "Turn it off to allow only the basic palette.",
+        "example": "cd.AllowFullOpen = false;",
+        "expectedEffect": "The Define Custom Colors button is disabled."
+      },
+      {
+        "name": "FullOpen",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Opens the custom color section when the dialog appears. AllowFullOpen must be true.",
+        "usage": "Start with the full color picker.",
+        "example": "cd.FullOpen = true;",
+        "expectedEffect": "The dialog opens fully expanded."
+      },
+      {
+        "name": "CustomColors",
+        "dataType": "int[]",
+        "defaultValue": "null",
+        "acceptedValues": "An array of up to 16 colors in OLE format (BGR)",
+        "description": "The colors shown in the custom color boxes.",
+        "usage": "Offer your brand colors.",
+        "example": "cd.CustomColors = new[] { ColorTranslator.ToOle(Color.Orange) };",
+        "expectedEffect": "Orange appears in the custom colors."
+      },
+      {
+        "name": "AnyColor",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows all available basic colors.",
+        "usage": "Offer a larger palette.",
+        "example": "cd.AnyColor = true;",
+        "expectedEffect": "More colors appear in the basic palette."
+      },
+      {
+        "name": "SolidColorOnly",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Restricts the choice to solid colors.",
+        "usage": "Avoid dithered colors on low-color displays.",
+        "example": "cd.SolidColorOnly = true;",
+        "expectedEffect": "Only solid colors can be chosen."
+      }
+    ]
+  },
+  {
+    "name": "FontDialog",
+    "properties": [
+      {
+        "name": "Font",
+        "dataType": "Font",
+        "defaultValue": "The system default font",
+        "acceptedValues": "Any Font",
+        "description": "The font shown at start and the font the user chose.",
+        "usage": "Apply the chosen font to a control.",
+        "example": "richTextBox1.Font = fd.Font;",
+        "expectedEffect": "The control uses the chosen font after OK."
+      },
+      {
+        "name": "Color",
+        "dataType": "Color",
+        "defaultValue": "Color.Black",
+        "acceptedValues": "Any Color (only when ShowColor is true)",
+        "description": "The text color the user chose.",
+        "usage": "Let users choose the font color too.",
+        "example": "richTextBox1.ForeColor = fd.Color;",
+        "expectedEffect": "The text takes the chosen color."
+      },
+      {
+        "name": "ShowColor",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows the color list in the dialog.",
+        "usage": "Allow choosing a color together with the font.",
+        "example": "fd.ShowColor = true;",
+        "expectedEffect": "A Color drop-down appears in the dialog."
+      },
+      {
+        "name": "ShowEffects",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Shows the Strikeout and Underline check boxes.",
+        "usage": "Hide them when you do not support them.",
+        "example": "fd.ShowEffects = false;",
+        "expectedEffect": "The effect check boxes are hidden."
+      },
+      {
+        "name": "MaxSize",
+        "dataType": "int",
+        "defaultValue": "0 (no limit)",
+        "acceptedValues": "0 or a point size",
+        "description": "The largest point size that can be chosen.",
+        "usage": "Prevent unreasonably large text.",
+        "example": "fd.MaxSize = 48;",
+        "expectedEffect": "Sizes above 48 are not accepted."
+      },
+      {
+        "name": "MinSize",
+        "dataType": "int",
+        "defaultValue": "0 (no limit)",
+        "acceptedValues": "0 or a point size",
+        "description": "The smallest point size that can be chosen.",
+        "usage": "Prevent unreadable text.",
+        "example": "fd.MinSize = 8;",
+        "expectedEffect": "Sizes below 8 are not accepted."
+      },
+      {
+        "name": "FontMustExist",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows an error when the user types a font that is not installed.",
+        "usage": "Avoid unknown fonts.",
+        "example": "fd.FontMustExist = true;",
+        "expectedEffect": "An error message appears for fonts that do not exist."
+      }
+    ]
+  }
+]

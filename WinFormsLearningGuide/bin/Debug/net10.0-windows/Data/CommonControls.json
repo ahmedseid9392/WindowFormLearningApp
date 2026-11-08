@@ -1,0 +1,614 @@
+[
+  {
+    "name": "Label",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "Label",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "Label"
+    ],
+    "summary": "Displays read-only text or an image. Use it to caption other controls, show status text or present instructions.",
+    "importantProperties": [
+      "Text",
+      "AutoSize",
+      "TextAlign",
+      "Font",
+      "ForeColor",
+      "Image"
+    ],
+    "importantEvents": [
+      "Click",
+      "TextChanged",
+      "TextAlignChanged"
+    ],
+    "relatedControls": [
+      "LinkLabel",
+      "TextBox",
+      "ToolStripLabel"
+    ]
+  },
+  {
+    "name": "Button",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "Button",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ButtonBase",
+      "Button"
+    ],
+    "summary": "A clickable push button that triggers an action such as submitting a form, saving data or opening a dialog.",
+    "importantProperties": [
+      "Text",
+      "Enabled",
+      "FlatStyle",
+      "DialogResult",
+      "BackColor",
+      "ForeColor",
+      "Image"
+    ],
+    "importantEvents": [
+      "Click",
+      "MouseEnter",
+      "MouseLeave",
+      "EnabledChanged"
+    ],
+    "relatedControls": [
+      "CheckBox",
+      "RadioButton",
+      "LinkLabel",
+      "ToolStripButton"
+    ]
+  },
+  {
+    "name": "TextBox",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "TextBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "TextBoxBase",
+      "TextBox"
+    ],
+    "summary": "Lets the user enter and edit plain text, either a single line or several lines.",
+    "importantProperties": [
+      "Text",
+      "Multiline",
+      "ReadOnly",
+      "MaxLength",
+      "PasswordChar",
+      "UseSystemPasswordChar",
+      "PlaceholderText",
+      "WordWrap"
+    ],
+    "importantEvents": [
+      "TextChanged",
+      "KeyPress",
+      "KeyDown",
+      "Validating"
+    ],
+    "relatedControls": [
+      "RichTextBox",
+      "MaskedTextBox",
+      "ComboBox",
+      "NumericUpDown"
+    ]
+  },
+  {
+    "name": "RichTextBox",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "RichTextBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "TextBoxBase",
+      "RichTextBox"
+    ],
+    "summary": "A text editor that supports formatting such as fonts, colors, alignment and RTF content.",
+    "importantProperties": [
+      "Rtf",
+      "Text",
+      "SelectionFont",
+      "SelectionColor",
+      "SelectionAlignment",
+      "ReadOnly",
+      "WordWrap"
+    ],
+    "importantEvents": [
+      "TextChanged",
+      "SelectionChanged",
+      "LinkClicked"
+    ],
+    "relatedControls": [
+      "TextBox",
+      "MaskedTextBox"
+    ]
+  },
+  {
+    "name": "MaskedTextBox",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "MaskedTextBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "TextBoxBase",
+      "MaskedTextBox"
+    ],
+    "summary": "A text box that enforces an input pattern (mask) such as a phone number, postal code or date.",
+    "importantProperties": [
+      "Mask",
+      "MaskCompleted",
+      "PromptChar",
+      "Text",
+      "TextMaskFormat",
+      "ValidatingType"
+    ],
+    "importantEvents": [
+      "MaskInputRejected",
+      "TypeValidationCompleted",
+      "TextChanged"
+    ],
+    "relatedControls": [
+      "TextBox",
+      "NumericUpDown",
+      "DateTimePicker"
+    ]
+  },
+  {
+    "name": "CheckBox",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "CheckBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ButtonBase",
+      "CheckBox"
+    ],
+    "summary": "Lets the user turn an option on or off, or choose several options independently.",
+    "importantProperties": [
+      "Checked",
+      "CheckState",
+      "ThreeState",
+      "Text",
+      "AutoCheck",
+      "Appearance"
+    ],
+    "importantEvents": [
+      "CheckedChanged",
+      "CheckStateChanged",
+      "Click"
+    ],
+    "relatedControls": [
+      "RadioButton",
+      "CheckedListBox",
+      "Button"
+    ]
+  },
+  {
+    "name": "RadioButton",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "RadioButton",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ButtonBase",
+      "RadioButton"
+    ],
+    "summary": "Lets the user choose exactly one option from a group of mutually exclusive choices.",
+    "importantProperties": [
+      "Checked",
+      "Text",
+      "AutoCheck",
+      "Appearance"
+    ],
+    "importantEvents": [
+      "CheckedChanged",
+      "Click"
+    ],
+    "relatedControls": [
+      "CheckBox",
+      "ComboBox",
+      "GroupBox"
+    ]
+  },
+  {
+    "name": "ComboBox",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "ComboBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ListControl",
+      "ComboBox"
+    ],
+    "summary": "A drop-down list that lets the user pick one item, and optionally type a value.",
+    "importantProperties": [
+      "Items",
+      "SelectedIndex",
+      "SelectedItem",
+      "DropDownStyle",
+      "DataSource",
+      "DisplayMember",
+      "ValueMember",
+      "AutoCompleteMode"
+    ],
+    "importantEvents": [
+      "SelectedIndexChanged",
+      "SelectionChangeCommitted",
+      "TextChanged",
+      "DropDown"
+    ],
+    "relatedControls": [
+      "ListBox",
+      "CheckedListBox",
+      "TextBox"
+    ]
+  },
+  {
+    "name": "ListBox",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "ListBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ListControl",
+      "ListBox"
+    ],
+    "summary": "Shows a scrollable list of items from which the user can select one or several.",
+    "importantProperties": [
+      "Items",
+      "SelectedIndex",
+      "SelectedItem",
+      "SelectedItems",
+      "SelectionMode",
+      "Sorted",
+      "DataSource"
+    ],
+    "importantEvents": [
+      "SelectedIndexChanged",
+      "SelectedValueChanged",
+      "MouseDoubleClick"
+    ],
+    "relatedControls": [
+      "ComboBox",
+      "CheckedListBox",
+      "DataGridView"
+    ]
+  },
+  {
+    "name": "CheckedListBox",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "CheckedListBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ListControl",
+      "ListBox",
+      "CheckedListBox"
+    ],
+    "summary": "A list box in which every item has a check box, so several items can be ticked.",
+    "importantProperties": [
+      "Items",
+      "CheckedItems",
+      "CheckedIndices",
+      "CheckOnClick",
+      "SelectionMode"
+    ],
+    "importantEvents": [
+      "ItemCheck",
+      "SelectedIndexChanged"
+    ],
+    "relatedControls": [
+      "ListBox",
+      "CheckBox",
+      "ComboBox"
+    ]
+  },
+  {
+    "name": "PictureBox",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "PictureBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "PictureBox"
+    ],
+    "summary": "Displays an image from a file, resource or stream.",
+    "importantProperties": [
+      "Image",
+      "ImageLocation",
+      "SizeMode",
+      "BorderStyle"
+    ],
+    "importantEvents": [
+      "Click",
+      "LoadCompleted",
+      "SizeModeChanged"
+    ],
+    "relatedControls": [
+      "Panel",
+      "Label",
+      "Button"
+    ]
+  },
+  {
+    "name": "DateTimePicker",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "DateTimePicker",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "DateTimePicker"
+    ],
+    "summary": "Lets the user choose a date and/or time from a drop-down calendar or an up-down field.",
+    "importantProperties": [
+      "Value",
+      "Format",
+      "CustomFormat",
+      "MinDate",
+      "MaxDate",
+      "ShowUpDown",
+      "ShowCheckBox"
+    ],
+    "importantEvents": [
+      "ValueChanged",
+      "CloseUp",
+      "DropDown",
+      "FormatChanged"
+    ],
+    "relatedControls": [
+      "MonthCalendar",
+      "MaskedTextBox",
+      "NumericUpDown"
+    ]
+  },
+  {
+    "name": "MonthCalendar",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "MonthCalendar",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "MonthCalendar"
+    ],
+    "summary": "Shows a full month calendar in which the user can select a date or a range of dates.",
+    "importantProperties": [
+      "SelectionStart",
+      "SelectionEnd",
+      "SelectionRange",
+      "MaxSelectionCount",
+      "ShowToday",
+      "BoldedDates"
+    ],
+    "importantEvents": [
+      "DateChanged",
+      "DateSelected"
+    ],
+    "relatedControls": [
+      "DateTimePicker"
+    ]
+  },
+  {
+    "name": "NumericUpDown",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "NumericUpDown",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "ContainerControl",
+      "UpDownBase",
+      "NumericUpDown"
+    ],
+    "summary": "Lets the user enter or step through a number within a minimum and maximum range.",
+    "importantProperties": [
+      "Value",
+      "Minimum",
+      "Maximum",
+      "Increment",
+      "DecimalPlaces",
+      "ThousandsSeparator"
+    ],
+    "importantEvents": [
+      "ValueChanged",
+      "Validating"
+    ],
+    "relatedControls": [
+      "TrackBar",
+      "TextBox",
+      "MaskedTextBox"
+    ]
+  },
+  {
+    "name": "ProgressBar",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "ProgressBar",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ProgressBar"
+    ],
+    "summary": "Shows how far a long-running operation has progressed, or that work is ongoing.",
+    "importantProperties": [
+      "Value",
+      "Minimum",
+      "Maximum",
+      "Style",
+      "Step",
+      "MarqueeAnimationSpeed"
+    ],
+    "importantEvents": [
+      "Click",
+      "SizeChanged"
+    ],
+    "relatedControls": [
+      "TrackBar",
+      "BackgroundWorker",
+      "StatusStrip"
+    ]
+  },
+  {
+    "name": "TrackBar",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "TrackBar",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "TrackBar"
+    ],
+    "summary": "A slider that lets the user pick a value in a range by dragging a thumb.",
+    "importantProperties": [
+      "Value",
+      "Minimum",
+      "Maximum",
+      "TickFrequency",
+      "TickStyle",
+      "Orientation",
+      "SmallChange",
+      "LargeChange"
+    ],
+    "importantEvents": [
+      "Scroll",
+      "ValueChanged"
+    ],
+    "relatedControls": [
+      "NumericUpDown",
+      "ProgressBar"
+    ]
+  },
+  {
+    "name": "LinkLabel",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "LinkLabel",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "Label",
+      "LinkLabel"
+    ],
+    "summary": "A label that can contain one or more hyperlinks, for example to a web page or another form.",
+    "importantProperties": [
+      "Links",
+      "LinkColor",
+      "VisitedLinkColor",
+      "LinkBehavior",
+      "LinkVisited",
+      "Text"
+    ],
+    "importantEvents": [
+      "LinkClicked"
+    ],
+    "relatedControls": [
+      "Label",
+      "Button"
+    ]
+  },
+  {
+    "name": "ToolTip",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "ToolTip",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "ToolTip"
+    ],
+    "summary": "A component that shows a small pop-up hint when the mouse rests over another control.",
+    "importantProperties": [
+      "AutoPopDelay",
+      "InitialDelay",
+      "ReshowDelay",
+      "IsBalloon",
+      "ShowAlways",
+      "ToolTipTitle",
+      "ToolTipIcon"
+    ],
+    "importantEvents": [
+      "Popup",
+      "Draw"
+    ],
+    "relatedControls": [
+      "ErrorProvider",
+      "StatusStrip",
+      "Label"
+    ]
+  },
+  {
+    "name": "ErrorProvider",
+    "category": "Common Controls",
+    "namespace": "System.Windows.Forms",
+    "className": "ErrorProvider",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "ErrorProvider"
+    ],
+    "summary": "A component that shows a small error icon next to a control and a tooltip with the error message.",
+    "importantProperties": [
+      "BlinkStyle",
+      "Icon",
+      "ContainerControl",
+      "DataSource"
+    ],
+    "importantEvents": [],
+    "relatedControls": [
+      "ToolTip",
+      "TextBox",
+      "MaskedTextBox"
+    ]
+  }
+]

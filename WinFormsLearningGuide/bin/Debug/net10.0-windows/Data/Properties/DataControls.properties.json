@@ -1,0 +1,227 @@
+[
+  {
+    "name": "DataGridView",
+    "properties": [
+      {
+        "name": "DataSource",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "A DataTable, BindingSource, List<T> or any IList or IListSource",
+        "description": "The collection the grid displays and edits.",
+        "usage": "Show database rows or a list of objects.",
+        "example": "dgvOrders.DataSource = bindingSource1;",
+        "expectedEffect": "The grid shows one row per item."
+      },
+      {
+        "name": "Columns",
+        "dataType": "DataGridViewColumnCollection",
+        "defaultValue": "Empty (filled automatically when a DataSource is set)",
+        "acceptedValues": "DataGridViewColumn objects",
+        "description": "The columns of the grid.",
+        "usage": "Define columns by hand.",
+        "example": "dgvOrders.Columns.Add(\"Name\", \"Customer\");",
+        "expectedEffect": "A text column named Name with the header Customer appears."
+      },
+      {
+        "name": "Rows",
+        "dataType": "DataGridViewRowCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "DataGridViewRow objects",
+        "description": "The rows of the grid.",
+        "usage": "Add rows manually when there is no DataSource.",
+        "example": "dgvOrders.Rows.Add(\"Alice\", 3);",
+        "expectedEffect": "A new row is added."
+      },
+      {
+        "name": "AllowUserToAddRows",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Shows the empty row at the bottom that lets users add records.",
+        "usage": "Turn it off for read-only lists.",
+        "example": "dgvOrders.AllowUserToAddRows = false;",
+        "expectedEffect": "The blank new-row line disappears."
+      },
+      {
+        "name": "ReadOnly",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Prevents the user from editing cells.",
+        "usage": "Use the grid only for viewing.",
+        "example": "dgvOrders.ReadOnly = true;",
+        "expectedEffect": "Cells cannot be edited."
+      },
+      {
+        "name": "SelectionMode",
+        "dataType": "DataGridViewSelectionMode",
+        "defaultValue": "RowHeaderSelect",
+        "acceptedValues": "CellSelect, FullRowSelect, FullColumnSelect, RowHeaderSelect, ColumnHeaderSelect",
+        "description": "What a click selects.",
+        "usage": "Use FullRowSelect for master lists.",
+        "example": "dgvOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;",
+        "expectedEffect": "Clicking a cell highlights its whole row."
+      },
+      {
+        "name": "AutoSizeColumnsMode",
+        "dataType": "DataGridViewAutoSizeColumnsMode",
+        "defaultValue": "None",
+        "acceptedValues": "None, ColumnHeader, AllCells, AllCellsExceptHeader, DisplayedCells, DisplayedCellsExceptHeader, Fill",
+        "description": "How column widths are set automatically.",
+        "usage": "Use Fill so the columns share the grid width.",
+        "example": "dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;",
+        "expectedEffect": "The columns divide the available width."
+      },
+      {
+        "name": "AutoGenerateColumns",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Whether columns are created automatically from the DataSource.",
+        "usage": "Set it to false when you define your own columns.",
+        "example": "dgvOrders.AutoGenerateColumns = false;",
+        "expectedEffect": "Only the columns you defined are shown."
+      }
+    ]
+  },
+  {
+    "name": "BindingSource",
+    "properties": [
+      {
+        "name": "DataSource",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "A list, DataSet, DataTable or a type",
+        "description": "The data the component manages.",
+        "usage": "Connect it to your data and bind controls to the BindingSource.",
+        "example": "bindingSource1.DataSource = customers;",
+        "expectedEffect": "Bound controls show the data."
+      },
+      {
+        "name": "DataMember",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "The name of a list or table inside the DataSource",
+        "description": "Selects a table or list within a DataSource that contains several.",
+        "usage": "Pick one table of a DataSet.",
+        "example": "bindingSource1.DataMember = \"Orders\";",
+        "expectedEffect": "The component works with the Orders table."
+      },
+      {
+        "name": "Filter",
+        "dataType": "string",
+        "defaultValue": "null",
+        "acceptedValues": "An expression such as \"Country = 'France'\" (only for lists that support filtering, for example a DataView)",
+        "description": "Shows only the rows that match the expression.",
+        "usage": "Implement a quick search box.",
+        "example": "bindingSource1.Filter = \"Country = 'France'\";",
+        "expectedEffect": "Only matching rows are shown."
+      },
+      {
+        "name": "Sort",
+        "dataType": "string",
+        "defaultValue": "null",
+        "acceptedValues": "Column names with optional ASC or DESC (only for sortable lists)",
+        "description": "Orders the rows.",
+        "usage": "Show the newest first.",
+        "example": "bindingSource1.Sort = \"Date DESC\";",
+        "expectedEffect": "Rows appear in descending order of Date."
+      },
+      {
+        "name": "Position",
+        "dataType": "int",
+        "defaultValue": "0 (or -1 when the list is empty)",
+        "acceptedValues": "-1 up to Count - 1",
+        "description": "The index of the current item.",
+        "usage": "Move the selection from code.",
+        "example": "bindingSource1.Position = 0;",
+        "expectedEffect": "Bound controls show the first item."
+      },
+      {
+        "name": "Current",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "Read-only",
+        "description": "The current item itself.",
+        "usage": "Read the selected record.",
+        "example": "var customer = (Customer)bindingSource1.Current;",
+        "expectedEffect": "Returns the object at the current position."
+      },
+      {
+        "name": "List",
+        "dataType": "IList",
+        "defaultValue": "The underlying list",
+        "acceptedValues": "Read-only",
+        "description": "The list the component currently exposes after filtering and sorting.",
+        "usage": "Inspect or count the visible items.",
+        "example": "int visible = bindingSource1.List.Count;",
+        "expectedEffect": "Returns the list that bound controls see."
+      }
+    ]
+  },
+  {
+    "name": "BindingNavigator",
+    "properties": [
+      {
+        "name": "BindingSource",
+        "dataType": "BindingSource",
+        "defaultValue": "null",
+        "acceptedValues": "A BindingSource component",
+        "description": "The data source the navigator moves through and edits.",
+        "usage": "Connect the toolbar to your data.",
+        "example": "bindingNavigator1.BindingSource = bindingSource1;",
+        "expectedEffect": "The buttons now control bindingSource1."
+      },
+      {
+        "name": "PositionItem",
+        "dataType": "ToolStripItem",
+        "defaultValue": "null (the designer creates the standard items)",
+        "acceptedValues": "A ToolStripItem, usually a text box",
+        "description": "The item that shows the current position.",
+        "usage": "Replace it with your own item.",
+        "example": "bindingNavigator1.PositionItem = tstPosition;",
+        "expectedEffect": "This item shows and edits the current position."
+      },
+      {
+        "name": "CountItem",
+        "dataType": "ToolStripItem",
+        "defaultValue": "null (the designer creates the standard items)",
+        "acceptedValues": "A ToolStripItem, usually a label",
+        "description": "The item that shows the total count.",
+        "usage": "Use a custom label for the count.",
+        "example": "bindingNavigator1.CountItem = tslCount;",
+        "expectedEffect": "The label shows the number of records."
+      },
+      {
+        "name": "MoveFirstItem",
+        "dataType": "ToolStripItem",
+        "defaultValue": "null (the designer creates the standard items)",
+        "acceptedValues": "A ToolStripItem",
+        "description": "The button that jumps to the first record.",
+        "usage": "Assign your own button.",
+        "example": "bindingNavigator1.MoveFirstItem = tsbFirst;",
+        "expectedEffect": "Clicking the button moves to the first record."
+      },
+      {
+        "name": "AddNewItem",
+        "dataType": "ToolStripItem",
+        "defaultValue": "null (the designer creates the standard items)",
+        "acceptedValues": "A ToolStripItem",
+        "description": "The button that adds a new record.",
+        "usage": "Assign your own Add button.",
+        "example": "bindingNavigator1.AddNewItem = tsbAdd;",
+        "expectedEffect": "Clicking the button adds a record."
+      },
+      {
+        "name": "DeleteItem",
+        "dataType": "ToolStripItem",
+        "defaultValue": "null (the designer creates the standard items)",
+        "acceptedValues": "A ToolStripItem",
+        "description": "The button that deletes the current record.",
+        "usage": "Assign your own Delete button.",
+        "example": "bindingNavigator1.DeleteItem = tsbDelete;",
+        "expectedEffect": "Clicking the button deletes the current record."
+      }
+    ]
+  }
+]

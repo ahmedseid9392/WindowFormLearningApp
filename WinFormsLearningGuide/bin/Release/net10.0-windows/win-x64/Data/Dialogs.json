@@ -1,0 +1,154 @@
+[
+  {
+    "name": "OpenFileDialog",
+    "category": "Dialogs",
+    "namespace": "System.Windows.Forms",
+    "className": "OpenFileDialog",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "CommonDialog",
+      "FileDialog",
+      "OpenFileDialog"
+    ],
+    "summary": "Lets the user browse for and choose one or more existing files.",
+    "importantProperties": [
+      "Filter",
+      "FilterIndex",
+      "InitialDirectory",
+      "Multiselect",
+      "FileName",
+      "FileNames",
+      "Title",
+      "CheckFileExists"
+    ],
+    "importantEvents": [
+      "FileOk"
+    ],
+    "relatedControls": [
+      "SaveFileDialog",
+      "FolderBrowserDialog"
+    ]
+  },
+  {
+    "name": "SaveFileDialog",
+    "category": "Dialogs",
+    "namespace": "System.Windows.Forms",
+    "className": "SaveFileDialog",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "CommonDialog",
+      "FileDialog",
+      "SaveFileDialog"
+    ],
+    "summary": "Lets the user choose a file name and location for saving.",
+    "importantProperties": [
+      "Filter",
+      "DefaultExt",
+      "FileName",
+      "OverwritePrompt",
+      "AddExtension",
+      "Title",
+      "InitialDirectory"
+    ],
+    "importantEvents": [
+      "FileOk"
+    ],
+    "relatedControls": [
+      "OpenFileDialog",
+      "FolderBrowserDialog"
+    ]
+  },
+  {
+    "name": "FolderBrowserDialog",
+    "category": "Dialogs",
+    "namespace": "System.Windows.Forms",
+    "className": "FolderBrowserDialog",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "CommonDialog",
+      "FolderBrowserDialog"
+    ],
+    "summary": "Lets the user choose a folder.",
+    "importantProperties": [
+      "SelectedPath",
+      "Description",
+      "RootFolder",
+      "ShowNewFolderButton",
+      "UseDescriptionForTitle"
+    ],
+    "importantEvents": [
+      "HelpRequest"
+    ],
+    "relatedControls": [
+      "OpenFileDialog",
+      "SaveFileDialog"
+    ]
+  },
+  {
+    "name": "ColorDialog",
+    "category": "Dialogs",
+    "namespace": "System.Windows.Forms",
+    "className": "ColorDialog",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "CommonDialog",
+      "ColorDialog"
+    ],
+    "summary": "Lets the user pick a color from a palette or define a custom one.",
+    "importantProperties": [
+      "Color",
+      "AllowFullOpen",
+      "FullOpen",
+      "CustomColors",
+      "AnyColor",
+      "SolidColorOnly"
+    ],
+    "importantEvents": [
+      "HelpRequest"
+    ],
+    "relatedControls": [
+      "FontDialog",
+      "OpenFileDialog"
+    ]
+  },
+  {
+    "name": "FontDialog",
+    "category": "Dialogs",
+    "namespace": "System.Windows.Forms",
+    "className": "FontDialog",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "CommonDialog",
+      "FontDialog"
+    ],
+    "summary": "Lets the user choose a font, size, style and optionally a color.",
+    "importantProperties": [
+      "Font",
+      "Color",
+      "ShowColor",
+      "ShowEffects",
+      "MaxSize",
+      "MinSize",
+      "FontMustExist"
+    ],
+    "importantEvents": [
+      "Apply",
+      "HelpRequest"
+    ],
+    "relatedControls": [
+      "ColorDialog",
+      "RichTextBox",
+      "TextBox"
+    ]
+  }
+]

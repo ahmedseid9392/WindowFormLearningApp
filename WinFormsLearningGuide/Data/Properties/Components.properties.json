@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Timer",
+    "properties": [
+      {
+        "name": "Interval",
+        "dataType": "int",
+        "defaultValue": "100",
+        "acceptedValues": "Milliseconds greater than 0",
+        "description": "The time between Tick events.",
+        "usage": "Set 1000 for a clock that updates every second.",
+        "example": "timer1.Interval = 1000;",
+        "expectedEffect": "Tick occurs once per second."
+      },
+      {
+        "name": "Enabled",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Starts or stops the timer. Start() and Stop() set it too.",
+        "usage": "Start the timer when your form loads.",
+        "example": "timer1.Enabled = true;",
+        "expectedEffect": "The timer begins to raise Tick."
+      },
+      {
+        "name": "Tag",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "Any object",
+        "description": "A free slot for attaching data to the timer.",
+        "usage": "Remember what the timer was started for.",
+        "example": "timer1.Tag = \"autosave\";",
+        "expectedEffect": "The object is stored with the timer."
+      }
+    ]
+  },
+  {
+    "name": "BackgroundWorker",
+    "properties": [
+      {
+        "name": "WorkerReportsProgress",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Allows the work to report progress with ReportProgress.",
+        "usage": "Update a progress bar during long work.",
+        "example": "worker.WorkerReportsProgress = true;",
+        "expectedEffect": "ProgressChanged can now be raised."
+      },
+      {
+        "name": "WorkerSupportsCancellation",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Allows CancelAsync to ask the work to stop.",
+        "usage": "Offer a Cancel button.",
+        "example": "worker.WorkerSupportsCancellation = true;",
+        "expectedEffect": "CancelAsync no longer throws and sets CancellationPending."
+      },
+      {
+        "name": "IsBusy",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "Read-only",
+        "description": "True while the background operation is running.",
+        "usage": "Prevent starting the work twice.",
+        "example": "if (!worker.IsBusy) { worker.RunWorkerAsync(); }",
+        "expectedEffect": "Returns true until RunWorkerCompleted."
+      },
+      {
+        "name": "CancellationPending",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "Read-only",
+        "description": "True after CancelAsync was called. Check it inside DoWork.",
+        "usage": "Stop a loop politely.",
+        "example": "if (worker.CancellationPending) { e.Cancel = true; return; }",
+        "expectedEffect": "Lets the work end early."
+      }
+    ]
+  },
+  {
+    "name": "NotifyIcon",
+    "properties": [
+      {
+        "name": "Icon",
+        "dataType": "Icon",
+        "defaultValue": "null",
+        "acceptedValues": "Any Icon",
+        "description": "The icon in the notification area. Nothing is shown until you set one.",
+        "usage": "Show your application's icon in the tray.",
+        "example": "notifyIcon1.Icon = new Icon(\"app.ico\");",
+        "expectedEffect": "The icon appears in the tray once Visible is true."
+      },
+      {
+        "name": "Text",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "A short string (limited length: 63 characters in .NET Framework, 127 in modern .NET)",
+        "description": "The tip shown when the pointer is over the icon.",
+        "usage": "Tell what the icon represents.",
+        "example": "notifyIcon1.Text = \"My Application\";",
+        "expectedEffect": "The tip appears on hover."
+      },
+      {
+        "name": "Visible",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows or hides the icon.",
+        "usage": "Hide the icon when the program exits to avoid ghost icons.",
+        "example": "notifyIcon1.Visible = true;",
+        "expectedEffect": "The icon appears in the tray."
+      },
+      {
+        "name": "ContextMenuStrip",
+        "dataType": "ContextMenuStrip",
+        "defaultValue": "null",
+        "acceptedValues": "A ContextMenuStrip",
+        "description": "The menu shown when the user right-clicks the icon.",
+        "usage": "Offer Open and Exit commands.",
+        "example": "notifyIcon1.ContextMenuStrip = trayMenu;",
+        "expectedEffect": "Right-clicking the icon opens the menu."
+      },
+      {
+        "name": "BalloonTipTitle",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string",
+        "description": "The title of the balloon shown by ShowBalloonTip.",
+        "usage": "Give notifications a heading.",
+        "example": "notifyIcon1.BalloonTipTitle = \"Download finished\";",
+        "expectedEffect": "The balloon shows the title."
+      },
+      {
+        "name": "BalloonTipText",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string",
+        "description": "The message of the balloon.",
+        "usage": "Describe the event.",
+        "example": "notifyIcon1.BalloonTipText = \"3 files were saved.\";",
+        "expectedEffect": "The balloon shows the message."
+      },
+      {
+        "name": "BalloonTipIcon",
+        "dataType": "ToolTipIcon",
+        "defaultValue": "None",
+        "acceptedValues": "None, Info, Warning, Error",
+        "description": "The icon of the balloon.",
+        "usage": "Mark a warning or an error.",
+        "example": "notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;",
+        "expectedEffect": "An information icon is shown in the balloon."
+      }
+    ]
+  }
+]

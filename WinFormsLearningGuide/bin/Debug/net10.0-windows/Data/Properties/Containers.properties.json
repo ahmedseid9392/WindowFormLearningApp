@@ -1,0 +1,347 @@
+[
+  {
+    "name": "Panel",
+    "properties": [
+      {
+        "name": "AutoScroll",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows scroll bars when the content is larger than the panel.",
+        "usage": "Host a form that is bigger than the available space.",
+        "example": "pnlContent.AutoScroll = true;",
+        "expectedEffect": "Scroll bars appear when child controls extend past the edges."
+      },
+      {
+        "name": "BorderStyle",
+        "dataType": "BorderStyle",
+        "defaultValue": "None",
+        "acceptedValues": "None, FixedSingle, Fixed3D",
+        "description": "The border drawn around the panel.",
+        "usage": "Make the boundary of a group visible.",
+        "example": "pnlContent.BorderStyle = BorderStyle.FixedSingle;",
+        "expectedEffect": "A thin line surrounds the panel."
+      },
+      {
+        "name": "AutoSize",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Makes the panel grow to fit its child controls. AutoSizeMode decides whether it can also shrink.",
+        "usage": "Let a panel follow dynamically added content.",
+        "example": "pnlContent.AutoSize = true;",
+        "expectedEffect": "The panel resizes when controls are added or removed."
+      }
+    ]
+  },
+  {
+    "name": "GroupBox",
+    "properties": [
+      {
+        "name": "FlatStyle",
+        "dataType": "FlatStyle",
+        "defaultValue": "Standard",
+        "acceptedValues": "Flat, Popup, Standard, System",
+        "description": "Selects how the frame and caption are drawn.",
+        "usage": "Use System for the native Windows look.",
+        "example": "grpOptions.FlatStyle = FlatStyle.System;",
+        "expectedEffect": "The frame is drawn by the operating system."
+      },
+      {
+        "name": "AutoSize",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Makes the group box grow to fit its child controls.",
+        "usage": "Let the frame follow its content.",
+        "example": "grpOptions.AutoSize = true;",
+        "expectedEffect": "The group box resizes around its controls."
+      }
+    ]
+  },
+  {
+    "name": "TabControl",
+    "properties": [
+      {
+        "name": "TabPages",
+        "dataType": "TabControl.TabPageCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "TabPage objects",
+        "description": "The pages of the control.",
+        "usage": "Create a page from code.",
+        "example": "tabMain.TabPages.Add(new TabPage(\"General\"));",
+        "expectedEffect": "A new tab appears at the end of the tab strip."
+      },
+      {
+        "name": "SelectedIndex",
+        "dataType": "int",
+        "defaultValue": "0 once a page exists (-1 if there is none)",
+        "acceptedValues": "-1 or an index of an existing page",
+        "description": "Zero-based index of the visible page.",
+        "usage": "Open a specific page.",
+        "example": "tabMain.SelectedIndex = 1;",
+        "expectedEffect": "The second page becomes visible."
+      },
+      {
+        "name": "SelectedTab",
+        "dataType": "TabPage",
+        "defaultValue": "The first page",
+        "acceptedValues": "Any TabPage of this control",
+        "description": "The visible page itself.",
+        "usage": "Switch to a page by reference.",
+        "example": "tabMain.SelectedTab = tabAdvanced;",
+        "expectedEffect": "The Advanced page is shown."
+      },
+      {
+        "name": "Alignment",
+        "dataType": "TabAlignment",
+        "defaultValue": "Top",
+        "acceptedValues": "Top, Bottom, Left, Right",
+        "description": "The side of the control where the tabs appear.",
+        "usage": "Put tabs on the left for a vertical navigation.",
+        "example": "tabMain.Alignment = TabAlignment.Left;",
+        "expectedEffect": "The tab strip moves to the left edge."
+      },
+      {
+        "name": "Multiline",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Lets the tabs wrap onto several rows instead of scrolling.",
+        "usage": "Show all tabs at once when there are many.",
+        "example": "tabMain.Multiline = true;",
+        "expectedEffect": "Tabs wrap to additional rows."
+      },
+      {
+        "name": "ImageList",
+        "dataType": "ImageList",
+        "defaultValue": "null",
+        "acceptedValues": "An ImageList component",
+        "description": "The icons that pages can use through ImageIndex.",
+        "usage": "Add icons to the tabs.",
+        "example": "tabMain.ImageList = imageList1;",
+        "expectedEffect": "Pages with an ImageIndex show their icon."
+      }
+    ]
+  },
+  {
+    "name": "TabPage",
+    "properties": [
+      {
+        "name": "ImageIndex",
+        "dataType": "int",
+        "defaultValue": "-1",
+        "acceptedValues": "-1 or a valid index of the TabControl.ImageList",
+        "description": "The icon of the tab.",
+        "usage": "Show an icon on the tab header.",
+        "example": "tabGeneral.ImageIndex = 0;",
+        "expectedEffect": "The first image of the ImageList appears on the tab."
+      },
+      {
+        "name": "UseVisualStyleBackColor",
+        "dataType": "bool",
+        "defaultValue": "false in code (the designer sets true)",
+        "acceptedValues": "true, false",
+        "description": "When true, the page is drawn with the themed background and BackColor is ignored.",
+        "usage": "Set it to false before changing BackColor.",
+        "example": "tabGeneral.UseVisualStyleBackColor = false;",
+        "expectedEffect": "The page now honors BackColor."
+      },
+      {
+        "name": "ToolTipText",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string",
+        "description": "The tip shown when the pointer is over the tab. The TabControl must have ShowToolTips set to true.",
+        "usage": "Explain what a tab contains.",
+        "example": "tabGeneral.ToolTipText = \"General settings\";",
+        "expectedEffect": "A tip appears over the tab header."
+      }
+    ]
+  },
+  {
+    "name": "SplitContainer",
+    "properties": [
+      {
+        "name": "Orientation",
+        "dataType": "Orientation",
+        "defaultValue": "Vertical",
+        "acceptedValues": "Horizontal, Vertical",
+        "description": "Direction of the splitter. Vertical puts the panels side by side.",
+        "usage": "Stack the panels on top of each other with Horizontal.",
+        "example": "split.Orientation = Orientation.Horizontal;",
+        "expectedEffect": "Panel1 appears above Panel2."
+      },
+      {
+        "name": "SplitterDistance",
+        "dataType": "int",
+        "defaultValue": "50",
+        "acceptedValues": "Between Panel1MinSize and the container size minus Panel2MinSize and SplitterWidth",
+        "description": "Distance in pixels from the left (or top) edge to the splitter.",
+        "usage": "Set the initial width of a navigation pane.",
+        "example": "split.SplitterDistance = 250;",
+        "expectedEffect": "The splitter moves to 250 px."
+      },
+      {
+        "name": "SplitterWidth",
+        "dataType": "int",
+        "defaultValue": "4",
+        "acceptedValues": "1 or greater",
+        "description": "The thickness of the splitter bar.",
+        "usage": "Make the bar easier to grab.",
+        "example": "split.SplitterWidth = 6;",
+        "expectedEffect": "The bar becomes thicker."
+      },
+      {
+        "name": "FixedPanel",
+        "dataType": "FixedPanel",
+        "defaultValue": "None",
+        "acceptedValues": "None, Panel1, Panel2",
+        "description": "The panel that keeps its size when the container is resized.",
+        "usage": "Keep a sidebar at a constant width.",
+        "example": "split.FixedPanel = FixedPanel.Panel1;",
+        "expectedEffect": "Only Panel2 grows or shrinks on resize."
+      },
+      {
+        "name": "Panel1",
+        "dataType": "SplitterPanel",
+        "defaultValue": "Created automatically",
+        "acceptedValues": "Read-only",
+        "description": "The first panel (left or top).",
+        "usage": "Add controls to the first panel.",
+        "example": "split.Panel1.Controls.Add(tree);",
+        "expectedEffect": "The control is hosted in the first panel."
+      },
+      {
+        "name": "Panel2",
+        "dataType": "SplitterPanel",
+        "defaultValue": "Created automatically",
+        "acceptedValues": "Read-only",
+        "description": "The second panel (right or bottom).",
+        "usage": "Add controls to the second panel.",
+        "example": "split.Panel2.Controls.Add(viewer);",
+        "expectedEffect": "The control is hosted in the second panel."
+      },
+      {
+        "name": "IsSplitterFixed",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Prevents the user from dragging the splitter. Code can still move it.",
+        "usage": "Lock a layout.",
+        "example": "split.IsSplitterFixed = true;",
+        "expectedEffect": "The splitter can no longer be dragged."
+      },
+      {
+        "name": "Panel1Collapsed",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Hides the first panel so the second one uses all the space.",
+        "usage": "Toggle a sidebar.",
+        "example": "split.Panel1Collapsed = true;",
+        "expectedEffect": "Panel1 disappears and Panel2 fills the container."
+      }
+    ]
+  },
+  {
+    "name": "FlowLayoutPanel",
+    "properties": [
+      {
+        "name": "FlowDirection",
+        "dataType": "FlowDirection",
+        "defaultValue": "LeftToRight",
+        "acceptedValues": "LeftToRight, TopDown, RightToLeft, BottomUp",
+        "description": "The direction in which child controls are arranged.",
+        "usage": "Stack controls vertically with TopDown.",
+        "example": "flow.FlowDirection = FlowDirection.TopDown;",
+        "expectedEffect": "Controls are placed one below the other."
+      },
+      {
+        "name": "WrapContents",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Whether controls move to a new row or column when the edge is reached.",
+        "usage": "Keep all controls in one line.",
+        "example": "flow.WrapContents = false;",
+        "expectedEffect": "Controls stay in a single row or column."
+      },
+      {
+        "name": "AutoScroll",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows scroll bars when the content does not fit.",
+        "usage": "Scroll a long vertical list of controls.",
+        "example": "flow.AutoScroll = true;",
+        "expectedEffect": "Scroll bars appear when needed."
+      }
+    ]
+  },
+  {
+    "name": "TableLayoutPanel",
+    "properties": [
+      {
+        "name": "RowCount",
+        "dataType": "int",
+        "defaultValue": "0",
+        "acceptedValues": "0 or greater",
+        "description": "The number of rows in the grid.",
+        "usage": "Define the grid before adding controls.",
+        "example": "tlp.RowCount = 3;",
+        "expectedEffect": "The grid has three rows."
+      },
+      {
+        "name": "ColumnCount",
+        "dataType": "int",
+        "defaultValue": "0",
+        "acceptedValues": "0 or greater",
+        "description": "The number of columns in the grid.",
+        "usage": "Create a two-column label and input layout.",
+        "example": "tlp.ColumnCount = 2;",
+        "expectedEffect": "The grid has two columns."
+      },
+      {
+        "name": "ColumnStyles",
+        "dataType": "TableLayoutColumnStyleCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "ColumnStyle objects (Absolute, Percent, AutoSize)",
+        "description": "The sizing rules of the columns.",
+        "usage": "Give the second column all the extra space.",
+        "example": "tlp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));",
+        "expectedEffect": "The column grows with the panel."
+      },
+      {
+        "name": "RowStyles",
+        "dataType": "TableLayoutRowStyleCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "RowStyle objects (Absolute, Percent, AutoSize)",
+        "description": "The sizing rules of the rows.",
+        "usage": "Make rows fit their content.",
+        "example": "tlp.RowStyles.Add(new RowStyle(SizeType.AutoSize));",
+        "expectedEffect": "The row height follows its content."
+      },
+      {
+        "name": "CellBorderStyle",
+        "dataType": "TableLayoutPanelCellBorderStyle",
+        "defaultValue": "None",
+        "acceptedValues": "None, Single, Inset, InsetDouble, Outset, OutsetPartial, OutsetDouble",
+        "description": "Draws lines between cells.",
+        "usage": "Show grid lines while designing the layout.",
+        "example": "tlp.CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;",
+        "expectedEffect": "Thin lines appear between the cells."
+      },
+      {
+        "name": "GrowStyle",
+        "dataType": "TableLayoutPanelGrowStyle",
+        "defaultValue": "AddRows",
+        "acceptedValues": "FixedSize, AddRows, AddColumns",
+        "description": "What happens when a control is added to a full grid.",
+        "usage": "Allow the grid to add columns instead of rows.",
+        "example": "tlp.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;",
+        "expectedEffect": "New columns are created as needed."
+      }
+    ]
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BBDF4437-5D16-BDD8-0FFA-9D08B859167F}|WinFormsLearningGuide.csproj|c:\\users\\amd\\downloads\\winformslearningguide_phase3\\winformslearningguide\\controls\\sectioncard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBDF4437-5D16-BDD8-0FFA-9D08B859167F}|WinFormsLearningGuide.csproj|solutionrelative:controls\\sectioncard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SectionCard.cs",
+              "DocumentMoniker": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\Controls\\SectionCard.cs",
+              "RelativeDocumentMoniker": "Controls\\SectionCard.cs",
+              "ToolTip": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\Controls\\SectionCard.cs",
+              "RelativeToolTip": "Controls\\SectionCard.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAD4vzsAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-07T13:54:25.863Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

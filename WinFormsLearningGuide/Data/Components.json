@@ -1,0 +1,88 @@
+[
+  {
+    "name": "Timer",
+    "category": "Components",
+    "namespace": "System.Windows.Forms",
+    "className": "Timer",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Timer"
+    ],
+    "summary": "Raises a Tick event at regular intervals on the UI thread.",
+    "importantProperties": [
+      "Interval",
+      "Enabled",
+      "Tag"
+    ],
+    "importantEvents": [
+      "Tick"
+    ],
+    "relatedControls": [
+      "BackgroundWorker",
+      "ProgressBar"
+    ]
+  },
+  {
+    "name": "BackgroundWorker",
+    "category": "Components",
+    "namespace": "System.ComponentModel",
+    "className": "BackgroundWorker",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "BackgroundWorker"
+    ],
+    "summary": "Runs a time-consuming operation on a background thread and reports progress without freezing the UI.",
+    "importantProperties": [
+      "WorkerReportsProgress",
+      "WorkerSupportsCancellation",
+      "IsBusy",
+      "CancellationPending"
+    ],
+    "importantEvents": [
+      "DoWork",
+      "ProgressChanged",
+      "RunWorkerCompleted"
+    ],
+    "relatedControls": [
+      "Timer",
+      "ProgressBar"
+    ]
+  },
+  {
+    "name": "NotifyIcon",
+    "category": "Components",
+    "namespace": "System.Windows.Forms",
+    "className": "NotifyIcon",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "NotifyIcon"
+    ],
+    "summary": "Shows an icon in the Windows notification area (system tray) with optional balloon notifications and a menu.",
+    "importantProperties": [
+      "Icon",
+      "Text",
+      "Visible",
+      "ContextMenuStrip",
+      "BalloonTipTitle",
+      "BalloonTipText",
+      "BalloonTipIcon"
+    ],
+    "importantEvents": [
+      "MouseClick",
+      "MouseDoubleClick",
+      "BalloonTipClicked",
+      "BalloonTipClosed"
+    ],
+    "relatedControls": [
+      "ContextMenuStrip",
+      "ToolTip",
+      "Timer"
+    ]
+  }
+]

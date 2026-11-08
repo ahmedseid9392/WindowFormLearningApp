@@ -1,0 +1,474 @@
+[
+  {
+    "name": "Label",
+    "purpose": "A Label shows text (or an image) that the user reads but does not edit. It is the standard way to caption other controls and to display messages or results.",
+    "whenToUse": [
+      "Caption a TextBox, ComboBox or other input so the user knows what to enter.",
+      "Show a result, status message or instruction that your code updates at run time.",
+      "Display a heading or a short description inside a form or GroupBox."
+    ],
+    "realWorldExamples": [
+      "The 'Username:' and 'Password:' captions on a login form.",
+      "A 'Total: $42.50' line that updates as items are added to an order.",
+      "A red 'Invalid email address' message under a registration field."
+    ],
+    "defaultAppearance": "Plain text on the parent's background with no border. By default AutoSize is true, so the label grows to fit its text, and the font and color are inherited from the parent form.",
+    "commonMistakes": [
+      { "mistake": "Leaving AutoSize = true and then wondering why Size, Width and Height changes seem to be ignored.", "fix": "Set AutoSize = false when you need a fixed size, then set Size and TextAlign yourself." },
+      { "mistake": "Using '&' in the text and losing a character, for example 'Q&A' shows as 'QA' with an underlined A.", "fix": "Set UseMnemonic = false, or write '&&' to display a literal ampersand." },
+      { "mistake": "Using a Label to collect input, or a disabled TextBox to display results.", "fix": "Use a Label for output, a TextBox with ReadOnly = true when the text must be selectable and copyable." }
+    ],
+    "relatedNotes": [
+      { "name": "LinkLabel", "difference": "Looks like a Label but contains clickable links that raise LinkClicked." },
+      { "name": "TextBox", "difference": "Lets the user edit text; a Label is display-only." },
+      { "name": "ToolStripLabel", "difference": "The Label equivalent for use inside ToolStrip and StatusStrip." }
+    ]
+  },
+  {
+    "name": "Button",
+    "purpose": "A Button lets the user trigger an action with a single click. Your code reacts in the Click event.",
+    "whenToUse": [
+      "Submit, save, cancel or confirm a form.",
+      "Start a command such as Search, Refresh or Export.",
+      "Close a dialog by setting DialogResult, so ShowDialog returns the answer."
+    ],
+    "realWorldExamples": [
+      "OK and Cancel buttons at the bottom of a settings dialog.",
+      "A 'Search' button next to a search TextBox.",
+      "A 'Browse...' button that opens an OpenFileDialog."
+    ],
+    "defaultAppearance": "A raised, standard Windows push button with centered text and the system button color. It shows a focus rectangle when reached with the keyboard, and the default button of a form has a heavier border.",
+    "commonMistakes": [
+      { "mistake": "Double-clicking the button in the designer several times, which creates extra empty event handlers.", "fix": "Create the Click handler once and delete unused handlers in both the .cs and Designer.cs files." },
+      { "mistake": "Running a long operation directly in Click, which freezes the window.", "fix": "Move the work to a BackgroundWorker or use async/await so the UI thread stays responsive." },
+      { "mistake": "Not setting the form's AcceptButton and CancelButton.", "fix": "Set Form.AcceptButton to the main button so Enter triggers it, and CancelButton so Esc closes the form." }
+    ],
+    "relatedNotes": [
+      { "name": "CheckBox", "difference": "Holds an on/off state instead of firing a one-time action." },
+      { "name": "RadioButton", "difference": "One choice among a group of mutually exclusive options." },
+      { "name": "LinkLabel", "difference": "Looks like a hyperlink and suits navigation or 'learn more' actions." },
+      { "name": "ToolStripButton", "difference": "The Button equivalent for a ToolStrip toolbar." }
+    ]
+  },
+  {
+    "name": "TextBox",
+    "purpose": "A TextBox lets the user type and edit plain text, on one line or several. The text is available in the Text property.",
+    "whenToUse": [
+      "Collect free-form text such as names, emails, search terms or comments.",
+      "Show text that should be selectable and copyable by setting ReadOnly = true.",
+      "Collect a password by setting UseSystemPasswordChar = true."
+    ],
+    "realWorldExamples": [
+      "The username and password fields on a login screen.",
+      "A multiline notes box on a customer record.",
+      "A search box that filters a list as the user types."
+    ],
+    "defaultAppearance": "A single-line white box with a thin sunken border and a blinking caret when focused. Text is left-aligned in the form's font, and the control's height is fixed by the font size until Multiline is turned on.",
+    "commonMistakes": [
+      { "mistake": "Trying to make a single-line TextBox taller and finding that Height does not change.", "fix": "Set Multiline = true first, or change the Font; a single-line TextBox derives its height from the font." },
+      { "mistake": "Reading Text for a number and calling int.Parse directly, which crashes on empty or invalid input.", "fix": "Use int.TryParse and show a message or ErrorProvider when it fails." },
+      { "mistake": "Appending to Text in a loop for logs, which becomes very slow.", "fix": "Use AppendText, or collect lines in a StringBuilder and assign once." }
+    ],
+    "relatedNotes": [
+      { "name": "RichTextBox", "difference": "Supports formatted text (bold, colors, images) but is heavier." },
+      { "name": "MaskedTextBox", "difference": "Forces input to follow a pattern such as a phone number." },
+      { "name": "ComboBox", "difference": "Combines a text field with a drop-down list of suggested values." },
+      { "name": "NumericUpDown", "difference": "Accepts only numbers within a range, with up and down arrows." }
+    ]
+  },
+  {
+    "name": "RichTextBox",
+    "purpose": "A RichTextBox edits and displays text with formatting such as bold, italic, colors and different fonts, and can load and save RTF files.",
+    "whenToUse": [
+      "Build a simple word-processor or note editor.",
+      "Display colored log or console output.",
+      "Let users format part of a message with bold or color."
+    ],
+    "realWorldExamples": [
+      "A mini text editor similar to WordPad.",
+      "A log window that shows errors in red and warnings in orange.",
+      "An email composer with bold and bullet formatting."
+    ],
+    "defaultAppearance": "A white multiline text area with a sunken border and a vertical scroll bar that appears when needed. Text wraps by default (WordWrap = true), and formatting is applied to the current selection.",
+    "commonMistakes": [
+      { "mistake": "Setting the Text property and expecting formatting to survive.", "fix": "Use the Rtf property to load formatted content, or format ranges with Select and SelectionFont/SelectionColor." },
+      { "mistake": "Applying SelectionColor without selecting anything first, so nothing changes.", "fix": "Call Select(start, length) before setting Selection properties; with no selection they affect new typed text." },
+      { "mistake": "Using a RichTextBox where a TextBox is enough.", "fix": "Use a plain TextBox when no formatting is needed; it is lighter and simpler." }
+    ],
+    "relatedNotes": [
+      { "name": "TextBox", "difference": "Plain text only, simpler and faster for ordinary input." },
+      { "name": "MaskedTextBox", "difference": "Restricts input to a pattern; it is single-line and has no formatting." }
+    ]
+  },
+  {
+    "name": "MaskedTextBox",
+    "purpose": "A MaskedTextBox restricts what the user can type to a pattern defined by its Mask, so values such as phone numbers, dates and postal codes are entered in the right format.",
+    "whenToUse": [
+      "Collect data with a fixed layout such as phone numbers, ZIP codes or IDs.",
+      "Prevent letters in a field that should hold only digits.",
+      "Guide users by showing the format placeholder while they type."
+    ],
+    "realWorldExamples": [
+      "A phone number field using the mask (000) 000-0000.",
+      "A national ID or product serial number field.",
+      "A time field using the mask 00:00."
+    ],
+    "defaultAppearance": "Looks like a single-line TextBox. When a Mask is set, the placeholders (underscores by default) and literal characters such as brackets and dashes are visible before the user types.",
+    "commonMistakes": [
+      { "mistake": "Reading Text and getting the literals, such as '(555) 123-4567', when you wanted only digits.", "fix": "Set TextMaskFormat = MaskFormat.ExcludePromptAndLiterals before reading Text." },
+      { "mistake": "Checking Text.Length to see if the field is filled in, which is always the mask length.", "fix": "Check MaskCompleted (or MaskFull) instead." },
+      { "mistake": "Using a mask for free-form data like names.", "fix": "Use a plain TextBox; masks are for fixed-length structured values." }
+    ],
+    "relatedNotes": [
+      { "name": "TextBox", "difference": "Accepts any text; no pattern enforcement." },
+      { "name": "NumericUpDown", "difference": "Accepts a number in a range with arrows rather than a text pattern." },
+      { "name": "DateTimePicker", "difference": "A better choice for dates; it gives a calendar and always returns a valid DateTime." }
+    ]
+  },
+  {
+    "name": "CheckBox",
+    "purpose": "A CheckBox lets the user turn an option on or off, independently of other check boxes. It can also have a third, indeterminate state.",
+    "whenToUse": [
+      "Offer yes/no settings such as 'Remember me'.",
+      "Let the user select any number of options from a list.",
+      "Show a mixed state with ThreeState = true, for example 'select all' over partly selected items."
+    ],
+    "realWorldExamples": [
+      "'Remember me' on a login form.",
+      "'I accept the terms and conditions' before enabling a Next button.",
+      "A list of newsletter topics the user can subscribe to."
+    ],
+    "defaultAppearance": "A small square box followed by its text. A tick shows when Checked is true; with ThreeState a filled square shows the indeterminate state. The text is clickable too.",
+    "commonMistakes": [
+      { "mistake": "Using CheckBoxes for mutually exclusive choices.", "fix": "Use RadioButtons, so selecting one clears the others." },
+      { "mistake": "Reading Checked when ThreeState is true and ignoring the indeterminate state.", "fix": "Read CheckState instead and handle Checked, Unchecked and Indeterminate." },
+      { "mistake": "Reacting in Click and getting the old value in some cases.", "fix": "Use the CheckedChanged event, which fires after the state has changed." }
+    ],
+    "relatedNotes": [
+      { "name": "RadioButton", "difference": "Choices exclude each other within a group; check boxes are independent." },
+      { "name": "CheckedListBox", "difference": "Shows many check boxes in a scrollable list, good for long lists." },
+      { "name": "Button", "difference": "Fires an action; a CheckBox stores a state. Appearance = Button makes a CheckBox look like a toggle button." }
+    ]
+  },
+  {
+    "name": "RadioButton",
+    "purpose": "A RadioButton presents one option in a group of mutually exclusive choices. Selecting one automatically deselects the others in the same container.",
+    "whenToUse": [
+      "Let the user choose exactly one of a small set of options.",
+      "Select a mode, size or payment method where all options should be visible at once.",
+      "Group related choices with a GroupBox or Panel."
+    ],
+    "realWorldExamples": [
+      "Choosing Small, Medium or Large for a drink.",
+      "Selecting a payment method: Card, PayPal or Cash.",
+      "Picking Light or Dark theme in settings."
+    ],
+    "defaultAppearance": "A small round button followed by text; the selected option shows a filled dot. Related buttons are placed together, usually inside a GroupBox that gives them a visible frame and caption.",
+    "commonMistakes": [
+      { "mistake": "Placing two separate sets of RadioButtons directly on the same form and finding that choosing one set clears the other.", "fix": "Put each set in its own GroupBox or Panel; the parent container defines the group." },
+      { "mistake": "Having no option checked at startup.", "fix": "Set Checked = true on the default option so the form is always in a valid state." },
+      { "mistake": "Handling CheckedChanged and running the code twice.", "fix": "CheckedChanged fires for both the deselected and selected button; test the sender's Checked property before acting." }
+    ],
+    "relatedNotes": [
+      { "name": "CheckBox", "difference": "Independent on/off options; many can be checked at once." },
+      { "name": "ComboBox", "difference": "Saves space for long lists, but hides the options until opened." },
+      { "name": "GroupBox", "difference": "The usual container that defines a group of RadioButtons and adds a caption." }
+    ]
+  },
+  {
+    "name": "ComboBox",
+    "purpose": "A ComboBox combines a text field with a drop-down list. The user picks from the list or, depending on DropDownStyle, types a value.",
+    "whenToUse": [
+      "Pick one item from a medium or long list while saving screen space.",
+      "Offer common values but still allow typing (DropDownStyle = DropDown).",
+      "Force a choice from the list with DropDownStyle = DropDownList."
+    ],
+    "realWorldExamples": [
+      "A country selector on an address form.",
+      "A font-size box offering 8, 10, 12 and also allowing custom values.",
+      "A filter drop-down such as 'All', 'Active', 'Archived'."
+    ],
+    "defaultAppearance": "Looks like a TextBox with a small arrow button on the right. Clicking the arrow opens a list below. With DropDownList the text part is not editable and is shown as a flat selected item.",
+    "commonMistakes": [
+      { "mistake": "Reading Text to find the selection in a DropDown-style box, which also contains whatever the user typed.", "fix": "Use SelectedItem or SelectedIndex, and check for null/-1 when nothing is selected." },
+      { "mistake": "Adding objects without overriding ToString and seeing type names in the list.", "fix": "Set DisplayMember and ValueMember when binding, or override ToString on the item class." },
+      { "mistake": "Expecting a selected item at startup.", "fix": "Set SelectedIndex = 0 in code, because a new ComboBox starts with nothing selected." }
+    ],
+    "relatedNotes": [
+      { "name": "ListBox", "difference": "Shows several items at once in a fixed area, with optional multi-select." },
+      { "name": "CheckedListBox", "difference": "A list where each item has a check box, allowing multiple choices." },
+      { "name": "TextBox", "difference": "Free text only; no list of choices." }
+    ]
+  },
+  {
+    "name": "ListBox",
+    "purpose": "A ListBox shows a scrollable list of items and lets the user select one or several of them.",
+    "whenToUse": [
+      "Show a list that should stay visible, such as files or search results.",
+      "Allow multiple selection with SelectionMode.MultiExtended.",
+      "Display items that your code adds and removes at run time."
+    ],
+    "realWorldExamples": [
+      "A list of open documents in a tool window.",
+      "The results list in a search form.",
+      "A source and a destination list where items are moved between them."
+    ],
+    "defaultAppearance": "A white rectangle with a sunken border listing one item per line. The selected item is highlighted in the system selection color, and a vertical scroll bar appears when the list is longer than the box.",
+    "commonMistakes": [
+      { "mistake": "Reading SelectedItem when SelectionMode allows several items.", "fix": "Loop over SelectedItems or SelectedIndices for multi-select lists." },
+      { "mistake": "Modifying the Items collection while looping over it with foreach.", "fix": "Loop backwards by index, or copy the selected items to a list first." },
+      { "mistake": "Adding thousands of items one by one, which flickers and is slow.", "fix": "Wrap the loop with BeginUpdate()/EndUpdate(), or use AddRange." }
+    ],
+    "relatedNotes": [
+      { "name": "ComboBox", "difference": "Shows a single selection and hides the list until opened." },
+      { "name": "CheckedListBox", "difference": "Adds a check box to each item for multiple selection." },
+      { "name": "DataGridView", "difference": "Use it when items have several columns of data." }
+    ]
+  },
+  {
+    "name": "CheckedListBox",
+    "purpose": "A CheckedListBox is a list in which every item has a check box, so the user can tick any number of items.",
+    "whenToUse": [
+      "Let users choose several options from a long list.",
+      "Show on/off settings that are generated from data.",
+      "Select items for a bulk action, such as files to delete."
+    ],
+    "realWorldExamples": [
+      "A list of features to install in a setup wizard.",
+      "Choosing which columns to show in a report.",
+      "Selecting several users to receive a message."
+    ],
+    "defaultAppearance": "Looks like a ListBox with a check box before each item. Ticked items show a check mark. By default the first click selects an item and a second click toggles its check box.",
+    "commonMistakes": [
+      { "mistake": "Confusing selected items with checked items, and reading SelectedItems.", "fix": "Use CheckedItems or CheckedIndices to find the ticked items." },
+      { "mistake": "Needing two clicks to tick an item and thinking the control is broken.", "fix": "Set CheckOnClick = true so a single click toggles the check box." },
+      { "mistake": "Reading CheckedItems inside ItemCheck and getting the previous state.", "fix": "ItemCheck fires before the change; use e.NewValue, or defer the work with BeginInvoke." }
+    ],
+    "relatedNotes": [
+      { "name": "ListBox", "difference": "Selection by highlight only; no check boxes." },
+      { "name": "CheckBox", "difference": "A single option; use several for a short, fixed set." },
+      { "name": "ComboBox", "difference": "A drop-down for choosing a single value." }
+    ]
+  },
+  {
+    "name": "PictureBox",
+    "purpose": "A PictureBox displays an image (bitmap, JPEG, PNG, GIF, icon) on a form and can scale it in several ways.",
+    "whenToUse": [
+      "Show a logo, photo or product image.",
+      "Display a drawing or the result of image processing.",
+      "Provide a surface for custom drawing in the Paint event."
+    ],
+    "realWorldExamples": [
+      "A company logo on a splash screen.",
+      "A product photo in an inventory form.",
+      "A preview of the picture the user selected with OpenFileDialog."
+    ],
+    "defaultAppearance": "An empty rectangle with no border until an Image is assigned; at design time an empty box shows a dashed outline. By default the image is drawn at its original size from the top-left corner and is clipped if it is larger.",
+    "commonMistakes": [
+      { "mistake": "Loading a new image and leaving the old one undisposed, which leaks memory and locks the file.", "fix": "Dispose the previous Image before assigning a new one." },
+      { "mistake": "Using Image.FromFile and then being unable to overwrite the file.", "fix": "Load through a FileStream or copy into a new Bitmap, and dispose the original." },
+      { "mistake": "Stretched or distorted pictures.", "fix": "Set SizeMode = Zoom to keep the aspect ratio instead of StretchImage." }
+    ],
+    "relatedNotes": [
+      { "name": "Panel", "difference": "A container; use BackgroundImage on a Panel when you also need child controls on top." },
+      { "name": "Label", "difference": "Can show a small Image with text, but PictureBox is better for image-focused layouts." },
+      { "name": "Button", "difference": "Can display an image on a clickable surface; PictureBox is passive unless you handle Click." }
+    ]
+  },
+  {
+    "name": "DateTimePicker",
+    "purpose": "A DateTimePicker lets the user pick a date, a time or both, with a drop-down calendar for dates, and always gives you a valid DateTime.",
+    "whenToUse": [
+      "Ask for a single date such as a birth date or a due date.",
+      "Collect a time of day by setting Format = Time and ShowUpDown = true.",
+      "Restrict the range with MinDate and MaxDate."
+    ],
+    "realWorldExamples": [
+      "A booking form with check-in and check-out dates.",
+      "An appointment time selector.",
+      "Report filters with a start and an end date."
+    ],
+    "defaultAppearance": "A single-line box showing the date in the system's long format, with a drop-down arrow on the right. Clicking the arrow opens a month calendar; each part of the date can also be edited with the keyboard.",
+    "commonMistakes": [
+      { "mistake": "Assuming the control starts empty.", "fix": "It starts with today's date; set ShowCheckBox = true and test Checked if the date is optional." },
+      { "mistake": "Comparing Value to a date and failing because of the time part.", "fix": "Compare Value.Date when you only care about the day." },
+      { "mistake": "Setting Value outside MinDate and MaxDate, which throws an exception.", "fix": "Set the limits first and make sure the value is inside them." }
+    ],
+    "relatedNotes": [
+      { "name": "MonthCalendar", "difference": "Always shows a full calendar and can select a range of dates; DateTimePicker is compact." },
+      { "name": "MaskedTextBox", "difference": "Can enforce a date format but does not validate the date for you." },
+      { "name": "NumericUpDown", "difference": "Picks a number; use DateTimePicker for anything date-like." }
+    ]
+  },
+  {
+    "name": "MonthCalendar",
+    "purpose": "A MonthCalendar shows one or more months and lets the user pick a date or a range of dates directly on the calendar.",
+    "whenToUse": [
+      "Show a full calendar that stays visible on the form.",
+      "Select a range of days, for example a holiday period.",
+      "Highlight important days with BoldedDates."
+    ],
+    "realWorldExamples": [
+      "A scheduling screen that shows the month with booked days in bold.",
+      "A leave request form where employees select start and end days.",
+      "A dashboard sidebar calendar."
+    ],
+    "defaultAppearance": "A calendar grid for the current month with the weekday names, a header with arrows to change month, and today's date circled or shown at the bottom. The selected day or range is highlighted.",
+    "commonMistakes": [
+      { "mistake": "Reading Value, which does not exist; the control uses SelectionStart and SelectionEnd.", "fix": "Use SelectionStart and SelectionEnd (or SelectionRange) to read the selection." },
+      { "mistake": "Trying to resize it freely and getting odd sizes.", "fix": "The control sizes itself in whole months; change CalendarDimensions to show more months." },
+      { "mistake": "Allowing a long range by accident.", "fix": "Set MaxSelectionCount to limit how many days can be selected." }
+    ],
+    "relatedNotes": [
+      { "name": "DateTimePicker", "difference": "A compact box with a drop-down calendar, for picking a single date or time." }
+    ]
+  },
+  {
+    "name": "NumericUpDown",
+    "purpose": "A NumericUpDown lets the user enter a number by typing or by using up and down arrows, within a Minimum and Maximum you control.",
+    "whenToUse": [
+      "Collect a quantity, age or other bounded number.",
+      "Let the user adjust a value in fixed steps (Increment).",
+      "Show decimals with DecimalPlaces."
+    ],
+    "realWorldExamples": [
+      "A quantity selector in an order form.",
+      "An age field limited to 0-120.",
+      "A font-size or zoom field."
+    ],
+    "defaultAppearance": "A small text field showing a number with a pair of tiny up and down arrows on the right. The default range is 0 to 100 and the default value is 0.",
+    "commonMistakes": [
+      { "mistake": "Setting Value above the default Maximum of 100, which throws an exception.", "fix": "Set Minimum and Maximum first, then Value." },
+      { "mistake": "Using Value as an int and getting a compile error, because it is a decimal.", "fix": "Cast with (int)numeric.Value, or use Convert.ToInt32." },
+      { "mistake": "Reading Value right after the user types without leaving the control, and getting the old number.", "fix": "Use the ValueChanged event, or call ValidateChildren, so the typed text is committed." }
+    ],
+    "relatedNotes": [
+      { "name": "TrackBar", "difference": "A slider for approximate values; NumericUpDown is better for exact numbers." },
+      { "name": "TextBox", "difference": "Accepts any text and needs manual number validation." },
+      { "name": "MaskedTextBox", "difference": "Enforces a text pattern; NumericUpDown enforces a numeric range." }
+    ]
+  },
+  {
+    "name": "ProgressBar",
+    "purpose": "A ProgressBar shows how far a long-running operation has progressed, or that work is happening when the duration is unknown.",
+    "whenToUse": [
+      "Report progress of a file copy, import or download.",
+      "Show that the app is busy using Style = Marquee when the end is unknown.",
+      "Give feedback inside a StatusStrip while a task runs."
+    ],
+    "realWorldExamples": [
+      "A progress bar while importing a large CSV file.",
+      "A download progress indicator.",
+      "A loading bar at the bottom of the main window."
+    ],
+    "defaultAppearance": "A horizontal bar with a green block fill that grows from the left as Value approaches Maximum. The range is 0 to 100 by default.",
+    "commonMistakes": [
+      { "mistake": "Updating the bar from a worker thread directly, which throws a cross-thread exception.", "fix": "Report progress with BackgroundWorker.ReportProgress or use Invoke." },
+      { "mistake": "Updating Value in a tight loop on the UI thread and seeing no movement.", "fix": "Run the work on another thread so the UI can repaint, or call Application.DoEvents sparingly." },
+      { "mistake": "Setting Value greater than Maximum.", "fix": "Check the range first; it throws an ArgumentException." }
+    ],
+    "relatedNotes": [
+      { "name": "TrackBar", "difference": "A slider the user drags; a ProgressBar is read-only output." },
+      { "name": "BackgroundWorker", "difference": "Runs the long task on another thread and reports progress back to a ProgressBar." },
+      { "name": "StatusStrip", "difference": "A common place to host a progress bar at the bottom of the window." }
+    ]
+  },
+  {
+    "name": "TrackBar",
+    "purpose": "A TrackBar is a slider the user drags to choose a value within a range, such as volume or brightness.",
+    "whenToUse": [
+      "Adjust a value where precision is not critical.",
+      "Give instant feedback by updating something while the thumb moves.",
+      "Provide a range selection with tick marks."
+    ],
+    "realWorldExamples": [
+      "A volume slider in a media player.",
+      "A brightness or zoom control.",
+      "A speed setting from slow to fast."
+    ],
+    "defaultAppearance": "A horizontal track with a draggable thumb and small tick marks below it. The default range is 0 to 10, and the thumb starts at the left.",
+    "commonMistakes": [
+      { "mistake": "Using the Scroll event and missing changes from the keyboard or code.", "fix": "Use ValueChanged, which fires for every change." },
+      { "mistake": "Expecting a text label of the value.", "fix": "A TrackBar shows no number; update a Label in ValueChanged." },
+      { "mistake": "Having too many tick marks.", "fix": "Set TickFrequency to a sensible step for the range." }
+    ],
+    "relatedNotes": [
+      { "name": "NumericUpDown", "difference": "Precise numeric entry by typing; TrackBar is for approximate adjustment." },
+      { "name": "ProgressBar", "difference": "Shows progress to the user and cannot be dragged." }
+    ]
+  },
+  {
+    "name": "LinkLabel",
+    "purpose": "A LinkLabel is a Label that displays one or more hyperlinks and raises LinkClicked when the user clicks one.",
+    "whenToUse": [
+      "Open a web page, help topic or another form from text.",
+      "Add 'Forgot password?' or 'Terms of use' links.",
+      "Show text with a link inside a sentence by setting Links."
+    ],
+    "realWorldExamples": [
+      "A 'Forgot your password?' link on a login screen.",
+      "A link to the privacy policy in an About dialog.",
+      "A 'Check for updates' link."
+    ],
+    "defaultAppearance": "Underlined blue text that behaves like a web link: the cursor changes to a hand when the mouse hovers. After a click you can mark it visited, which changes its color.",
+    "commonMistakes": [
+      { "mistake": "Doing nothing in LinkClicked and expecting the browser to open.", "fix": "Handle LinkClicked and start the process yourself with UseShellExecute = true." },
+      { "mistake": "Opening a URL with Process.Start(url) on current .NET and getting an error.", "fix": "Use new ProcessStartInfo(url) { UseShellExecute = true }." },
+      { "mistake": "Never setting LinkVisited = true, so the link looks unused.", "fix": "Set LinkVisited = true in the handler after the user follows the link." }
+    ],
+    "relatedNotes": [
+      { "name": "Label", "difference": "Plain text with no link behavior." },
+      { "name": "Button", "difference": "A standard action button; use LinkLabel when the action looks like navigation." }
+    ]
+  },
+  {
+    "name": "ToolTip",
+    "purpose": "A ToolTip is a component that shows a small pop-up hint when the mouse hovers over a control. Once added to a form, it gives each control a new ToolTip property.",
+    "whenToUse": [
+      "Explain icon-only buttons.",
+      "Show the full text of something that is truncated.",
+      "Give short help for a field without taking space on the form."
+    ],
+    "realWorldExamples": [
+      "Hovering a toolbar icon to see 'Save (Ctrl+S)'.",
+      "Hovering a truncated file name to see its full path.",
+      "Hint text next to a password field describing the rules."
+    ],
+    "defaultAppearance": "ToolTip is a non-visual component and is not drawn on the form. At run time Windows shows a small light-yellow rectangle with text near the pointer after a short delay.",
+    "commonMistakes": [
+      { "mistake": "Setting a tooltip on a control before adding a ToolTip component.", "fix": "Add one ToolTip component to the form, then call toolTip1.SetToolTip(control, text) for each control." },
+      { "mistake": "Expecting tooltips on a disabled control.", "fix": "Disabled controls do not receive mouse events; show the tip on a parent or use a Label nearby." },
+      { "mistake": "Using one tooltip for critical information.", "fix": "Hints are easy to miss; show important messages directly on the form." }
+    ],
+    "relatedNotes": [
+      { "name": "ErrorProvider", "difference": "Shows a validation error icon beside a control instead of a hover hint." },
+      { "name": "StatusStrip", "difference": "Shows persistent help text at the bottom of the window." },
+      { "name": "Label", "difference": "Shows permanent text on the form, while a tooltip is temporary." }
+    ]
+  },
+  {
+    "name": "ErrorProvider",
+    "purpose": "An ErrorProvider shows a small error icon next to a control with a message that appears when the user hovers over it. It is the standard way to report validation problems.",
+    "whenToUse": [
+      "Flag invalid input without opening message boxes.",
+      "Validate several fields and show all problems at once.",
+      "Tell the user exactly which field needs attention."
+    ],
+    "realWorldExamples": [
+      "A red icon beside an email field that says 'Enter a valid email address'.",
+      "Marking required fields that were left empty.",
+      "Showing 'Passwords do not match' next to a confirmation box."
+    ],
+    "defaultAppearance": "ErrorProvider is a non-visual component. When SetError is called with text, a small red circle with an exclamation mark appears beside the control, and the text shows as a tooltip.",
+    "commonMistakes": [
+      { "mistake": "Setting an error and never clearing it, so the icon stays after the user fixes the input.", "fix": "Call errorProvider1.SetError(control, string.Empty) when the value becomes valid." },
+      { "mistake": "Validating in TextChanged and annoying the user while typing.", "fix": "Validate in the Validating event, and set e.Cancel = true only if you really must keep focus." },
+      { "mistake": "Not leaving room beside the control, so the icon is clipped.", "fix": "Leave a few pixels to the right of the control or adjust SetIconPadding." }
+    ],
+    "relatedNotes": [
+      { "name": "ToolTip", "difference": "Displays hints on hover; it does not mark an error with an icon." },
+      { "name": "TextBox", "difference": "The most common control to validate with an ErrorProvider." },
+      { "name": "MaskedTextBox", "difference": "Prevents some invalid input itself, but still often needs an ErrorProvider for incomplete values." }
+    ]
+  }
+]

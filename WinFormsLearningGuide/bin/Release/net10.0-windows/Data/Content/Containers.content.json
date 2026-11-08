@@ -1,0 +1,176 @@
+[
+  {
+    "name": "Panel",
+    "purpose": "A Panel is a plain container that groups other controls so they can be moved, shown, hidden, docked or scrolled together.",
+    "whenToUse": [
+      "Divide a form into regions such as a header, sidebar and content area.",
+      "Show or hide a whole group of controls with a single Visible property.",
+      "Scroll a large block of controls by setting AutoScroll = true."
+    ],
+    "realWorldExamples": [
+      "A sidebar panel docked to the left holding navigation buttons.",
+      "A 'page' panel that is swapped with other panels in a wizard.",
+      "A custom-drawn control surface built on a Panel."
+    ],
+    "defaultAppearance": "An invisible rectangle that takes the parent's background color, with no border and no caption. Set BorderStyle or BackColor to make it visible.",
+    "commonMistakes": [
+      { "mistake": "Dropping controls on a Panel in the designer and then moving them to the form by accident.", "fix": "Check the Document Outline or Properties window to confirm the parent, or drag the control into the panel." },
+      { "mistake": "Overlapping several panels and losing track of them.", "fix": "Use TableLayoutPanel, or Dock with Fill, and use BringToFront/SendToBack deliberately." },
+      { "mistake": "Using Panel to group RadioButtons and expecting a caption.", "fix": "Use a GroupBox when you want a visible title around the group." }
+    ],
+    "relatedNotes": [
+      { "name": "GroupBox", "difference": "A container with a visible border and caption text." },
+      { "name": "FlowLayoutPanel", "difference": "Panel that arranges its children automatically in rows or columns." },
+      { "name": "TableLayoutPanel", "difference": "Panel that arranges its children in a grid of rows and columns." },
+      { "name": "SplitContainer", "difference": "Two panels separated by a draggable splitter." }
+    ]
+  },
+  {
+    "name": "GroupBox",
+    "purpose": "A GroupBox is a container with a border and a caption that visually groups related controls. It also defines the group for RadioButtons placed inside it.",
+    "whenToUse": [
+      "Group related options under a title such as 'Delivery method'.",
+      "Create separate sets of RadioButtons on the same form.",
+      "Disable a whole section by setting Enabled = false on the GroupBox."
+    ],
+    "realWorldExamples": [
+      "A 'Font' group in a settings dialog.",
+      "A 'Payment method' box with several radio buttons.",
+      "'Filters' and 'Sort by' sections in a search form."
+    ],
+    "defaultAppearance": "A thin etched rectangle with its Text shown as a caption at the top-left, interrupting the border line. Controls inside are positioned relative to the box.",
+    "commonMistakes": [
+      { "mistake": "Setting Dock = Fill and having the content collide with the caption.", "fix": "Put a Panel inside the GroupBox, dock the Panel, and then place the controls in the Panel." },
+      { "mistake": "Expecting scroll bars when content does not fit.", "fix": "GroupBox does not scroll; use a Panel with AutoScroll inside it, or resize the box." },
+      { "mistake": "Placing controls on top of the GroupBox in the designer instead of inside it, so disabling or moving the box does not affect them.", "fix": "Drag each control into the GroupBox so it becomes a child; check that the Document Outline shows it nested." }
+    ],
+    "relatedNotes": [
+      { "name": "Panel", "difference": "No border or caption by default, and it can scroll." },
+      { "name": "TabControl", "difference": "Shows several groups, one at a time, on tabs." },
+      { "name": "RadioButton", "difference": "The control most often grouped inside a GroupBox." }
+    ]
+  },
+  {
+    "name": "TabControl",
+    "purpose": "A TabControl displays several pages, each on its own tab, and shows one page at a time. It organizes a lot of content in a small space.",
+    "whenToUse": [
+      "Split a settings dialog into General, Advanced and About pages.",
+      "Show several documents or views in the same area.",
+      "Organize a complex form into logical sections."
+    ],
+    "realWorldExamples": [
+      "The Options dialog in many applications.",
+      "A customer form with Details, Orders and Notes tabs.",
+      "A multi-document editor with a tab per file."
+    ],
+    "defaultAppearance": "A row of tab headers across the top (Alignment = Top), with the selected tab joined to a bordered page area below. New tabs are named TabPage1, TabPage2 and so on.",
+    "commonMistakes": [
+      { "mistake": "Adding tabs through the Controls collection and getting nothing.", "fix": "Add TabPage objects to the TabPages collection." },
+      { "mistake": "Reading controls on a tab that has never been shown and finding them empty or unready.", "fix": "Initialize data in the form load, or in the TabControl.Selected event, and avoid relying on lazy creation." },
+      { "mistake": "Using too many tabs to fit.", "fix": "Set Multiline = true for several rows, or choose a different layout such as a list on the left." }
+    ],
+    "relatedNotes": [
+      { "name": "TabPage", "difference": "One page inside a TabControl; the container for that tab's controls." },
+      { "name": "Panel", "difference": "A single group; swap Panels manually for a custom tab-like effect." },
+      { "name": "GroupBox", "difference": "Shows all groups at once instead of one at a time." }
+    ]
+  },
+  {
+    "name": "TabPage",
+    "purpose": "A TabPage is one page of a TabControl. It is a container that holds the controls shown when its tab is selected.",
+    "whenToUse": [
+      "Define the content of each tab in a TabControl.",
+      "Hide or show a tab by adding or removing the page from TabPages.",
+      "Give each tab a Text caption and optional icon via ImageIndex."
+    ],
+    "realWorldExamples": [
+      "The 'General' page of a settings dialog.",
+      "A page per customer in a CRM window.",
+      "A 'Preview' page showing the rendered output."
+    ],
+    "defaultAppearance": "A bordered panel that fills the page area of its TabControl. Its Text appears on the tab header, and its background is the system's tab-page color.",
+    "commonMistakes": [
+      { "mistake": "Trying to set Visible = false to hide a tab.", "fix": "Remove the page from TabControl.TabPages (and add it back later) because Visible does not hide the tab header." },
+      { "mistake": "Creating a TabPage without adding it to a TabControl and expecting it to display.", "fix": "A TabPage can only be shown inside a TabControl; add it to TabPages." },
+      { "mistake": "Setting Size or Location on a TabPage.", "fix": "The TabControl controls the page size; resize the TabControl instead." }
+    ],
+    "relatedNotes": [
+      { "name": "TabControl", "difference": "The parent that holds the pages and draws the tab headers." },
+      { "name": "Panel", "difference": "A general container that is not tied to a tab control." }
+    ]
+  },
+  {
+    "name": "SplitContainer",
+    "purpose": "A SplitContainer divides an area into two resizable panels separated by a splitter bar that the user can drag.",
+    "whenToUse": [
+      "Build master/detail layouts such as a list on the left and details on the right.",
+      "Let the user decide how much space each region gets.",
+      "Nest splitters for a three-pane layout."
+    ],
+    "realWorldExamples": [
+      "A file explorer with a folder tree and a file list.",
+      "An email client with a folder list, message list and reading pane.",
+      "A code editor with a tool window at the bottom."
+    ],
+    "defaultAppearance": "Two equal panels side by side (Orientation = Vertical splitter), divided by a thin movable bar. Each panel, Panel1 and Panel2, is a container for other controls.",
+    "commonMistakes": [
+      { "mistake": "Adding controls to the SplitContainer itself.", "fix": "Add them to SplitContainer.Panel1 or Panel2." },
+      { "mistake": "Setting SplitterDistance too large at startup and getting an exception.", "fix": "Set it after the control has its final size, or respect Panel1MinSize and Panel2MinSize." },
+      { "mistake": "Panels do not resize as expected when the form grows.", "fix": "Set FixedPanel to the panel that should keep its size." }
+    ],
+    "relatedNotes": [
+      { "name": "Panel", "difference": "A single container with no splitter." },
+      { "name": "TableLayoutPanel", "difference": "A grid whose size is fixed by styles; users cannot drag the dividers." },
+      { "name": "TabControl", "difference": "Shows several pages in one area instead of side by side." }
+    ]
+  },
+  {
+    "name": "FlowLayoutPanel",
+    "purpose": "A FlowLayoutPanel arranges its child controls one after another in a row or a column, wrapping to the next line when it runs out of space.",
+    "whenToUse": [
+      "Show a list of buttons, tags or cards that should wrap.",
+      "Build a form of controls that appear or disappear dynamically.",
+      "Avoid manual positioning of many similar controls."
+    ],
+    "realWorldExamples": [
+      "A toolbar-like row of buttons that wraps on narrow windows.",
+      "A gallery of thumbnails.",
+      "A set of filter 'chips' that the user can add and remove."
+    ],
+    "defaultAppearance": "An invisible container (no border by default) in which controls are placed left to right in the order they were added (FlowDirection = LeftToRight). With WrapContents = true they continue on a new row.",
+    "commonMistakes": [
+      { "mistake": "Setting Location on children and seeing it ignored.", "fix": "The panel decides positions; use the child's Margin to control spacing." },
+      { "mistake": "Wrong order of controls.", "fix": "Order follows the Controls collection; change it with SetChildIndex or by adding in the correct order." },
+      { "mistake": "Children do not fill the width.", "fix": "Set the child's Anchor, or set FlowDirection = TopDown with WrapContents = false and use Anchor Left, Right." }
+    ],
+    "relatedNotes": [
+      { "name": "TableLayoutPanel", "difference": "Places controls into fixed cells of a grid, not in a flowing sequence." },
+      { "name": "Panel", "difference": "Places controls exactly where you put them." }
+    ]
+  },
+  {
+    "name": "TableLayoutPanel",
+    "purpose": "A TableLayoutPanel arranges its children in a grid of rows and columns, so complex forms line up and resize correctly.",
+    "whenToUse": [
+      "Build forms where labels and inputs must stay aligned.",
+      "Create responsive layouts using percentage-based rows and columns.",
+      "Place several controls in a dialog without manual coordinates."
+    ],
+    "realWorldExamples": [
+      "A data entry form with labels in column one and text boxes in column two.",
+      "A dashboard split into equal tiles.",
+      "A settings page with aligned label/value pairs."
+    ],
+    "defaultAppearance": "An invisible grid of two equal rows and columns by default, with no lines (CellBorderStyle = None). Each cell holds one control, which you can make span cells with ColumnSpan or RowSpan.",
+    "commonMistakes": [
+      { "mistake": "Dropping several controls into the same cell.", "fix": "Only one control belongs in a cell; use a Panel or another TableLayoutPanel when a cell needs several." },
+      { "mistake": "Child controls not filling their cell.", "fix": "Set Dock = Fill, or set Anchor to all sides, and check the Margin." },
+      { "mistake": "Deep nesting that makes the form slow and hard to read.", "fix": "Use one table with ColumnSpan/RowSpan where possible, and keep nesting shallow." }
+    ],
+    "relatedNotes": [
+      { "name": "FlowLayoutPanel", "difference": "Places controls one after another and wraps; no fixed cells." },
+      { "name": "Panel", "difference": "Absolute positioning by Location instead of a grid." },
+      { "name": "SplitContainer", "difference": "Two areas whose boundary the user can drag." }
+    ]
+  }
+]

@@ -1,0 +1,123 @@
+[
+  {
+    "name": "OpenFileDialog",
+    "purpose": "An OpenFileDialog shows the standard Windows 'Open' window so the user can choose one or more existing files. Your code receives the selected path.",
+    "whenToUse": [
+      "Let the user pick a file to load, import or attach.",
+      "Allow several files by setting Multiselect = true.",
+      "Limit choices to certain types with the Filter property."
+    ],
+    "realWorldExamples": [
+      "A 'Browse...' button to select an image for a profile.",
+      "File > Open in a text editor.",
+      "Importing a CSV file into a grid."
+    ],
+    "defaultAppearance": "OpenFileDialog is a non-visual component. When ShowDialog is called, Windows displays its modal Open window with a folder tree, file list, a File name box and a file-type drop-down.",
+    "commonMistakes": [
+      { "mistake": "Using the FileName without checking the dialog result.", "fix": "Only use FileName when ShowDialog() returns DialogResult.OK." },
+      { "mistake": "Writing a wrong Filter string.", "fix": "Use pairs separated by '|', such as \"Text files (*.txt)|*.txt|All files (*.*)|*.*\"." },
+      { "mistake": "Not disposing the dialog.", "fix": "Create it in a using block or add it to the form's components so it is released." }
+    ],
+    "relatedNotes": [
+      { "name": "SaveFileDialog", "difference": "Chooses a file name to write to; it can warn about overwriting." },
+      { "name": "FolderBrowserDialog", "difference": "Chooses a folder instead of a file." }
+    ]
+  },
+  {
+    "name": "SaveFileDialog",
+    "purpose": "A SaveFileDialog shows the standard Windows 'Save As' window so the user can choose where and under what name to save a file.",
+    "whenToUse": [
+      "Implement 'Save As' or 'Export'.",
+      "Suggest a default name and extension with FileName and DefaultExt.",
+      "Warn before overwriting using OverwritePrompt."
+    ],
+    "realWorldExamples": [
+      "File > Save As in an editor.",
+      "Exporting a report to PDF or CSV.",
+      "Saving a drawing as a PNG image."
+    ],
+    "defaultAppearance": "SaveFileDialog is a non-visual component. ShowDialog opens the modal Save As window with a folder tree, a File name box and a Save as type list.",
+    "commonMistakes": [
+      { "mistake": "Assuming the file now exists after the dialog closes.", "fix": "The dialog only returns a path; you must write the file yourself." },
+      { "mistake": "Ignoring the extension the user chose.", "fix": "Set AddExtension and DefaultExt, and match the Filter to what you can write." },
+      { "mistake": "Using FileName if the dialog was cancelled.", "fix": "Check for DialogResult.OK first." }
+    ],
+    "relatedNotes": [
+      { "name": "OpenFileDialog", "difference": "Selects an existing file to read." },
+      { "name": "FolderBrowserDialog", "difference": "Selects a folder, not a file name." }
+    ]
+  },
+  {
+    "name": "FolderBrowserDialog",
+    "purpose": "A FolderBrowserDialog lets the user choose a folder. The path is returned in SelectedPath.",
+    "whenToUse": [
+      "Pick an output or backup folder.",
+      "Choose a root directory to scan for files.",
+      "Set a default folder in application settings."
+    ],
+    "realWorldExamples": [
+      "Choosing where downloaded files are stored.",
+      "Selecting a photo folder to import.",
+      "Choosing a project folder in a developer tool."
+    ],
+    "defaultAppearance": "FolderBrowserDialog is a non-visual component. ShowDialog opens a modal window with a folder tree, and a 'Make New Folder' button when ShowNewFolderButton is true.",
+    "commonMistakes": [
+      { "mistake": "Using SelectedPath when the user cancelled.", "fix": "Read SelectedPath only if ShowDialog() returns DialogResult.OK." },
+      { "mistake": "Expecting it to select files.", "fix": "Use OpenFileDialog when you need a file; this dialog selects folders only." },
+      { "mistake": "Starting in an unhelpful location.", "fix": "Set InitialDirectory or SelectedPath to a sensible starting folder." }
+    ],
+    "relatedNotes": [
+      { "name": "OpenFileDialog", "difference": "Selects files; it can also be used with a folder to start in." },
+      { "name": "SaveFileDialog", "difference": "Chooses a file name to save to, not just a folder." }
+    ]
+  },
+  {
+    "name": "ColorDialog",
+    "purpose": "A ColorDialog displays the standard Windows color picker and returns the chosen Color.",
+    "whenToUse": [
+      "Let users customize a background, text or drawing color.",
+      "Offer custom colors with AllowFullOpen.",
+      "Preview a color before applying it."
+    ],
+    "realWorldExamples": [
+      "A 'Choose color' button in a drawing app.",
+      "Changing the background color of a note.",
+      "Setting a highlight color in settings."
+    ],
+    "defaultAppearance": "ColorDialog is a non-visual component. ShowDialog opens a modal window with a palette of basic colors, custom color slots and, if allowed, a 'Define Custom Colors' area.",
+    "commonMistakes": [
+      { "mistake": "Applying Color without checking the result.", "fix": "Use the color only when ShowDialog() returns DialogResult.OK." },
+      { "mistake": "Not showing the current color as the starting point.", "fix": "Set ColorDialog.Color to the existing color before calling ShowDialog." },
+      { "mistake": "Losing the user's custom colors between uses.", "fix": "Keep the same dialog object, or save and restore the CustomColors array." }
+    ],
+    "relatedNotes": [
+      { "name": "FontDialog", "difference": "Chooses a font and font color instead of just a color." },
+      { "name": "OpenFileDialog", "difference": "Another standard dialog; it picks files rather than colors." }
+    ]
+  },
+  {
+    "name": "FontDialog",
+    "purpose": "A FontDialog displays the standard Windows font picker, where the user chooses a font family, style and size, and optionally a color.",
+    "whenToUse": [
+      "Let users change the font of an editor or label.",
+      "Choose a font with ShowColor = true to also pick a text color.",
+      "Limit choices with MinSize, MaxSize or FixedPitchOnly."
+    ],
+    "realWorldExamples": [
+      "Format > Font in a text editor.",
+      "Choosing the display font for a report.",
+      "A console or code editor font setting."
+    ],
+    "defaultAppearance": "FontDialog is a non-visual component. ShowDialog opens a modal window with lists for Font, Font style and Size, a Sample preview, and optional Effects such as strikeout and underline.",
+    "commonMistakes": [
+      { "mistake": "Using Font without checking DialogResult.", "fix": "Apply the Font only when ShowDialog() returns DialogResult.OK." },
+      { "mistake": "Forgetting that the dialog does not show the current font unless you set it.", "fix": "Assign the control's current Font to FontDialog.Font before showing." },
+      { "mistake": "Expecting the text color to apply by itself.", "fix": "Set ShowColor = true and apply the Color property to ForeColor yourself." }
+    ],
+    "relatedNotes": [
+      { "name": "ColorDialog", "difference": "Chooses just a color." },
+      { "name": "RichTextBox", "difference": "A common target for the chosen font, using SelectionFont." },
+      { "name": "TextBox", "difference": "Receives the chosen font through its Font property." }
+    ]
+  }
+]

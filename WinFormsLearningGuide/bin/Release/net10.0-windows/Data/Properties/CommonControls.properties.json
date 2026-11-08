@@ -1,0 +1,1237 @@
+[
+  {
+    "name": "Label",
+    "properties": [
+      {
+        "name": "AutoSize",
+        "dataType": "bool",
+        "defaultValue": "false when created in code (the designer sets it to true)",
+        "acceptedValues": "true, false",
+        "description": "Makes the label resize itself to fit its text.",
+        "usage": "Keep it on for simple captions; turn it off when you need a fixed-size or wrapped text area.",
+        "example": "lblTitle.AutoSize = false;",
+        "expectedEffect": "With AutoSize off the label keeps its Size, so long text wraps or is clipped."
+      },
+      {
+        "name": "TextAlign",
+        "dataType": "ContentAlignment",
+        "defaultValue": "TopLeft",
+        "acceptedValues": "TopLeft, TopCenter, TopRight, MiddleLeft, MiddleCenter, MiddleRight, BottomLeft, BottomCenter, BottomRight",
+        "description": "Where the text sits inside the label's area.",
+        "usage": "Center a heading in a wide label or right-align numbers.",
+        "example": "lblTitle.TextAlign = ContentAlignment.MiddleCenter;",
+        "expectedEffect": "The text moves inside the label. You only notice it when AutoSize is off and the label is larger than the text."
+      },
+      {
+        "name": "Image",
+        "dataType": "Image",
+        "defaultValue": "null",
+        "acceptedValues": "Any System.Drawing.Image",
+        "description": "A picture drawn inside the label, positioned with ImageAlign.",
+        "usage": "Show a small icon next to a status message.",
+        "example": "lblStatus.Image = Image.FromFile(\"info.png\");",
+        "expectedEffect": "The picture appears in the label together with the text."
+      },
+      {
+        "name": "BorderStyle",
+        "dataType": "BorderStyle",
+        "defaultValue": "None",
+        "acceptedValues": "None, FixedSingle, Fixed3D",
+        "description": "The border drawn around the label.",
+        "usage": "Make a label look like a read-only field.",
+        "example": "lblValue.BorderStyle = BorderStyle.FixedSingle;",
+        "expectedEffect": "A thin line (or a sunken edge for Fixed3D) surrounds the label."
+      },
+      {
+        "name": "UseMnemonic",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Treats an ampersand (&) in Text as the marker for an underlined access key.",
+        "usage": "Set it to false when the text must show a literal ampersand, such as \"Q&A\".",
+        "example": "lblTopic.UseMnemonic = false;",
+        "expectedEffect": "The ampersand is shown as normal text instead of underlining the next letter."
+      }
+    ]
+  },
+  {
+    "name": "Button",
+    "properties": [
+      {
+        "name": "FlatStyle",
+        "dataType": "FlatStyle",
+        "defaultValue": "Standard",
+        "acceptedValues": "Flat, Popup, Standard, System",
+        "description": "Selects how the button is drawn.",
+        "usage": "Use Flat when you want full control of colors and a modern look.",
+        "example": "btnSave.FlatStyle = FlatStyle.Flat;",
+        "expectedEffect": "The button loses its 3-D look and uses FlatAppearance settings for border and hover colors."
+      },
+      {
+        "name": "DialogResult",
+        "dataType": "DialogResult",
+        "defaultValue": "None",
+        "acceptedValues": "None, OK, Cancel, Abort, Retry, Ignore, Yes, No (plus Continue and TryAgain in newer versions)",
+        "description": "The value handed back to the form when the button is clicked on a dialog.",
+        "usage": "Give OK and Cancel buttons a DialogResult so you need no Click handler to close the dialog.",
+        "example": "btnOk.DialogResult = DialogResult.OK;",
+        "expectedEffect": "Clicking the button closes a form shown with ShowDialog, and ShowDialog returns that value."
+      },
+      {
+        "name": "Image",
+        "dataType": "Image",
+        "defaultValue": "null",
+        "acceptedValues": "Any System.Drawing.Image",
+        "description": "A picture shown on the button, positioned with ImageAlign and TextImageRelation.",
+        "usage": "Add an icon to Save, Print or Delete buttons.",
+        "example": "btnSave.Image = Image.FromFile(\"save.png\");",
+        "expectedEffect": "The icon is drawn on the button, next to the text if you also set TextImageRelation."
+      },
+      {
+        "name": "UseVisualStyleBackColor",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "When true, Windows visual styles draw the button and BackColor is ignored.",
+        "usage": "Set it to false before changing BackColor, otherwise your color has no effect.",
+        "example": "btnSave.UseVisualStyleBackColor = false;",
+        "expectedEffect": "The button now honors BackColor."
+      }
+    ]
+  },
+  {
+    "name": "TextBox",
+    "properties": [
+      {
+        "name": "Text",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string; use Environment.NewLine for line breaks when Multiline is true",
+        "description": "The characters currently in the box, which is what the user typed.",
+        "usage": "Read it when the user submits a form, and trim it before use.",
+        "example": "string name = txtName.Text.Trim();",
+        "expectedEffect": "Assigning a value replaces the box content and raises TextChanged."
+      },
+      {
+        "name": "Multiline",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Allows several lines of text. Enter then inserts a new line.",
+        "usage": "Use it for notes, comments and logs.",
+        "example": "txtNotes.Multiline = true;",
+        "expectedEffect": "The box can be made taller and Enter starts a new line."
+      },
+      {
+        "name": "ReadOnly",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Stops the user from changing the text while still letting them select and copy it.",
+        "usage": "Show an ID or a calculated result the user may copy but not edit.",
+        "example": "txtId.ReadOnly = true;",
+        "expectedEffect": "Typing is ignored; the text stays selectable."
+      },
+      {
+        "name": "MaxLength",
+        "dataType": "int",
+        "defaultValue": "32767",
+        "acceptedValues": "0 or greater (0 means the default limit)",
+        "description": "The maximum number of characters the user can type.",
+        "usage": "Limit a postal code or a code field to its real length.",
+        "example": "txtZip.MaxLength = 5;",
+        "expectedEffect": "Extra typing is ignored. Code can still assign longer text."
+      },
+      {
+        "name": "PasswordChar",
+        "dataType": "char",
+        "defaultValue": "'\\0' (none)",
+        "acceptedValues": "Any single character",
+        "description": "A character displayed in place of every typed character.",
+        "usage": "Hide a password. It has no effect when Multiline is true.",
+        "example": "txtPassword.PasswordChar = '*';",
+        "expectedEffect": "Each typed character appears as *."
+      },
+      {
+        "name": "UseSystemPasswordChar",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Uses the operating system's password dot and overrides PasswordChar.",
+        "usage": "Prefer it over PasswordChar for consistent looks and for blocking copy.",
+        "example": "txtPassword.UseSystemPasswordChar = true;",
+        "expectedEffect": "Typed characters appear as dots and the text cannot be copied."
+      },
+      {
+        "name": "PlaceholderText",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string",
+        "description": "Gray hint text shown while the box is empty and unfocused.",
+        "usage": "Tell users what to type, such as \"Search...\".",
+        "example": "txtSearch.PlaceholderText = \"Search...\";",
+        "expectedEffect": "The hint disappears as soon as the user types."
+      },
+      {
+        "name": "WordWrap",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Wraps long lines onto the next line in a multiline box.",
+        "usage": "Turn it off for logs or code where line breaks matter.",
+        "example": "txtLog.WordWrap = false;",
+        "expectedEffect": "Long lines run past the edge; set ScrollBars to Horizontal or Both to scroll."
+      }
+    ]
+  },
+  {
+    "name": "RichTextBox",
+    "properties": [
+      {
+        "name": "Rtf",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Valid Rich Text Format markup",
+        "description": "The content including its formatting, as RTF.",
+        "usage": "Load or save a formatted document.",
+        "example": "rtbDoc.Rtf = File.ReadAllText(\"note.rtf\");",
+        "expectedEffect": "Fonts, colors and alignment from the RTF appear in the box."
+      },
+      {
+        "name": "Text",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string",
+        "description": "The plain text of the box without formatting.",
+        "usage": "Read the words only, for searching or counting.",
+        "example": "rtbDoc.Text = \"Hello\";",
+        "expectedEffect": "Setting Text replaces the content and removes earlier formatting."
+      },
+      {
+        "name": "SelectionFont",
+        "dataType": "Font",
+        "defaultValue": "null when the selection has mixed fonts",
+        "acceptedValues": "Any Font",
+        "description": "The font of the selected text, or of the text typed at the caret if nothing is selected.",
+        "usage": "Implement Bold and Italic buttons.",
+        "example": "rtbDoc.SelectionFont = new Font(rtbDoc.Font, FontStyle.Bold);",
+        "expectedEffect": "The selected text becomes bold."
+      },
+      {
+        "name": "SelectionColor",
+        "dataType": "Color",
+        "defaultValue": "Color.Empty when the selection has mixed colors",
+        "acceptedValues": "Any Color",
+        "description": "The color of the selected text or of the next typed text.",
+        "usage": "Highlight a keyword or an error in a log.",
+        "example": "rtbDoc.SelectionColor = Color.Red;",
+        "expectedEffect": "The selected text turns red."
+      },
+      {
+        "name": "SelectionAlignment",
+        "dataType": "HorizontalAlignment",
+        "defaultValue": "Left",
+        "acceptedValues": "Left, Right, Center",
+        "description": "Alignment of the selected paragraphs.",
+        "usage": "Center a title paragraph.",
+        "example": "rtbDoc.SelectionAlignment = HorizontalAlignment.Center;",
+        "expectedEffect": "The paragraphs containing the selection move to the center."
+      },
+      {
+        "name": "ReadOnly",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Prevents editing while keeping the formatted text visible and selectable.",
+        "usage": "Display formatted help text or a license.",
+        "example": "rtbDoc.ReadOnly = true;",
+        "expectedEffect": "Typing is ignored; code can still change the content."
+      },
+      {
+        "name": "WordWrap",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Wraps long lines at the edge of the control.",
+        "usage": "Disable it for code or tabular text.",
+        "example": "rtbDoc.WordWrap = false;",
+        "expectedEffect": "Lines extend past the edge and a horizontal scroll bar can appear."
+      }
+    ]
+  },
+  {
+    "name": "MaskedTextBox",
+    "properties": [
+      {
+        "name": "Mask",
+        "dataType": "string",
+        "defaultValue": "\"\" (no mask)",
+        "acceptedValues": "Mask characters such as 0 (digit required), 9 (digit optional), L (letter required), ? (letter optional), A (alphanumeric required) and literals",
+        "description": "The pattern every entry must follow.",
+        "usage": "Force a phone number, date or postal code to a fixed layout.",
+        "example": "mtbPhone.Mask = \"(000) 000-0000\";",
+        "expectedEffect": "The box shows the pattern with prompt characters and accepts only matching input."
+      },
+      {
+        "name": "MaskCompleted",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "Read-only",
+        "description": "True when every required position of the mask has been filled.",
+        "usage": "Check it before accepting the form.",
+        "example": "bool ok = mtbPhone.MaskCompleted;",
+        "expectedEffect": "Returns false while required positions are still empty."
+      },
+      {
+        "name": "PromptChar",
+        "dataType": "char",
+        "defaultValue": "'_'",
+        "acceptedValues": "Any single character",
+        "description": "The character shown for positions that are still empty.",
+        "usage": "Use a different prompt, such as '#', to match your design.",
+        "example": "mtbPhone.PromptChar = '#';",
+        "expectedEffect": "Empty positions show # instead of _."
+      },
+      {
+        "name": "Text",
+        "dataType": "string",
+        "defaultValue": "The prompt characters and literals of the mask",
+        "acceptedValues": "Any text that satisfies the mask",
+        "description": "The entered text, formatted according to TextMaskFormat.",
+        "usage": "Read the value after validating with MaskCompleted.",
+        "example": "string phone = mtbPhone.Text;",
+        "expectedEffect": "Returns the text in the format chosen by TextMaskFormat."
+      },
+      {
+        "name": "TextMaskFormat",
+        "dataType": "MaskFormat",
+        "defaultValue": "IncludePromptAndLiterals",
+        "acceptedValues": "ExcludePromptAndLiterals, IncludePrompt, IncludeLiterals, IncludePromptAndLiterals",
+        "description": "Controls whether Text contains the literals and prompt characters of the mask.",
+        "usage": "Use ExcludePromptAndLiterals when you want only the typed digits.",
+        "example": "mtbPhone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;",
+        "expectedEffect": "Text returns digits only, for example 5551234567."
+      },
+      {
+        "name": "ValidatingType",
+        "dataType": "Type",
+        "defaultValue": "null",
+        "acceptedValues": "typeof(DateTime), typeof(int), or any type with a static Parse method",
+        "description": "The type the entered text must be convertible to.",
+        "usage": "Validate a date mask when the user leaves the box.",
+        "example": "mtbDate.ValidatingType = typeof(DateTime);",
+        "expectedEffect": "TypeValidationCompleted is raised after the user leaves the box and tells you whether parsing worked."
+      }
+    ]
+  },
+  {
+    "name": "CheckBox",
+    "properties": [
+      {
+        "name": "Checked",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false (true also for the Indeterminate state)",
+        "description": "Whether the box is ticked.",
+        "usage": "Read it to find out the user's choice.",
+        "example": "if (chkRemember.Checked) { SaveLogin(); }",
+        "expectedEffect": "Setting it ticks or clears the box and raises CheckedChanged."
+      },
+      {
+        "name": "CheckState",
+        "dataType": "CheckState",
+        "defaultValue": "Unchecked",
+        "acceptedValues": "Unchecked, Checked, Indeterminate",
+        "description": "The full state of the box, including the third state.",
+        "usage": "Show \"some items selected\" in a select-all box.",
+        "example": "chkAll.CheckState = CheckState.Indeterminate;",
+        "expectedEffect": "A filled square appears instead of a tick."
+      },
+      {
+        "name": "ThreeState",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Lets the user cycle through Unchecked, Checked and Indeterminate by clicking.",
+        "usage": "Use it for options that can be on, off or \"not set\".",
+        "example": "chkNews.ThreeState = true;",
+        "expectedEffect": "Each click moves to the next of the three states."
+      },
+      {
+        "name": "AutoCheck",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Whether a click changes the state automatically.",
+        "usage": "Turn it off when your code must confirm the change first.",
+        "example": "chkAdmin.AutoCheck = false;",
+        "expectedEffect": "Clicks no longer toggle the box; your code sets Checked itself."
+      },
+      {
+        "name": "Appearance",
+        "dataType": "Appearance",
+        "defaultValue": "Normal",
+        "acceptedValues": "Normal, Button",
+        "description": "Draws the check box as a normal box or as a toggle button.",
+        "usage": "Build toolbar-like toggles such as Bold.",
+        "example": "chkBold.Appearance = Appearance.Button;",
+        "expectedEffect": "The control looks like a button that stays pressed while checked."
+      }
+    ]
+  },
+  {
+    "name": "RadioButton",
+    "properties": [
+      {
+        "name": "Checked",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Whether this option is selected. Selecting it clears the others in the same container.",
+        "usage": "Read which option is chosen.",
+        "example": "if (rbExpress.Checked) { ship = Express; }",
+        "expectedEffect": "Setting it to true selects this option and deselects its siblings."
+      },
+      {
+        "name": "AutoCheck",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Whether a click selects the button automatically.",
+        "usage": "Turn it off when you must validate the choice first.",
+        "example": "rbExpress.AutoCheck = false;",
+        "expectedEffect": "Clicks no longer change the selection; code must set Checked."
+      },
+      {
+        "name": "Appearance",
+        "dataType": "Appearance",
+        "defaultValue": "Normal",
+        "acceptedValues": "Normal, Button",
+        "description": "Draws the option as a round button or as a toggle button.",
+        "usage": "Create segmented choices such as Day / Week / Month.",
+        "example": "rbWeek.Appearance = Appearance.Button;",
+        "expectedEffect": "The option looks like a push button that stays pressed when chosen."
+      }
+    ]
+  },
+  {
+    "name": "ComboBox",
+    "properties": [
+      {
+        "name": "Items",
+        "dataType": "ComboBox.ObjectCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "Any objects (text is taken from ToString or DisplayMember)",
+        "description": "The list of choices.",
+        "usage": "Fill the list from code.",
+        "example": "cboSize.Items.AddRange(new object[] { \"Small\", \"Medium\", \"Large\" });",
+        "expectedEffect": "The drop-down shows the three entries."
+      },
+      {
+        "name": "SelectedIndex",
+        "dataType": "int",
+        "defaultValue": "-1",
+        "acceptedValues": "-1 (nothing) up to Items.Count - 1; other values throw ArgumentOutOfRangeException",
+        "description": "Zero-based position of the selected entry.",
+        "usage": "Select a default entry or test whether anything is selected.",
+        "example": "cboSize.SelectedIndex = 0;",
+        "expectedEffect": "The first entry is shown and SelectedIndexChanged is raised."
+      },
+      {
+        "name": "SelectedItem",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "Any object in Items",
+        "description": "The selected entry itself.",
+        "usage": "Read the chosen value.",
+        "example": "string size = (string)cboSize.SelectedItem;",
+        "expectedEffect": "Returns the chosen object, or null when nothing is selected."
+      },
+      {
+        "name": "DropDownStyle",
+        "dataType": "ComboBoxStyle",
+        "defaultValue": "DropDown",
+        "acceptedValues": "Simple, DropDown, DropDownList",
+        "description": "Whether the user may type text or only pick from the list.",
+        "usage": "Use DropDownList when only listed values are valid.",
+        "example": "cboSize.DropDownStyle = ComboBoxStyle.DropDownList;",
+        "expectedEffect": "The text area becomes read-only and only the listed entries can be chosen."
+      },
+      {
+        "name": "DataSource",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "An IList or IListSource such as an array, List<T>, DataTable or BindingSource",
+        "description": "Binds the list to a collection instead of filling Items manually.",
+        "usage": "Show database or business objects.",
+        "example": "cboCustomers.DataSource = customers;",
+        "expectedEffect": "The list shows one entry per object in the collection."
+      },
+      {
+        "name": "DisplayMember",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "The name of a property of the bound objects",
+        "description": "The property whose value is shown for each entry.",
+        "usage": "Show a name instead of the object's type name.",
+        "example": "cboCustomers.DisplayMember = \"Name\";",
+        "expectedEffect": "The list displays each object's Name."
+      },
+      {
+        "name": "ValueMember",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "The name of a property of the bound objects",
+        "description": "The property returned by SelectedValue.",
+        "usage": "Keep an ID behind each visible name.",
+        "example": "cboCustomers.ValueMember = \"Id\";",
+        "expectedEffect": "SelectedValue returns the Id of the chosen object."
+      },
+      {
+        "name": "AutoCompleteMode",
+        "dataType": "AutoCompleteMode",
+        "defaultValue": "None",
+        "acceptedValues": "None, Suggest, Append, SuggestAppend",
+        "description": "Offers or completes matches while the user types. It also needs AutoCompleteSource and does not work with DropDownList.",
+        "usage": "Help users find an entry in a long list.",
+        "example": "cboCity.AutoCompleteMode = AutoCompleteMode.SuggestAppend;",
+        "expectedEffect": "Matching entries are suggested and the rest of the word is filled in."
+      },
+      {
+        "name": "Text",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string",
+        "description": "The text in the edit area. With DropDownList it matches the selected entry.",
+        "usage": "Read what the user typed in a DropDown combo box.",
+        "example": "string city = cboCity.Text;",
+        "expectedEffect": "Returns the visible text, whether typed or chosen."
+      }
+    ]
+  },
+  {
+    "name": "ListBox",
+    "properties": [
+      {
+        "name": "Items",
+        "dataType": "ListBox.ObjectCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "Any objects",
+        "description": "The entries shown in the list.",
+        "usage": "Add entries from code.",
+        "example": "lstFiles.Items.Add(\"report.pdf\");",
+        "expectedEffect": "A new line appears at the end of the list."
+      },
+      {
+        "name": "SelectedIndex",
+        "dataType": "int",
+        "defaultValue": "-1",
+        "acceptedValues": "-1 (nothing) up to Items.Count - 1",
+        "description": "Zero-based index of the selected entry (the first selected one in multi-select mode).",
+        "usage": "Test whether anything is selected.",
+        "example": "if (lstFiles.SelectedIndex >= 0) { Open(); }",
+        "expectedEffect": "Returns -1 when nothing is selected."
+      },
+      {
+        "name": "SelectedItem",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "Any object in Items",
+        "description": "The selected entry itself.",
+        "usage": "Read the chosen value.",
+        "example": "string file = (string)lstFiles.SelectedItem;",
+        "expectedEffect": "Returns the chosen object, or null."
+      },
+      {
+        "name": "SelectedItems",
+        "dataType": "ListBox.SelectedObjectCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "Read-only",
+        "description": "All selected entries when multi-select is enabled.",
+        "usage": "Process every selected entry.",
+        "example": "foreach (object item in lstFiles.SelectedItems) { Delete(item); }",
+        "expectedEffect": "Enumerates every highlighted entry."
+      },
+      {
+        "name": "SelectionMode",
+        "dataType": "SelectionMode",
+        "defaultValue": "One",
+        "acceptedValues": "None, One, MultiSimple, MultiExtended",
+        "description": "How many entries the user may select and how.",
+        "usage": "Use MultiExtended for Ctrl and Shift selection.",
+        "example": "lstFiles.SelectionMode = SelectionMode.MultiExtended;",
+        "expectedEffect": "Ctrl-click and Shift-click select several entries."
+      },
+      {
+        "name": "Sorted",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Keeps the entries in alphabetical order.",
+        "usage": "Show a list that must always be ordered.",
+        "example": "lstNames.Sorted = true;",
+        "expectedEffect": "New entries are inserted in order and indexes change accordingly."
+      },
+      {
+        "name": "DataSource",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "An IList or IListSource",
+        "description": "Binds the list to a collection.",
+        "usage": "Display a list of business objects.",
+        "example": "lstCustomers.DataSource = customers;",
+        "expectedEffect": "One line is shown per object (use DisplayMember to choose the text)."
+      }
+    ]
+  },
+  {
+    "name": "CheckedListBox",
+    "properties": [
+      {
+        "name": "Items",
+        "dataType": "CheckedListBox.ObjectCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "Any objects",
+        "description": "The entries shown in the list, each with a check box.",
+        "usage": "Add an entry and decide whether it starts checked.",
+        "example": "clbFeatures.Items.Add(\"Email alerts\", true);",
+        "expectedEffect": "A new entry appears with its box already ticked."
+      },
+      {
+        "name": "CheckedItems",
+        "dataType": "CheckedListBox.CheckedItemCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "Read-only",
+        "description": "The entries whose boxes are ticked.",
+        "usage": "Collect the user's choices.",
+        "example": "foreach (object item in clbFeatures.CheckedItems) { Enable(item); }",
+        "expectedEffect": "Enumerates only the ticked entries."
+      },
+      {
+        "name": "CheckedIndices",
+        "dataType": "CheckedListBox.CheckedIndexCollection",
+        "defaultValue": "Empty",
+        "acceptedValues": "Read-only",
+        "description": "The zero-based indexes of the ticked entries.",
+        "usage": "Save which positions are ticked.",
+        "example": "int count = clbFeatures.CheckedIndices.Count;",
+        "expectedEffect": "Returns how many entries are ticked."
+      },
+      {
+        "name": "CheckOnClick",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Ticks or clears a box with a single click instead of first selecting the entry.",
+        "usage": "Make the list feel like a normal group of check boxes.",
+        "example": "clbFeatures.CheckOnClick = true;",
+        "expectedEffect": "One click toggles the box."
+      },
+      {
+        "name": "SelectionMode",
+        "dataType": "SelectionMode",
+        "defaultValue": "One",
+        "acceptedValues": "One, None (multi-select modes are not supported)",
+        "description": "How the highlight bar behaves. Ticking is independent of it.",
+        "usage": "Use CheckedItems, not multi-select, to pick several entries.",
+        "example": "clbFeatures.SelectionMode = SelectionMode.None;",
+        "expectedEffect": "No entry can be highlighted, but boxes can still be ticked."
+      }
+    ]
+  },
+  {
+    "name": "PictureBox",
+    "properties": [
+      {
+        "name": "Image",
+        "dataType": "Image",
+        "defaultValue": "null",
+        "acceptedValues": "Any System.Drawing.Image",
+        "description": "The picture displayed.",
+        "usage": "Show a logo, photo or generated bitmap.",
+        "example": "picLogo.Image = Image.FromFile(\"logo.png\");",
+        "expectedEffect": "The picture is drawn according to SizeMode."
+      },
+      {
+        "name": "ImageLocation",
+        "dataType": "string",
+        "defaultValue": "null",
+        "acceptedValues": "A file path or an URL",
+        "description": "A location the control loads the picture from.",
+        "usage": "Show a picture from the web without writing download code.",
+        "example": "picLogo.ImageLocation = \"https://example.com/logo.png\";",
+        "expectedEffect": "The picture is loaded (in the background by default) and displayed."
+      },
+      {
+        "name": "SizeMode",
+        "dataType": "PictureBoxSizeMode",
+        "defaultValue": "Normal",
+        "acceptedValues": "Normal, StretchImage, AutoSize, CenterImage, Zoom",
+        "description": "How the picture is fitted into the control.",
+        "usage": "Use Zoom to fit a picture without distortion.",
+        "example": "picLogo.SizeMode = PictureBoxSizeMode.Zoom;",
+        "expectedEffect": "The picture is scaled to fit while keeping its aspect ratio."
+      },
+      {
+        "name": "BorderStyle",
+        "dataType": "BorderStyle",
+        "defaultValue": "None",
+        "acceptedValues": "None, FixedSingle, Fixed3D",
+        "description": "The border drawn around the control.",
+        "usage": "Frame a thumbnail.",
+        "example": "picLogo.BorderStyle = BorderStyle.FixedSingle;",
+        "expectedEffect": "A thin line surrounds the picture."
+      }
+    ]
+  },
+  {
+    "name": "DateTimePicker",
+    "properties": [
+      {
+        "name": "Value",
+        "dataType": "DateTime",
+        "defaultValue": "The current date and time when the control is created",
+        "acceptedValues": "A DateTime between MinDate and MaxDate",
+        "description": "The date and time currently chosen.",
+        "usage": "Read the chosen date or preset it.",
+        "example": "dtpStart.Value = new DateTime(2026, 1, 15);",
+        "expectedEffect": "The control shows the new date and raises ValueChanged."
+      },
+      {
+        "name": "Format",
+        "dataType": "DateTimePickerFormat",
+        "defaultValue": "Long",
+        "acceptedValues": "Long, Short, Time, Custom",
+        "description": "How the value is displayed.",
+        "usage": "Use Short for compact dates and Time for time entry.",
+        "example": "dtpStart.Format = DateTimePickerFormat.Short;",
+        "expectedEffect": "The date is shown in the short format of the user's regional settings."
+      },
+      {
+        "name": "CustomFormat",
+        "dataType": "string",
+        "defaultValue": "null",
+        "acceptedValues": "Format strings such as \"yyyy-MM-dd HH:mm\" (needs Format = Custom)",
+        "description": "A custom display pattern.",
+        "usage": "Show dates in a fixed layout.",
+        "example": "dtpStart.CustomFormat = \"yyyy-MM-dd\";",
+        "expectedEffect": "The control displays the date in your pattern when Format is Custom."
+      },
+      {
+        "name": "MinDate",
+        "dataType": "DateTime",
+        "defaultValue": "1/1/1753",
+        "acceptedValues": "Any DateTime up to MaxDate",
+        "description": "The earliest date the user can choose.",
+        "usage": "Block dates in the past.",
+        "example": "dtpStart.MinDate = DateTime.Today;",
+        "expectedEffect": "Earlier dates cannot be selected."
+      },
+      {
+        "name": "MaxDate",
+        "dataType": "DateTime",
+        "defaultValue": "12/31/9998",
+        "acceptedValues": "Any DateTime from MinDate on",
+        "description": "The latest date the user can choose.",
+        "usage": "Limit a booking window.",
+        "example": "dtpStart.MaxDate = DateTime.Today.AddMonths(6);",
+        "expectedEffect": "Later dates cannot be selected."
+      },
+      {
+        "name": "ShowUpDown",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows a spin button instead of the drop-down calendar.",
+        "usage": "Use it for time entry.",
+        "example": "dtpTime.ShowUpDown = true;",
+        "expectedEffect": "The calendar button is replaced by up/down arrows."
+      },
+      {
+        "name": "ShowCheckBox",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows a check box that tells whether a date is set at all. Read Checked for its state.",
+        "usage": "Make the date optional.",
+        "example": "dtpEnd.ShowCheckBox = true;",
+        "expectedEffect": "A check box appears left of the date; clear it for \"no date\"."
+      }
+    ]
+  },
+  {
+    "name": "MonthCalendar",
+    "properties": [
+      {
+        "name": "SelectionStart",
+        "dataType": "DateTime",
+        "defaultValue": "Today",
+        "acceptedValues": "Any date within MinDate and MaxDate",
+        "description": "First day of the selected range.",
+        "usage": "Read or set the chosen date.",
+        "example": "calBooking.SelectionStart = DateTime.Today;",
+        "expectedEffect": "The calendar highlights that day."
+      },
+      {
+        "name": "SelectionEnd",
+        "dataType": "DateTime",
+        "defaultValue": "Today",
+        "acceptedValues": "Any date within MinDate and MaxDate",
+        "description": "Last day of the selected range.",
+        "usage": "Read the end of a multi-day selection.",
+        "example": "DateTime last = calBooking.SelectionEnd;",
+        "expectedEffect": "Returns the last selected day."
+      },
+      {
+        "name": "SelectionRange",
+        "dataType": "SelectionRange",
+        "defaultValue": "Today to today",
+        "acceptedValues": "Any range up to MaxSelectionCount days",
+        "description": "Start and end of the selection together.",
+        "usage": "Select a whole week from code.",
+        "example": "calBooking.SelectionRange = new SelectionRange(start, end);",
+        "expectedEffect": "All days in the range are highlighted."
+      },
+      {
+        "name": "MaxSelectionCount",
+        "dataType": "int",
+        "defaultValue": "7",
+        "acceptedValues": "1 or greater",
+        "description": "The largest number of days the user can select.",
+        "usage": "Set it to 1 for single-date choice.",
+        "example": "calBooking.MaxSelectionCount = 1;",
+        "expectedEffect": "The user can select only one day."
+      },
+      {
+        "name": "ShowToday",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Shows the \"Today\" line at the bottom.",
+        "usage": "Hide it for a cleaner calendar.",
+        "example": "calBooking.ShowToday = false;",
+        "expectedEffect": "The Today line disappears."
+      },
+      {
+        "name": "BoldedDates",
+        "dataType": "DateTime[]",
+        "defaultValue": "Empty array",
+        "acceptedValues": "An array of DateTime values",
+        "description": "Days shown in bold, such as holidays or events.",
+        "usage": "Mark days that have appointments.",
+        "example": "calBooking.BoldedDates = new[] { new DateTime(2026, 12, 25) };",
+        "expectedEffect": "Those days appear in bold."
+      }
+    ]
+  },
+  {
+    "name": "NumericUpDown",
+    "properties": [
+      {
+        "name": "Value",
+        "dataType": "decimal",
+        "defaultValue": "0",
+        "acceptedValues": "A number from Minimum to Maximum; others throw ArgumentOutOfRangeException",
+        "description": "The current number.",
+        "usage": "Read the quantity the user chose.",
+        "example": "int qty = (int)nudQty.Value;",
+        "expectedEffect": "Returns the number as a decimal."
+      },
+      {
+        "name": "Minimum",
+        "dataType": "decimal",
+        "defaultValue": "0",
+        "acceptedValues": "Any decimal up to Maximum",
+        "description": "The smallest allowed value.",
+        "usage": "Prevent negative quantities.",
+        "example": "nudQty.Minimum = 1;",
+        "expectedEffect": "The value cannot go below 1."
+      },
+      {
+        "name": "Maximum",
+        "dataType": "decimal",
+        "defaultValue": "100",
+        "acceptedValues": "Any decimal from Minimum up",
+        "description": "The largest allowed value.",
+        "usage": "Limit a quantity to the available stock.",
+        "example": "nudQty.Maximum = 10;",
+        "expectedEffect": "The value cannot go above 10."
+      },
+      {
+        "name": "Increment",
+        "dataType": "decimal",
+        "defaultValue": "1",
+        "acceptedValues": "Any positive decimal",
+        "description": "The step applied by the arrows and the arrow keys.",
+        "usage": "Step in 0.5 or 10.",
+        "example": "nudPrice.Increment = 0.5M;",
+        "expectedEffect": "Each arrow click changes the value by 0.5."
+      },
+      {
+        "name": "DecimalPlaces",
+        "dataType": "int",
+        "defaultValue": "0",
+        "acceptedValues": "0 or greater",
+        "description": "How many digits follow the decimal point.",
+        "usage": "Show prices with two decimals.",
+        "example": "nudPrice.DecimalPlaces = 2;",
+        "expectedEffect": "The value is displayed as 12.50."
+      },
+      {
+        "name": "ThousandsSeparator",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows group separators in large numbers.",
+        "usage": "Make big numbers easier to read.",
+        "example": "nudPopulation.ThousandsSeparator = true;",
+        "expectedEffect": "The value is displayed as 1,000,000."
+      }
+    ]
+  },
+  {
+    "name": "ProgressBar",
+    "properties": [
+      {
+        "name": "Value",
+        "dataType": "int",
+        "defaultValue": "0",
+        "acceptedValues": "Minimum to Maximum",
+        "description": "The current progress.",
+        "usage": "Update it as work advances.",
+        "example": "progress.Value = 40;",
+        "expectedEffect": "The filled part of the bar grows to 40 percent for the default range."
+      },
+      {
+        "name": "Minimum",
+        "dataType": "int",
+        "defaultValue": "0",
+        "acceptedValues": "Any int up to Maximum",
+        "description": "The value that represents an empty bar.",
+        "usage": "Use a custom range such as 1 to 12.",
+        "example": "progress.Minimum = 0;",
+        "expectedEffect": "Sets the lower end of the range."
+      },
+      {
+        "name": "Maximum",
+        "dataType": "int",
+        "defaultValue": "100",
+        "acceptedValues": "Any int from Minimum up",
+        "description": "The value that represents a full bar.",
+        "usage": "Set it to the number of items to process.",
+        "example": "progress.Maximum = files.Length;",
+        "expectedEffect": "The bar is full when Value equals the number of files."
+      },
+      {
+        "name": "Style",
+        "dataType": "ProgressBarStyle",
+        "defaultValue": "Blocks",
+        "acceptedValues": "Blocks, Continuous, Marquee",
+        "description": "Draws the bar in blocks, as a smooth bar, or as an endlessly moving marquee.",
+        "usage": "Use Marquee when the duration is unknown.",
+        "example": "progress.Style = ProgressBarStyle.Marquee;",
+        "expectedEffect": "A block moves back and forth continuously."
+      },
+      {
+        "name": "Step",
+        "dataType": "int",
+        "defaultValue": "10",
+        "acceptedValues": "Any int",
+        "description": "The amount PerformStep adds to Value.",
+        "usage": "Advance by one item at a time.",
+        "example": "progress.Step = 1;",
+        "expectedEffect": "Each call to PerformStep adds 1."
+      },
+      {
+        "name": "MarqueeAnimationSpeed",
+        "dataType": "int",
+        "defaultValue": "100",
+        "acceptedValues": "0 or greater (milliseconds)",
+        "description": "The delay between marquee animation updates. It only matters when Style is Marquee.",
+        "usage": "Slow down or stop the marquee.",
+        "example": "progress.MarqueeAnimationSpeed = 30;",
+        "expectedEffect": "A smaller number makes the block move faster; 0 stops it."
+      }
+    ]
+  },
+  {
+    "name": "TrackBar",
+    "properties": [
+      {
+        "name": "Value",
+        "dataType": "int",
+        "defaultValue": "0",
+        "acceptedValues": "Minimum to Maximum",
+        "description": "The position of the slider.",
+        "usage": "Read the chosen level.",
+        "example": "int volume = trkVolume.Value;",
+        "expectedEffect": "Setting it moves the slider and raises ValueChanged."
+      },
+      {
+        "name": "Minimum",
+        "dataType": "int",
+        "defaultValue": "0",
+        "acceptedValues": "Any int up to Maximum",
+        "description": "The value at the left (or bottom) end.",
+        "usage": "Define the lower limit.",
+        "example": "trkVolume.Minimum = 0;",
+        "expectedEffect": "Sets the smallest slider value."
+      },
+      {
+        "name": "Maximum",
+        "dataType": "int",
+        "defaultValue": "10",
+        "acceptedValues": "Any int from Minimum up",
+        "description": "The value at the right (or top) end.",
+        "usage": "Use 100 for percentages.",
+        "example": "trkVolume.Maximum = 100;",
+        "expectedEffect": "The slider now covers 0 to 100."
+      },
+      {
+        "name": "TickFrequency",
+        "dataType": "int",
+        "defaultValue": "1",
+        "acceptedValues": "1 or greater",
+        "description": "The distance between tick marks, in value units.",
+        "usage": "Show a tick every ten units.",
+        "example": "trkVolume.TickFrequency = 10;",
+        "expectedEffect": "Tick marks appear every 10 units."
+      },
+      {
+        "name": "TickStyle",
+        "dataType": "TickStyle",
+        "defaultValue": "BottomRight",
+        "acceptedValues": "None, TopLeft, BottomRight, Both",
+        "description": "Where the tick marks are drawn.",
+        "usage": "Hide ticks for a clean slider.",
+        "example": "trkVolume.TickStyle = TickStyle.None;",
+        "expectedEffect": "The tick marks disappear."
+      },
+      {
+        "name": "Orientation",
+        "dataType": "Orientation",
+        "defaultValue": "Horizontal",
+        "acceptedValues": "Horizontal, Vertical",
+        "description": "Direction of the slider.",
+        "usage": "Build a vertical volume slider.",
+        "example": "trkVolume.Orientation = Orientation.Vertical;",
+        "expectedEffect": "The slider turns upright."
+      },
+      {
+        "name": "SmallChange",
+        "dataType": "int",
+        "defaultValue": "1",
+        "acceptedValues": "1 or greater",
+        "description": "The change caused by the arrow keys.",
+        "usage": "Use finer keyboard control.",
+        "example": "trkVolume.SmallChange = 1;",
+        "expectedEffect": "Each arrow key press moves the value by 1."
+      },
+      {
+        "name": "LargeChange",
+        "dataType": "int",
+        "defaultValue": "5",
+        "acceptedValues": "1 or greater",
+        "description": "The change caused by PageUp, PageDown or a click beside the thumb.",
+        "usage": "Move faster with the keyboard.",
+        "example": "trkVolume.LargeChange = 10;",
+        "expectedEffect": "Page keys move the value by 10."
+      }
+    ]
+  },
+  {
+    "name": "LinkLabel",
+    "properties": [
+      {
+        "name": "Links",
+        "dataType": "LinkLabel.LinkCollection",
+        "defaultValue": "One link covering all the text",
+        "acceptedValues": "Link objects with a start and a length",
+        "description": "The clickable parts of the text.",
+        "usage": "Make only a part of a sentence clickable.",
+        "example": "lnkTerms.Links.Add(14, 5, \"https://example.com/terms\");",
+        "expectedEffect": "Only the five characters from position 14 are shown and handled as a link."
+      },
+      {
+        "name": "LinkColor",
+        "dataType": "Color",
+        "defaultValue": "The system link color (usually blue)",
+        "acceptedValues": "Any Color",
+        "description": "The color of unvisited links.",
+        "usage": "Match the link color to your theme.",
+        "example": "lnkTerms.LinkColor = Color.DodgerBlue;",
+        "expectedEffect": "Links are drawn in the new color."
+      },
+      {
+        "name": "VisitedLinkColor",
+        "dataType": "Color",
+        "defaultValue": "A purple system color",
+        "acceptedValues": "Any Color",
+        "description": "The color of links whose LinkVisited is true.",
+        "usage": "Show which links were already used.",
+        "example": "lnkTerms.VisitedLinkColor = Color.Gray;",
+        "expectedEffect": "Visited links change to the new color."
+      },
+      {
+        "name": "LinkBehavior",
+        "dataType": "LinkBehavior",
+        "defaultValue": "SystemDefault",
+        "acceptedValues": "SystemDefault, AlwaysUnderline, HoverUnderline, NeverUnderline",
+        "description": "When the link text is underlined.",
+        "usage": "Underline only on hover for a cleaner look.",
+        "example": "lnkTerms.LinkBehavior = LinkBehavior.HoverUnderline;",
+        "expectedEffect": "The underline appears when the pointer is over the link."
+      },
+      {
+        "name": "LinkVisited",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Marks the first link as visited.",
+        "usage": "Set it after the user has opened the link.",
+        "example": "lnkTerms.LinkVisited = true;",
+        "expectedEffect": "The link switches to VisitedLinkColor."
+      }
+    ]
+  },
+  {
+    "name": "ToolTip",
+    "properties": [
+      {
+        "name": "Active",
+        "dataType": "bool",
+        "defaultValue": "true",
+        "acceptedValues": "true, false",
+        "description": "Turns all tool tips of this component on or off.",
+        "usage": "Let users disable help pop-ups.",
+        "example": "toolTip1.Active = false;",
+        "expectedEffect": "No tool tip appears while it is false."
+      },
+      {
+        "name": "AutoPopDelay",
+        "dataType": "int",
+        "defaultValue": "5000",
+        "acceptedValues": "Milliseconds, 0 or greater",
+        "description": "How long the tool tip stays visible while the pointer rests.",
+        "usage": "Keep long hints on screen for longer.",
+        "example": "toolTip1.AutoPopDelay = 8000;",
+        "expectedEffect": "The tip disappears after 8 seconds."
+      },
+      {
+        "name": "InitialDelay",
+        "dataType": "int",
+        "defaultValue": "500",
+        "acceptedValues": "Milliseconds, 0 or greater",
+        "description": "How long the pointer must rest before the tip appears.",
+        "usage": "Show hints faster.",
+        "example": "toolTip1.InitialDelay = 200;",
+        "expectedEffect": "The tip appears after 0.2 seconds."
+      },
+      {
+        "name": "ReshowDelay",
+        "dataType": "int",
+        "defaultValue": "100",
+        "acceptedValues": "Milliseconds, 0 or greater",
+        "description": "The delay before the tip appears when moving from one control to another.",
+        "usage": "Make moving between controls feel smoother.",
+        "example": "toolTip1.ReshowDelay = 50;",
+        "expectedEffect": "Tips follow the pointer more quickly."
+      },
+      {
+        "name": "IsBalloon",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows the tip as a balloon with a pointer instead of a rectangle.",
+        "usage": "Use balloon tips for friendly hints.",
+        "example": "toolTip1.IsBalloon = true;",
+        "expectedEffect": "The tip is drawn as a rounded balloon."
+      },
+      {
+        "name": "ShowAlways",
+        "dataType": "bool",
+        "defaultValue": "false",
+        "acceptedValues": "true, false",
+        "description": "Shows tips even when the owner form is not active.",
+        "usage": "Show hints in tool windows.",
+        "example": "toolTip1.ShowAlways = true;",
+        "expectedEffect": "Tips appear even if the form is in the background."
+      },
+      {
+        "name": "ToolTipTitle",
+        "dataType": "string",
+        "defaultValue": "\"\"",
+        "acceptedValues": "Any string",
+        "description": "A bold title shown above the tip text.",
+        "usage": "Add a heading to important tips.",
+        "example": "toolTip1.ToolTipTitle = \"Tip\";",
+        "expectedEffect": "A title line is shown above the text."
+      },
+      {
+        "name": "ToolTipIcon",
+        "dataType": "ToolTipIcon",
+        "defaultValue": "None",
+        "acceptedValues": "None, Info, Warning, Error",
+        "description": "An icon shown beside the title. It only appears when ToolTipTitle is set.",
+        "usage": "Signal the kind of message.",
+        "example": "toolTip1.ToolTipIcon = ToolTipIcon.Info;",
+        "expectedEffect": "An information icon is shown next to the title."
+      }
+    ]
+  },
+  {
+    "name": "ErrorProvider",
+    "properties": [
+      {
+        "name": "BlinkStyle",
+        "dataType": "ErrorBlinkStyle",
+        "defaultValue": "BlinkIfDifferentError",
+        "acceptedValues": "AlwaysBlink, BlinkIfDifferentError, NeverBlink",
+        "description": "When the error icon blinks to attract attention.",
+        "usage": "Stop the icon from blinking if it distracts.",
+        "example": "errorProvider1.BlinkStyle = ErrorBlinkStyle.NeverBlink;",
+        "expectedEffect": "The icon stays steady."
+      },
+      {
+        "name": "BlinkRate",
+        "dataType": "int",
+        "defaultValue": "250",
+        "acceptedValues": "Milliseconds, 0 or greater",
+        "description": "The blink interval of the icon.",
+        "usage": "Slow the blinking down.",
+        "example": "errorProvider1.BlinkRate = 500;",
+        "expectedEffect": "The icon blinks every half second."
+      },
+      {
+        "name": "Icon",
+        "dataType": "Icon",
+        "defaultValue": "A red circle with an exclamation mark",
+        "acceptedValues": "Any Icon",
+        "description": "The icon shown next to an invalid control.",
+        "usage": "Use your own error symbol.",
+        "example": "errorProvider1.Icon = new Icon(\"error.ico\");",
+        "expectedEffect": "Your icon replaces the default one."
+      },
+      {
+        "name": "ContainerControl",
+        "dataType": "ContainerControl",
+        "defaultValue": "The owning form when created by the designer",
+        "acceptedValues": "Any form or user control",
+        "description": "The container whose controls the provider decorates. When you create the provider in code, set it yourself.",
+        "usage": "Make the provider work when created in code.",
+        "example": "errorProvider1.ContainerControl = this;",
+        "expectedEffect": "Error icons now appear on controls of this form."
+      },
+      {
+        "name": "DataSource",
+        "dataType": "object",
+        "defaultValue": "null",
+        "acceptedValues": "An object that implements IDataErrorInfo, or a binding source",
+        "description": "A data source from which error messages are read automatically.",
+        "usage": "Show validation errors from your data classes.",
+        "example": "errorProvider1.DataSource = bindingSource1;",
+        "expectedEffect": "Errors reported by the data objects appear on the bound controls."
+      }
+    ]
+  }
+]

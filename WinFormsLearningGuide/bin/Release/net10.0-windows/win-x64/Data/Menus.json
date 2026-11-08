@@ -1,0 +1,232 @@
+[
+  {
+    "name": "MenuStrip",
+    "category": "Menus and Toolbars",
+    "namespace": "System.Windows.Forms",
+    "className": "MenuStrip",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "ToolStrip",
+      "MenuStrip"
+    ],
+    "summary": "The main menu bar at the top of a window, containing drop-down menus and commands.",
+    "importantProperties": [
+      "Items",
+      "Dock",
+      "RenderMode",
+      "ShowItemToolTips",
+      "MdiWindowListItem"
+    ],
+    "importantEvents": [
+      "ItemClicked",
+      "MenuActivate",
+      "MenuDeactivate"
+    ],
+    "relatedControls": [
+      "ContextMenuStrip",
+      "ToolStrip",
+      "StatusStrip"
+    ]
+  },
+  {
+    "name": "ContextMenuStrip",
+    "category": "Menus and Toolbars",
+    "namespace": "System.Windows.Forms",
+    "className": "ContextMenuStrip",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "ToolStrip",
+      "ToolStripDropDown",
+      "ToolStripDropDownMenu",
+      "ContextMenuStrip"
+    ],
+    "summary": "A pop-up menu shown when the user right-clicks a control or a tray icon.",
+    "importantProperties": [
+      "Items",
+      "SourceControl",
+      "ShowImageMargin",
+      "ShowCheckMargin"
+    ],
+    "importantEvents": [
+      "Opening",
+      "Opened",
+      "Closing",
+      "ItemClicked"
+    ],
+    "relatedControls": [
+      "MenuStrip",
+      "ToolStrip",
+      "NotifyIcon"
+    ]
+  },
+  {
+    "name": "ToolStrip",
+    "category": "Menus and Toolbars",
+    "namespace": "System.Windows.Forms",
+    "className": "ToolStrip",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "ToolStrip"
+    ],
+    "summary": "A toolbar that hosts buttons, labels, combo boxes and other items.",
+    "importantProperties": [
+      "Items",
+      "GripStyle",
+      "ImageScalingSize",
+      "LayoutStyle",
+      "RenderMode",
+      "ShowItemToolTips"
+    ],
+    "importantEvents": [
+      "ItemClicked",
+      "ItemAdded",
+      "ItemRemoved"
+    ],
+    "relatedControls": [
+      "MenuStrip",
+      "StatusStrip",
+      "ToolStripButton",
+      "BindingNavigator"
+    ]
+  },
+  {
+    "name": "StatusStrip",
+    "category": "Menus and Toolbars",
+    "namespace": "System.Windows.Forms",
+    "className": "StatusStrip",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "Control",
+      "ScrollableControl",
+      "ToolStrip",
+      "StatusStrip"
+    ],
+    "summary": "A bar at the bottom of a window that shows status text, progress and other information.",
+    "importantProperties": [
+      "Items",
+      "SizingGrip",
+      "Dock"
+    ],
+    "importantEvents": [
+      "ItemClicked"
+    ],
+    "relatedControls": [
+      "ToolStrip",
+      "MenuStrip",
+      "ToolStripLabel",
+      "ProgressBar"
+    ]
+  },
+  {
+    "name": "ToolStripButton",
+    "category": "Menus and Toolbars",
+    "namespace": "System.Windows.Forms",
+    "className": "ToolStripButton",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "BindableComponent",
+      "ToolStripItem",
+      "ToolStripButton"
+    ],
+    "summary": "A clickable button placed on a ToolStrip, MenuStrip or StatusStrip.",
+    "importantProperties": [
+      "Text",
+      "Image",
+      "DisplayStyle",
+      "Checked",
+      "CheckOnClick",
+      "ToolTipText"
+    ],
+    "importantEvents": [
+      "Click",
+      "CheckedChanged"
+    ],
+    "relatedControls": [
+      "Button",
+      "ToolStrip",
+      "ToolStripLabel"
+    ]
+  },
+  {
+    "name": "ToolStripLabel",
+    "category": "Menus and Toolbars",
+    "namespace": "System.Windows.Forms",
+    "className": "ToolStripLabel",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "BindableComponent",
+      "ToolStripItem",
+      "ToolStripLabel"
+    ],
+    "summary": "A text or image label (optionally a link) placed on a tool strip or status strip.",
+    "importantProperties": [
+      "Text",
+      "IsLink",
+      "LinkColor",
+      "Image",
+      "DisplayStyle"
+    ],
+    "importantEvents": [
+      "Click",
+      "TextChanged"
+    ],
+    "relatedControls": [
+      "Label",
+      "LinkLabel",
+      "ToolStrip",
+      "StatusStrip"
+    ]
+  },
+  {
+    "name": "ToolStripComboBox",
+    "category": "Menus and Toolbars",
+    "namespace": "System.Windows.Forms",
+    "className": "ToolStripComboBox",
+    "inheritance": [
+      "Object",
+      "MarshalByRefObject",
+      "Component",
+      "BindableComponent",
+      "ToolStripItem",
+      "ToolStripControlHost",
+      "ToolStripComboBox"
+    ],
+    "summary": "A combo box hosted inside a tool strip.",
+    "importantProperties": [
+      "ComboBox",
+      "Items",
+      "SelectedIndex",
+      "SelectedItem",
+      "DropDownStyle",
+      "Text"
+    ],
+    "importantEvents": [
+      "SelectedIndexChanged",
+      "TextChanged",
+      "DropDown"
+    ],
+    "relatedControls": [
+      "ComboBox",
+      "ToolStrip",
+      "ToolStripButton"
+    ]
+  }
+]

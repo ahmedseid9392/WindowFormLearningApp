@@ -1,0 +1,75 @@
+[
+  {
+    "name": "Timer",
+    "purpose": "A Timer raises its Tick event at a regular interval, so your code can run repeatedly without a loop that blocks the window.",
+    "whenToUse": [
+      "Update a clock or countdown every second.",
+      "Refresh data or poll a status periodically.",
+      "Run a delayed action once by stopping the timer in the Tick handler."
+    ],
+    "realWorldExamples": [
+      "A digital clock in a status bar.",
+      "An auto-save that runs every five minutes.",
+      "A slideshow that changes the picture every few seconds."
+    ],
+    "defaultAppearance": "Timer is a non-visual component that appears in the component tray in the designer. It has no appearance at run time. It is disabled by default (Enabled = false) and has a 100 ms Interval.",
+    "commonMistakes": [
+      { "mistake": "Forgetting to enable the timer.", "fix": "Set Enabled = true or call Start(); a new Timer does not tick by default." },
+      { "mistake": "Doing slow work inside Tick, which freezes the UI because Tick runs on the UI thread.", "fix": "Keep Tick short, or start background work from it." },
+      { "mistake": "Expecting exact timing.", "fix": "The Windows Forms Timer is not precise; for accuracy use a Stopwatch or another timer type." }
+    ],
+    "relatedNotes": [
+      { "name": "BackgroundWorker", "difference": "Runs one long task on another thread; a Timer repeats a short task on the UI thread." },
+      { "name": "ProgressBar", "difference": "Often updated from a Timer's Tick to show elapsed time." }
+    ]
+  },
+  {
+    "name": "BackgroundWorker",
+    "purpose": "A BackgroundWorker runs a long operation on a separate thread and reports progress and completion back on the UI thread, keeping the window responsive.",
+    "whenToUse": [
+      "Run work such as file processing or a slow calculation without freezing the form.",
+      "Report progress to a ProgressBar.",
+      "Let the user cancel a running task."
+    ],
+    "realWorldExamples": [
+      "Importing a large CSV file while a progress bar fills.",
+      "Resizing many images in the background.",
+      "Running a long report and showing 'Done' at the end."
+    ],
+    "defaultAppearance": "BackgroundWorker is a non-visual component that appears in the component tray in the designer. It has no appearance at run time; its effect is seen in the controls you update from its events.",
+    "commonMistakes": [
+      { "mistake": "Touching controls from DoWork, which throws a cross-thread exception.", "fix": "Only update the UI in ProgressChanged and RunWorkerCompleted, which run on the UI thread." },
+      { "mistake": "Calling ReportProgress without enabling it.", "fix": "Set WorkerReportsProgress = true (and WorkerSupportsCancellation = true for cancellation)." },
+      { "mistake": "Ignoring errors from the worker.", "fix": "Check e.Error and e.Cancelled in RunWorkerCompleted before using e.Result." }
+    ],
+    "relatedNotes": [
+      { "name": "Timer", "difference": "Repeats on the UI thread; BackgroundWorker moves work off it." },
+      { "name": "ProgressBar", "difference": "The usual way to display BackgroundWorker progress." }
+    ]
+  },
+  {
+    "name": "NotifyIcon",
+    "purpose": "A NotifyIcon places an icon in the Windows notification area (system tray) so the application can run in the background, show balloon notifications and offer a quick menu.",
+    "whenToUse": [
+      "Keep an application running in the tray after the window is closed or minimized.",
+      "Show a notification balloon when something happens.",
+      "Offer a right-click menu with commands like Open and Exit."
+    ],
+    "realWorldExamples": [
+      "A chat app that stays in the tray with a new-message notification.",
+      "A download manager that minimizes to the tray.",
+      "A background sync tool with a status icon."
+    ],
+    "defaultAppearance": "NotifyIcon is a component shown in the designer's component tray. At run time it appears as a small icon in the Windows tray; it is not visible unless you set Icon and Visible = true.",
+    "commonMistakes": [
+      { "mistake": "Not setting an Icon, so the tray icon never appears.", "fix": "Assign an Icon and set Visible = true." },
+      { "mistake": "Leaving a ghost icon in the tray after the app closes.", "fix": "Set Visible = false (or Dispose) in FormClosing before exiting." },
+      { "mistake": "Hiding the form with Hide() and not allowing the user to restore it.", "fix": "Handle DoubleClick or a ContextMenuStrip item to Show the form and bring it to the front." }
+    ],
+    "relatedNotes": [
+      { "name": "ContextMenuStrip", "difference": "Assign it to NotifyIcon.ContextMenuStrip for the right-click menu." },
+      { "name": "ToolTip", "difference": "Shows hints for controls on a form; NotifyIcon has its own Text and balloon tips." },
+      { "name": "Timer", "difference": "Can be used to update the icon or text at intervals." }
+    ]
+  }
+]
