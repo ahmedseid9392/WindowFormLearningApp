@@ -1,0 +1,316 @@
+[
+  {
+    "name": "Panel",
+    "methods": [
+      {
+        "name": "Controls.Add",
+        "signature": "void Controls.Add(Control value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Places a control inside this container. Its Location is then relative to the container.",
+        "parameters": [
+          {
+            "name": "value",
+            "type": "Control",
+            "description": "The control to add."
+          }
+        ],
+        "example": "pnlHeader.Controls.Add(lblTitle);",
+        "expectedEffect": "The control appears inside the container and moves with it."
+      },
+      {
+        "name": "Controls.Clear",
+        "signature": "void Controls.Clear()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes every child control from the container. The removed controls are not disposed.",
+        "parameters": [],
+        "example": "pnlHeader.Controls.Clear();",
+        "expectedEffect": "The panel is empty. Dispose the removed controls yourself if you will not reuse them."
+      },
+      {
+        "name": "ScrollControlIntoView",
+        "signature": "void ScrollControlIntoView(Control activeControl)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Scrolls an AutoScroll panel so a child control becomes visible.",
+        "parameters": [
+          {
+            "name": "activeControl",
+            "type": "Control",
+            "description": "The child control to bring into view."
+          }
+        ],
+        "example": "pnlHeader.ScrollControlIntoView(btnLast);",
+        "expectedEffect": "The panel scrolls until the button is visible."
+      }
+    ]
+  },
+  {
+    "name": "GroupBox",
+    "methods": [
+      {
+        "name": "Controls.Add",
+        "signature": "void Controls.Add(Control value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Places a control inside this container. Its Location is then relative to the container.",
+        "parameters": [
+          {
+            "name": "value",
+            "type": "Control",
+            "description": "The control to add."
+          }
+        ],
+        "example": "grpOptions.Controls.Add(rdoExpress);",
+        "expectedEffect": "The control appears inside the container and moves with it."
+      }
+    ]
+  },
+  {
+    "name": "TabControl",
+    "methods": [
+      {
+        "name": "TabPages.Add",
+        "signature": "void TabPages.Add(TabPage value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Adds a tab page at the end.",
+        "parameters": [
+          {
+            "name": "value",
+            "type": "TabPage",
+            "description": "The page to add."
+          }
+        ],
+        "example": "tabMain.TabPages.Add(new TabPage(\"Reports\"));",
+        "expectedEffect": "A new tab titled \"Reports\" appears."
+      },
+      {
+        "name": "TabPages.Remove",
+        "signature": "void TabPages.Remove(TabPage value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes a tab page. Use it to hide a tab (TabPage.Visible does not hide the tab header).",
+        "parameters": [
+          {
+            "name": "value",
+            "type": "TabPage",
+            "description": "The page to remove."
+          }
+        ],
+        "example": "tabMain.TabPages.Remove(tabAdvanced);",
+        "expectedEffect": "The tab disappears; the page object still exists and can be added again."
+      },
+      {
+        "name": "SelectTab",
+        "signature": "void SelectTab(int index)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Makes the tab at the given index the selected one.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "int",
+            "description": "Zero-based index of the tab."
+          }
+        ],
+        "example": "tabMain.SelectTab(1);",
+        "expectedEffect": "The second tab is shown. Overloads accept a TabPage or a page name."
+      },
+      {
+        "name": "GetTabRect",
+        "signature": "Rectangle GetTabRect(int index)",
+        "returnType": "Rectangle",
+        "returnDescription": "The bounds of the tab header, relative to the control.",
+        "description": "Gets the rectangle of a tab header, for example to draw on it.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "int",
+            "description": "Zero-based index of the tab."
+          }
+        ],
+        "example": "Rectangle r = tabMain.GetTabRect(0);",
+        "expectedEffect": "Returns the position and size of the first tab header."
+      }
+    ]
+  },
+  {
+    "name": "TabPage",
+    "methods": [
+      {
+        "name": "Controls.Add",
+        "signature": "void Controls.Add(Control value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Places a control inside this container. Its Location is then relative to the container.",
+        "parameters": [
+          {
+            "name": "value",
+            "type": "Control",
+            "description": "The control to add."
+          }
+        ],
+        "example": "tabGeneral.Controls.Add(txtName);",
+        "expectedEffect": "The control appears inside the container and moves with it."
+      }
+    ]
+  },
+  {
+    "name": "SplitContainer",
+    "methods": []
+  },
+  {
+    "name": "FlowLayoutPanel",
+    "methods": [
+      {
+        "name": "Controls.Add",
+        "signature": "void Controls.Add(Control value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Places a control inside this container. Its Location is then relative to the container.",
+        "parameters": [
+          {
+            "name": "value",
+            "type": "Control",
+            "description": "The control to add."
+          }
+        ],
+        "example": "flowButtons.Controls.Add(new Button { Text = \"New\" });",
+        "expectedEffect": "The control appears inside the container and moves with it."
+      },
+      {
+        "name": "SetFlowBreak",
+        "signature": "void SetFlowBreak(Control child, bool value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Forces the next control to start on a new row (or column).",
+        "parameters": [
+          {
+            "name": "child",
+            "type": "Control",
+            "description": "The control after which the break is placed."
+          },
+          {
+            "name": "value",
+            "type": "bool",
+            "description": "true to add the break."
+          }
+        ],
+        "example": "flowButtons.SetFlowBreak(btnFirst, true);",
+        "expectedEffect": "The control that follows btnFirst starts a new line."
+      },
+      {
+        "name": "GetFlowBreak",
+        "signature": "bool GetFlowBreak(Control child)",
+        "returnType": "bool",
+        "returnDescription": "true if a flow break follows the control.",
+        "description": "Tells whether a flow break was set for a control.",
+        "parameters": [
+          {
+            "name": "child",
+            "type": "Control",
+            "description": "The control to ask about."
+          }
+        ],
+        "example": "bool hasBreak = flowButtons.GetFlowBreak(btnFirst);",
+        "expectedEffect": "Returns true when a break follows btnFirst."
+      }
+    ]
+  },
+  {
+    "name": "TableLayoutPanel",
+    "methods": [
+      {
+        "name": "Controls.Add",
+        "signature": "void Controls.Add(Control control, int column, int row)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Places a control in a specific cell.",
+        "parameters": [
+          {
+            "name": "control",
+            "type": "Control",
+            "description": "The control to add."
+          },
+          {
+            "name": "column",
+            "type": "int",
+            "description": "Zero-based column index."
+          },
+          {
+            "name": "row",
+            "type": "int",
+            "description": "Zero-based row index."
+          }
+        ],
+        "example": "tblLayout.Controls.Add(txtName, 1, 0);",
+        "expectedEffect": "txtName appears in the second column of the first row."
+      },
+      {
+        "name": "SetColumnSpan",
+        "signature": "void SetColumnSpan(Control control, int value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Makes a control span several columns.",
+        "parameters": [
+          {
+            "name": "control",
+            "type": "Control",
+            "description": "A control already in the table."
+          },
+          {
+            "name": "value",
+            "type": "int",
+            "description": "Number of columns to span."
+          }
+        ],
+        "example": "tblLayout.SetColumnSpan(lblTitle, 2);",
+        "expectedEffect": "lblTitle stretches across two columns."
+      },
+      {
+        "name": "SetRowSpan",
+        "signature": "void SetRowSpan(Control control, int value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Makes a control span several rows.",
+        "parameters": [
+          {
+            "name": "control",
+            "type": "Control",
+            "description": "A control already in the table."
+          },
+          {
+            "name": "value",
+            "type": "int",
+            "description": "Number of rows to span."
+          }
+        ],
+        "example": "tblLayout.SetRowSpan(picLogo, 2);",
+        "expectedEffect": "picLogo stretches across two rows."
+      },
+      {
+        "name": "GetControlFromPosition",
+        "signature": "Control GetControlFromPosition(int column, int row)",
+        "returnType": "Control",
+        "returnDescription": "The control in that cell, or null.",
+        "description": "Finds the control in a cell.",
+        "parameters": [
+          {
+            "name": "column",
+            "type": "int",
+            "description": "Zero-based column index."
+          },
+          {
+            "name": "row",
+            "type": "int",
+            "description": "Zero-based row index."
+          }
+        ],
+        "example": "Control c = tblLayout.GetControlFromPosition(1, 0);",
+        "expectedEffect": "Returns the control in the second column of the first row, or null if the cell is empty."
+      }
+    ]
+  }
+]

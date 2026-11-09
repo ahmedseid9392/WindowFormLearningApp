@@ -1,0 +1,81 @@
+[
+  {
+    "name": "OpenFileDialog",
+    "events": [
+      {
+        "name": "FileOk",
+        "description": "Raised when the user clicks Open, before the dialog closes.",
+        "delegate": "CancelEventHandler",
+        "eventArgsType": "CancelEventArgs",
+        "argumentsNote": "Set e.Cancel = true to keep the dialog open.",
+        "useCase": "Reject files that are too large or have the wrong content.",
+        "example": "// Subscribe once, for example in the form constructor:\nopenFileDialog1.FileOk += openFileDialog1_FileOk;\n\nprivate void openFileDialog1_FileOk(object sender, CancelEventArgs e)\n{\n    // requires: using System.IO;\n    if (new FileInfo(openFileDialog1.FileName).Length > 10 * 1024 * 1024)\n    {\n        MessageBox.Show(\"Please choose a file smaller than 10 MB.\");\n        e.Cancel = true;\n    }\n}"
+      }
+    ]
+  },
+  {
+    "name": "SaveFileDialog",
+    "events": [
+      {
+        "name": "FileOk",
+        "description": "Raised when the user clicks Save, before the dialog closes.",
+        "delegate": "CancelEventHandler",
+        "eventArgsType": "CancelEventArgs",
+        "argumentsNote": "Set e.Cancel = true to keep the dialog open.",
+        "useCase": "Refuse a file name that does not follow your rules.",
+        "example": "// Subscribe once, for example in the form constructor:\nsaveFileDialog1.FileOk += saveFileDialog1_FileOk;\n\nprivate void saveFileDialog1_FileOk(object sender, CancelEventArgs e)\n{\n    if (!saveFileDialog1.FileName.EndsWith(\".txt\", StringComparison.OrdinalIgnoreCase))\n    {\n        MessageBox.Show(\"Only .txt files can be saved here.\");\n        e.Cancel = true;\n    }\n}"
+      }
+    ]
+  },
+  {
+    "name": "FolderBrowserDialog",
+    "events": [
+      {
+        "name": "HelpRequest",
+        "description": "Raised when the user clicks the Help button. Set ShowHelp = true to show the button.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Explain which folder to choose.",
+        "example": "// Subscribe once, for example in the form constructor:\nfolderBrowserDialog1.HelpRequest += folderBrowserDialog1_HelpRequest;\nfolderBrowserDialog1.ShowHelp = true; // shows the Help button\n\nprivate void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Choose the folder that contains your project.\");\n}"
+      }
+    ]
+  },
+  {
+    "name": "ColorDialog",
+    "events": [
+      {
+        "name": "HelpRequest",
+        "description": "Raised when the user clicks the Help button. Set ShowHelp = true to show the button.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Explain how colors are used in your application.",
+        "example": "// Subscribe once, for example in the form constructor:\ncolorDialog1.HelpRequest += colorDialog1_HelpRequest;\ncolorDialog1.ShowHelp = true; // shows the Help button\n\nprivate void colorDialog1_HelpRequest(object sender, EventArgs e)\n{\n    MessageBox.Show(\"The color is used for the page background.\");\n}"
+      }
+    ]
+  },
+  {
+    "name": "FontDialog",
+    "events": [
+      {
+        "name": "Apply",
+        "description": "Raised when the user clicks Apply. Set ShowApply = true to show the button.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Preview the font in your document without closing the dialog.",
+        "example": "// Subscribe once, for example in the form constructor:\nfontDialog1.Apply += fontDialog1_Apply;\nfontDialog1.ShowApply = true; // shows the Apply button\n\nprivate void fontDialog1_Apply(object sender, EventArgs e)\n{\n    lblSample.Font = fontDialog1.Font;\n}"
+      },
+      {
+        "name": "HelpRequest",
+        "description": "Raised when the user clicks Help. Set ShowHelp = true to show the button.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Explain how fonts are used.",
+        "example": "// Subscribe once, for example in the form constructor:\nfontDialog1.HelpRequest += fontDialog1_HelpRequest;\nfontDialog1.ShowHelp = true; // shows the Help button\n\nprivate void fontDialog1_HelpRequest(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Choose a font for the document body.\");\n}"
+      }
+    ]
+  }
+]

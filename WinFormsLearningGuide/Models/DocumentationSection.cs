@@ -6,7 +6,7 @@ namespace WinFormsLearningGuide.Models;
 public sealed class DocumentationSection
 {
     /// <summary>The newest phase whose content is implemented. Sections for later phases show placeholders.</summary>
-    public const int CurrentPhase = 3;
+    public const int CurrentPhase = 4;
 
     public bool IsComplete => Phase <= CurrentPhase;
 

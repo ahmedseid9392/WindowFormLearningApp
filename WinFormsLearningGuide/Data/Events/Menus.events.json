@@ -1,0 +1,199 @@
+[
+  {
+    "name": "MenuStrip",
+    "events": [
+      {
+        "name": "ItemClicked",
+        "description": "Raised when an item placed directly on the strip is clicked. Items in drop-down menus raise their own Click events.",
+        "delegate": "ToolStripItemClickedEventHandler",
+        "eventArgsType": "ToolStripItemClickedEventArgs",
+        "argumentsNote": "e.ClickedItem is the item that was clicked.",
+        "useCase": "Handle many top-level items in one place.",
+        "example": "// Subscribe once, for example in the form constructor:\nmenuMain.ItemClicked += menuMain_ItemClicked;\n\nprivate void menuMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)\n{\n    tslStatus.Text = \"Clicked \" + e.ClickedItem.Text;\n}"
+      },
+      {
+        "name": "MenuActivate",
+        "description": "Raised when the user activates the menu with the mouse or the Alt key.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Show a hint in the status bar while the menu is in use.",
+        "example": "// Subscribe once, for example in the form constructor:\nmenuMain.MenuActivate += menuMain_MenuActivate;\n\nprivate void menuMain_MenuActivate(object sender, EventArgs e)\n{\n    tslStatus.Text = \"Menu active\";\n}"
+      },
+      {
+        "name": "MenuDeactivate",
+        "description": "Raised when the menu is no longer active.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Restore the status text.",
+        "example": "// Subscribe once, for example in the form constructor:\nmenuMain.MenuDeactivate += menuMain_MenuDeactivate;\n\nprivate void menuMain_MenuDeactivate(object sender, EventArgs e)\n{\n    tslStatus.Text = \"Ready\";\n}"
+      }
+    ]
+  },
+  {
+    "name": "ContextMenuStrip",
+    "events": [
+      {
+        "name": "Opening",
+        "description": "Raised just before the menu is shown.",
+        "delegate": "CancelEventHandler",
+        "eventArgsType": "CancelEventArgs",
+        "argumentsNote": "Set e.Cancel = true to stop the menu from appearing.",
+        "useCase": "Enable or hide items depending on the current state.",
+        "example": "// Subscribe once, for example in the form constructor:\nctxMenu.Opening += ctxMenu_Opening;\n\nprivate void ctxMenu_Opening(object sender, CancelEventArgs e)\n{\n    bool hasSelection = txtEditor.SelectionLength > 0;\n    mnuCopy.Enabled = hasSelection;\n    mnuCut.Enabled = hasSelection;\n}"
+      },
+      {
+        "name": "Opened",
+        "description": "Raised after the menu has been displayed.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Log usage or move focus to the first item.",
+        "example": "// Subscribe once, for example in the form constructor:\nctxMenu.Opened += ctxMenu_Opened;\n\nprivate void ctxMenu_Opened(object sender, EventArgs e)\n{\n    tslStatus.Text = \"Context menu opened\";\n}"
+      },
+      {
+        "name": "Closing",
+        "description": "Raised before the menu closes.",
+        "delegate": "ToolStripDropDownClosingEventHandler",
+        "eventArgsType": "ToolStripDropDownClosingEventArgs",
+        "argumentsNote": "e.CloseReason says why (ItemClicked, Keyboard, AppClicked...). Set e.Cancel = true to keep it open.",
+        "useCase": "Find out why the menu closed, or keep it open for check-style items.",
+        "example": "// Subscribe once, for example in the form constructor:\nctxMenu.Closing += ctxMenu_Closing;\n\nprivate void ctxMenu_Closing(object sender, ToolStripDropDownClosingEventArgs e)\n{\n    tslStatus.Text = \"Menu closed because: \" + e.CloseReason;\n}"
+      },
+      {
+        "name": "ItemClicked",
+        "description": "Raised when an item in the menu is clicked.",
+        "delegate": "ToolStripItemClickedEventHandler",
+        "eventArgsType": "ToolStripItemClickedEventArgs",
+        "argumentsNote": "e.ClickedItem is the item that was clicked.",
+        "useCase": "Handle every item of the menu in one handler.",
+        "example": "// Subscribe once, for example in the form constructor:\nctxMenu.ItemClicked += ctxMenu_ItemClicked;\n\nprivate void ctxMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)\n{\n    tslStatus.Text = \"You chose \" + e.ClickedItem.Text;\n}"
+      }
+    ]
+  },
+  {
+    "name": "ToolStrip",
+    "events": [
+      {
+        "name": "ItemClicked",
+        "description": "Raised when any item on the toolbar is clicked.",
+        "delegate": "ToolStripItemClickedEventHandler",
+        "eventArgsType": "ToolStripItemClickedEventArgs",
+        "argumentsNote": "e.ClickedItem is the item that was clicked.",
+        "useCase": "Handle every toolbar button in one place.",
+        "example": "// Subscribe once, for example in the form constructor:\ntoolMain.ItemClicked += toolMain_ItemClicked;\n\nprivate void toolMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)\n{\n    tslStatus.Text = e.ClickedItem.Text + \" clicked\";\n}"
+      },
+      {
+        "name": "ItemAdded",
+        "description": "Raised after an item is added to the strip.",
+        "delegate": "ToolStripItemEventHandler",
+        "eventArgsType": "ToolStripItemEventArgs",
+        "argumentsNote": "e.Item is the item that was added.",
+        "useCase": "Give every new item the same tooltip behavior.",
+        "example": "// Subscribe once, for example in the form constructor:\ntoolMain.ItemAdded += toolMain_ItemAdded;\n\nprivate void toolMain_ItemAdded(object sender, ToolStripItemEventArgs e)\n{\n    e.Item.ToolTipText = e.Item.Text;\n}"
+      },
+      {
+        "name": "ItemRemoved",
+        "description": "Raised after an item is removed from the strip.",
+        "delegate": "ToolStripItemEventHandler",
+        "eventArgsType": "ToolStripItemEventArgs",
+        "argumentsNote": "e.Item is the item that was removed.",
+        "useCase": "Update a counter or clean up resources.",
+        "example": "// Subscribe once, for example in the form constructor:\ntoolMain.ItemRemoved += toolMain_ItemRemoved;\n\nprivate void toolMain_ItemRemoved(object sender, ToolStripItemEventArgs e)\n{\n    lblCount.Text = toolMain.Items.Count + \" items\";\n}"
+      }
+    ]
+  },
+  {
+    "name": "StatusStrip",
+    "events": [
+      {
+        "name": "ItemClicked",
+        "description": "Raised when an item on the status bar is clicked.",
+        "delegate": "ToolStripItemClickedEventHandler",
+        "eventArgsType": "ToolStripItemClickedEventArgs",
+        "argumentsNote": "e.ClickedItem is the item that was clicked.",
+        "useCase": "Let the user click a status item, such as the line number, to open a dialog.",
+        "example": "// Subscribe once, for example in the form constructor:\nstatusMain.ItemClicked += statusMain_ItemClicked;\n\nprivate void statusMain_ItemClicked(object sender, ToolStripItemClickedEventArgs e)\n{\n    MessageBox.Show(\"You clicked \" + e.ClickedItem.Text);\n}"
+      }
+    ]
+  },
+  {
+    "name": "ToolStripButton",
+    "events": [
+      {
+        "name": "Click",
+        "description": "Raised when the toolbar button is clicked.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Run the command the button stands for.",
+        "example": "// Subscribe once, for example in the form constructor:\ntsbBold.Click += tsbBold_Click;\n\nprivate void tsbBold_Click(object sender, EventArgs e)\n{\n    rtbEditor.SelectionFont = new Font(rtbEditor.Font, FontStyle.Bold);\n}"
+      },
+      {
+        "name": "CheckedChanged",
+        "description": "Raised when Checked changes. Use it with CheckOnClick = true for toggle buttons.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Switch a formatting option on or off.",
+        "example": "// Subscribe once, for example in the form constructor:\ntsbBold.CheckedChanged += tsbBold_CheckedChanged;\n\nprivate void tsbBold_CheckedChanged(object sender, EventArgs e)\n{\n    rtbEditor.SelectionFont = new Font(rtbEditor.Font, tsbBold.Checked ? FontStyle.Bold : FontStyle.Regular);\n}"
+      }
+    ]
+  },
+  {
+    "name": "ToolStripLabel",
+    "events": [
+      {
+        "name": "Click",
+        "description": "Raised when the label is clicked. ToolStripLabel has no LinkClicked event, so handle Click when IsLink = true.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Open a web page from a link in the toolbar or status bar.",
+        "example": "// Subscribe once, for example in the form constructor:\ntslLink.Click += tslLink_Click;\n\nprivate void tslLink_Click(object sender, EventArgs e)\n{\n    // requires: using System.Diagnostics;\n    tslLink.LinkVisited = true;\n    Process.Start(new ProcessStartInfo(\"https://dotnet.microsoft.com\") { UseShellExecute = true });\n}"
+      },
+      {
+        "name": "TextChanged",
+        "description": "Raised when the Text of the label changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "React when another part of the program updates the label.",
+        "example": "// Subscribe once, for example in the form constructor:\ntslLink.TextChanged += tslLink_TextChanged;\n\nprivate void tslLink_TextChanged(object sender, EventArgs e)\n{\n    Text = \"Status: \" + tslLink.Text; // here Text is the form's title\n}"
+      }
+    ]
+  },
+  {
+    "name": "ToolStripComboBox",
+    "events": [
+      {
+        "name": "SelectedIndexChanged",
+        "description": "Raised when the selected item changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Apply the chosen zoom level.",
+        "example": "// Subscribe once, for example in the form constructor:\ntscZoom.SelectedIndexChanged += tscZoom_SelectedIndexChanged;\n\nprivate void tscZoom_SelectedIndexChanged(object sender, EventArgs e)\n{\n    rtbEditor.ZoomFactor = float.Parse(tscZoom.SelectedItem.ToString().TrimEnd('%')) / 100f;\n}"
+      },
+      {
+        "name": "TextChanged",
+        "description": "Raised when the text changes, including typing in a DropDown-style box.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Show what the user is typing.",
+        "example": "// Subscribe once, for example in the form constructor:\ntscZoom.TextChanged += tscZoom_TextChanged;\n\nprivate void tscZoom_TextChanged(object sender, EventArgs e)\n{\n    tslStatus.Text = \"Typed: \" + tscZoom.Text;\n}"
+      },
+      {
+        "name": "DropDown",
+        "description": "Raised when the drop-down list opens.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Fill the list only when it is first needed.",
+        "example": "// Subscribe once, for example in the form constructor:\ntscZoom.DropDown += tscZoom_DropDown;\n\nprivate void tscZoom_DropDown(object sender, EventArgs e)\n{\n    if (tscZoom.Items.Count == 0)\n    {\n        tscZoom.Items.AddRange(new object[] { \"50%\", \"100%\", \"200%\" });\n    }\n}"
+      }
+    ]
+  }
+]

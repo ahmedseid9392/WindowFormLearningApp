@@ -1,0 +1,115 @@
+[
+  {
+    "name": "Timer",
+    "methods": [
+      {
+        "name": "Start",
+        "signature": "void Start()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Starts the timer (sets Enabled = true).",
+        "parameters": [],
+        "example": "timer1.Start();",
+        "expectedEffect": "Tick is raised every Interval milliseconds."
+      },
+      {
+        "name": "Stop",
+        "signature": "void Stop()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Stops the timer (sets Enabled = false).",
+        "parameters": [],
+        "example": "timer1.Stop();",
+        "expectedEffect": "No more Tick events are raised until Start() is called again."
+      }
+    ]
+  },
+  {
+    "name": "BackgroundWorker",
+    "methods": [
+      {
+        "name": "RunWorkerAsync",
+        "signature": "void RunWorkerAsync(object argument)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Starts the background operation and raises DoWork on a background thread.",
+        "parameters": [
+          {
+            "name": "argument",
+            "type": "object",
+            "description": "A value passed to DoWork as e.Argument (the overload without a parameter passes null)."
+          }
+        ],
+        "example": "if (!backgroundWorker1.IsBusy)\n{\n    backgroundWorker1.RunWorkerAsync(@\"C:\\Data\\big.csv\");\n}",
+        "expectedEffect": "DoWork starts while the user interface stays responsive. Starting it twice at once throws, so check IsBusy."
+      },
+      {
+        "name": "CancelAsync",
+        "signature": "void CancelAsync()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Requests cancellation. DoWork must check CancellationPending to stop.",
+        "parameters": [],
+        "example": "backgroundWorker1.CancelAsync();",
+        "expectedEffect": "CancellationPending becomes true; the work stops when DoWork notices it."
+      },
+      {
+        "name": "ReportProgress",
+        "signature": "void ReportProgress(int percentProgress, object userState)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Raises ProgressChanged on the UI thread. Call it from DoWork.",
+        "parameters": [
+          {
+            "name": "percentProgress",
+            "type": "int",
+            "description": "Progress from 0 to 100."
+          },
+          {
+            "name": "userState",
+            "type": "object",
+            "description": "Any extra information, available as e.UserState."
+          }
+        ],
+        "example": "backgroundWorker1.ReportProgress(40, \"Reading file 4 of 10\");",
+        "expectedEffect": "The progress bar and label can be updated safely in ProgressChanged."
+      }
+    ]
+  },
+  {
+    "name": "NotifyIcon",
+    "methods": [
+      {
+        "name": "ShowBalloonTip",
+        "signature": "void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Shows a balloon notification above the tray icon.",
+        "parameters": [
+          {
+            "name": "timeout",
+            "type": "int",
+            "description": "Suggested time in milliseconds (Windows may ignore it)."
+          },
+          {
+            "name": "tipTitle",
+            "type": "string",
+            "description": "The bold title."
+          },
+          {
+            "name": "tipText",
+            "type": "string",
+            "description": "The message."
+          },
+          {
+            "name": "tipIcon",
+            "type": "ToolTipIcon",
+            "description": "None, Info, Warning or Error."
+          }
+        ],
+        "example": "notifyIcon1.ShowBalloonTip(3000, \"Download finished\", \"report.pdf was saved.\", ToolTipIcon.Info);",
+        "expectedEffect": "A notification appears near the clock (unless Windows is hiding notifications)."
+      }
+    ]
+  }
+]

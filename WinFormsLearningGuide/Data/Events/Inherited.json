@@ -1,0 +1,323 @@
+[
+  {
+    "name": "Control",
+    "events": [
+      {
+        "name": "Click",
+        "description": "The user clicks the control with the mouse.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.Click += (s, e) => MessageBox.Show(\"Clicked\");"
+      },
+      {
+        "name": "DoubleClick",
+        "description": "The user double-clicks the control.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.DoubleClick += (s, e) => OpenSelectedItem();"
+      },
+      {
+        "name": "MouseDown",
+        "description": "A mouse button is pressed while the pointer is over the control.",
+        "delegate": "MouseEventHandler",
+        "eventArgsType": "MouseEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.MouseDown += (s, e) => { if (e.Button == MouseButtons.Right) { /* ... */ } };"
+      },
+      {
+        "name": "MouseUp",
+        "description": "A mouse button is released over the control.",
+        "delegate": "MouseEventHandler",
+        "eventArgsType": "MouseEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.MouseUp += (s, e) => isDragging = false;"
+      },
+      {
+        "name": "MouseMove",
+        "description": "The pointer moves over the control. e.X and e.Y give the position.",
+        "delegate": "MouseEventHandler",
+        "eventArgsType": "MouseEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.MouseMove += (s, e) => lblPos.Text = e.X + \", \" + e.Y;"
+      },
+      {
+        "name": "MouseEnter",
+        "description": "The pointer enters the control.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.MouseEnter += (s, e) => ctl.BackColor = Color.LightYellow;"
+      },
+      {
+        "name": "MouseLeave",
+        "description": "The pointer leaves the control.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.MouseLeave += (s, e) => ctl.BackColor = SystemColors.Control;"
+      },
+      {
+        "name": "MouseWheel",
+        "description": "The mouse wheel is turned while the control has focus. e.Delta is positive when scrolling up.",
+        "delegate": "MouseEventHandler",
+        "eventArgsType": "MouseEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.MouseWheel += (s, e) => zoom += e.Delta > 0 ? 1 : -1;"
+      },
+      {
+        "name": "KeyDown",
+        "description": "A key is pressed down. Works for every key, including arrows and Enter.",
+        "delegate": "KeyEventHandler",
+        "eventArgsType": "KeyEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.KeyDown += (s, e) => { if (e.KeyCode == Keys.Escape) Close(); };"
+      },
+      {
+        "name": "KeyUp",
+        "description": "A key is released.",
+        "delegate": "KeyEventHandler",
+        "eventArgsType": "KeyEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.KeyUp += (s, e) => lblKey.Text = e.KeyCode.ToString();"
+      },
+      {
+        "name": "KeyPress",
+        "description": "A character key is pressed. e.KeyChar is the character; set e.Handled = true to ignore it.",
+        "delegate": "KeyPressEventHandler",
+        "eventArgsType": "KeyPressEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.KeyPress += (s, e) => e.Handled = char.IsDigit(e.KeyChar);"
+      },
+      {
+        "name": "Enter",
+        "description": "The control (or a child) receives focus.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.Enter += (s, e) => lblHelp.Text = \"Type your name\";"
+      },
+      {
+        "name": "Leave",
+        "description": "The control (and all its children) loses focus.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.Leave += (s, e) => lblHelp.Text = \"\";"
+      },
+      {
+        "name": "GotFocus",
+        "description": "The control receives focus.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.GotFocus += (s, e) => ctl.BackColor = Color.LightYellow;"
+      },
+      {
+        "name": "LostFocus",
+        "description": "The control loses focus.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.LostFocus += (s, e) => ctl.BackColor = Color.White;"
+      },
+      {
+        "name": "Validating",
+        "description": "The control is about to lose focus and CausesValidation is true. Set e.Cancel = true to keep focus.",
+        "delegate": "CancelEventHandler",
+        "eventArgsType": "CancelEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.Validating += (s, e) => e.Cancel = ctl.Text.Length == 0;"
+      },
+      {
+        "name": "Validated",
+        "description": "Validation succeeded and the control has lost focus.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.Validated += (s, e) => errorProvider1.SetError(ctl, \"\");"
+      },
+      {
+        "name": "TextChanged",
+        "description": "The Text property changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.TextChanged += (s, e) => Text = ctl.Text;"
+      },
+      {
+        "name": "EnabledChanged",
+        "description": "The Enabled property changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.EnabledChanged += (s, e) => lblState.Text = ctl.Enabled ? \"On\" : \"Off\";"
+      },
+      {
+        "name": "VisibleChanged",
+        "description": "The Visible property changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.VisibleChanged += (s, e) => { if (ctl.Visible) LoadData(); };"
+      },
+      {
+        "name": "Resize",
+        "description": "The control is resized.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.Resize += (s, e) => lblSize.Text = ctl.Width + \" x \" + ctl.Height;"
+      },
+      {
+        "name": "SizeChanged",
+        "description": "The Size property changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.SizeChanged += (s, e) => LayoutChildren();"
+      },
+      {
+        "name": "Paint",
+        "description": "The control needs to be drawn. Draw with e.Graphics.",
+        "delegate": "PaintEventHandler",
+        "eventArgsType": "PaintEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "ctl.Paint += (s, e) => e.Graphics.DrawRectangle(Pens.Red, 0, 0, ctl.Width - 1, ctl.Height - 1);"
+      }
+    ]
+  },
+  {
+    "name": "ToolStripItem",
+    "events": [
+      {
+        "name": "Click",
+        "description": "The item is clicked.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.Click += (s, e) => MessageBox.Show(\"Clicked\");"
+      },
+      {
+        "name": "DoubleClick",
+        "description": "The item is double-clicked. Needs DoubleClickEnabled = true.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.DoubleClickEnabled = true;\nitem.DoubleClick += (s, e) => OpenSelectedItem();"
+      },
+      {
+        "name": "MouseDown",
+        "description": "A mouse button is pressed over the item.",
+        "delegate": "MouseEventHandler",
+        "eventArgsType": "MouseEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.MouseDown += (s, e) => lblButton.Text = e.Button.ToString();"
+      },
+      {
+        "name": "MouseUp",
+        "description": "A mouse button is released over the item.",
+        "delegate": "MouseEventHandler",
+        "eventArgsType": "MouseEventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.MouseUp += (s, e) => lblButton.Text = \"\";"
+      },
+      {
+        "name": "MouseEnter",
+        "description": "The pointer enters the item.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.MouseEnter += (s, e) => tslStatus.Text = item.ToolTipText;"
+      },
+      {
+        "name": "MouseLeave",
+        "description": "The pointer leaves the item.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.MouseLeave += (s, e) => tslStatus.Text = \"Ready\";"
+      },
+      {
+        "name": "MouseHover",
+        "description": "The pointer rests on the item.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.MouseHover += (s, e) => tslStatus.Text = \"Hovering\";"
+      },
+      {
+        "name": "EnabledChanged",
+        "description": "The Enabled property changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.EnabledChanged += (s, e) => UpdateToolbar();"
+      },
+      {
+        "name": "VisibleChanged",
+        "description": "The Visible property changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.VisibleChanged += (s, e) => UpdateToolbar();"
+      },
+      {
+        "name": "TextChanged",
+        "description": "The Text property changes.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "item.TextChanged += (s, e) => Text = item.Text;"
+      }
+    ]
+  },
+  {
+    "name": "Component",
+    "events": [
+      {
+        "name": "Disposed",
+        "description": "The component is disposed (released).",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "",
+        "useCase": "",
+        "example": "comp.Disposed += (s, e) => Console.WriteLine(\"Disposed\");"
+      }
+    ]
+  }
+]

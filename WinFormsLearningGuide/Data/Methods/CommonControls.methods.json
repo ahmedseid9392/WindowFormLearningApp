@@ -1,0 +1,911 @@
+[
+  {
+    "name": "Label",
+    "methods": []
+  },
+  {
+    "name": "Button",
+    "methods": [
+      {
+        "name": "PerformClick",
+        "signature": "void PerformClick()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Generates a Click event for the button, as if the user had clicked it.",
+        "parameters": [],
+        "example": "btnSearch.PerformClick();",
+        "expectedEffect": "The code in the button's Click handler runs immediately."
+      }
+    ]
+  },
+  {
+    "name": "TextBox",
+    "methods": [
+      {
+        "name": "AppendText",
+        "signature": "void AppendText(string text)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Adds text to the end of the current text without replacing it.",
+        "parameters": [
+          {
+            "name": "text",
+            "type": "string",
+            "description": "The text to add."
+          }
+        ],
+        "example": "txtLog.AppendText(\"Started\" + Environment.NewLine);",
+        "expectedEffect": "The new line appears at the end of the box. Faster than using += on Text."
+      },
+      {
+        "name": "Clear",
+        "signature": "void Clear()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes all text from the control.",
+        "parameters": [],
+        "example": "txtName.Clear();",
+        "expectedEffect": "The box becomes empty."
+      },
+      {
+        "name": "SelectAll",
+        "signature": "void SelectAll()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Selects all the text in the control.",
+        "parameters": [],
+        "example": "txtName.SelectAll();",
+        "expectedEffect": "All text is highlighted, so typing replaces it."
+      },
+      {
+        "name": "Select",
+        "signature": "void Select(int start, int length)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Selects a range of characters.",
+        "parameters": [
+          {
+            "name": "start",
+            "type": "int",
+            "description": "Index of the first character to select (0-based)."
+          },
+          {
+            "name": "length",
+            "type": "int",
+            "description": "Number of characters to select."
+          }
+        ],
+        "example": "txtName.Select(0, 5);",
+        "expectedEffect": "The first five characters are highlighted."
+      },
+      {
+        "name": "Copy",
+        "signature": "void Copy()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Copies the selected text to the Clipboard.",
+        "parameters": [],
+        "example": "txtName.Copy();",
+        "expectedEffect": "The selection is placed on the Clipboard."
+      },
+      {
+        "name": "Paste",
+        "signature": "void Paste()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Replaces the selection with the text on the Clipboard.",
+        "parameters": [],
+        "example": "txtName.Paste();",
+        "expectedEffect": "The Clipboard text is inserted at the caret."
+      },
+      {
+        "name": "Undo",
+        "signature": "void Undo()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Undoes the last edit made by the user.",
+        "parameters": [],
+        "example": "if (txtName.CanUndo) txtName.Undo();",
+        "expectedEffect": "The previous text is restored."
+      }
+    ]
+  },
+  {
+    "name": "RichTextBox",
+    "methods": [
+      {
+        "name": "LoadFile",
+        "signature": "void LoadFile(string path, RichTextBoxStreamType fileType)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Loads a file (RTF or plain text) into the control.",
+        "parameters": [
+          {
+            "name": "path",
+            "type": "string",
+            "description": "Full path of the file."
+          },
+          {
+            "name": "fileType",
+            "type": "RichTextBoxStreamType",
+            "description": "RichText, PlainText, UnicodePlainText and so on."
+          }
+        ],
+        "example": "rtbNotes.LoadFile(@\"C:\\Docs\\notes.rtf\", RichTextBoxStreamType.RichText);",
+        "expectedEffect": "The file content, including formatting, appears in the control. Throws if the file is missing or not valid."
+      },
+      {
+        "name": "SaveFile",
+        "signature": "void SaveFile(string path, RichTextBoxStreamType fileType)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Saves the content of the control to a file.",
+        "parameters": [
+          {
+            "name": "path",
+            "type": "string",
+            "description": "Full path of the file to create."
+          },
+          {
+            "name": "fileType",
+            "type": "RichTextBoxStreamType",
+            "description": "The format to write."
+          }
+        ],
+        "example": "rtbNotes.SaveFile(@\"C:\\Docs\\notes.rtf\", RichTextBoxStreamType.RichText);",
+        "expectedEffect": "A file with the formatted text is written."
+      },
+      {
+        "name": "Find",
+        "signature": "int Find(string str)",
+        "returnType": "int",
+        "returnDescription": "The index of the first match, or -1 if the text was not found.",
+        "description": "Searches the text and selects the first match.",
+        "parameters": [
+          {
+            "name": "str",
+            "type": "string",
+            "description": "The text to search for."
+          }
+        ],
+        "example": "int index = rtbNotes.Find(\"error\");\nif (index < 0) MessageBox.Show(\"Not found.\");",
+        "expectedEffect": "The match is highlighted when found."
+      },
+      {
+        "name": "AppendText",
+        "signature": "void AppendText(string text)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Adds text to the end of the content.",
+        "parameters": [
+          {
+            "name": "text",
+            "type": "string",
+            "description": "The text to add."
+          }
+        ],
+        "example": "rtbNotes.AppendText(\"Done\" + Environment.NewLine);",
+        "expectedEffect": "The text is appended using the current selection formatting."
+      },
+      {
+        "name": "Clear",
+        "signature": "void Clear()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes all content.",
+        "parameters": [],
+        "example": "rtbNotes.Clear();",
+        "expectedEffect": "The control is empty."
+      }
+    ]
+  },
+  {
+    "name": "MaskedTextBox",
+    "methods": [
+      {
+        "name": "ValidateText",
+        "signature": "object ValidateText()",
+        "returnType": "object",
+        "returnDescription": "The converted value, or null if the text could not be converted to ValidatingType.",
+        "description": "Converts the text to the type set in ValidatingType.",
+        "parameters": [],
+        "example": "mtbPhone.ValidatingType = typeof(DateTime);\nobject value = mtbPhone.ValidateText();",
+        "expectedEffect": "Returns a DateTime if the text is a valid date; otherwise null."
+      },
+      {
+        "name": "Clear",
+        "signature": "void Clear()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Clears all entered characters, leaving the mask.",
+        "parameters": [],
+        "example": "mtbPhone.Clear();",
+        "expectedEffect": "Only the mask with prompt characters remains."
+      },
+      {
+        "name": "SelectAll",
+        "signature": "void SelectAll()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Selects all text in the control.",
+        "parameters": [],
+        "example": "mtbPhone.SelectAll();",
+        "expectedEffect": "The whole mask is highlighted."
+      }
+    ]
+  },
+  {
+    "name": "CheckBox",
+    "methods": []
+  },
+  {
+    "name": "RadioButton",
+    "methods": [
+      {
+        "name": "PerformClick",
+        "signature": "void PerformClick()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Generates a Click event for the radio button, selecting it.",
+        "parameters": [],
+        "example": "rdoExpress.PerformClick();",
+        "expectedEffect": "The radio button becomes selected and its Click handler runs."
+      }
+    ]
+  },
+  {
+    "name": "ComboBox",
+    "methods": [
+      {
+        "name": "Items.Add",
+        "signature": "int Items.Add(object item)",
+        "returnType": "int",
+        "returnDescription": "The index of the new item.",
+        "description": "Adds an item to the end of the list.",
+        "parameters": [
+          {
+            "name": "item",
+            "type": "object",
+            "description": "The object to add. Its ToString() text is shown."
+          }
+        ],
+        "example": "cboCountry.Items.Add(\"Canada\");",
+        "expectedEffect": "\"Canada\" appears at the end of the drop-down list."
+      },
+      {
+        "name": "Items.AddRange",
+        "signature": "void Items.AddRange(object[] items)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Adds several items at once.",
+        "parameters": [
+          {
+            "name": "items",
+            "type": "object[]",
+            "description": "The objects to add."
+          }
+        ],
+        "example": "cboCountry.Items.AddRange(new object[] { \"Canada\", \"France\", \"Japan\" });",
+        "expectedEffect": "All three items are added; faster than adding them one by one."
+      },
+      {
+        "name": "FindStringExact",
+        "signature": "int FindStringExact(string s)",
+        "returnType": "int",
+        "returnDescription": "The index of the item that matches exactly, or -1 (ListBox.NoMatches).",
+        "description": "Finds the first item whose text exactly matches (ignoring case).",
+        "parameters": [
+          {
+            "name": "s",
+            "type": "string",
+            "description": "The text to look for."
+          }
+        ],
+        "example": "cboCountry.SelectedIndex = cboCountry.FindStringExact(\"France\");",
+        "expectedEffect": "\"France\" becomes the selected item if it exists."
+      },
+      {
+        "name": "BeginUpdate",
+        "signature": "void BeginUpdate()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Stops the control from repainting while you change many items. Always pair with EndUpdate().",
+        "parameters": [],
+        "example": "cboCountry.BeginUpdate();\ntry { /* add many items */ }\nfinally { cboCountry.EndUpdate(); }",
+        "expectedEffect": "No flicker while the list is changed."
+      },
+      {
+        "name": "EndUpdate",
+        "signature": "void EndUpdate()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Resumes painting after BeginUpdate().",
+        "parameters": [],
+        "example": "cboCountry.EndUpdate();",
+        "expectedEffect": "The control repaints once with all changes."
+      }
+    ]
+  },
+  {
+    "name": "ListBox",
+    "methods": [
+      {
+        "name": "Items.Add",
+        "signature": "int Items.Add(object item)",
+        "returnType": "int",
+        "returnDescription": "The index of the new item.",
+        "description": "Adds an item to the end of the list.",
+        "parameters": [
+          {
+            "name": "item",
+            "type": "object",
+            "description": "The object to add. Its ToString() text is shown."
+          }
+        ],
+        "example": "lstItems.Items.Add(\"Milk\");",
+        "expectedEffect": "\"Milk\" appears at the bottom of the list."
+      },
+      {
+        "name": "ClearSelected",
+        "signature": "void ClearSelected()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Deselects all items.",
+        "parameters": [],
+        "example": "lstItems.ClearSelected();",
+        "expectedEffect": "No item is highlighted; SelectedIndex becomes -1."
+      },
+      {
+        "name": "SetSelected",
+        "signature": "void SetSelected(int index, bool value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Selects or deselects an item.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "int",
+            "description": "Index of the item."
+          },
+          {
+            "name": "value",
+            "type": "bool",
+            "description": "true to select, false to deselect."
+          }
+        ],
+        "example": "lstItems.SetSelected(0, true);",
+        "expectedEffect": "The first item is highlighted."
+      },
+      {
+        "name": "GetSelected",
+        "signature": "bool GetSelected(int index)",
+        "returnType": "bool",
+        "returnDescription": "true if the item is selected.",
+        "description": "Tells whether an item is selected.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "int",
+            "description": "Index of the item."
+          }
+        ],
+        "example": "bool first = lstItems.GetSelected(0);",
+        "expectedEffect": "Returns true when the first item is selected."
+      },
+      {
+        "name": "FindString",
+        "signature": "int FindString(string s)",
+        "returnType": "int",
+        "returnDescription": "The index of the first item that starts with the text, or -1.",
+        "description": "Finds the first item that starts with the given text (ignoring case).",
+        "parameters": [
+          {
+            "name": "s",
+            "type": "string",
+            "description": "The beginning of the text to look for."
+          }
+        ],
+        "example": "int index = lstItems.FindString(\"Mi\");",
+        "expectedEffect": "Returns the index of \"Milk\" if present."
+      },
+      {
+        "name": "BeginUpdate",
+        "signature": "void BeginUpdate()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Suspends painting while you add many items. Pair with EndUpdate().",
+        "parameters": [],
+        "example": "lstItems.BeginUpdate();\ntry { /* add many items */ }\nfinally { lstItems.EndUpdate(); }",
+        "expectedEffect": "No flicker while items are added."
+      }
+    ]
+  },
+  {
+    "name": "CheckedListBox",
+    "methods": [
+      {
+        "name": "Items.Add",
+        "signature": "int Items.Add(object item, bool isChecked)",
+        "returnType": "int",
+        "returnDescription": "The index of the new item.",
+        "description": "Adds an item and sets whether it starts checked.",
+        "parameters": [
+          {
+            "name": "item",
+            "type": "object",
+            "description": "The object to add."
+          },
+          {
+            "name": "isChecked",
+            "type": "bool",
+            "description": "true to add it already ticked."
+          }
+        ],
+        "example": "clbOptions.Items.Add(\"E-mail\", true);",
+        "expectedEffect": "\"E-mail\" appears with its box ticked."
+      },
+      {
+        "name": "SetItemChecked",
+        "signature": "void SetItemChecked(int index, bool value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Ticks or clears the box of an item.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "int",
+            "description": "Index of the item."
+          },
+          {
+            "name": "value",
+            "type": "bool",
+            "description": "true to tick, false to clear."
+          }
+        ],
+        "example": "clbOptions.SetItemChecked(2, true);",
+        "expectedEffect": "The third item becomes ticked."
+      },
+      {
+        "name": "GetItemChecked",
+        "signature": "bool GetItemChecked(int index)",
+        "returnType": "bool",
+        "returnDescription": "true if the item is ticked.",
+        "description": "Tells whether an item is ticked.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "int",
+            "description": "Index of the item."
+          }
+        ],
+        "example": "bool isOn = clbOptions.GetItemChecked(0);",
+        "expectedEffect": "Returns true when the first item is ticked."
+      },
+      {
+        "name": "GetItemCheckState",
+        "signature": "CheckState GetItemCheckState(int index)",
+        "returnType": "CheckState",
+        "returnDescription": "Checked, Unchecked or Indeterminate.",
+        "description": "Gets the exact check state of an item.",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "int",
+            "description": "Index of the item."
+          }
+        ],
+        "example": "CheckState state = clbOptions.GetItemCheckState(1);",
+        "expectedEffect": "Returns the three-state value of the second item."
+      }
+    ]
+  },
+  {
+    "name": "PictureBox",
+    "methods": [
+      {
+        "name": "Load",
+        "signature": "void Load(string url)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Loads an image from a file path or URL and displays it. Blocks until the image is loaded.",
+        "parameters": [
+          {
+            "name": "url",
+            "type": "string",
+            "description": "A file path or web address."
+          }
+        ],
+        "example": "picPhoto.Load(@\"C:\\Pictures\\cat.jpg\");",
+        "expectedEffect": "The picture is shown. Throws if it cannot be loaded."
+      },
+      {
+        "name": "LoadAsync",
+        "signature": "void LoadAsync(string url)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Starts loading an image in the background. LoadCompleted is raised at the end.",
+        "parameters": [
+          {
+            "name": "url",
+            "type": "string",
+            "description": "A file path or web address."
+          }
+        ],
+        "example": "picPhoto.LoadAsync(\"https://example.com/cat.jpg\");",
+        "expectedEffect": "The window stays responsive while the image downloads."
+      },
+      {
+        "name": "CancelAsync",
+        "signature": "void CancelAsync()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Cancels a LoadAsync operation that is still running.",
+        "parameters": [],
+        "example": "picPhoto.CancelAsync();",
+        "expectedEffect": "LoadCompleted is raised with Cancelled = true."
+      }
+    ]
+  },
+  {
+    "name": "DateTimePicker",
+    "methods": []
+  },
+  {
+    "name": "MonthCalendar",
+    "methods": [
+      {
+        "name": "SetDate",
+        "signature": "void SetDate(DateTime date)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Selects a single date and shows its month.",
+        "parameters": [
+          {
+            "name": "date",
+            "type": "DateTime",
+            "description": "The date to select."
+          }
+        ],
+        "example": "calBooking.SetDate(DateTime.Today);",
+        "expectedEffect": "Today is selected."
+      },
+      {
+        "name": "SetSelectionRange",
+        "signature": "void SetSelectionRange(DateTime date1, DateTime date2)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Selects a range of dates.",
+        "parameters": [
+          {
+            "name": "date1",
+            "type": "DateTime",
+            "description": "First date of the range."
+          },
+          {
+            "name": "date2",
+            "type": "DateTime",
+            "description": "Last date of the range."
+          }
+        ],
+        "example": "calBooking.SetSelectionRange(DateTime.Today, DateTime.Today.AddDays(3));",
+        "expectedEffect": "Four days are highlighted (the range must not exceed MaxSelectionCount)."
+      },
+      {
+        "name": "AddBoldedDate",
+        "signature": "void AddBoldedDate(DateTime date)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Marks a date in bold. Call UpdateBoldedDates() afterwards.",
+        "parameters": [
+          {
+            "name": "date",
+            "type": "DateTime",
+            "description": "The date to show in bold."
+          }
+        ],
+        "example": "calBooking.AddBoldedDate(new DateTime(2025, 12, 25));\ncalBooking.UpdateBoldedDates();",
+        "expectedEffect": "December 25 is drawn in bold."
+      },
+      {
+        "name": "RemoveAllBoldedDates",
+        "signature": "void RemoveAllBoldedDates()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes the bold formatting from all dates.",
+        "parameters": [],
+        "example": "calBooking.RemoveAllBoldedDates();\ncalBooking.UpdateBoldedDates();",
+        "expectedEffect": "No dates are bold."
+      },
+      {
+        "name": "UpdateBoldedDates",
+        "signature": "void UpdateBoldedDates()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Redraws the calendar after the bolded dates were changed.",
+        "parameters": [],
+        "example": "calBooking.UpdateBoldedDates();",
+        "expectedEffect": "Changes to the bolded dates become visible."
+      }
+    ]
+  },
+  {
+    "name": "NumericUpDown",
+    "methods": [
+      {
+        "name": "UpButton",
+        "signature": "void UpButton()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Increases the value by Increment, as if the up arrow was clicked.",
+        "parameters": [],
+        "example": "nudQuantity.UpButton();",
+        "expectedEffect": "Value increases (up to Maximum)."
+      },
+      {
+        "name": "DownButton",
+        "signature": "void DownButton()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Decreases the value by Increment, as if the down arrow was clicked.",
+        "parameters": [],
+        "example": "nudQuantity.DownButton();",
+        "expectedEffect": "Value decreases (down to Minimum)."
+      }
+    ]
+  },
+  {
+    "name": "ProgressBar",
+    "methods": [
+      {
+        "name": "PerformStep",
+        "signature": "void PerformStep()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Advances the bar by the amount in the Step property.",
+        "parameters": [],
+        "example": "prgDownload.Step = 10;\nprgDownload.PerformStep();",
+        "expectedEffect": "Value increases by 10."
+      },
+      {
+        "name": "Increment",
+        "signature": "void Increment(int value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Advances the bar by the given amount.",
+        "parameters": [
+          {
+            "name": "value",
+            "type": "int",
+            "description": "The amount to add to Value."
+          }
+        ],
+        "example": "prgDownload.Increment(5);",
+        "expectedEffect": "Value increases by 5 (never above Maximum)."
+      }
+    ]
+  },
+  {
+    "name": "TrackBar",
+    "methods": [
+      {
+        "name": "SetRange",
+        "signature": "void SetRange(int minValue, int maxValue)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Sets Minimum and Maximum in one call.",
+        "parameters": [
+          {
+            "name": "minValue",
+            "type": "int",
+            "description": "The new Minimum."
+          },
+          {
+            "name": "maxValue",
+            "type": "int",
+            "description": "The new Maximum."
+          }
+        ],
+        "example": "trkVolume.SetRange(0, 100);",
+        "expectedEffect": "The slider covers 0 to 100."
+      }
+    ]
+  },
+  {
+    "name": "LinkLabel",
+    "methods": [
+      {
+        "name": "Links.Add",
+        "signature": "LinkLabel.Link Links.Add(int start, int length, object linkData)",
+        "returnType": "LinkLabel.Link",
+        "returnDescription": "The new link.",
+        "description": "Turns part of the text into a link and stores data with it.",
+        "parameters": [
+          {
+            "name": "start",
+            "type": "int",
+            "description": "Index of the first character of the link."
+          },
+          {
+            "name": "length",
+            "type": "int",
+            "description": "Number of characters in the link."
+          },
+          {
+            "name": "linkData",
+            "type": "object",
+            "description": "Any object you want to read back in LinkClicked (e.Link.LinkData)."
+          }
+        ],
+        "example": "lnkHelp.Text = \"Read the terms or the privacy policy.\";\nlnkHelp.LinkArea = new LinkArea(0, 0); // remove the default link\nlnkHelp.Links.Add(9, 5, \"terms\");",
+        "expectedEffect": "Only the word \"terms\" is clickable."
+      }
+    ]
+  },
+  {
+    "name": "ToolTip",
+    "methods": [
+      {
+        "name": "SetToolTip",
+        "signature": "void SetToolTip(Control control, string caption)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Associates a tip text with a control.",
+        "parameters": [
+          {
+            "name": "control",
+            "type": "Control",
+            "description": "The control that shows the tip."
+          },
+          {
+            "name": "caption",
+            "type": "string",
+            "description": "The tip text."
+          }
+        ],
+        "example": "toolTip1.SetToolTip(btnSave, \"Save the document (Ctrl+S)\");",
+        "expectedEffect": "The tip appears when the mouse rests on the button."
+      },
+      {
+        "name": "GetToolTip",
+        "signature": "string GetToolTip(Control control)",
+        "returnType": "string",
+        "returnDescription": "The tip text, or an empty string.",
+        "description": "Reads the tip text of a control.",
+        "parameters": [
+          {
+            "name": "control",
+            "type": "Control",
+            "description": "The control to ask about."
+          }
+        ],
+        "example": "string tip = toolTip1.GetToolTip(btnSave);",
+        "expectedEffect": "Returns the text set with SetToolTip."
+      },
+      {
+        "name": "Show",
+        "signature": "void Show(string text, IWin32Window window, int duration)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Shows a tip immediately for a given time.",
+        "parameters": [
+          {
+            "name": "text",
+            "type": "string",
+            "description": "The tip text."
+          },
+          {
+            "name": "window",
+            "type": "IWin32Window",
+            "description": "The control to attach the tip to."
+          },
+          {
+            "name": "duration",
+            "type": "int",
+            "description": "How long to show it, in milliseconds."
+          }
+        ],
+        "example": "toolTip1.Show(\"Saved!\", btnSave, 2000);",
+        "expectedEffect": "A tip appears next to the button for two seconds."
+      },
+      {
+        "name": "Hide",
+        "signature": "void Hide(IWin32Window window)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Hides the tip of a control.",
+        "parameters": [
+          {
+            "name": "window",
+            "type": "IWin32Window",
+            "description": "The control whose tip should be hidden."
+          }
+        ],
+        "example": "toolTip1.Hide(btnSave);",
+        "expectedEffect": "The tip disappears."
+      },
+      {
+        "name": "RemoveAll",
+        "signature": "void RemoveAll()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes every tip text that was set.",
+        "parameters": [],
+        "example": "toolTip1.RemoveAll();",
+        "expectedEffect": "No control shows a tip any more."
+      }
+    ]
+  },
+  {
+    "name": "ErrorProvider",
+    "methods": [
+      {
+        "name": "SetError",
+        "signature": "void SetError(Control control, string value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Shows an error icon next to the control with a message. An empty string clears the error.",
+        "parameters": [
+          {
+            "name": "control",
+            "type": "Control",
+            "description": "The control to flag."
+          },
+          {
+            "name": "value",
+            "type": "string",
+            "description": "The message, or an empty string to clear it."
+          }
+        ],
+        "example": "errorProvider1.SetError(txtEmail, \"E-mail is required.\");",
+        "expectedEffect": "A red icon appears next to the text box; hovering it shows the message."
+      },
+      {
+        "name": "GetError",
+        "signature": "string GetError(Control control)",
+        "returnType": "string",
+        "returnDescription": "The current error text, or an empty string.",
+        "description": "Reads the error message of a control.",
+        "parameters": [
+          {
+            "name": "control",
+            "type": "Control",
+            "description": "The control to ask about."
+          }
+        ],
+        "example": "bool hasError = errorProvider1.GetError(txtEmail).Length > 0;",
+        "expectedEffect": "Returns true when the control is currently flagged."
+      },
+      {
+        "name": "Clear",
+        "signature": "void Clear()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes all error icons and settings.",
+        "parameters": [],
+        "example": "errorProvider1.Clear();",
+        "expectedEffect": "All icons disappear."
+      },
+      {
+        "name": "SetIconAlignment",
+        "signature": "void SetIconAlignment(Control control, ErrorIconAlignment value)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Chooses on which side of the control the icon appears.",
+        "parameters": [
+          {
+            "name": "control",
+            "type": "Control",
+            "description": "The control."
+          },
+          {
+            "name": "value",
+            "type": "ErrorIconAlignment",
+            "description": "TopLeft, MiddleRight, BottomLeft and so on."
+          }
+        ],
+        "example": "errorProvider1.SetIconAlignment(txtEmail, ErrorIconAlignment.MiddleLeft);",
+        "expectedEffect": "The icon moves to the left of the text box."
+      }
+    ]
+  }
+]

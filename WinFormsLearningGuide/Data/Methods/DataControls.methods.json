@@ -1,0 +1,197 @@
+[
+  {
+    "name": "DataGridView",
+    "methods": [
+      {
+        "name": "Rows.Add",
+        "signature": "int Rows.Add(params object[] values)",
+        "returnType": "int",
+        "returnDescription": "The index of the new row.",
+        "description": "Adds a row with one value per column (for an unbound grid).",
+        "parameters": [
+          {
+            "name": "values",
+            "type": "object[]",
+            "description": "The cell values, in column order."
+          }
+        ],
+        "example": "dgvCustomers.Rows.Add(1, \"Alice\", \"Berlin\");",
+        "expectedEffect": "A new row appears at the bottom."
+      },
+      {
+        "name": "Rows.RemoveAt",
+        "signature": "void Rows.RemoveAt(int index)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes the row at the given index (unbound grids).",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "int",
+            "description": "Zero-based row index."
+          }
+        ],
+        "example": "dgvCustomers.Rows.RemoveAt(0);",
+        "expectedEffect": "The first row disappears."
+      },
+      {
+        "name": "Columns.Add",
+        "signature": "int Columns.Add(string columnName, string headerText)",
+        "returnType": "int",
+        "returnDescription": "The index of the new column.",
+        "description": "Adds a text column.",
+        "parameters": [
+          {
+            "name": "columnName",
+            "type": "string",
+            "description": "The column's Name, used in Cells[\"Name\"]."
+          },
+          {
+            "name": "headerText",
+            "type": "string",
+            "description": "The caption in the header row."
+          }
+        ],
+        "example": "dgvCustomers.Columns.Add(\"City\", \"City\");",
+        "expectedEffect": "A City column appears at the right."
+      },
+      {
+        "name": "EndEdit",
+        "signature": "bool EndEdit()",
+        "returnType": "bool",
+        "returnDescription": "true if the edit was committed, false if it failed validation.",
+        "description": "Commits the cell that is currently being edited.",
+        "parameters": [],
+        "example": "dgvCustomers.EndEdit();",
+        "expectedEffect": "The pending edit is saved to the cell and the data source."
+      },
+      {
+        "name": "ClearSelection",
+        "signature": "void ClearSelection()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Clears the current selection.",
+        "parameters": [],
+        "example": "dgvCustomers.ClearSelection();",
+        "expectedEffect": "No cell or row is highlighted."
+      },
+      {
+        "name": "AutoResizeColumns",
+        "signature": "void AutoResizeColumns()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Resizes all columns to fit their content.",
+        "parameters": [],
+        "example": "dgvCustomers.AutoResizeColumns();",
+        "expectedEffect": "Each column becomes as wide as its widest value."
+      },
+      {
+        "name": "Sort",
+        "signature": "void Sort(DataGridViewColumn dataGridViewColumn, ListSortDirection direction)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Sorts the rows by a column (unbound or sortable bound data).",
+        "parameters": [
+          {
+            "name": "dataGridViewColumn",
+            "type": "DataGridViewColumn",
+            "description": "The column to sort by."
+          },
+          {
+            "name": "direction",
+            "type": "ListSortDirection",
+            "description": "Ascending or Descending (System.ComponentModel)."
+          }
+        ],
+        "example": "dgvCustomers.Sort(dgvCustomers.Columns[\"Name\"], ListSortDirection.Ascending);",
+        "expectedEffect": "Rows are ordered by name from A to Z."
+      }
+    ]
+  },
+  {
+    "name": "BindingSource",
+    "methods": [
+      {
+        "name": "AddNew",
+        "signature": "object AddNew()",
+        "returnType": "object",
+        "returnDescription": "The new item.",
+        "description": "Creates a new item in the list and makes it current.",
+        "parameters": [],
+        "example": "bsCustomers.AddNew();",
+        "expectedEffect": "A blank record is added and shown in bound controls."
+      },
+      {
+        "name": "RemoveCurrent",
+        "signature": "void RemoveCurrent()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Removes the current item from the list.",
+        "parameters": [],
+        "example": "bsCustomers.RemoveCurrent();",
+        "expectedEffect": "The current record disappears and the next one becomes current."
+      },
+      {
+        "name": "MoveNext",
+        "signature": "void MoveNext()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Makes the next item current.",
+        "parameters": [],
+        "example": "bsCustomers.MoveNext();",
+        "expectedEffect": "Bound controls show the next record."
+      },
+      {
+        "name": "MoveFirst",
+        "signature": "void MoveFirst()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Makes the first item current.",
+        "parameters": [],
+        "example": "bsCustomers.MoveFirst();",
+        "expectedEffect": "Bound controls show the first record."
+      },
+      {
+        "name": "EndEdit",
+        "signature": "void EndEdit()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Applies pending edits of the current item to the data source.",
+        "parameters": [],
+        "example": "bsCustomers.EndEdit();",
+        "expectedEffect": "Edits made in bound controls are committed."
+      },
+      {
+        "name": "ResetBindings",
+        "signature": "void ResetBindings(bool metadataChanged)",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Tells bound controls to reread the list.",
+        "parameters": [
+          {
+            "name": "metadataChanged",
+            "type": "bool",
+            "description": "true if the structure (columns) changed, false if only the data changed."
+          }
+        ],
+        "example": "bsCustomers.ResetBindings(false);",
+        "expectedEffect": "Bound controls refresh with the current list contents."
+      }
+    ]
+  },
+  {
+    "name": "BindingNavigator",
+    "methods": [
+      {
+        "name": "AddStandardItems",
+        "signature": "void AddStandardItems()",
+        "returnType": "void",
+        "returnDescription": "",
+        "description": "Adds the standard buttons (First, Previous, Position, Count, Next, Last, Add, Delete) to the navigator.",
+        "parameters": [],
+        "example": "bnCustomers.AddStandardItems();",
+        "expectedEffect": "The usual navigation buttons appear."
+      }
+    ]
+  }
+]

@@ -1,0 +1,89 @@
+[
+  {
+    "name": "Timer",
+    "events": [
+      {
+        "name": "Tick",
+        "description": "Raised each time Interval milliseconds have passed while the timer is enabled. It runs on the UI thread.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Update a clock, refresh data, or run a delayed action.",
+        "example": "// Subscribe once, for example in the form constructor:\ntimer1.Tick += timer1_Tick;\ntimer1.Interval = 1000; // milliseconds\ntimer1.Start();\n\nprivate void timer1_Tick(object sender, EventArgs e)\n{\n    lblClock.Text = DateTime.Now.ToLongTimeString();\n}"
+      }
+    ]
+  },
+  {
+    "name": "BackgroundWorker",
+    "events": [
+      {
+        "name": "DoWork",
+        "description": "Raised on a background thread when RunWorkerAsync is called. Do not touch controls here.",
+        "delegate": "DoWorkEventHandler",
+        "eventArgsType": "DoWorkEventArgs",
+        "argumentsNote": "e.Argument is the value passed to RunWorkerAsync, e.Result is how you return a result, e.Cancel = true marks the work as cancelled.",
+        "useCase": "Run the slow work: copy files, process data, call a service.",
+        "example": "// Subscribe once, for example in the form constructor:\nbackgroundWorker1.DoWork += backgroundWorker1_DoWork;\nbackgroundWorker1.WorkerReportsProgress = true;\nbackgroundWorker1.WorkerSupportsCancellation = true;\nbackgroundWorker1.RunWorkerAsync();\n\nprivate void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)\n{\n    var worker = (BackgroundWorker)sender;\n    for (int i = 1; i <= 100; i++)\n    {\n        if (worker.CancellationPending)\n        {\n            e.Cancel = true;\n            return;\n        }\n        System.Threading.Thread.Sleep(50); // simulate work\n        worker.ReportProgress(i);\n    }\n    e.Result = \"Finished\";\n}"
+      },
+      {
+        "name": "ProgressChanged",
+        "description": "Raised on the UI thread when the worker calls ReportProgress.",
+        "delegate": "ProgressChangedEventHandler",
+        "eventArgsType": "ProgressChangedEventArgs",
+        "argumentsNote": "e.ProgressPercentage is the number passed to ReportProgress (0 to 100), e.UserState is an optional extra object.",
+        "useCase": "Move a progress bar and update a status label.",
+        "example": "// Subscribe once, for example in the form constructor:\nbackgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;\n\nprivate void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)\n{\n    prgWork.Value = e.ProgressPercentage;\n    lblStatus.Text = e.ProgressPercentage + \"%\";\n}"
+      },
+      {
+        "name": "RunWorkerCompleted",
+        "description": "Raised on the UI thread when the work finishes, fails or is cancelled.",
+        "delegate": "RunWorkerCompletedEventHandler",
+        "eventArgsType": "RunWorkerCompletedEventArgs",
+        "argumentsNote": "e.Error is the exception if the work failed, e.Cancelled is true if it was cancelled, e.Result is the value set in DoWork.",
+        "useCase": "Report the outcome and re-enable the Start button.",
+        "example": "// Subscribe once, for example in the form constructor:\nbackgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;\n\nprivate void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)\n{\n    if (e.Error != null)\n    {\n        MessageBox.Show(\"Failed: \" + e.Error.Message);\n    }\n    else if (e.Cancelled)\n    {\n        lblStatus.Text = \"Cancelled\";\n    }\n    else\n    {\n        lblStatus.Text = (string)e.Result;\n    }\n}"
+      }
+    ]
+  },
+  {
+    "name": "NotifyIcon",
+    "events": [
+      {
+        "name": "MouseClick",
+        "description": "Raised when the tray icon is clicked.",
+        "delegate": "MouseEventHandler",
+        "eventArgsType": "MouseEventArgs",
+        "argumentsNote": "e.Button tells which mouse button was used, e.Location the position.",
+        "useCase": "Restore the window when the user clicks the tray icon.",
+        "example": "// Subscribe once, for example in the form constructor:\nnotifyIcon1.MouseClick += notifyIcon1_MouseClick;\n\nprivate void notifyIcon1_MouseClick(object sender, MouseEventArgs e)\n{\n    if (e.Button == MouseButtons.Left)\n    {\n        Show();\n        WindowState = FormWindowState.Normal;\n        Activate();\n    }\n}"
+      },
+      {
+        "name": "MouseDoubleClick",
+        "description": "Raised when the tray icon is double-clicked.",
+        "delegate": "MouseEventHandler",
+        "eventArgsType": "MouseEventArgs",
+        "argumentsNote": "e.Button tells which mouse button was used.",
+        "useCase": "Open the main window, as many tray applications do.",
+        "example": "// Subscribe once, for example in the form constructor:\nnotifyIcon1.MouseDoubleClick += notifyIcon1_MouseDoubleClick;\n\nprivate void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)\n{\n    Show();\n    WindowState = FormWindowState.Normal;\n    Activate();\n}"
+      },
+      {
+        "name": "BalloonTipClicked",
+        "description": "Raised when the user clicks the balloon notification.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Open the item the notification is about.",
+        "example": "// Subscribe once, for example in the form constructor:\nnotifyIcon1.BalloonTipClicked += notifyIcon1_BalloonTipClicked;\n\nprivate void notifyIcon1_BalloonTipClicked(object sender, EventArgs e)\n{\n    Show();\n    Activate();\n}"
+      },
+      {
+        "name": "BalloonTipClosed",
+        "description": "Raised when the balloon notification disappears.",
+        "delegate": "EventHandler",
+        "eventArgsType": "EventArgs",
+        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "useCase": "Clean up or update the status after a notification.",
+        "example": "// Subscribe once, for example in the form constructor:\nnotifyIcon1.BalloonTipClosed += notifyIcon1_BalloonTipClosed;\n\nprivate void notifyIcon1_BalloonTipClosed(object sender, EventArgs e)\n{\n    lblStatus.Text = \"Notification dismissed\";\n}"
+      }
+    ]
+  }
+]

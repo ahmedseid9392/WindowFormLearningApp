@@ -30,8 +30,23 @@ public class ControlDocumentation
     [JsonIgnore]
     public string InheritedFrom { get; set; } = "";
 
-    // Filled in by a later phase.
+    /// <summary>Phase 4: the events specific to this control.</summary>
     public List<EventDocumentation> Events { get; set; } = new List<EventDocumentation>();
+
+    /// <summary>Phase 4: shared events inherited from Control or ToolStripItem, without the ones listed in Events.</summary>
+    [JsonIgnore]
+    public List<EventDocumentation> InheritedEvents { get; set; } = new List<EventDocumentation>();
+
+    /// <summary>Phase 4: the base class the shared events and methods come from: Control, ToolStripItem or Component.</summary>
+    [JsonIgnore]
+    public string MemberBase { get; set; } = "";
+
+    /// <summary>Phase 4: the important methods of this control.</summary>
+    public List<MethodDocumentation> Methods { get; set; } = new List<MethodDocumentation>();
+
+    /// <summary>Phase 4: shared methods inherited from Control or ToolStripItem, without the ones listed in Methods.</summary>
+    [JsonIgnore]
+    public List<MethodDocumentation> InheritedMethods { get; set; } = new List<MethodDocumentation>();
 
     [JsonIgnore]
     public string FullName => Namespace + "." + ClassName;

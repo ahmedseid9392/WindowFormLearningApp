@@ -1,7 +1,7 @@
-# Windows Forms Learning & Reference Guide — Phase 3
+# Windows Forms Learning & Reference Guide — Phase 4
 
 A reading / learning / code-reference application for the WinForms toolbox
-(not a designer). This package contains **Phase 1 (layout and navigation), Phase 2 (documentation content) and Phase 3 (properties reference)**.
+(not a designer). This package contains **Phase 1 (layout and navigation), Phase 2 (documentation content), Phase 3 (properties reference) and Phase 4 (events and methods)**.
 
 ## Run it
 
@@ -13,6 +13,37 @@ Requirements: Windows 10/11 and the .NET 10 SDK (https://dotnet.microsoft.com/do
 or open `WinFormsLearningGuide.csproj` in Visual Studio 2022/2026 and press F5.
 
 Using .NET 8 or 9? Edit `<TargetFramework>` in the .csproj to `net8.0-windows` or `net9.0-windows`.
+
+## What Phase 4 adds
+
+Sections **4. Events Reference** and **5. Methods Reference** are now real on all 44 control pages
+(108 documented events and 122 documented methods).
+
+**Events** - for each event: when it is raised, the delegate type, the event-argument class with what its
+members give you, a real-world use case, and a complete C# example (the subscription line, any setup it
+needs, and the handler method). Covers every event shown in the quick-reference panel.
+
+**Methods** - for each method: the full signature, description, every parameter with its type, the return
+type and what it returns, a C# example and the expected effect. Includes the collection calls beginners use
+all the time (`Items.Add`, `Controls.Add`, `Rows.Add`, `TabPages.Add`...).
+
+**Inherited members** - shared events and methods are written once in `Data/Events/Inherited.json` and
+`Data/Methods/Inherited.json` and shown as a table at the end of each page: 23 `Control` events and 16
+`Control` methods; 10 events and 5 methods for toolbar items (`ToolStripItem`); `Disposed` and `Dispose()` for
+non-visual components. A member documented on the control itself replaces the shared entry. In the inherited
+tables the example is a one-line subscription or call (`ctl.Click += ...`).
+
+Content lives in `Data/Events/*.events.json` and `Data/Methods/*.methods.json` (one file per category,
+matched to controls by name). To change or add text, edit those files; no code changes needed. An entry that
+names an unknown control stops the app at startup with a clear message.
+
+Code added or changed: `EventDocumentation` (new Delegate and ArgumentsNote fields), `MethodDocumentation`,
+`ParameterDocumentation`, `ControlMembers` (ControlEvents / ControlMethods), `ControlDocumentation`
+(Events, InheritedEvents, Methods, InheritedMethods, MemberBase), `DocumentationService` (LoadEvents,
+LoadMethods), `SectionContentBuilder` (BuildEvents, BuildMethods), `SearchService` (searches event and method
+names) and `DocumentationSection.CurrentPhase = 4`. The existing content blocks and `SectionCard` are reused unchanged.
+
+Section 6 (Complete C# Example) is still a placeholder (Phase 5).
 
 ## What Phase 3 adds
 
@@ -38,7 +69,6 @@ properties card stays fast).
 **Fix:** the Phase 2 zip did not compile because of an unescaped quote in `SectionContentBuilder.cs`
 (the note under Related Controls). That line is corrected here.
 
-Sections 4-6 are still placeholders (Phases 4-5).
 
 ## What Phase 2 adds
 
@@ -74,4 +104,4 @@ Code added: `ControlContent` model, `ContentBlock`, block-based `SectionCard`,
 
 ## Next phases
 
-~~2 documentation content~~ (done) · ~~3 properties~~ (done) · 4 events/methods · 5 code viewer · 6 playground · 7 search/progress polish · 8 testing
+~~2 documentation content~~ (done) · ~~3 properties~~ (done) · ~~4 events/methods~~ (done) · 5 code viewer · 6 playground · 7 search/progress polish · 8 testing
