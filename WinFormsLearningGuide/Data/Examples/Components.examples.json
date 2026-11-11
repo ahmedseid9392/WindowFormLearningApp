@@ -1,0 +1,333 @@
+[
+  {
+    "name": "Timer",
+    "title": "Timer example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private Label lblClock;\n    private Button btnToggle;\n    private Timer timer1;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"Timer example\";\n        ClientSize = new Size(300, 140);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        lblClock = new Label();\n        lblClock.Font = new Font(\"Segoe UI\", 20F);\n        lblClock.AutoSize = true;\n        lblClock.Location = new Point(20, 20);\n        lblClock.Text = DateTime.Now.ToLongTimeString();",
+        "explain": "A label that shows the time."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        timer1 = new Timer();\n        timer1.Interval = 1000;\n        timer1.Tick += Timer1_Tick;\n        timer1.Start();",
+        "explain": "Interval is in milliseconds. Tick is raised every second after Start. A Timer is a component, so it is not added to Controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnToggle = new Button();\n        btnToggle.Text = \"Pause\";\n        btnToggle.Location = new Point(20, 80);\n        btnToggle.Click += BtnToggle_Click;",
+        "explain": "A button that pauses and resumes the clock."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(lblClock);\n        Controls.Add(btnToggle);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void Timer1_Tick(object sender, EventArgs e)\n    {\n        lblClock.Text = DateTime.Now.ToLongTimeString();\n    }",
+        "explain": "Runs once per Interval on the UI thread, so it may update controls directly."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnToggle_Click(object sender, EventArgs e)\n    {\n        timer1.Enabled = !timer1.Enabled;\n        btnToggle.Text = timer1.Enabled ? \"Pause\" : \"Resume\";\n    }",
+        "explain": "Flipping Enabled starts or stops the timer."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Run once",
+        "description": "Stop the timer inside the first Tick to run a delayed action once.",
+        "code": "timer1.Stop();"
+      }
+    ]
+  },
+  {
+    "name": "BackgroundWorker",
+    "title": "BackgroundWorker example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.ComponentModel;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private BackgroundWorker worker;\n    private ProgressBar progress;\n    private Button btnStart;\n    private Button btnCancel;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"BackgroundWorker example\";\n        ClientSize = new Size(360, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        worker = new BackgroundWorker();\n        worker.WorkerReportsProgress = true;\n        worker.WorkerSupportsCancellation = true;",
+        "explain": "Both features are off by default. ReportProgress and CancelAsync only work when they are turned on."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        worker.DoWork += Worker_DoWork;\n        worker.ProgressChanged += Worker_ProgressChanged;\n        worker.RunWorkerCompleted += Worker_RunWorkerCompleted;",
+        "explain": "Three events: the work itself, progress reports, and completion."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        progress = new ProgressBar();\n        progress.Location = new Point(20, 20);\n        progress.Size = new Size(300, 24);",
+        "explain": "A bar that shows the progress."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnStart = new Button();\n        btnStart.Text = \"Start\";\n        btnStart.Location = new Point(20, 60);\n        btnStart.Click += BtnStart_Click;\n\n        btnCancel = new Button();\n        btnCancel.Text = \"Cancel\";\n        btnCancel.Location = new Point(110, 60);\n        btnCancel.Click += BtnCancel_Click;",
+        "explain": "Buttons to start and cancel the work."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(progress);\n        Controls.Add(btnStart);\n        Controls.Add(btnCancel);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnStart_Click(object sender, EventArgs e)\n    {\n        if (!worker.IsBusy)\n        {\n            progress.Value = 0;\n            worker.RunWorkerAsync();\n        }\n    }",
+        "explain": "RunWorkerAsync throws if the worker is already running, so IsBusy is checked first."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnCancel_Click(object sender, EventArgs e)\n    {\n        worker.CancelAsync();\n    }",
+        "explain": "Only asks the work to stop. DoWork must check CancellationPending."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void Worker_DoWork(object sender, DoWorkEventArgs e)\n    {\n        for (int i = 1; i <= 100; i++)\n        {\n            if (worker.CancellationPending)\n            {\n                e.Cancel = true;\n                return;\n            }\n\n            System.Threading.Thread.Sleep(30);\n            worker.ReportProgress(i);\n        }\n    }",
+        "explain": "This runs on a background thread, so it must not touch controls. It reports progress instead."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void Worker_ProgressChanged(object sender, ProgressChangedEventArgs e)\n    {\n        progress.Value = e.ProgressPercentage;\n    }",
+        "explain": "Runs on the UI thread, so it may update the progress bar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)\n    {\n        MessageBox.Show(e.Cancelled ? \"Cancelled.\" : \"Finished!\");\n    }",
+        "explain": "Runs on the UI thread when the work ends, fails or is cancelled."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "async and await",
+        "description": "Modern code often uses Task.Run instead of a BackgroundWorker.",
+        "code": "await Task.Run(() => System.Threading.Thread.Sleep(3000));"
+      }
+    ]
+  },
+  {
+    "name": "NotifyIcon",
+    "title": "NotifyIcon example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private NotifyIcon notifyIcon1;\n    private ContextMenuStrip trayMenu;\n    private ToolStripMenuItem exitItem;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"NotifyIcon example\";\n        ClientSize = new Size(300, 100);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        trayMenu = new ContextMenuStrip();\n        exitItem = new ToolStripMenuItem(\"Exit\");\n        exitItem.Click += ExitItem_Click;\n        trayMenu.Items.Add(exitItem);",
+        "explain": "The right-click menu of the tray icon."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        notifyIcon1 = new NotifyIcon();\n        notifyIcon1.Icon = SystemIcons.Application;\n        notifyIcon1.Text = \"My Application\";\n        notifyIcon1.ContextMenuStrip = trayMenu;",
+        "explain": "Nothing is shown without an Icon. Text is the tip."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        notifyIcon1.MouseDoubleClick += NotifyIcon1_MouseDoubleClick;\n        notifyIcon1.Visible = true;",
+        "explain": "Visible = true places the icon in the notification area."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void ExitItem_Click(object sender, EventArgs e)\n    {\n        notifyIcon1.Visible = false;\n        Application.Exit();\n    }",
+        "explain": "Hide the icon before exiting, otherwise it can stay in the tray until the mouse moves over it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void NotifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)\n    {\n        Show();\n        WindowState = FormWindowState.Normal;\n    }",
+        "explain": "Restores the window when the user double-clicks the tray icon."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Show a balloon",
+        "description": "Notify the user from the tray.",
+        "code": "notifyIcon1.ShowBalloonTip(3000, \"Done\", \"3 files saved.\", ToolTipIcon.Info);"
+      }
+    ]
+  }
+]

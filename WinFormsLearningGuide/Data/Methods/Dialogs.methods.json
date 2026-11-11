@@ -4,49 +4,30 @@
     "methods": [
       {
         "name": "ShowDialog",
+        "returnType": "DialogResult",
         "signature": "DialogResult ShowDialog()",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog and waits until it is closed.",
+        "description": "Shows the dialog and waits until the user closes it.",
         "parameters": [],
-        "example": "if (openFileDialog1.ShowDialog() == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens; the program continues after it closes."
-      },
-      {
-        "name": "ShowDialog",
-        "signature": "DialogResult ShowDialog(IWin32Window owner)",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog on top of a window you choose.",
-        "parameters": [
-          {
-            "name": "owner",
-            "type": "IWin32Window",
-            "description": "The window that owns the dialog, usually this (the form)."
-          }
-        ],
-        "example": "if (openFileDialog1.ShowDialog(this) == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens centered over the form."
-      },
-      {
-        "name": "Reset",
-        "signature": "void Reset()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Puts all properties back to their default values.",
-        "parameters": [],
-        "example": "openFileDialog1.Reset();",
-        "expectedEffect": "The dialog starts fresh the next time it is shown."
+        "returns": "OK when the user chose a file, Cancel otherwise.",
+        "example": "if (ofd.ShowDialog() == DialogResult.OK) { Open(ofd.FileName); }"
       },
       {
         "name": "OpenFile",
-        "signature": "Stream OpenFile()",
         "returnType": "Stream",
-        "returnDescription": "A read-only stream for the selected file.",
+        "signature": "Stream OpenFile()",
         "description": "Opens the selected file for reading.",
         "parameters": [],
-        "example": "using (Stream stream = openFileDialog1.OpenFile())\n{\n    // read from the stream\n}",
-        "expectedEffect": "The file is opened read-only. Dispose the stream when done."
+        "returns": "A read-only Stream. Close or dispose it when done.",
+        "example": "using (Stream stream = ofd.OpenFile()) { Load(stream); }"
+      },
+      {
+        "name": "Reset",
+        "returnType": "void",
+        "signature": "void Reset()",
+        "description": "Sets all properties back to their defaults.",
+        "parameters": [],
+        "returns": "Nothing.",
+        "example": "ofd.Reset();"
       }
     ]
   },
@@ -55,49 +36,30 @@
     "methods": [
       {
         "name": "ShowDialog",
+        "returnType": "DialogResult",
         "signature": "DialogResult ShowDialog()",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog and waits until it is closed.",
+        "description": "Shows the dialog and waits until the user closes it.",
         "parameters": [],
-        "example": "if (saveFileDialog1.ShowDialog() == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens; the program continues after it closes."
-      },
-      {
-        "name": "ShowDialog",
-        "signature": "DialogResult ShowDialog(IWin32Window owner)",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog on top of a window you choose.",
-        "parameters": [
-          {
-            "name": "owner",
-            "type": "IWin32Window",
-            "description": "The window that owns the dialog, usually this (the form)."
-          }
-        ],
-        "example": "if (saveFileDialog1.ShowDialog(this) == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens centered over the form."
-      },
-      {
-        "name": "Reset",
-        "signature": "void Reset()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Puts all properties back to their default values.",
-        "parameters": [],
-        "example": "saveFileDialog1.Reset();",
-        "expectedEffect": "The dialog starts fresh the next time it is shown."
+        "returns": "OK when the user chose a name, Cancel otherwise.",
+        "example": "if (sfd.ShowDialog() == DialogResult.OK) { Save(sfd.FileName); }"
       },
       {
         "name": "OpenFile",
-        "signature": "Stream OpenFile()",
         "returnType": "Stream",
-        "returnDescription": "A writable stream for the selected file.",
-        "description": "Creates or overwrites the selected file and opens it for writing.",
+        "signature": "Stream OpenFile()",
+        "description": "Opens the chosen file for writing, creating it if necessary.",
         "parameters": [],
-        "example": "using (Stream stream = saveFileDialog1.OpenFile())\n{\n    // write to the stream\n}",
-        "expectedEffect": "The file is created. Dispose the stream when done."
+        "returns": "A writable Stream. Close or dispose it when done.",
+        "example": "using (Stream stream = sfd.OpenFile()) { Write(stream); }"
+      },
+      {
+        "name": "Reset",
+        "returnType": "void",
+        "signature": "void Reset()",
+        "description": "Sets all properties back to their defaults.",
+        "parameters": [],
+        "returns": "Nothing.",
+        "example": "sfd.Reset();"
       }
     ]
   },
@@ -106,39 +68,21 @@
     "methods": [
       {
         "name": "ShowDialog",
+        "returnType": "DialogResult",
         "signature": "DialogResult ShowDialog()",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog and waits until it is closed.",
+        "description": "Shows the dialog and waits until the user closes it.",
         "parameters": [],
-        "example": "if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens; the program continues after it closes."
-      },
-      {
-        "name": "ShowDialog",
-        "signature": "DialogResult ShowDialog(IWin32Window owner)",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog on top of a window you choose.",
-        "parameters": [
-          {
-            "name": "owner",
-            "type": "IWin32Window",
-            "description": "The window that owns the dialog, usually this (the form)."
-          }
-        ],
-        "example": "if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens centered over the form."
+        "returns": "OK when a folder was chosen, Cancel otherwise.",
+        "example": "if (fbd.ShowDialog() == DialogResult.OK) { Use(fbd.SelectedPath); }"
       },
       {
         "name": "Reset",
-        "signature": "void Reset()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Puts all properties back to their default values.",
+        "signature": "void Reset()",
+        "description": "Sets all properties back to their defaults.",
         "parameters": [],
-        "example": "folderBrowserDialog1.Reset();",
-        "expectedEffect": "The dialog starts fresh the next time it is shown."
+        "returns": "Nothing.",
+        "example": "fbd.Reset();"
       }
     ]
   },
@@ -147,39 +91,21 @@
     "methods": [
       {
         "name": "ShowDialog",
+        "returnType": "DialogResult",
         "signature": "DialogResult ShowDialog()",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog and waits until it is closed.",
+        "description": "Shows the dialog and waits until the user closes it.",
         "parameters": [],
-        "example": "if (colorDialog1.ShowDialog() == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens; the program continues after it closes."
-      },
-      {
-        "name": "ShowDialog",
-        "signature": "DialogResult ShowDialog(IWin32Window owner)",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog on top of a window you choose.",
-        "parameters": [
-          {
-            "name": "owner",
-            "type": "IWin32Window",
-            "description": "The window that owns the dialog, usually this (the form)."
-          }
-        ],
-        "example": "if (colorDialog1.ShowDialog(this) == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens centered over the form."
+        "returns": "OK when a color was chosen, Cancel otherwise.",
+        "example": "if (cd.ShowDialog() == DialogResult.OK) { panel1.BackColor = cd.Color; }"
       },
       {
         "name": "Reset",
-        "signature": "void Reset()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Puts all properties back to their default values.",
+        "signature": "void Reset()",
+        "description": "Sets all properties back to their defaults, including the custom colors.",
         "parameters": [],
-        "example": "colorDialog1.Reset();",
-        "expectedEffect": "The dialog starts fresh the next time it is shown."
+        "returns": "Nothing.",
+        "example": "cd.Reset();"
       }
     ]
   },
@@ -188,39 +114,21 @@
     "methods": [
       {
         "name": "ShowDialog",
+        "returnType": "DialogResult",
         "signature": "DialogResult ShowDialog()",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog and waits until it is closed.",
+        "description": "Shows the dialog and waits until the user closes it.",
         "parameters": [],
-        "example": "if (fontDialog1.ShowDialog() == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens; the program continues after it closes."
-      },
-      {
-        "name": "ShowDialog",
-        "signature": "DialogResult ShowDialog(IWin32Window owner)",
-        "returnType": "DialogResult",
-        "returnDescription": "OK if the user confirmed, Cancel otherwise.",
-        "description": "Shows the dialog on top of a window you choose.",
-        "parameters": [
-          {
-            "name": "owner",
-            "type": "IWin32Window",
-            "description": "The window that owns the dialog, usually this (the form)."
-          }
-        ],
-        "example": "if (fontDialog1.ShowDialog(this) == DialogResult.OK)\n{\n    // use the user's choice\n}",
-        "expectedEffect": "The dialog opens centered over the form."
+        "returns": "OK when a font was chosen, Cancel otherwise.",
+        "example": "if (fd.ShowDialog() == DialogResult.OK) { label1.Font = fd.Font; }"
       },
       {
         "name": "Reset",
-        "signature": "void Reset()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Puts all properties back to their default values.",
+        "signature": "void Reset()",
+        "description": "Sets all properties back to their defaults.",
         "parameters": [],
-        "example": "fontDialog1.Reset();",
-        "expectedEffect": "The dialog starts fresh the next time it is shown."
+        "returns": "Nothing.",
+        "example": "fd.Reset();"
       }
     ]
   }

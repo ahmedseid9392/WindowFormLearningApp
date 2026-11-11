@@ -4,23 +4,21 @@
     "methods": [
       {
         "name": "Start",
-        "signature": "void Start()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Starts the timer (sets Enabled = true).",
+        "signature": "void Start()",
+        "description": "Starts the timer. It is the same as setting Enabled to true.",
         "parameters": [],
-        "example": "timer1.Start();",
-        "expectedEffect": "Tick is raised every Interval milliseconds."
+        "returns": "Nothing.",
+        "example": "timer1.Start();"
       },
       {
         "name": "Stop",
-        "signature": "void Stop()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Stops the timer (sets Enabled = false).",
+        "signature": "void Stop()",
+        "description": "Stops the timer. It is the same as setting Enabled to false.",
         "parameters": [],
-        "example": "timer1.Stop();",
-        "expectedEffect": "No more Tick events are raised until Start() is called again."
+        "returns": "Nothing.",
+        "example": "timer1.Stop();"
       }
     ]
   },
@@ -29,50 +27,36 @@
     "methods": [
       {
         "name": "RunWorkerAsync",
-        "signature": "void RunWorkerAsync(object argument)",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Starts the background operation and raises DoWork on a background thread.",
-        "parameters": [
-          {
-            "name": "argument",
-            "type": "object",
-            "description": "A value passed to DoWork as e.Argument (the overload without a parameter passes null)."
-          }
-        ],
-        "example": "if (!backgroundWorker1.IsBusy)\n{\n    backgroundWorker1.RunWorkerAsync(@\"C:\\Data\\big.csv\");\n}",
-        "expectedEffect": "DoWork starts while the user interface stays responsive. Starting it twice at once throws, so check IsBusy."
+        "signature": "void RunWorkerAsync()",
+        "description": "Starts the background operation and raises DoWork on another thread.",
+        "parameters": [],
+        "returns": "Nothing. It throws InvalidOperationException if the worker is already busy.",
+        "example": "worker.RunWorkerAsync();"
       },
       {
         "name": "CancelAsync",
-        "signature": "void CancelAsync()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Requests cancellation. DoWork must check CancellationPending to stop.",
+        "signature": "void CancelAsync()",
+        "description": "Requests that the operation stops. It only sets CancellationPending; DoWork must check it.",
         "parameters": [],
-        "example": "backgroundWorker1.CancelAsync();",
-        "expectedEffect": "CancellationPending becomes true; the work stops when DoWork notices it."
+        "returns": "Nothing.",
+        "example": "worker.CancelAsync();"
       },
       {
         "name": "ReportProgress",
-        "signature": "void ReportProgress(int percentProgress, object userState)",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Raises ProgressChanged on the UI thread. Call it from DoWork.",
+        "signature": "void ReportProgress(int percentProgress)",
+        "description": "Raises ProgressChanged on the UI thread. WorkerReportsProgress must be true.",
         "parameters": [
           {
             "name": "percentProgress",
             "type": "int",
-            "description": "Progress from 0 to 100."
-          },
-          {
-            "name": "userState",
-            "type": "object",
-            "description": "Any extra information, available as e.UserState."
+            "description": "A number from 0 to 100."
           }
         ],
-        "example": "backgroundWorker1.ReportProgress(40, \"Reading file 4 of 10\");",
-        "expectedEffect": "The progress bar and label can be updated safely in ProgressChanged."
+        "returns": "Nothing.",
+        "example": "worker.ReportProgress(50);"
       }
     ]
   },
@@ -81,20 +65,34 @@
     "methods": [
       {
         "name": "ShowBalloonTip",
-        "signature": "void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Shows a balloon notification above the tray icon.",
+        "signature": "void ShowBalloonTip(int timeout)",
+        "description": "Shows the balloon defined by the BalloonTip properties.",
         "parameters": [
           {
             "name": "timeout",
             "type": "int",
-            "description": "Suggested time in milliseconds (Windows may ignore it)."
+            "description": "How long to show the balloon, in milliseconds. Modern Windows may ignore it."
+          }
+        ],
+        "returns": "Nothing.",
+        "example": "notifyIcon1.ShowBalloonTip(3000);"
+      },
+      {
+        "name": "ShowBalloonTip",
+        "returnType": "void",
+        "signature": "void ShowBalloonTip(int timeout, string tipTitle, string tipText, ToolTipIcon tipIcon)",
+        "description": "Shows a balloon with the title, text and icon you pass.",
+        "parameters": [
+          {
+            "name": "timeout",
+            "type": "int",
+            "description": "How long to show the balloon, in milliseconds."
           },
           {
             "name": "tipTitle",
             "type": "string",
-            "description": "The bold title."
+            "description": "The title."
           },
           {
             "name": "tipText",
@@ -104,11 +102,11 @@
           {
             "name": "tipIcon",
             "type": "ToolTipIcon",
-            "description": "None, Info, Warning or Error."
+            "description": "The icon."
           }
         ],
-        "example": "notifyIcon1.ShowBalloonTip(3000, \"Download finished\", \"report.pdf was saved.\", ToolTipIcon.Info);",
-        "expectedEffect": "A notification appears near the clock (unless Windows is hiding notifications)."
+        "returns": "Nothing.",
+        "example": "notifyIcon1.ShowBalloonTip(3000, \"Done\", \"3 files saved.\", ToolTipIcon.Info);"
       }
     ]
   }

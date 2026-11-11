@@ -4,30 +4,24 @@
     "events": [
       {
         "name": "Paint",
-        "description": "Raised when the panel needs to be drawn.",
-        "delegate": "PaintEventHandler",
-        "eventArgsType": "PaintEventArgs",
-        "argumentsNote": "e.Graphics is the surface to draw on and e.ClipRectangle is the area that needs repainting.",
-        "useCase": "Draw a custom border, gradient or line on the panel.",
-        "example": "// Subscribe once, for example in the form constructor:\npnlHeader.Paint += pnlHeader_Paint;\n\nprivate void pnlHeader_Paint(object sender, PaintEventArgs e)\n{\n    using (var pen = new Pen(Color.SteelBlue, 2))\n    {\n        e.Graphics.DrawLine(pen, 0, pnlHeader.Height - 1, pnlHeader.Width, pnlHeader.Height - 1);\n    }\n}"
+        "description": "The panel needs to be drawn.",
+        "eventArgsType": "PaintEventArgs (System.Windows.Forms)",
+        "useCase": "Draw custom graphics such as a border or a chart.",
+        "example": "// Subscribe once, for example in the form constructor\npnlContent.Paint += PnlContent_Paint;\n\nprivate void PnlContent_Paint(object sender, PaintEventArgs e)\n{\n    e.Graphics.DrawRectangle(Pens.SteelBlue, 0, 0, pnlContent.Width - 1, pnlContent.Height - 1);\n}"
       },
       {
         "name": "Resize",
-        "description": "Raised when the panel is resized.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Re-center a child control when the panel changes size.",
-        "example": "// Subscribe once, for example in the form constructor:\npnlHeader.Resize += pnlHeader_Resize;\n\nprivate void pnlHeader_Resize(object sender, EventArgs e)\n{\n    lblTitle.Left = (pnlHeader.Width - lblTitle.Width) / 2;\n}"
+        "description": "The panel changes size.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Reposition or resize the controls inside it by hand.",
+        "example": "// Subscribe once, for example in the form constructor\npnlContent.Resize += PnlContent_Resize;\n\nprivate void PnlContent_Resize(object sender, EventArgs e)\n{\n    this.Text = \"Panel size: \" + pnlContent.Size;\n}"
       },
       {
         "name": "ControlAdded",
-        "description": "Raised after a control is added to the panel's Controls collection.",
-        "delegate": "ControlEventHandler",
-        "eventArgsType": "ControlEventArgs",
-        "argumentsNote": "e.Control is the control that was added.",
-        "useCase": "Apply common settings to every control added at run time.",
-        "example": "// Subscribe once, for example in the form constructor:\npnlHeader.ControlAdded += pnlHeader_ControlAdded;\n\nprivate void pnlHeader_ControlAdded(object sender, ControlEventArgs e)\n{\n    e.Control.Margin = new Padding(6);\n}"
+        "description": "A control is added to the panel.",
+        "eventArgsType": "ControlEventArgs (System.Windows.Forms)",
+        "useCase": "Track controls that are created at run time.",
+        "example": "// Subscribe once, for example in the form constructor\npnlContent.ControlAdded += PnlContent_ControlAdded;\n\nprivate void PnlContent_ControlAdded(object sender, ControlEventArgs e)\n{\n    this.Text = \"Added: \" + e.Control.Name;\n}"
       }
     ]
   },
@@ -36,21 +30,17 @@
     "events": [
       {
         "name": "Enter",
-        "description": "Raised when focus moves into the group box or one of the controls inside it.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
+        "description": "Focus moves into the group box or one of its controls.",
+        "eventArgsType": "EventArgs (System)",
         "useCase": "Highlight the group the user is working in.",
-        "example": "// Subscribe once, for example in the form constructor:\ngrpOptions.Enter += grpOptions_Enter;\n\nprivate void grpOptions_Enter(object sender, EventArgs e)\n{\n    grpOptions.ForeColor = Color.SteelBlue;\n}"
+        "example": "// Subscribe once, for example in the form constructor\ngrpOptions.Enter += GrpOptions_Enter;\n\nprivate void GrpOptions_Enter(object sender, EventArgs e)\n{\n    grpOptions.Text = \"Options (active)\";\n}"
       },
       {
         "name": "Paint",
-        "description": "Raised when the group box is drawn.",
-        "delegate": "PaintEventHandler",
-        "eventArgsType": "PaintEventArgs",
-        "argumentsNote": "e.Graphics is the surface to draw on.",
-        "useCase": "Add a custom outline or decoration.",
-        "example": "// Subscribe once, for example in the form constructor:\ngrpOptions.Paint += grpOptions_Paint;\n\nprivate void grpOptions_Paint(object sender, PaintEventArgs e)\n{\n    e.Graphics.DrawRectangle(Pens.SteelBlue, 0, 0, grpOptions.Width - 1, grpOptions.Height - 1);\n}"
+        "description": "The group box needs to be drawn.",
+        "eventArgsType": "PaintEventArgs (System.Windows.Forms)",
+        "useCase": "Add custom graphics to the frame.",
+        "example": "// Subscribe once, for example in the form constructor\ngrpOptions.Paint += GrpOptions_Paint;\n\nprivate void GrpOptions_Paint(object sender, PaintEventArgs e)\n{\n    e.Graphics.DrawLine(Pens.SteelBlue, 0, grpOptions.Height - 1, grpOptions.Width, grpOptions.Height - 1);\n}"
       }
     ]
   },
@@ -59,39 +49,31 @@
     "events": [
       {
         "name": "SelectedIndexChanged",
-        "description": "Raised after the selected tab has changed.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Show the name of the current page or load its data.",
-        "example": "// Subscribe once, for example in the form constructor:\ntabMain.SelectedIndexChanged += tabMain_SelectedIndexChanged;\n\nprivate void tabMain_SelectedIndexChanged(object sender, EventArgs e)\n{\n    lblStatus.Text = \"Page: \" + tabMain.SelectedTab?.Text;\n}"
+        "description": "The selected tab changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Load the content of the newly shown page.",
+        "example": "// Subscribe once, for example in the form constructor\ntabMain.SelectedIndexChanged += TabMain_SelectedIndexChanged;\n\nprivate void TabMain_SelectedIndexChanged(object sender, EventArgs e)\n{\n    this.Text = \"Tab: \" + tabMain.SelectedTab.Text;\n}"
       },
       {
         "name": "Selecting",
-        "description": "Raised before a different tab is selected.",
-        "delegate": "TabControlCancelEventHandler",
-        "eventArgsType": "TabControlCancelEventArgs",
-        "argumentsNote": "e.TabPage and e.TabPageIndex identify the tab being selected, e.Action says how, and e.Cancel = true stops the switch.",
-        "useCase": "Block access to a tab until the user has the right to see it.",
-        "example": "// Subscribe once, for example in the form constructor:\ntabMain.Selecting += tabMain_Selecting;\n// assumes a tab page named tabAdvanced and a bool field named isAdmin\n\nprivate void tabMain_Selecting(object sender, TabControlCancelEventArgs e)\n{\n    if (e.TabPage == tabAdvanced && !isAdmin)\n    {\n        e.Cancel = true; // stay on the current tab\n    }\n}"
+        "description": "A tab is about to be selected. Setting Cancel prevents the switch.",
+        "eventArgsType": "TabControlCancelEventArgs (System.Windows.Forms)",
+        "useCase": "Keep a tab locked until the user has the right to see it.",
+        "example": "// Subscribe once, for example in the form constructor\ntabMain.Selecting += TabMain_Selecting;\n\nprivate void TabMain_Selecting(object sender, TabControlCancelEventArgs e)\n{\n    if (e.TabPage.Text == \"Admin\")\n    {\n        e.Cancel = true;\n        MessageBox.Show(\"The Admin tab is locked.\");\n    }\n}"
       },
       {
         "name": "Selected",
-        "description": "Raised after a tab has been selected.",
-        "delegate": "TabControlEventHandler",
-        "eventArgsType": "TabControlEventArgs",
-        "argumentsNote": "e.TabPage and e.TabPageIndex identify the tab that was selected.",
-        "useCase": "Load the contents of a page only when it is first shown.",
-        "example": "// Subscribe once, for example in the form constructor:\ntabMain.Selected += tabMain_Selected;\n\nprivate void tabMain_Selected(object sender, TabControlEventArgs e)\n{\n    lblStatus.Text = \"Now on \" + e.TabPage.Text;\n}"
+        "description": "A tab has been selected.",
+        "eventArgsType": "TabControlEventArgs (System.Windows.Forms)",
+        "useCase": "Run code after a page is shown.",
+        "example": "// Subscribe once, for example in the form constructor\ntabMain.Selected += TabMain_Selected;\n\nprivate void TabMain_Selected(object sender, TabControlEventArgs e)\n{\n    this.Text = \"Now showing \" + e.TabPage.Text;\n}"
       },
       {
         "name": "Deselecting",
-        "description": "Raised before the current tab is left.",
-        "delegate": "TabControlCancelEventHandler",
-        "eventArgsType": "TabControlCancelEventArgs",
-        "argumentsNote": "e.TabPage is the tab being left. Set e.Cancel = true to keep it selected.",
-        "useCase": "Validate the page and stop the user from leaving if it is invalid.",
-        "example": "// Subscribe once, for example in the form constructor:\ntabMain.Deselecting += tabMain_Deselecting;\n\nprivate void tabMain_Deselecting(object sender, TabControlCancelEventArgs e)\n{\n    if (!ValidateChildren())\n    {\n        e.Cancel = true;\n    }\n}"
+        "description": "The current tab is about to be left. Setting Cancel keeps it.",
+        "eventArgsType": "TabControlCancelEventArgs (System.Windows.Forms)",
+        "useCase": "Validate or confirm before leaving a page.",
+        "example": "// Subscribe once, for example in the form constructor\ntabMain.Deselecting += TabMain_Deselecting;\n\nprivate void TabMain_Deselecting(object sender, TabControlCancelEventArgs e)\n{\n    DialogResult answer = MessageBox.Show(\"Leave this tab?\", \"Confirm\", MessageBoxButtons.YesNo);\n    e.Cancel = answer == DialogResult.No;\n}"
       }
     ]
   },
@@ -100,21 +82,17 @@
     "events": [
       {
         "name": "Enter",
-        "description": "Raised when focus enters the page, usually after its tab is selected.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Put the focus on the first field of the page.",
-        "example": "// Subscribe once, for example in the form constructor:\ntabGeneral.Enter += tabGeneral_Enter;\n\nprivate void tabGeneral_Enter(object sender, EventArgs e)\n{\n    txtName.Focus();\n}"
+        "description": "The page becomes active, which happens when its tab is selected.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Refresh the page content when it is shown.",
+        "example": "// Subscribe once, for example in the form constructor\ntabGeneral.Enter += TabGeneral_Enter;\n\nprivate void TabGeneral_Enter(object sender, EventArgs e)\n{\n    this.Text = \"Entered \" + tabGeneral.Text;\n}"
       },
       {
         "name": "Leave",
-        "description": "Raised when focus leaves the page.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Save the page's settings when the user goes to another tab.",
-        "example": "// Subscribe once, for example in the form constructor:\ntabGeneral.Leave += tabGeneral_Leave;\n\nprivate void tabGeneral_Leave(object sender, EventArgs e)\n{\n    lblStatus.Text = \"Left the General page\";\n}"
+        "description": "The page stops being active.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Save the changes of a page when the user leaves it.",
+        "example": "// Subscribe once, for example in the form constructor\ntabGeneral.Leave += TabGeneral_Leave;\n\nprivate void TabGeneral_Leave(object sender, EventArgs e)\n{\n    this.Text = \"Left \" + tabGeneral.Text;\n}"
       }
     ]
   },
@@ -123,21 +101,17 @@
     "events": [
       {
         "name": "SplitterMoved",
-        "description": "Raised after the user has moved the splitter.",
-        "delegate": "SplitterEventHandler",
-        "eventArgsType": "SplitterEventArgs",
-        "argumentsNote": "e.SplitX and e.SplitY are the splitter position, e.X and e.Y the mouse position.",
-        "useCase": "Remember the splitter position so it can be restored next time.",
-        "example": "// Subscribe once, for example in the form constructor:\nsplitMain.SplitterMoved += splitMain_SplitterMoved;\n\nprivate void splitMain_SplitterMoved(object sender, SplitterEventArgs e)\n{\n    lblInfo.Text = \"Left panel width: \" + splitMain.SplitterDistance;\n}"
+        "description": "The user has finished moving the splitter.",
+        "eventArgsType": "SplitterEventArgs (System.Windows.Forms)",
+        "useCase": "Remember the width of a sidebar.",
+        "example": "// Subscribe once, for example in the form constructor\nsplit.SplitterMoved += Split_SplitterMoved;\n\nprivate void Split_SplitterMoved(object sender, SplitterEventArgs e)\n{\n    this.Text = \"Splitter at \" + e.SplitX;\n}"
       },
       {
         "name": "SplitterMoving",
-        "description": "Raised while the user drags the splitter, before it moves.",
-        "delegate": "SplitterCancelEventHandler",
-        "eventArgsType": "SplitterCancelEventArgs",
-        "argumentsNote": "e.SplitX and e.SplitY are the proposed splitter position. Set e.Cancel = true to refuse the move.",
-        "useCase": "Keep a panel from becoming too small.",
-        "example": "// Subscribe once, for example in the form constructor:\nsplitMain.SplitterMoving += splitMain_SplitterMoving;\n\nprivate void splitMain_SplitterMoving(object sender, SplitterCancelEventArgs e)\n{\n    if (e.SplitX < 150)\n    {\n        e.Cancel = true; // keep the left panel at least 150 pixels wide\n    }\n}"
+        "description": "The user is dragging the splitter. Setting Cancel stops the move.",
+        "eventArgsType": "SplitterCancelEventArgs (System.Windows.Forms)",
+        "useCase": "Stop a panel from becoming too small.",
+        "example": "// Subscribe once, for example in the form constructor\nsplit.SplitterMoving += Split_SplitterMoving;\n\nprivate void Split_SplitterMoving(object sender, SplitterCancelEventArgs e)\n{\n    if (e.SplitX < 100)\n    {\n        e.Cancel = true;\n    }\n}"
       }
     ]
   },
@@ -146,21 +120,17 @@
     "events": [
       {
         "name": "ControlAdded",
-        "description": "Raised after a control is added to the panel.",
-        "delegate": "ControlEventHandler",
-        "eventArgsType": "ControlEventArgs",
-        "argumentsNote": "e.Control is the control that was added.",
-        "useCase": "Give every new item the same margin.",
-        "example": "// Subscribe once, for example in the form constructor:\nflowButtons.ControlAdded += flowButtons_ControlAdded;\n\nprivate void flowButtons_ControlAdded(object sender, ControlEventArgs e)\n{\n    e.Control.Margin = new Padding(6);\n}"
+        "description": "A control is added to the panel.",
+        "eventArgsType": "ControlEventArgs (System.Windows.Forms)",
+        "useCase": "Update a counter or style new controls.",
+        "example": "// Subscribe once, for example in the form constructor\nflow.ControlAdded += Flow_ControlAdded;\n\nprivate void Flow_ControlAdded(object sender, ControlEventArgs e)\n{\n    this.Text = \"Controls: \" + flow.Controls.Count;\n}"
       },
       {
         "name": "ControlRemoved",
-        "description": "Raised after a control is removed from the panel.",
-        "delegate": "ControlEventHandler",
-        "eventArgsType": "ControlEventArgs",
-        "argumentsNote": "e.Control is the control that was removed.",
-        "useCase": "Update an item counter.",
-        "example": "// Subscribe once, for example in the form constructor:\nflowButtons.ControlRemoved += flowButtons_ControlRemoved;\n\nprivate void flowButtons_ControlRemoved(object sender, ControlEventArgs e)\n{\n    lblCount.Text = flowButtons.Controls.Count + \" items\";\n}"
+        "description": "A control is removed from the panel.",
+        "eventArgsType": "ControlEventArgs (System.Windows.Forms)",
+        "useCase": "Update a counter or release resources.",
+        "example": "// Subscribe once, for example in the form constructor\nflow.ControlRemoved += Flow_ControlRemoved;\n\nprivate void Flow_ControlRemoved(object sender, ControlEventArgs e)\n{\n    this.Text = \"Removed: \" + e.Control.Name;\n}"
       }
     ]
   },
@@ -169,12 +139,10 @@
     "events": [
       {
         "name": "CellPaint",
-        "description": "Raised for each cell when the table is drawn.",
-        "delegate": "TableLayoutCellPaintEventHandler",
-        "eventArgsType": "TableLayoutCellPaintEventArgs",
-        "argumentsNote": "e.Row and e.Column identify the cell, e.CellBounds is its rectangle, e.Graphics the surface.",
-        "useCase": "Shade the header row or alternate rows.",
-        "example": "// Subscribe once, for example in the form constructor:\ntblLayout.CellPaint += tblLayout_CellPaint;\n\nprivate void tblLayout_CellPaint(object sender, TableLayoutCellPaintEventArgs e)\n{\n    if (e.Row == 0)\n    {\n        using (var brush = new SolidBrush(Color.LightSteelBlue))\n        {\n            e.Graphics.FillRectangle(brush, e.CellBounds);\n        }\n    }\n}"
+        "description": "A cell of the grid needs to be drawn.",
+        "eventArgsType": "TableLayoutCellPaintEventArgs (System.Windows.Forms)",
+        "useCase": "Colour the header row or draw a custom cell background.",
+        "example": "// Subscribe once, for example in the form constructor\ntlp.CellPaint += Tlp_CellPaint;\n\nprivate void Tlp_CellPaint(object sender, TableLayoutCellPaintEventArgs e)\n{\n    if (e.Row == 0)\n    {\n        e.Graphics.FillRectangle(Brushes.LightSteelBlue, e.CellBounds);\n    }\n}"
       }
     ]
   }

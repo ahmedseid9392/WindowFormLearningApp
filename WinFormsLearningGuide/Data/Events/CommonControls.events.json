@@ -4,30 +4,24 @@
     "events": [
       {
         "name": "Click",
-        "description": "Raised when the user clicks the label with the mouse.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Turn a label into a simple clickable element, such as a 'Show details' caption.",
-        "example": "// Subscribe once, for example in the form constructor:\nlblStatus.Click += lblStatus_Click;\n\nprivate void lblStatus_Click(object sender, EventArgs e)\n{\n    lblStatus.Text = \"You clicked the status label.\";\n}"
+        "description": "The user clicks the label with the mouse.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Make a label act like a simple button, for example to clear a message when it is clicked.",
+        "example": "// Subscribe once, for example in the form constructor\nlblStatus.Click += LblStatus_Click;\n\nprivate void LblStatus_Click(object sender, EventArgs e)\n{\n    lblStatus.Text = \"\";\n}"
       },
       {
         "name": "TextChanged",
-        "description": "Raised whenever the Text property changes, whether by code or by the user.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Keep other controls in sync, for example enable a Retry button when the label shows an error.",
-        "example": "// Subscribe once, for example in the form constructor:\nlblStatus.TextChanged += lblStatus_TextChanged;\n\nprivate void lblStatus_TextChanged(object sender, EventArgs e)\n{\n    btnRetry.Enabled = lblStatus.Text.StartsWith(\"Error\");\n}"
+        "description": "The Text property changes, from code or because the text was replaced.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Keep another part of the UI in sync, such as copying a heading into the window title.",
+        "example": "// Subscribe once, for example in the form constructor\nlblStatus.TextChanged += LblStatus_TextChanged;\n\nprivate void LblStatus_TextChanged(object sender, EventArgs e)\n{\n    this.Text = lblStatus.Text;\n}"
       },
       {
         "name": "TextAlignChanged",
-        "description": "Raised when the TextAlign property changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Rarely needed; useful when other elements must be re-positioned after the alignment changes.",
-        "example": "// Subscribe once, for example in the form constructor:\nlblStatus.TextAlignChanged += lblStatus_TextAlignChanged;\n\nprivate void lblStatus_TextAlignChanged(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Alignment is now \" + lblStatus.TextAlign);\n}"
+        "description": "The TextAlign property changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "React when the alignment is switched, for example to update a preview.",
+        "example": "// Subscribe once, for example in the form constructor\nlblStatus.TextAlignChanged += LblStatus_TextAlignChanged;\n\nprivate void LblStatus_TextAlignChanged(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Alignment is now \" + lblStatus.TextAlign);\n}"
       }
     ]
   },
@@ -36,39 +30,31 @@
     "events": [
       {
         "name": "Click",
-        "description": "Raised when the user clicks the button, presses Space or Enter while it has focus, or uses its access key. Also raised by PerformClick().",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Run the action the button stands for: save, submit, search, close.",
-        "example": "// Subscribe once, for example in the form constructor:\nbtnSave.Click += btnSave_Click;\n\nprivate void btnSave_Click(object sender, EventArgs e)\n{\n    string name = txtName.Text.Trim();\n    if (name.Length == 0)\n    {\n        MessageBox.Show(\"Please enter a name.\");\n        return;\n    }\n    MessageBox.Show(\"Hello, \" + name + \"!\");\n}"
+        "description": "The user clicks the button, presses Space or Enter while it has focus, or code calls PerformClick.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Run the command the button stands for, such as saving a form.",
+        "example": "// Subscribe once, for example in the form constructor\nbtnSubmit.Click += BtnSubmit_Click;\n\nprivate void BtnSubmit_Click(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Submitted successfully!\");\n}"
       },
       {
         "name": "MouseEnter",
-        "description": "Raised when the mouse pointer moves onto the button.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Highlight the button or show a hint in a status label when the pointer is over it.",
-        "example": "// Subscribe once, for example in the form constructor:\nbtnSave.MouseEnter += btnSave_MouseEnter;\n\nprivate void btnSave_MouseEnter(object sender, EventArgs e)\n{\n    btnSave.BackColor = Color.LightSkyBlue;\n}"
+        "description": "The mouse pointer moves onto the button.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Give hover feedback such as a hand cursor or a hint in a status bar.",
+        "example": "// Subscribe once, for example in the form constructor\nbtnSubmit.MouseEnter += BtnSubmit_MouseEnter;\n\nprivate void BtnSubmit_MouseEnter(object sender, EventArgs e)\n{\n    btnSubmit.Cursor = Cursors.Hand;\n}"
       },
       {
         "name": "MouseLeave",
-        "description": "Raised when the mouse pointer leaves the button.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Undo the highlight applied in MouseEnter.",
-        "example": "// Subscribe once, for example in the form constructor:\nbtnSave.MouseLeave += btnSave_MouseLeave;\n\nprivate void btnSave_MouseLeave(object sender, EventArgs e)\n{\n    btnSave.BackColor = SystemColors.Control;\n}"
+        "description": "The mouse pointer leaves the button.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Undo whatever the hover feedback changed.",
+        "example": "// Subscribe once, for example in the form constructor\nbtnSubmit.MouseLeave += BtnSubmit_MouseLeave;\n\nprivate void BtnSubmit_MouseLeave(object sender, EventArgs e)\n{\n    btnSubmit.Cursor = Cursors.Default;\n}"
       },
       {
         "name": "EnabledChanged",
-        "description": "Raised when the Enabled property changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Change the caption while an operation runs and the button is disabled.",
-        "example": "// Subscribe once, for example in the form constructor:\nbtnSave.EnabledChanged += btnSave_EnabledChanged;\n\nprivate void btnSave_EnabledChanged(object sender, EventArgs e)\n{\n    btnSave.Text = btnSave.Enabled ? \"Save\" : \"Saving...\";\n}"
+        "description": "The Enabled property changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Change the caption to explain why a button is unavailable.",
+        "example": "// Subscribe once, for example in the form constructor\nbtnSubmit.EnabledChanged += BtnSubmit_EnabledChanged;\n\nprivate void BtnSubmit_EnabledChanged(object sender, EventArgs e)\n{\n    btnSubmit.Text = btnSubmit.Enabled ? \"Submit\" : \"Please wait...\";\n}"
       }
     ]
   },
@@ -77,39 +63,31 @@
     "events": [
       {
         "name": "TextChanged",
-        "description": "Raised every time the Text changes, after each keystroke, paste or assignment in code.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Live search, character counters, or enabling a button only when the box is not empty.",
-        "example": "// Subscribe once, for example in the form constructor:\ntxtEmail.TextChanged += txtEmail_TextChanged;\n\nprivate void txtEmail_TextChanged(object sender, EventArgs e)\n{\n    btnSearch.Enabled = txtEmail.Text.Length > 0;\n}"
+        "description": "The text changes, whether the user types or code assigns Text.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Live search, character counters, or enabling a Save button once something is typed.",
+        "example": "// Subscribe once, for example in the form constructor\ntxtName.TextChanged += TxtName_TextChanged;\n\nprivate void TxtName_TextChanged(object sender, EventArgs e)\n{\n    this.Text = \"Length: \" + txtName.Text.Length;\n}"
       },
       {
         "name": "KeyPress",
-        "description": "Raised when a character key is pressed, before the character is added to the text.",
-        "delegate": "KeyPressEventHandler",
-        "eventArgsType": "KeyPressEventArgs",
-        "argumentsNote": "e.KeyChar is the character that was typed. Set e.Handled = true to reject it.",
-        "useCase": "Allow only certain characters, for example digits in a quantity box.",
-        "example": "// Subscribe once, for example in the form constructor:\ntxtEmail.KeyPress += txtEmail_KeyPress;\n\nprivate void txtEmail_KeyPress(object sender, KeyPressEventArgs e)\n{\n    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))\n    {\n        e.Handled = true; // ignore anything that is not a digit\n    }\n}"
+        "description": "The user presses a character key while the box has focus. Setting Handled to true discards the key.",
+        "eventArgsType": "KeyPressEventArgs (System.Windows.Forms)",
+        "useCase": "Allow only digits in a quantity field.",
+        "example": "// Subscribe once, for example in the form constructor\ntxtName.KeyPress += TxtName_KeyPress;\n\nprivate void TxtName_KeyPress(object sender, KeyPressEventArgs e)\n{\n    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))\n    {\n        e.Handled = true;\n    }\n}"
       },
       {
         "name": "KeyDown",
-        "description": "Raised when a key is pressed down, including keys that do not produce characters such as Enter and the arrows.",
-        "delegate": "KeyEventHandler",
-        "eventArgsType": "KeyEventArgs",
-        "argumentsNote": "e.KeyCode is the key, e.Control / e.Shift / e.Alt tell which modifiers are held, e.SuppressKeyPress blocks the character.",
-        "useCase": "Run a search when the user presses Enter.",
-        "example": "// Subscribe once, for example in the form constructor:\ntxtEmail.KeyDown += txtEmail_KeyDown;\n\nprivate void txtEmail_KeyDown(object sender, KeyEventArgs e)\n{\n    if (e.KeyCode == Keys.Enter)\n    {\n        e.SuppressKeyPress = true; // no beep sound\n        btnSearch.PerformClick();\n    }\n}"
+        "description": "A key is pressed, including keys that produce no character such as Enter or the arrow keys.",
+        "eventArgsType": "KeyEventArgs (System.Windows.Forms)",
+        "useCase": "Submit a search when the user presses Enter.",
+        "example": "// Subscribe once, for example in the form constructor\ntxtName.KeyDown += TxtName_KeyDown;\n\nprivate void TxtName_KeyDown(object sender, KeyEventArgs e)\n{\n    if (e.KeyCode == Keys.Enter)\n    {\n        MessageBox.Show(\"You typed: \" + txtName.Text);\n        e.SuppressKeyPress = true;\n    }\n}"
       },
       {
         "name": "Validating",
-        "description": "Raised when the control is about to lose focus and CausesValidation is true, before the focus actually moves.",
-        "delegate": "CancelEventHandler",
-        "eventArgsType": "CancelEventArgs",
-        "argumentsNote": "Set e.Cancel = true to keep the focus in the control.",
-        "useCase": "Check the value and show an error before the user can leave the field.",
-        "example": "// Subscribe once, for example in the form constructor:\ntxtEmail.Validating += txtEmail_Validating;\n\nprivate void txtEmail_Validating(object sender, CancelEventArgs e)\n{\n    if (string.IsNullOrWhiteSpace(txtEmail.Text))\n    {\n        e.Cancel = true;\n        errorProvider1.SetError(txtEmail, \"E-mail is required.\");\n    }\n    else\n    {\n        errorProvider1.SetError(txtEmail, \"\");\n    }\n}"
+        "description": "The control is about to lose focus and its CausesValidation property is true. Setting Cancel keeps the focus in the box.",
+        "eventArgsType": "CancelEventArgs (System.ComponentModel)",
+        "useCase": "Reject an empty required field before the user moves on.",
+        "example": "// Subscribe once, for example in the form constructor\ntxtName.Validating += TxtName_Validating;\n\nprivate void TxtName_Validating(object sender, CancelEventArgs e)\n{\n    if (string.IsNullOrWhiteSpace(txtName.Text))\n    {\n        e.Cancel = true;\n        MessageBox.Show(\"Name is required.\");\n    }\n}"
       }
     ]
   },
@@ -118,30 +96,24 @@
     "events": [
       {
         "name": "TextChanged",
-        "description": "Raised when the text content changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Show a live character count or mark the document as modified.",
-        "example": "// Subscribe once, for example in the form constructor:\nrtbNotes.TextChanged += rtbNotes_TextChanged;\n\nprivate void rtbNotes_TextChanged(object sender, EventArgs e)\n{\n    lblCount.Text = rtbNotes.TextLength + \" characters\";\n}"
+        "description": "The content changes, whether typed or assigned.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Update a word or character counter.",
+        "example": "// Subscribe once, for example in the form constructor\nrtbEditor.TextChanged += RtbEditor_TextChanged;\n\nprivate void RtbEditor_TextChanged(object sender, EventArgs e)\n{\n    this.Text = \"Characters: \" + rtbEditor.TextLength;\n}"
       },
       {
         "name": "SelectionChanged",
-        "description": "Raised when the selection or the caret position changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Update a toolbar so the Bold button shows the formatting at the caret.",
-        "example": "// Subscribe once, for example in the form constructor:\nrtbNotes.SelectionChanged += rtbNotes_SelectionChanged;\n\nprivate void rtbNotes_SelectionChanged(object sender, EventArgs e)\n{\n    chkBold.Checked = rtbNotes.SelectionFont != null && rtbNotes.SelectionFont.Bold;\n}"
+        "description": "The selection or the caret position changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Update toolbar buttons such as Bold so they match the formatting at the caret.",
+        "example": "// Subscribe once, for example in the form constructor\nrtbEditor.SelectionChanged += RtbEditor_SelectionChanged;\n\nprivate void RtbEditor_SelectionChanged(object sender, EventArgs e)\n{\n    bool bold = rtbEditor.SelectionFont != null && rtbEditor.SelectionFont.Bold;\n    this.Text = bold ? \"Bold\" : \"Not bold\";\n}"
       },
       {
         "name": "LinkClicked",
-        "description": "Raised when the user clicks a web address in the text (needs DetectUrls = true, which is the default).",
-        "delegate": "LinkClickedEventHandler",
-        "eventArgsType": "LinkClickedEventArgs",
-        "argumentsNote": "e.LinkText is the text of the link that was clicked.",
-        "useCase": "Open clicked web addresses in the browser.",
-        "example": "// Subscribe once, for example in the form constructor:\nrtbNotes.LinkClicked += rtbNotes_LinkClicked;\n\nprivate void rtbNotes_LinkClicked(object sender, LinkClickedEventArgs e)\n{\n    // requires: using System.Diagnostics;\n    Process.Start(new ProcessStartInfo(e.LinkText) { UseShellExecute = true });\n}"
+        "description": "The user clicks a web address in the text (DetectUrls must be true).",
+        "eventArgsType": "LinkClickedEventArgs (System.Windows.Forms)",
+        "useCase": "Open the clicked link in the default browser.",
+        "example": "// Subscribe once, for example in the form constructor\nrtbEditor.LinkClicked += RtbEditor_LinkClicked;\n\nprivate void RtbEditor_LinkClicked(object sender, LinkClickedEventArgs e)\n{\n    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.LinkText) { UseShellExecute = true });\n}"
       }
     ]
   },
@@ -150,30 +122,24 @@
     "events": [
       {
         "name": "MaskInputRejected",
-        "description": "Raised when a typed character does not fit the mask.",
-        "delegate": "MaskInputRejectedEventHandler",
-        "eventArgsType": "MaskInputRejectedEventArgs",
-        "argumentsNote": "e.RejectionHint says why the character was refused (for example InvalidInput) and e.Position tells where.",
-        "useCase": "Show a hint such as 'digits only' when the user types a wrong character.",
-        "example": "// Subscribe once, for example in the form constructor:\nmtbPhone.MaskInputRejected += mtbPhone_MaskInputRejected;\n\nprivate void mtbPhone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)\n{\n    lblHint.Text = \"Not allowed here: \" + e.RejectionHint;\n}"
+        "description": "A typed or pasted character does not fit the mask.",
+        "eventArgsType": "MaskInputRejectedEventArgs (System.Windows.Forms)",
+        "useCase": "Tell the user why the input was refused.",
+        "example": "// Subscribe once, for example in the form constructor\nmtbPhone.MaskInputRejected += MtbPhone_MaskInputRejected;\n\nprivate void MtbPhone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)\n{\n    MessageBox.Show(\"Input rejected: \" + e.RejectionHint);\n}"
       },
       {
         "name": "TypeValidationCompleted",
-        "description": "Raised when the control leaves focus and ValidatingType is set (for example typeof(DateTime)).",
-        "delegate": "TypeValidationEventHandler",
-        "eventArgsType": "TypeValidationEventArgs",
-        "argumentsNote": "e.IsValidInput tells whether the text could be converted to ValidatingType. e.ReturnValue holds the converted value. Set e.Cancel = true to keep the focus.",
-        "useCase": "Reject an impossible date such as 31/02/2024 in a date box.",
-        "example": "// Subscribe once, for example in the form constructor:\nmtbPhone.TypeValidationCompleted += mtbPhone_TypeValidationCompleted;\nmtbPhone.ValidatingType = typeof(DateTime); // needed for this event to convert the text\n\nprivate void mtbPhone_TypeValidationCompleted(object sender, TypeValidationEventArgs e)\n{\n    if (!e.IsValidInput)\n    {\n        MessageBox.Show(\"That is not a valid date.\");\n        e.Cancel = true;\n    }\n}"
+        "description": "The box has checked its text against ValidatingType, after the user leaves it.",
+        "eventArgsType": "TypeValidationEventArgs (System.Windows.Forms)",
+        "useCase": "Warn about an invalid date or number.",
+        "example": "// Subscribe once, for example in the form constructor\nmtbPhone.TypeValidationCompleted += MtbPhone_TypeValidationCompleted;\n\nprivate void MtbPhone_TypeValidationCompleted(object sender, TypeValidationEventArgs e)\n{\n    if (!e.IsValidInput)\n    {\n        MessageBox.Show(\"Invalid value: \" + e.Message);\n    }\n}"
       },
       {
         "name": "TextChanged",
-        "description": "Raised when the text changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Enable Save only when the whole mask has been filled in.",
-        "example": "// Subscribe once, for example in the form constructor:\nmtbPhone.TextChanged += mtbPhone_TextChanged;\n\nprivate void mtbPhone_TextChanged(object sender, EventArgs e)\n{\n    btnSave.Enabled = mtbPhone.MaskCompleted;\n}"
+        "description": "The text changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Enable a button when the mask is complete.",
+        "example": "// Subscribe once, for example in the form constructor\nmtbPhone.TextChanged += MtbPhone_TextChanged;\n\nprivate void MtbPhone_TextChanged(object sender, EventArgs e)\n{\n    this.Text = mtbPhone.MaskCompleted ? \"Complete\" : \"Incomplete\";\n}"
       }
     ]
   },
@@ -182,30 +148,24 @@
     "events": [
       {
         "name": "CheckedChanged",
-        "description": "Raised when the Checked property changes, by the user or by code.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Enable a Continue button only after the user ticks 'I agree'.",
-        "example": "// Subscribe once, for example in the form constructor:\nchkOptions.CheckedChanged += chkOptions_CheckedChanged;\n\nprivate void chkOptions_CheckedChanged(object sender, EventArgs e)\n{\n    btnContinue.Enabled = chkOptions.Checked;\n}"
+        "description": "The Checked property changes, by a click or by code.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Enable or disable controls that depend on the option.",
+        "example": "// Subscribe once, for example in the form constructor\nchkRemember.CheckedChanged += ChkRemember_CheckedChanged;\n\nprivate void ChkRemember_CheckedChanged(object sender, EventArgs e)\n{\n    this.Text = chkRemember.Checked ? \"Remembered\" : \"Not remembered\";\n}"
       },
       {
         "name": "CheckStateChanged",
-        "description": "Raised when CheckState changes. This matters for three-state check boxes (ThreeState = true).",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Show whether all, none or some child options are selected.",
-        "example": "// Subscribe once, for example in the form constructor:\nchkOptions.CheckStateChanged += chkOptions_CheckStateChanged;\n\nprivate void chkOptions_CheckStateChanged(object sender, EventArgs e)\n{\n    switch (chkOptions.CheckState)\n    {\n        case CheckState.Checked:       lblState.Text = \"All\";  break;\n        case CheckState.Unchecked:     lblState.Text = \"None\"; break;\n        case CheckState.Indeterminate: lblState.Text = \"Some\"; break;\n    }\n}"
+        "description": "The CheckState property changes, including a switch to the Indeterminate state.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Handle the third state of a three-state box.",
+        "example": "// Subscribe once, for example in the form constructor\nchkRemember.CheckStateChanged += ChkRemember_CheckStateChanged;\n\nprivate void ChkRemember_CheckStateChanged(object sender, EventArgs e)\n{\n    MessageBox.Show(\"State: \" + chkRemember.CheckState);\n}"
       },
       {
         "name": "Click",
-        "description": "Raised when the user clicks the check box. Not raised when code sets Checked.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "React to user actions only, ignoring changes your own code makes.",
-        "example": "// Subscribe once, for example in the form constructor:\nchkOptions.Click += chkOptions_Click;\n\nprivate void chkOptions_Click(object sender, EventArgs e)\n{\n    lblLog.Text = \"User clicked; Checked = \" + chkOptions.Checked;\n}"
+        "description": "The user clicks the check box. With AutoCheck on, the state has already changed when the event is raised.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Count or log user clicks only, ignoring changes made by code.",
+        "example": "// Subscribe once, for example in the form constructor\nchkRemember.Click += ChkRemember_Click;\n\nprivate void ChkRemember_Click(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Checked is now \" + chkRemember.Checked);\n}"
       }
     ]
   },
@@ -214,21 +174,17 @@
     "events": [
       {
         "name": "CheckedChanged",
-        "description": "Raised when Checked changes. When the user selects a radio button, the event fires for the button that is cleared and for the one that is selected.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Update the price or summary when a different shipping option is selected.",
-        "example": "// Subscribe once, for example in the form constructor:\nrdoExpress.CheckedChanged += rdoExpress_CheckedChanged;\n\nprivate void rdoExpress_CheckedChanged(object sender, EventArgs e)\n{\n    var radio = (RadioButton)sender;\n    if (radio.Checked) // the event also fires for the button being cleared\n    {\n        lblShipping.Text = \"Selected: \" + radio.Text;\n    }\n}"
+        "description": "The Checked property changes. Selecting one option raises the event on it and on the option that was cleared.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "React to the new choice, after testing Checked to ignore the option that was cleared.",
+        "example": "// Subscribe once, for example in the form constructor\nrbExpress.CheckedChanged += RbExpress_CheckedChanged;\n\nprivate void RbExpress_CheckedChanged(object sender, EventArgs e)\n{\n    if (rbExpress.Checked)\n    {\n        this.Text = \"Express shipping selected\";\n    }\n}"
       },
       {
         "name": "Click",
-        "description": "Raised when the user clicks the radio button.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Run an action only when the user picks an option, not when code changes the selection.",
-        "example": "// Subscribe once, for example in the form constructor:\nrdoExpress.Click += rdoExpress_Click;\n\nprivate void rdoExpress_Click(object sender, EventArgs e)\n{\n    lblShipping.Text = \"You clicked \" + ((RadioButton)sender).Text;\n}"
+        "description": "The user clicks the option.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Run an action every time the user picks the option, even if it was already selected.",
+        "example": "// Subscribe once, for example in the form constructor\nrbExpress.Click += RbExpress_Click;\n\nprivate void RbExpress_Click(object sender, EventArgs e)\n{\n    MessageBox.Show(\"You clicked \" + rbExpress.Text);\n}"
       }
     ]
   },
@@ -237,39 +193,31 @@
     "events": [
       {
         "name": "SelectedIndexChanged",
-        "description": "Raised when the selected item changes, by the user or by code.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Fill a dependent list, for example cities after a country is chosen.",
-        "example": "// Subscribe once, for example in the form constructor:\ncboCountry.SelectedIndexChanged += cboCountry_SelectedIndexChanged;\n\nprivate void cboCountry_SelectedIndexChanged(object sender, EventArgs e)\n{\n    if (cboCountry.SelectedIndex >= 0)\n    {\n        lblResult.Text = \"Selected: \" + cboCountry.SelectedItem;\n    }\n}"
+        "description": "The selected entry changes, by the user or by code.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Show details for the chosen entry.",
+        "example": "// Subscribe once, for example in the form constructor\ncboSize.SelectedIndexChanged += CboSize_SelectedIndexChanged;\n\nprivate void CboSize_SelectedIndexChanged(object sender, EventArgs e)\n{\n    if (cboSize.SelectedItem != null)\n    {\n        this.Text = \"Size: \" + cboSize.SelectedItem;\n    }\n}"
       },
       {
         "name": "SelectionChangeCommitted",
-        "description": "Raised only when the user changes the selection and the change is final. Not raised for changes made by code.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Respond to the user's choice without reacting to your own SelectedIndex assignments.",
-        "example": "// Subscribe once, for example in the form constructor:\ncboCountry.SelectionChangeCommitted += cboCountry_SelectionChangeCommitted;\n\nprivate void cboCountry_SelectionChangeCommitted(object sender, EventArgs e)\n{\n    lblResult.Text = \"User chose: \" + cboCountry.Text;\n}"
+        "description": "The user picks an entry from the list. Code that changes the selection does not raise it.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "React only to real user choices, for example to load data.",
+        "example": "// Subscribe once, for example in the form constructor\ncboSize.SelectionChangeCommitted += CboSize_SelectionChangeCommitted;\n\nprivate void CboSize_SelectionChangeCommitted(object sender, EventArgs e)\n{\n    MessageBox.Show(\"You chose \" + cboSize.Text);\n}"
       },
       {
         "name": "TextChanged",
-        "description": "Raised when the text portion changes, including when the user types in a DropDown-style box.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Enable an Add button when the user has typed a new value.",
-        "example": "// Subscribe once, for example in the form constructor:\ncboCountry.TextChanged += cboCountry_TextChanged;\n\nprivate void cboCountry_TextChanged(object sender, EventArgs e)\n{\n    btnAdd.Enabled = cboCountry.Text.Length > 0;\n}"
+        "description": "The text in the edit area changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Filter a list while the user types.",
+        "example": "// Subscribe once, for example in the form constructor\ncboSize.TextChanged += CboSize_TextChanged;\n\nprivate void CboSize_TextChanged(object sender, EventArgs e)\n{\n    this.Text = cboSize.Text;\n}"
       },
       {
         "name": "DropDown",
-        "description": "Raised just before the drop-down list opens.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Load or refresh the items only when the user actually opens the list.",
-        "example": "// Subscribe once, for example in the form constructor:\ncboCountry.DropDown += cboCountry_DropDown;\n\nprivate void cboCountry_DropDown(object sender, EventArgs e)\n{\n    if (cboCountry.Items.Count == 0)\n    {\n        cboCountry.Items.AddRange(new object[] { \"Canada\", \"France\", \"Japan\" });\n    }\n}"
+        "description": "The drop-down list is about to open.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Refresh the entries just before they are shown.",
+        "example": "// Subscribe once, for example in the form constructor\ncboSize.DropDown += CboSize_DropDown;\n\nprivate void CboSize_DropDown(object sender, EventArgs e)\n{\n    cboSize.Items.Clear();\n    cboSize.Items.Add(DateTime.Now.ToLongTimeString());\n}"
       }
     ]
   },
@@ -278,30 +226,24 @@
     "events": [
       {
         "name": "SelectedIndexChanged",
-        "description": "Raised when the selection changes. SelectedIndex is -1 when nothing is selected.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Enable a Delete button only when an item is selected.",
-        "example": "// Subscribe once, for example in the form constructor:\nlstItems.SelectedIndexChanged += lstItems_SelectedIndexChanged;\n\nprivate void lstItems_SelectedIndexChanged(object sender, EventArgs e)\n{\n    btnDelete.Enabled = lstItems.SelectedIndex >= 0;\n}"
+        "description": "The selected index changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Show details for the selected entry.",
+        "example": "// Subscribe once, for example in the form constructor\nlstFiles.SelectedIndexChanged += LstFiles_SelectedIndexChanged;\n\nprivate void LstFiles_SelectedIndexChanged(object sender, EventArgs e)\n{\n    if (lstFiles.SelectedIndex >= 0)\n    {\n        this.Text = \"Selected: \" + lstFiles.SelectedItem;\n    }\n}"
       },
       {
         "name": "SelectedValueChanged",
-        "description": "Raised when SelectedValue changes. It is mainly useful when the list is data-bound with ValueMember.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Show the key (for example an ID) of the selected record.",
-        "example": "// Subscribe once, for example in the form constructor:\nlstItems.SelectedValueChanged += lstItems_SelectedValueChanged;\n\nprivate void lstItems_SelectedValueChanged(object sender, EventArgs e)\n{\n    lblId.Text = lstItems.SelectedValue?.ToString();\n}"
+        "description": "The SelectedValue changes, which matters for data-bound lists.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Load related data for the chosen value.",
+        "example": "// Subscribe once, for example in the form constructor\nlstFiles.SelectedValueChanged += LstFiles_SelectedValueChanged;\n\nprivate void LstFiles_SelectedValueChanged(object sender, EventArgs e)\n{\n    this.Text = \"Value: \" + lstFiles.SelectedValue;\n}"
       },
       {
         "name": "MouseDoubleClick",
-        "description": "Raised when the user double-clicks the list box.",
-        "delegate": "MouseEventHandler",
-        "eventArgsType": "MouseEventArgs",
-        "argumentsNote": "e.Location is where the pointer was, e.Button is the mouse button.",
-        "useCase": "Open the item under the pointer, like double-clicking a file.",
-        "example": "// Subscribe once, for example in the form constructor:\nlstItems.MouseDoubleClick += lstItems_MouseDoubleClick;\n\nprivate void lstItems_MouseDoubleClick(object sender, MouseEventArgs e)\n{\n    int index = lstItems.IndexFromPoint(e.Location);\n    if (index != ListBox.NoMatches)\n    {\n        MessageBox.Show(\"Opening \" + lstItems.Items[index]);\n    }\n}"
+        "description": "The user double-clicks inside the list.",
+        "eventArgsType": "MouseEventArgs (System.Windows.Forms)",
+        "useCase": "Open the entry under the pointer.",
+        "example": "// Subscribe once, for example in the form constructor\nlstFiles.MouseDoubleClick += LstFiles_MouseDoubleClick;\n\nprivate void LstFiles_MouseDoubleClick(object sender, MouseEventArgs e)\n{\n    int index = lstFiles.IndexFromPoint(e.Location);\n    if (index != ListBox.NoMatches)\n    {\n        MessageBox.Show(\"Open \" + lstFiles.Items[index]);\n    }\n}"
       }
     ]
   },
@@ -310,21 +252,17 @@
     "events": [
       {
         "name": "ItemCheck",
-        "description": "Raised when an item's check state is about to change. CheckedItems does not include the change yet.",
-        "delegate": "ItemCheckEventHandler",
-        "eventArgsType": "ItemCheckEventArgs",
-        "argumentsNote": "e.Index is the item, e.CurrentValue its old state and e.NewValue the state it is about to get. e.NewValue can be changed.",
-        "useCase": "Update a total as soon as the user ticks or clears an item.",
-        "example": "// Subscribe once, for example in the form constructor:\nclbOptions.ItemCheck += clbOptions_ItemCheck;\n\nprivate void clbOptions_ItemCheck(object sender, ItemCheckEventArgs e)\n{\n    string state = e.NewValue == CheckState.Checked ? \"checked\" : \"unchecked\";\n    lblLog.Text = clbOptions.Items[e.Index] + \" will be \" + state;\n}"
+        "description": "A box is about to change. The item still has its old state; e.NewValue holds the new one.",
+        "eventArgsType": "ItemCheckEventArgs (System.Windows.Forms)",
+        "useCase": "Veto a change or recalculate a total based on the new state.",
+        "example": "// Subscribe once, for example in the form constructor\nclbFeatures.ItemCheck += ClbFeatures_ItemCheck;\n\nprivate void ClbFeatures_ItemCheck(object sender, ItemCheckEventArgs e)\n{\n    string item = clbFeatures.Items[e.Index].ToString();\n    this.Text = item + \" -> \" + e.NewValue;\n}"
       },
       {
         "name": "SelectedIndexChanged",
-        "description": "Raised when the highlighted (not ticked) item changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Show details of the highlighted item.",
-        "example": "// Subscribe once, for example in the form constructor:\nclbOptions.SelectedIndexChanged += clbOptions_SelectedIndexChanged;\n\nprivate void clbOptions_SelectedIndexChanged(object sender, EventArgs e)\n{\n    if (clbOptions.SelectedIndex >= 0)\n    {\n        lblLog.Text = \"Highlighted: \" + clbOptions.SelectedItem;\n    }\n}"
+        "description": "The highlighted entry changes. This is not the same as ticking a box.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Show help text for the highlighted option.",
+        "example": "// Subscribe once, for example in the form constructor\nclbFeatures.SelectedIndexChanged += ClbFeatures_SelectedIndexChanged;\n\nprivate void ClbFeatures_SelectedIndexChanged(object sender, EventArgs e)\n{\n    this.Text = \"Highlighted: \" + clbFeatures.SelectedItem;\n}"
       }
     ]
   },
@@ -333,30 +271,24 @@
     "events": [
       {
         "name": "Click",
-        "description": "Raised when the user clicks the picture.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Open a larger view of a thumbnail.",
-        "example": "// Subscribe once, for example in the form constructor:\npicPhoto.Click += picPhoto_Click;\n\nprivate void picPhoto_Click(object sender, EventArgs e)\n{\n    picPhoto.BorderStyle = picPhoto.BorderStyle == BorderStyle.None\n        ? BorderStyle.FixedSingle\n        : BorderStyle.None;\n}"
+        "description": "The user clicks the picture.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Open a larger version of a thumbnail.",
+        "example": "// Subscribe once, for example in the form constructor\npicLogo.Click += PicLogo_Click;\n\nprivate void PicLogo_Click(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Picture clicked.\");\n}"
       },
       {
         "name": "LoadCompleted",
-        "description": "Raised when LoadAsync finishes, whether it succeeded, failed or was cancelled.",
-        "delegate": "AsyncCompletedEventHandler",
-        "eventArgsType": "AsyncCompletedEventArgs",
-        "argumentsNote": "e.Error holds the exception if loading failed, e.Cancelled is true if CancelAsync was called.",
-        "useCase": "Hide a 'loading' animation and report errors after downloading a picture.",
-        "example": "// Subscribe once, for example in the form constructor:\npicPhoto.LoadCompleted += picPhoto_LoadCompleted;\npicPhoto.LoadAsync(\"https://example.com/photo.jpg\"); // starts the download\n\nprivate void picPhoto_LoadCompleted(object sender, AsyncCompletedEventArgs e)\n{\n    if (e.Error != null)\n    {\n        lblStatus.Text = \"Could not load the picture: \" + e.Error.Message;\n    }\n    else if (!e.Cancelled)\n    {\n        lblStatus.Text = \"Picture loaded.\";\n    }\n}"
+        "description": "An asynchronous load started with LoadAsync or ImageLocation has finished or failed.",
+        "eventArgsType": "AsyncCompletedEventArgs (System.ComponentModel)",
+        "useCase": "Report a failed download or hide a loading indicator.",
+        "example": "// Subscribe once, for example in the form constructor\npicLogo.LoadCompleted += PicLogo_LoadCompleted;\n\nprivate void PicLogo_LoadCompleted(object sender, AsyncCompletedEventArgs e)\n{\n    if (e.Error != null)\n    {\n        MessageBox.Show(\"Could not load the picture: \" + e.Error.Message);\n    }\n}"
       },
       {
         "name": "SizeModeChanged",
-        "description": "Raised when the SizeMode property changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Update a label that shows how the picture is being fitted.",
-        "example": "// Subscribe once, for example in the form constructor:\npicPhoto.SizeModeChanged += picPhoto_SizeModeChanged;\n\nprivate void picPhoto_SizeModeChanged(object sender, EventArgs e)\n{\n    lblMode.Text = \"SizeMode: \" + picPhoto.SizeMode;\n}"
+        "description": "The SizeMode property changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Update a toolbar that shows the current fit mode.",
+        "example": "// Subscribe once, for example in the form constructor\npicLogo.SizeModeChanged += PicLogo_SizeModeChanged;\n\nprivate void PicLogo_SizeModeChanged(object sender, EventArgs e)\n{\n    this.Text = \"SizeMode: \" + picLogo.SizeMode;\n}"
       }
     ]
   },
@@ -365,39 +297,31 @@
     "events": [
       {
         "name": "ValueChanged",
-        "description": "Raised when Value changes, by the user or by code.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Recalculate a due date or age whenever the user picks a new date.",
-        "example": "// Subscribe once, for example in the form constructor:\ndtpDate.ValueChanged += dtpDate_ValueChanged;\n\nprivate void dtpDate_ValueChanged(object sender, EventArgs e)\n{\n    lblInfo.Text = \"Selected: \" + dtpDate.Value.ToShortDateString();\n}"
+        "description": "The Value property changes, by the user or by code.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Recalculate something that depends on the date, such as a deadline.",
+        "example": "// Subscribe once, for example in the form constructor\ndtpStart.ValueChanged += DtpStart_ValueChanged;\n\nprivate void DtpStart_ValueChanged(object sender, EventArgs e)\n{\n    this.Text = dtpStart.Value.ToShortDateString();\n}"
       },
       {
         "name": "CloseUp",
-        "description": "Raised when the drop-down calendar closes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Load data for the date only after the user has finished picking.",
-        "example": "// Subscribe once, for example in the form constructor:\ndtpDate.CloseUp += dtpDate_CloseUp;\n\nprivate void dtpDate_CloseUp(object sender, EventArgs e)\n{\n    lblInfo.Text = \"Picked \" + dtpDate.Value.ToLongDateString();\n}"
+        "description": "The drop-down calendar closes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Act once the user has finished choosing a date.",
+        "example": "// Subscribe once, for example in the form constructor\ndtpStart.CloseUp += DtpStart_CloseUp;\n\nprivate void DtpStart_CloseUp(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Chosen: \" + dtpStart.Value.ToLongDateString());\n}"
       },
       {
         "name": "DropDown",
-        "description": "Raised when the drop-down calendar opens.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Adjust the allowed range just before the user chooses a date.",
-        "example": "// Subscribe once, for example in the form constructor:\ndtpDate.DropDown += dtpDate_DropDown;\n\nprivate void dtpDate_DropDown(object sender, EventArgs e)\n{\n    dtpDate.MaxDate = DateTime.Today;\n}"
+        "description": "The drop-down calendar opens.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Show a hint while the calendar is open.",
+        "example": "// Subscribe once, for example in the form constructor\ndtpStart.DropDown += DtpStart_DropDown;\n\nprivate void DtpStart_DropDown(object sender, EventArgs e)\n{\n    this.Text = \"Choose a date\";\n}"
       },
       {
         "name": "FormatChanged",
-        "description": "Raised when the Format property changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Resize or re-align the control when it switches between date and time formats.",
-        "example": "// Subscribe once, for example in the form constructor:\ndtpDate.FormatChanged += dtpDate_FormatChanged;\n\nprivate void dtpDate_FormatChanged(object sender, EventArgs e)\n{\n    lblInfo.Text = \"Format is now \" + dtpDate.Format;\n}"
+        "description": "The Format property changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Adjust related controls when the display format changes.",
+        "example": "// Subscribe once, for example in the form constructor\ndtpStart.FormatChanged += DtpStart_FormatChanged;\n\nprivate void DtpStart_FormatChanged(object sender, EventArgs e)\n{\n    this.Text = \"Format: \" + dtpStart.Format;\n}"
       }
     ]
   },
@@ -406,21 +330,17 @@
     "events": [
       {
         "name": "DateChanged",
-        "description": "Raised whenever the selected date or range changes, including while the user is still dragging.",
-        "delegate": "DateRangeEventHandler",
-        "eventArgsType": "DateRangeEventArgs",
-        "argumentsNote": "e.Start and e.End are the first and last selected days.",
-        "useCase": "Show the current selection in a label as it changes.",
-        "example": "// Subscribe once, for example in the form constructor:\ncalBooking.DateChanged += calBooking_DateChanged;\n\nprivate void calBooking_DateChanged(object sender, DateRangeEventArgs e)\n{\n    lblRange.Text = e.Start.ToShortDateString() + \" - \" + e.End.ToShortDateString();\n}"
+        "description": "The selected date or range changes, including while the user drags.",
+        "eventArgsType": "DateRangeEventArgs (System.Windows.Forms)",
+        "useCase": "Show the selected range live.",
+        "example": "// Subscribe once, for example in the form constructor\ncalBooking.DateChanged += CalBooking_DateChanged;\n\nprivate void CalBooking_DateChanged(object sender, DateRangeEventArgs e)\n{\n    this.Text = e.Start.ToShortDateString() + \" - \" + e.End.ToShortDateString();\n}"
       },
       {
         "name": "DateSelected",
-        "description": "Raised when the user finishes selecting a date or range (mouse button released or Enter pressed).",
-        "delegate": "DateRangeEventHandler",
-        "eventArgsType": "DateRangeEventArgs",
-        "argumentsNote": "e.Start and e.End are the first and last selected days.",
-        "useCase": "Start an action, such as a booking, once the user has made a final choice.",
-        "example": "// Subscribe once, for example in the form constructor:\ncalBooking.DateSelected += calBooking_DateSelected;\n\nprivate void calBooking_DateSelected(object sender, DateRangeEventArgs e)\n{\n    MessageBox.Show(\"Booking from \" + e.Start.ToShortDateString() + \" to \" + e.End.ToShortDateString());\n}"
+        "description": "The user finishes selecting a date or range, by clicking or pressing Enter.",
+        "eventArgsType": "DateRangeEventArgs (System.Windows.Forms)",
+        "useCase": "Act only on the final choice, such as booking the days.",
+        "example": "// Subscribe once, for example in the form constructor\ncalBooking.DateSelected += CalBooking_DateSelected;\n\nprivate void CalBooking_DateSelected(object sender, DateRangeEventArgs e)\n{\n    MessageBox.Show(\"Selected: \" + e.Start.ToLongDateString());\n}"
       }
     ]
   },
@@ -429,21 +349,17 @@
     "events": [
       {
         "name": "ValueChanged",
-        "description": "Raised when Value changes, by the arrows, typing (after it is accepted) or code.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Recalculate a total when the quantity changes.",
-        "example": "// Subscribe once, for example in the form constructor:\nnudQuantity.ValueChanged += nudQuantity_ValueChanged;\n\nprivate void nudQuantity_ValueChanged(object sender, EventArgs e)\n{\n    lblTotal.Text = (nudQuantity.Value * 9.99M).ToString(\"C\");\n}"
+        "description": "The Value property changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Update a price or total.",
+        "example": "// Subscribe once, for example in the form constructor\nnudQty.ValueChanged += NudQty_ValueChanged;\n\nprivate void NudQty_ValueChanged(object sender, EventArgs e)\n{\n    this.Text = \"Quantity: \" + nudQty.Value;\n}"
       },
       {
         "name": "Validating",
-        "description": "Raised when the control is about to lose focus.",
-        "delegate": "CancelEventHandler",
-        "eventArgsType": "CancelEventArgs",
-        "argumentsNote": "Set e.Cancel = true to keep the focus in the control.",
-        "useCase": "Enforce a rule that Minimum and Maximum cannot express, such as even numbers only.",
-        "example": "// Subscribe once, for example in the form constructor:\nnudQuantity.Validating += nudQuantity_Validating;\n\nprivate void nudQuantity_Validating(object sender, CancelEventArgs e)\n{\n    if (nudQuantity.Value % 2 != 0)\n    {\n        e.Cancel = true;\n        errorProvider1.SetError(nudQuantity, \"Order in pairs only.\");\n    }\n    else\n    {\n        errorProvider1.SetError(nudQuantity, \"\");\n    }\n}"
+        "description": "The control is about to lose focus and validation is enabled.",
+        "eventArgsType": "CancelEventArgs (System.ComponentModel)",
+        "useCase": "Reject a number your rules do not allow.",
+        "example": "// Subscribe once, for example in the form constructor\nnudQty.Validating += NudQty_Validating;\n\nprivate void NudQty_Validating(object sender, CancelEventArgs e)\n{\n    if (nudQty.Value == 13)\n    {\n        e.Cancel = true;\n        MessageBox.Show(\"13 is not allowed.\");\n    }\n}"
       }
     ]
   },
@@ -452,21 +368,17 @@
     "events": [
       {
         "name": "Click",
-        "description": "Raised when the user clicks the bar.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Rarely used; for example show the exact percentage on click.",
-        "example": "// Subscribe once, for example in the form constructor:\nprgDownload.Click += prgDownload_Click;\n\nprivate void prgDownload_Click(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Progress: \" + prgDownload.Value + \"%\");\n}"
+        "description": "The user clicks the bar.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Show the exact progress in a message.",
+        "example": "// Subscribe once, for example in the form constructor\nprogress.Click += Progress_Click;\n\nprivate void Progress_Click(object sender, EventArgs e)\n{\n    MessageBox.Show(\"Progress: \" + progress.Value + \"%\");\n}"
       },
       {
         "name": "SizeChanged",
-        "description": "Raised when the width or height of the bar changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Keep a percentage label centered over the bar when the window is resized.",
-        "example": "// Subscribe once, for example in the form constructor:\nprgDownload.SizeChanged += prgDownload_SizeChanged;\n\nprivate void prgDownload_SizeChanged(object sender, EventArgs e)\n{\n    lblPercent.Left = prgDownload.Left + (prgDownload.Width - lblPercent.Width) / 2;\n}"
+        "description": "The size of the bar changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Reposition other controls that sit next to the bar.",
+        "example": "// Subscribe once, for example in the form constructor\nprogress.SizeChanged += Progress_SizeChanged;\n\nprivate void Progress_SizeChanged(object sender, EventArgs e)\n{\n    this.Text = \"Bar width: \" + progress.Width;\n}"
       }
     ]
   },
@@ -475,21 +387,17 @@
     "events": [
       {
         "name": "Scroll",
-        "description": "Raised when the user moves the thumb. Not raised when code changes Value.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Apply a volume change while the user drags.",
-        "example": "// Subscribe once, for example in the form constructor:\ntrkVolume.Scroll += trkVolume_Scroll;\n\nprivate void trkVolume_Scroll(object sender, EventArgs e)\n{\n    lblVolume.Text = trkVolume.Value + \"%\";\n}"
+        "description": "The user moves the slider with the mouse or keyboard. Code that sets Value does not raise it.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Update a label while the user drags.",
+        "example": "// Subscribe once, for example in the form constructor\ntrkVolume.Scroll += TrkVolume_Scroll;\n\nprivate void TrkVolume_Scroll(object sender, EventArgs e)\n{\n    this.Text = \"Volume: \" + trkVolume.Value;\n}"
       },
       {
         "name": "ValueChanged",
-        "description": "Raised whenever Value changes, from the user or from code.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Keep a label in sync no matter how the value was changed.",
-        "example": "// Subscribe once, for example in the form constructor:\ntrkVolume.ValueChanged += trkVolume_ValueChanged;\n\nprivate void trkVolume_ValueChanged(object sender, EventArgs e)\n{\n    lblVolume.Text = trkVolume.Value + \"%\"; // also runs when code sets Value\n}"
+        "description": "The Value property changes, by the user or by code.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Apply the new level, for example to an audio player.",
+        "example": "// Subscribe once, for example in the form constructor\ntrkVolume.ValueChanged += TrkVolume_ValueChanged;\n\nprivate void TrkVolume_ValueChanged(object sender, EventArgs e)\n{\n    this.Text = \"Value: \" + trkVolume.Value;\n}"
       }
     ]
   },
@@ -498,12 +406,10 @@
     "events": [
       {
         "name": "LinkClicked",
-        "description": "Raised when the user clicks one of the links.",
-        "delegate": "LinkLabelLinkClickedEventHandler",
-        "eventArgsType": "LinkLabelLinkClickedEventArgs",
-        "argumentsNote": "e.Link is the link that was clicked, e.Link.LinkData is any object you stored with it, e.Button is the mouse button.",
-        "useCase": "Open a web page or another form and mark the link as visited.",
-        "example": "// Subscribe once, for example in the form constructor:\nlnkHelp.LinkClicked += lnkHelp_LinkClicked;\n\nprivate void lnkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)\n{\n    // requires: using System.Diagnostics;\n    e.Link.Visited = true;\n    Process.Start(new ProcessStartInfo(\"https://learn.microsoft.com/dotnet/desktop/winforms/\") { UseShellExecute = true });\n}"
+        "description": "The user clicks a link area of the label.",
+        "eventArgsType": "LinkLabelLinkClickedEventArgs (System.Windows.Forms)",
+        "useCase": "Open a web page and mark the link as visited.",
+        "example": "// Subscribe once, for example in the form constructor\nlnkHelp.LinkClicked += LnkHelp_LinkClicked;\n\nprivate void LnkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)\n{\n    e.Link.Visited = true;\n    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(\"https://learn.microsoft.com\") { UseShellExecute = true });\n}"
       }
     ]
   },
@@ -512,21 +418,17 @@
     "events": [
       {
         "name": "Popup",
-        "description": "Raised just before a tip is displayed.",
-        "delegate": "PopupEventHandler",
-        "eventArgsType": "PopupEventArgs",
-        "argumentsNote": "e.AssociatedControl is the control, e.ToolTipSize can be changed, e.IsBalloon tells the style, e.Cancel stops the tip.",
-        "useCase": "Enlarge the tip or cancel it for certain controls.",
-        "example": "// Subscribe once, for example in the form constructor:\ntoolTip1.Popup += toolTip1_Popup;\n\nprivate void toolTip1_Popup(object sender, PopupEventArgs e)\n{\n    e.ToolTipSize = new Size(e.ToolTipSize.Width + 40, e.ToolTipSize.Height);\n}"
+        "description": "The tool tip is about to be shown.",
+        "eventArgsType": "PopupEventArgs (System.Windows.Forms)",
+        "useCase": "Change its size or cancel it for certain controls.",
+        "example": "// Subscribe once, for example in the form constructor\ntoolTip1.Popup += ToolTip1_Popup;\n\nprivate void ToolTip1_Popup(object sender, PopupEventArgs e)\n{\n    e.ToolTipSize = new Size(220, 40);\n}"
       },
       {
         "name": "Draw",
-        "description": "Raised when a tip must be painted, only when OwnerDraw = true.",
-        "delegate": "DrawToolTipEventHandler",
-        "eventArgsType": "DrawToolTipEventArgs",
-        "argumentsNote": "e.Graphics is the surface, e.Bounds the area, and e.DrawBackground / DrawBorder / DrawText draw the standard parts.",
-        "useCase": "Paint tips with your own colors or fonts.",
-        "example": "// Subscribe once, for example in the form constructor:\ntoolTip1.Draw += toolTip1_Draw;\ntoolTip1.OwnerDraw = true; // required for the Draw event\n\nprivate void toolTip1_Draw(object sender, DrawToolTipEventArgs e)\n{\n    e.DrawBackground();\n    e.DrawBorder();\n    e.DrawText();\n}"
+        "description": "The tool tip must be painted. Raised only when OwnerDraw is true.",
+        "eventArgsType": "DrawToolTipEventArgs (System.Windows.Forms)",
+        "useCase": "Draw a custom background, border or text.",
+        "example": "// Subscribe once, for example in the form constructor\ntoolTip1.Draw += ToolTip1_Draw;\n\nprivate void ToolTip1_Draw(object sender, DrawToolTipEventArgs e)\n{\n    // Requires toolTip1.OwnerDraw = true;\n    e.DrawBackground();\n    e.DrawBorder();\n    e.DrawText();\n}"
       }
     ]
   },

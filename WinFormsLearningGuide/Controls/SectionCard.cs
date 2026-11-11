@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using WinFormsLearningGuide.Helpers;
@@ -64,12 +65,14 @@ public class SectionCard : Control, IThemeable
         Height = 80;
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public string Heading
     {
         get => _heading;
         set { _heading = value ?? ""; Invalidate(); }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public string Badge
     {
         get => _badge;
@@ -77,6 +80,7 @@ public class SectionCard : Control, IThemeable
     }
 
     /// <summary>Convenience: shows plain wrapped text (a single paragraph).</summary>
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public string Body
     {
         get => _blocks.Count == 1 && _blocks[0].Kind == BlockKind.Paragraph ? _blocks[0].Text : "";

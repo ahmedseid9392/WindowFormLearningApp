@@ -1,7 +1,7 @@
-# Windows Forms Learning & Reference Guide — Phase 4
+# Windows Forms Learning & Reference Guide — Phase 5
 
 A reading / learning / code-reference application for the WinForms toolbox
-(not a designer). This package contains **Phase 1 (layout and navigation), Phase 2 (documentation content), Phase 3 (properties reference) and Phase 4 (events and methods)**.
+(not a designer). This package contains **Phases 1-5: layout and navigation, documentation content, properties, events and methods, and the source code viewer**.
 
 ## Run it
 
@@ -14,36 +14,33 @@ or open `WinFormsLearningGuide.csproj` in Visual Studio 2022/2026 and press F5.
 
 Using .NET 8 or 9? Edit `<TargetFramework>` in the .csproj to `net8.0-windows` or `net9.0-windows`.
 
-## What Phase 4 adds
+## What Phases 4 and 5 add
 
-Sections **4. Events Reference** and **5. Methods Reference** are now real on all 44 control pages
-(108 documented events and 122 documented methods).
+**Phase 4 - Events Reference (section 4) and Methods Reference (section 5)** on all 44 control pages
+(108 events, 97 methods):
 
-**Events** - for each event: when it is raised, the delegate type, the event-argument class with what its
-members give you, a real-world use case, and a complete C# example (the subscription line, any setup it
-needs, and the handler method). Covers every event shown in the quick-reference panel.
+* Events: a table (Event | Event Args | When it happens) and, for each event, when it happens, the event
+  arguments type with its namespace, a real-world use, and a complete subscription plus handler example.
+* Methods: a table and, for each method, its signature, description, every parameter, the return value and an example.
+  Methods shared by all controls (Focus, Show, Hide, Invalidate, ...) or all toolbar items are written once in
+  `Data/Methods/Inherited.json` and shown at the end of each page.
+* Content lives in `Data/Events/*.events.json` and `Data/Methods/*.methods.json`.
 
-**Methods** - for each method: the full signature, description, every parameter with its type, the return
-type and what it returns, a C# example and the expected effect. Includes the collection calls beginners use
-all the time (`Items.Add`, `Controls.Add`, `Rows.Add`, `TabPages.Add`...).
+**Phase 5 - Source code viewer (section 6 "Complete C# Example")** with a compilable program for every control:
 
-**Inherited members** - shared events and methods are written once in `Data/Events/Inherited.json` and
-`Data/Methods/Inherited.json` and shown as a table at the end of each page: 23 `Control` events and 16
-`Control` methods; 10 events and 5 methods for toolbar items (`ToolStripItem`); `Disposed` and `Dispose()` for
-non-visual components. A member documented on the control itself replaces the shared entry. In the inherited
-tables the example is a one-line subscription or call (`ctl.Click += ...`).
+* **Code** tab: the whole program with C# syntax highlighting and line numbers, a horizontal scroll bar for long lines,
+  **Copy code** and **Download .cs** buttons.
+* **Explain line by line** tab: the program in steps; each step shows its lines (real line numbers) and an explanation.
+* **Alternatives** tab: other ways to do the same thing, with highlighted code.
+* Content lives in `Data/Examples/*.examples.json`: each example is a list of segments (code plus explanation), so the
+  explanation can never drift away from the code. The Code tab is simply all segments joined.
+* New code: `Controls/CodeViewer.cs`, `Helpers/CSharpHighlighter.cs`, `Services/CodeExampleService.cs`, new models
+  (`ControlExample`, `MethodDocumentation`, `ControlMethods`, `ControlEvents`), loaders in `DocumentationService`,
+  builders in `SectionContentBuilder`, and `DocumentationViewer` now hosts the code viewer for section 6.
 
-Content lives in `Data/Events/*.events.json` and `Data/Methods/*.methods.json` (one file per category,
-matched to controls by name). To change or add text, edit those files; no code changes needed. An entry that
-names an unknown control stops the app at startup with a clear message.
+To run an example: create a new Windows Forms App project, delete Form1 and Program.cs, add the downloaded file, press F5.
 
-Code added or changed: `EventDocumentation` (new Delegate and ArgumentsNote fields), `MethodDocumentation`,
-`ParameterDocumentation`, `ControlMembers` (ControlEvents / ControlMethods), `ControlDocumentation`
-(Events, InheritedEvents, Methods, InheritedMethods, MemberBase), `DocumentationService` (LoadEvents,
-LoadMethods), `SectionContentBuilder` (BuildEvents, BuildMethods), `SearchService` (searches event and method
-names) and `DocumentationSection.CurrentPhase = 4`. The existing content blocks and `SectionCard` are reused unchanged.
-
-Section 6 (Complete C# Example) is still a placeholder (Phase 5).
+Only the PropertyPlayground (Phase 6) and the remaining Phase 7-8 polish are still to come.
 
 ## What Phase 3 adds
 
@@ -68,7 +65,6 @@ properties card stays fast).
 
 **Fix:** the Phase 2 zip did not compile because of an unescaped quote in `SectionContentBuilder.cs`
 (the note under Related Controls). That line is corrected here.
-
 
 ## What Phase 2 adds
 
@@ -104,4 +100,4 @@ Code added: `ControlContent` model, `ContentBlock`, block-based `SectionCard`,
 
 ## Next phases
 
-~~2 documentation content~~ (done) · ~~3 properties~~ (done) · ~~4 events/methods~~ (done) · 5 code viewer · 6 playground · 7 search/progress polish · 8 testing
+~~2 documentation content~~ (done) · ~~3 properties~~ (done) · 4 events/methods · 5 code viewer · 6 playground · 7 search/progress polish · 8 testing

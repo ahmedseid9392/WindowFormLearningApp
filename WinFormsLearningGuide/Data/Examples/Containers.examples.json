@@ -1,0 +1,637 @@
+[
+  {
+    "name": "Panel",
+    "title": "Panel example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private Panel pnlContent;\n    private Button btnInside;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"Panel example\";\n        ClientSize = new Size(300, 170);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        pnlContent = new Panel();\n        pnlContent.Location = new Point(20, 20);\n        pnlContent.Size = new Size(240, 120);\n        pnlContent.BorderStyle = BorderStyle.FixedSingle;",
+        "explain": "Create a panel with a visible border."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        pnlContent.AutoScroll = true;",
+        "explain": "Scroll bars appear when a child control lies outside the visible area."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnInside = new Button();\n        btnInside.Text = \"Inside\";\n        btnInside.Location = new Point(150, 90);\n        btnInside.Click += BtnInside_Click;\n        pnlContent.Controls.Add(btnInside);",
+        "explain": "The button is a child of the panel, so its Location is relative to the panel. It is partly outside, which triggers the scroll bars."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(pnlContent);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnInside_Click(object sender, EventArgs e)\n    {\n        pnlContent.BackColor = Color.LightYellow;\n    }",
+        "explain": "Changes the panel background to show that the event came from a control inside it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Fill the form",
+        "description": "Dock the panel so it follows the window size.",
+        "code": "pnlContent.Dock = DockStyle.Fill;"
+      }
+    ]
+  },
+  {
+    "name": "GroupBox",
+    "title": "GroupBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private GroupBox grpOptions;\n    private CheckBox chkEmail;\n    private CheckBox chkSms;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"GroupBox example\";\n        ClientSize = new Size(280, 150);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        grpOptions = new GroupBox();\n        grpOptions.Text = \"Notifications\";\n        grpOptions.Location = new Point(20, 20);\n        grpOptions.Size = new Size(220, 100);",
+        "explain": "The Text of a group box is its caption."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        chkEmail = new CheckBox();\n        chkEmail.Text = \"E-mail\";\n        chkEmail.Location = new Point(15, 25);\n        chkEmail.Checked = true;\n\n        chkSms = new CheckBox();\n        chkSms.Text = \"SMS\";\n        chkSms.Location = new Point(15, 55);",
+        "explain": "Two options that belong together."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        grpOptions.Controls.Add(chkEmail);\n        grpOptions.Controls.Add(chkSms);",
+        "explain": "Add the options to the group box, not to the form."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(grpOptions);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Disable the whole group",
+        "description": "Disabling the container disables all of its children.",
+        "code": "grpOptions.Enabled = false;"
+      }
+    ]
+  },
+  {
+    "name": "TabControl",
+    "title": "TabControl example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private TabControl tabMain;\n    private TabPage tabGeneral;\n    private TabPage tabAdvanced;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"TabControl example\";\n        ClientSize = new Size(360, 220);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        tabGeneral = new TabPage(\"General\");\n        tabAdvanced = new TabPage(\"Advanced\");",
+        "explain": "Each page is created with its caption."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tabMain = new TabControl();\n        tabMain.Dock = DockStyle.Fill;\n        tabMain.TabPages.Add(tabGeneral);\n        tabMain.TabPages.Add(tabAdvanced);",
+        "explain": "TabPages holds the pages. Docking to Fill makes the control cover the form."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tabMain.SelectedIndexChanged += TabMain_SelectedIndexChanged;",
+        "explain": "Raised when another tab is selected."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(tabMain);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void TabMain_SelectedIndexChanged(object sender, EventArgs e)\n    {\n        Text = \"Tab: \" + tabMain.SelectedTab.Text;\n    }",
+        "explain": "SelectedTab is the page that is now visible."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Tabs on the left",
+        "description": "Move the tab strip to another side.",
+        "code": "tabMain.Alignment = TabAlignment.Left;"
+      }
+    ]
+  },
+  {
+    "name": "TabPage",
+    "title": "TabPage example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private TabControl tabMain;\n    private TabPage tabNotes;\n    private TextBox txtNotes;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"TabPage example\";\n        ClientSize = new Size(360, 220);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        tabNotes = new TabPage(\"Notes\");\n        tabNotes.Padding = new Padding(8);\n        tabNotes.UseVisualStyleBackColor = true;\n        tabNotes.Enter += TabNotes_Enter;",
+        "explain": "A page is created with its caption. Enter is raised when the page becomes active."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        txtNotes = new TextBox();\n        txtNotes.Multiline = true;\n        txtNotes.Dock = DockStyle.Fill;\n        tabNotes.Controls.Add(txtNotes);",
+        "explain": "The page hosts its own child controls through Controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tabMain = new TabControl();\n        tabMain.Dock = DockStyle.Fill;\n        tabMain.TabPages.Add(tabNotes);",
+        "explain": "A page only becomes visible when it is added to a TabControl."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(tabMain);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void TabNotes_Enter(object sender, EventArgs e)\n    {\n        Text = \"Notes tab opened\";\n    }",
+        "explain": "Runs when the page is activated."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Shorter way",
+        "description": "The TabPages collection can create a page from a caption.",
+        "code": "tabMain.TabPages.Add(\"Notes\");"
+      }
+    ]
+  },
+  {
+    "name": "SplitContainer",
+    "title": "SplitContainer example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private SplitContainer split;\n    private ListBox lstNav;\n    private TextBox txtDetails;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"SplitContainer example\";\n        ClientSize = new Size(420, 240);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        split = new SplitContainer();\n        split.Dock = DockStyle.Fill;\n        split.FixedPanel = FixedPanel.Panel1;\n        split.SplitterDistance = 100;",
+        "explain": "Panel1 keeps its width when the window is resized. SplitterDistance is the width of Panel1."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lstNav = new ListBox();\n        lstNav.Dock = DockStyle.Fill;\n        lstNav.Items.AddRange(new object[] { \"Home\", \"Settings\", \"About\" });\n        split.Panel1.Controls.Add(lstNav);",
+        "explain": "The left panel hosts a navigation list."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        txtDetails = new TextBox();\n        txtDetails.Multiline = true;\n        txtDetails.Dock = DockStyle.Fill;\n        split.Panel2.Controls.Add(txtDetails);",
+        "explain": "The right panel hosts the details."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        split.SplitterMoved += Split_SplitterMoved;",
+        "explain": "Raised when the user has moved the splitter."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(split);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void Split_SplitterMoved(object sender, SplitterEventArgs e)\n    {\n        Text = \"Left panel width: \" + split.SplitterDistance;\n    }",
+        "explain": "SplitterDistance is the new width of the first panel."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Horizontal split",
+        "description": "Place the panels one above the other.",
+        "code": "split.Orientation = Orientation.Horizontal;"
+      }
+    ]
+  },
+  {
+    "name": "FlowLayoutPanel",
+    "title": "FlowLayoutPanel example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private FlowLayoutPanel flow;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"FlowLayoutPanel example\";\n        ClientSize = new Size(360, 160);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        flow = new FlowLayoutPanel();\n        flow.Dock = DockStyle.Fill;\n        flow.FlowDirection = FlowDirection.LeftToRight;\n        flow.WrapContents = true;\n        flow.AutoScroll = true;",
+        "explain": "Controls are arranged from left to right and wrap to a new row at the edge."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        for (int i = 1; i <= 8; i++)\n        {\n            Button button = new Button();\n            button.Text = \"Button \" + i;\n            button.AutoSize = true;\n            flow.Controls.Add(button);\n        }",
+        "explain": "Eight buttons are added. The panel positions them; no Location is needed."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(flow);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Start a new row",
+        "description": "Force a line break after a control.",
+        "code": "flow.SetFlowBreak(btnFirst, true);"
+      }
+    ]
+  },
+  {
+    "name": "TableLayoutPanel",
+    "title": "TableLayoutPanel example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private TableLayoutPanel tlp;\n    private Label lblName;\n    private TextBox txtName;\n    private Button btnOk;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"TableLayoutPanel example\";\n        ClientSize = new Size(360, 130);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        tlp = new TableLayoutPanel();\n        tlp.Dock = DockStyle.Fill;\n        tlp.ColumnCount = 2;\n        tlp.RowCount = 2;\n        tlp.Padding = new Padding(12);",
+        "explain": "A grid with two columns and two rows."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tlp.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));\n        tlp.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));\n        tlp.RowStyles.Add(new RowStyle(SizeType.AutoSize));\n        tlp.RowStyles.Add(new RowStyle(SizeType.AutoSize));",
+        "explain": "The first column fits its content, the second takes all remaining space."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblName = new Label();\n        lblName.Text = \"Name:\";\n        lblName.AutoSize = true;\n        lblName.Anchor = AnchorStyles.Left;\n\n        txtName = new TextBox();\n        txtName.Anchor = AnchorStyles.Left | AnchorStyles.Right;\n\n        btnOk = new Button();\n        btnOk.Text = \"OK\";\n        btnOk.Anchor = AnchorStyles.Right;",
+        "explain": "Anchor decides how each control is placed inside its cell."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tlp.Controls.Add(lblName, 0, 0);\n        tlp.Controls.Add(txtName, 1, 0);\n        tlp.Controls.Add(btnOk, 1, 1);",
+        "explain": "Controls.Add(control, column, row) puts a control into a cell."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(tlp);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Span two columns",
+        "description": "A control can cover several cells.",
+        "code": "tlp.SetColumnSpan(btnOk, 2);"
+      }
+    ]
+  }
+]

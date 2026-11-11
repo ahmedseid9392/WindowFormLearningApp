@@ -169,157 +169,106 @@ public class SectionContentBuilder
         return blocks;
     }
 
-    private static string BaseNote(ControlDocumentation doc, string ending)
-    {
-        switch (doc.MemberBase)
-        {
-            case "ToolStripItem":
-                return "Every item that can be placed on a ToolStrip derives from ToolStripItem, so " + doc.Name + " " + ending + ".";
-            case "Component":
-                return "Every component derives from Component, so " + doc.Name + " " + ending + ".";
-            default:
-                return "Every Windows Forms control derives from Control, so " + doc.Name + " " + ending + ".";
-        }
-    }
-
-    private static List<ContentBlock> NoMembers(ControlDocumentation doc, string what)
-    {
-        return new List<ContentBlock>
-        {
-            ContentBlock.Note("No " + what + " are documented for " + doc.Name + " (no entry in Data/" +
-                              (what == "events" ? "Events" : "Methods") + ").")
-        };
-    }
-
     // ------------------------------------------------------------------ 4. Events reference
 
-    private static readonly int[] EventTableWeights = { 21, 23, 56 };
+    private static readonly int[] EventTableWeights = { 20, 30, 50 };
     private static readonly bool[] EventTableMono = { true, true, false };
-    private static readonly int[] InheritedEventWeights = { 15, 15, 30, 40 };
-    private static readonly bool[] InheritedEventMono = { true, true, false, true };
 
     private static List<ContentBlock> BuildEvents(ControlDocumentation doc)
     {
-        List<EventDocumentation> own = doc.Events;
-        List<EventDocumentation> inherited = doc.InheritedEvents;
-        if (own.Count == 0 && inherited.Count == 0)
-            return NoMembers(doc, "events");
-
         var blocks = new List<ContentBlock>();
 
-        string intro = own.Count > 0
-            ? "The table lists the key events of " + doc.Name + ". Each one is explained below with when it is raised, " +
-              "its event arguments, a real-world use case and a complete C# handler (the subscription plus the handler method)."
-            : doc.Name + " has no events of its own that beginners need; the events it inherits are listed below.";
-        if (own.Count > 0 && inherited.Count > 0)
-            intro += " Events shared with every " + doc.MemberBase + " are listed at the end.";
-        blocks.Add(ContentBlock.Paragraph(intro));
-
-        if (own.Count > 0)
+        if (doc.Events.Count == 0)
         {
-            blocks.Add(ContentBlock.SubHeading("Events of " + doc.ClassName));
-
-            var rows = new List<string[]>();
-            foreach (EventDocumentation e in own)
-                rows.Add(new[] { e.Name, e.EventArgsType, e.Description });
-            blocks.Add(ContentBlock.Table(new[] { "Event", "Event Arguments", "When it happens" }, rows,
-                EventTableWeights, EventTableMono));
-
-            blocks.Add(ContentBlock.SubHeading("Event details"));
-            foreach (EventDocumentation e in own)
-            {
-                blocks.Add(ContentBlock.Title(e.Name));
-                AddIfNotEmpty(blocks, e.Description, ContentBlock.Paragraph);
-                AddField(blocks, "Delegate", e.Delegate);
-                AddField(blocks, "Event arguments", string.IsNullOrWhiteSpace(e.ArgumentsNote)
-                    ? e.EventArgsType
-                    : e.EventArgsType + " - " + e.ArgumentsNote);
-                AddField(blocks, "Real-world use", e.UseCase);
-                AddIfNotEmpty(blocks, e.Example, ContentBlock.Code);
-            }
+            blocks.Add(ContentBlock.Paragraph(doc.Name + " has no commonly used events of its own."));
+            if (doc.Name == "ErrorProvider")
+                blocks.Add(ContentBlock.Note("Use it together with the Validating event of the controls it decorates (see TextBox): the handler calls SetError to show or clear the message."));
+            else if (doc.InheritedFrom == "Control")
+                blocks.Add(ContentBlock.Note("Every control inherits the common events of Control, such as Click, Enter, Leave, KeyDown, MouseEnter and Resize."));
+            return blocks;
         }
 
-        if (inherited.Count > 0)
-        {
-            blocks.Add(ContentBlock.SubHeading("Inherited from " + doc.MemberBase));
-            blocks.Add(ContentBlock.Note(BaseNote(doc, "raises these events too")));
+        blocks.Add(ContentBlock.Paragraph(
+            "These are the most useful events of " + doc.Name + ". You subscribe with += and the handler receives the sender " +
+            "and an event-arguments object that carries the event data. In the examples, this is the form that contains the control."));
 
-            var rows = new List<string[]>();
-            foreach (EventDocumentation e in inherited)
-                rows.Add(new[] { e.Name, e.EventArgsType, e.Description, e.Example });
-            blocks.Add(ContentBlock.Table(new[] { "Event", "Event Arguments", "When it happens", "Subscribe" }, rows,
-                InheritedEventWeights, InheritedEventMono));
+        blocks.Add(ContentBlock.SubHeading("Events of " + doc.ClassName));
+        var rows = new List<string[]>();
+        foreach (EventDocumentation ev in doc.Events)
+            rows.Add(new[] { ev.Name, ev.EventArgsType, ev.Description });
+        blocks.Add(ContentBlock.Table(new[] { "Event", "Event Args", "When it happens" }, rows, EventTableWeights, EventTableMono));
+
+        blocks.Add(ContentBlock.SubHeading("Event details"));
+        foreach (EventDocumentation ev in doc.Events)
+        {
+            blocks.Add(ContentBlock.Title(ev.Name));
+            AddField(blocks, "When it happens", ev.Description);
+            AddField(blocks, "Event arguments", ev.EventArgsType);
+            AddField(blocks, "Real-world use", ev.UseCase);
+            AddIfNotEmpty(blocks, ev.Example, ContentBlock.Code);
         }
+
+        if (doc.InheritedFrom == "Control")
+            blocks.Add(ContentBlock.Note("Every control also inherits the common events of Control, such as Click, Enter, Leave, KeyDown, MouseEnter and Resize."));
 
         return blocks;
     }
 
     // ------------------------------------------------------------------ 5. Methods reference
 
-    private static readonly int[] MethodTableWeights = { 36, 14, 50 };
-    private static readonly bool[] MethodTableMono = { true, true, false };
-    private static readonly int[] InheritedMethodWeights = { 26, 11, 31, 32 };
-    private static readonly bool[] InheritedMethodMono = { true, true, false, true };
+    private static readonly int[] MethodTableWeights = { 19, 13, 38, 30 };
+    private static readonly bool[] MethodTableMono = { true, true, false, true };
 
     private static List<ContentBlock> BuildMethods(ControlDocumentation doc)
     {
         List<MethodDocumentation> own = doc.Methods;
         List<MethodDocumentation> inherited = doc.InheritedMethods;
-        if (own.Count == 0 && inherited.Count == 0)
-            return NoMembers(doc, "methods");
-
         var blocks = new List<ContentBlock>();
 
-        string intro = own.Count > 0
-            ? "The table lists the important methods of " + doc.Name + ". Each one is explained below with its signature, " +
-              "parameters, return type, a C# example and the effect you will see."
-            : doc.Name + " has no important methods of its own; the methods it inherits are listed below.";
-        if (own.Count > 0 && inherited.Count > 0)
-            intro += " Methods shared with every " + doc.MemberBase + " are listed at the end.";
-        blocks.Add(ContentBlock.Paragraph(intro));
+        if (own.Count == 0 && inherited.Count == 0)
+        {
+            blocks.Add(ContentBlock.Paragraph(doc.Name + " has no commonly used methods."));
+            return blocks;
+        }
+
+        blocks.Add(ContentBlock.Paragraph(own.Count > 0
+            ? "The key methods of " + doc.Name + ", each with its parameters, return value and a C# example."
+            : doc.Name + " has no methods of its own that beginners need. The methods it shares with every " +
+              doc.InheritedFrom + " are the ones to know."));
 
         if (own.Count > 0)
         {
             blocks.Add(ContentBlock.SubHeading("Methods of " + doc.ClassName));
-
             var rows = new List<string[]>();
             foreach (MethodDocumentation m in own)
-                rows.Add(new[] { m.Signature, m.ReturnType, m.Description });
-            blocks.Add(ContentBlock.Table(new[] { "Method", "Returns", "Description" }, rows,
-                MethodTableWeights, MethodTableMono));
+                rows.Add(new[] { m.Name, m.ReturnType, m.Description, m.Example });
+            blocks.Add(ContentBlock.Table(new[] { "Method", "Returns", "Description", "Example" }, rows, MethodTableWeights, MethodTableMono));
 
             blocks.Add(ContentBlock.SubHeading("Method details"));
             foreach (MethodDocumentation m in own)
             {
-                blocks.Add(ContentBlock.Title(m.Name));
+                blocks.Add(ContentBlock.Title(m.Signature));
                 AddIfNotEmpty(blocks, m.Description, ContentBlock.Paragraph);
-                AddIfNotEmpty(blocks, m.Signature, ContentBlock.Code);
-
                 if (m.Parameters.Count == 0)
-                    blocks.Add(ContentBlock.Field("Parameters", "None."));
-                else
-                    foreach (ParameterDocumentation p in m.Parameters)
-                        blocks.Add(ContentBlock.Field("Parameter", p.Name + " (" + p.Type + "): " + p.Description));
-
-                string returns = string.Equals(m.ReturnType, "void", StringComparison.OrdinalIgnoreCase)
-                    ? "void - nothing is returned."
-                    : m.ReturnType + (string.IsNullOrWhiteSpace(m.ReturnDescription) ? "" : " - " + m.ReturnDescription);
-                blocks.Add(ContentBlock.Field("Returns", returns));
+                    AddField(blocks, "Parameters", "None");
+                foreach (ParameterDocumentation p in m.Parameters)
+                    AddField(blocks, "Parameter", p.Name + " (" + p.Type + "): " + p.Description);
+                AddField(blocks, "Returns", m.Returns);
                 AddIfNotEmpty(blocks, m.Example, ContentBlock.Code);
-                AddField(blocks, "Expected effect", m.ExpectedEffect);
             }
         }
 
         if (inherited.Count > 0)
         {
-            blocks.Add(ContentBlock.SubHeading("Inherited from " + doc.MemberBase));
-            blocks.Add(ContentBlock.Note(BaseNote(doc, "has these methods too")));
-
+            blocks.Add(ContentBlock.SubHeading("Inherited from " + doc.InheritedFrom));
+            blocks.Add(ContentBlock.Note(
+                doc.InheritedFrom == "ToolStripItem"
+                    ? "These methods are shared by every item that can be placed on a ToolStrip."
+                    : "These methods are shared by every Windows Forms control."));
             var rows = new List<string[]>();
             foreach (MethodDocumentation m in inherited)
-                rows.Add(new[] { m.Signature, m.ReturnType, m.Description, m.Example });
-            blocks.Add(ContentBlock.Table(new[] { "Method", "Returns", "Description", "Example" }, rows,
-                InheritedMethodWeights, InheritedMethodMono));
+                rows.Add(new[] { m.Name, m.ReturnType, m.Description, m.Example });
+            blocks.Add(ContentBlock.Table(new[] { "Method", "Returns", "Description", "Example" }, rows, MethodTableWeights, MethodTableMono));
         }
 
         return blocks;

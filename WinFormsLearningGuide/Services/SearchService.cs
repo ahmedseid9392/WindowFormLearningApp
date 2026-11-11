@@ -52,8 +52,6 @@ public class SearchService
         if (Has(d.ClassName, token)) return 50;
         if (d.ImportantProperties.Any(p => Has(p, token))) return 20;
         if (d.ImportantEvents.Any(p => Has(p, token))) return 20;
-        if (d.Events.Any(ev => Has(ev.Name, token))) return 18;
-        if (d.Methods.Any(m => Has(m.Name, token))) return 18;
         if (Has(d.Category, token)) return 15;
         if (Has(d.Summary, token)) return 10;
         return 0;

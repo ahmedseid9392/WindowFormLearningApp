@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "UdaBptDrYus=",
+  "dgSpecHash": "J/stJcu71iw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj",
+  "projectFilePath": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase5\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\AMD\\.nuget\\packages\\microsoft.net.illink.tasks\\10.0.12\\microsoft.net.illink.tasks.10.0.12.nupkg.sha512",
     "C:\\Users\\AMD\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\10.0.12\\microsoft.netcore.app.runtime.win-x64.10.0.12.nupkg.sha512",
     "C:\\Users\\AMD\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\10.0.12\\microsoft.windowsdesktop.app.runtime.win-x64.10.0.12.nupkg.sha512",
     "C:\\Users\\AMD\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\10.0.12\\microsoft.aspnetcore.app.runtime.win-x64.10.0.12.nupkg.sha512"

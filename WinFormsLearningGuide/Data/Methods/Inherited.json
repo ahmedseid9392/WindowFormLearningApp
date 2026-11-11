@@ -4,163 +4,93 @@
     "methods": [
       {
         "name": "Focus",
-        "signature": "bool Focus()",
         "returnType": "bool",
-        "returnDescription": "",
-        "description": "Gives the control the keyboard focus. Returns true if it succeeded.",
+        "signature": "bool Focus()",
+        "description": "Tries to give the control the keyboard focus.",
         "parameters": [],
-        "example": "ctl.Focus();",
-        "expectedEffect": ""
+        "returns": "true if the control received the focus.",
+        "example": "txtName.Focus();"
       },
       {
         "name": "Select",
+        "returnType": "void",
         "signature": "void Select()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Activates the control (for a container, selects its first child).",
+        "description": "Activates the control so it can receive input. Inside the Load event it is more reliable than Focus.",
         "parameters": [],
-        "example": "ctl.Select();",
-        "expectedEffect": ""
-      },
-      {
-        "name": "Hide",
-        "signature": "void Hide()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Hides the control (same as Visible = false).",
-        "parameters": [],
-        "example": "ctl.Hide();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "txtName.Select();"
       },
       {
         "name": "Show",
-        "signature": "void Show()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Shows the control (same as Visible = true).",
+        "signature": "void Show()",
+        "description": "Makes the control visible. It is the same as setting Visible to true.",
         "parameters": [],
-        "example": "ctl.Show();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "lblError.Show();"
+      },
+      {
+        "name": "Hide",
+        "returnType": "void",
+        "signature": "void Hide()",
+        "description": "Hides the control. It is the same as setting Visible to false.",
+        "parameters": [],
+        "returns": "Nothing.",
+        "example": "lblError.Hide();"
       },
       {
         "name": "Invalidate",
-        "signature": "void Invalidate()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Marks the control as needing to be redrawn. Call it after changing what Paint draws.",
+        "signature": "void Invalidate()",
+        "description": "Marks the control's area as needing a repaint. The Paint event follows when Windows is ready.",
         "parameters": [],
-        "example": "ctl.Invalidate();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "pnlCanvas.Invalidate();"
       },
       {
         "name": "Refresh",
-        "signature": "void Refresh()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Redraws the control immediately.",
+        "signature": "void Refresh()",
+        "description": "Invalidates the control and repaints it immediately.",
         "parameters": [],
-        "example": "ctl.Refresh();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "pnlCanvas.Refresh();"
       },
       {
         "name": "BringToFront",
-        "signature": "void BringToFront()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Moves the control in front of its siblings (the top of the z-order).",
+        "signature": "void BringToFront()",
+        "description": "Moves the control in front of its siblings in the z-order.",
         "parameters": [],
-        "example": "ctl.BringToFront();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "btnHelp.BringToFront();"
       },
       {
         "name": "SendToBack",
-        "signature": "void SendToBack()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Moves the control behind its siblings.",
+        "signature": "void SendToBack()",
+        "description": "Moves the control behind its siblings in the z-order.",
         "parameters": [],
-        "example": "ctl.SendToBack();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "picBackground.SendToBack();"
       },
       {
         "name": "FindForm",
-        "signature": "Form FindForm()",
         "returnType": "Form",
-        "returnDescription": "",
-        "description": "Returns the form that contains the control.",
+        "signature": "Form FindForm()",
+        "description": "Finds the form that contains the control.",
         "parameters": [],
-        "example": "Form owner = ctl.FindForm();",
-        "expectedEffect": ""
-      },
-      {
-        "name": "Contains",
-        "signature": "bool Contains(Control ctl)",
-        "returnType": "bool",
-        "returnDescription": "",
-        "description": "Tells whether a control is a child (or descendant) of this control.",
-        "parameters": [],
-        "example": "bool inside = pnlMain.Contains(btnSave);",
-        "expectedEffect": ""
-      },
-      {
-        "name": "PointToScreen",
-        "signature": "Point PointToScreen(Point p)",
-        "returnType": "Point",
-        "returnDescription": "",
-        "description": "Converts a point from control coordinates to screen coordinates.",
-        "parameters": [],
-        "example": "Point screen = ctl.PointToScreen(Point.Empty);",
-        "expectedEffect": ""
-      },
-      {
-        "name": "SuspendLayout",
-        "signature": "void SuspendLayout()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Stops layout while you change many controls. Pair with ResumeLayout.",
-        "parameters": [],
-        "example": "ctl.SuspendLayout();",
-        "expectedEffect": ""
-      },
-      {
-        "name": "ResumeLayout",
-        "signature": "void ResumeLayout()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Resumes layout and applies the pending changes.",
-        "parameters": [],
-        "example": "ctl.ResumeLayout();",
-        "expectedEffect": ""
-      },
-      {
-        "name": "Invoke",
-        "signature": "object Invoke(Delegate method)",
-        "returnType": "object",
-        "returnDescription": "",
-        "description": "Runs a delegate on the UI thread and waits. Use it to update controls from another thread.",
-        "parameters": [],
-        "example": "ctl.Invoke(new Action(() => ctl.Text = \"Done\"));",
-        "expectedEffect": ""
-      },
-      {
-        "name": "BeginInvoke",
-        "signature": "IAsyncResult BeginInvoke(Delegate method)",
-        "returnType": "IAsyncResult",
-        "returnDescription": "",
-        "description": "Runs a delegate on the UI thread without waiting.",
-        "parameters": [],
-        "example": "ctl.BeginInvoke(new Action(() => ctl.Text = \"Done\"));",
-        "expectedEffect": ""
+        "returns": "The form, or null if the control is not on a form yet.",
+        "example": "Form owner = btnClose.FindForm();"
       },
       {
         "name": "Dispose",
-        "signature": "void Dispose()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Releases the control and its Windows resources.",
+        "signature": "void Dispose()",
+        "description": "Releases the resources used by the control. Removing a control from Controls does not dispose it, so call this when it is no longer needed.",
         "parameters": [],
-        "example": "ctl.Dispose();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "pnlOld.Dispose();"
       }
     ]
   },
@@ -169,68 +99,48 @@
     "methods": [
       {
         "name": "PerformClick",
-        "signature": "void PerformClick()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Raises the Click event as if the item had been clicked.",
+        "signature": "void PerformClick()",
+        "description": "Raises the Click event as if the user had clicked the item.",
         "parameters": [],
-        "example": "item.PerformClick();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "tsbSave.PerformClick();"
       },
       {
         "name": "Select",
-        "signature": "void Select()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Selects (highlights) the item.",
+        "signature": "void Select()",
+        "description": "Selects the item so it is highlighted.",
         "parameters": [],
-        "example": "item.Select();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "tsbSave.Select();"
       },
       {
         "name": "Invalidate",
-        "signature": "void Invalidate()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Marks the item as needing to be redrawn.",
+        "signature": "void Invalidate()",
+        "description": "Marks the item as needing a repaint.",
         "parameters": [],
-        "example": "item.Invalidate();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "tsbSave.Invalidate();"
       },
       {
         "name": "GetCurrentParent",
-        "signature": "ToolStrip GetCurrentParent()",
         "returnType": "ToolStrip",
-        "returnDescription": "",
-        "description": "Returns the ToolStrip that currently hosts the item.",
+        "signature": "ToolStrip GetCurrentParent()",
+        "description": "Gets the strip that currently hosts the item.",
         "parameters": [],
-        "example": "ToolStrip strip = item.GetCurrentParent();",
-        "expectedEffect": ""
+        "returns": "The ToolStrip, or null if the item is not on a strip.",
+        "example": "ToolStrip strip = tsbSave.GetCurrentParent();"
       },
       {
         "name": "Dispose",
-        "signature": "void Dispose()",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Releases the item.",
-        "parameters": [],
-        "example": "item.Dispose();",
-        "expectedEffect": ""
-      }
-    ]
-  },
-  {
-    "name": "Component",
-    "methods": [
-      {
-        "name": "Dispose",
         "signature": "void Dispose()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Releases the component and its resources. Call it when you no longer need the component (or use a using statement).",
+        "description": "Releases the resources used by the item.",
         "parameters": [],
-        "example": "comp.Dispose();",
-        "expectedEffect": ""
+        "returns": "Nothing.",
+        "example": "tsbSave.Dispose();"
       }
     ]
   }

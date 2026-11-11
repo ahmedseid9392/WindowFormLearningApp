@@ -1,0 +1,645 @@
+[
+  {
+    "name": "MenuStrip",
+    "title": "MenuStrip example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private MenuStrip menuStrip1;\n    private ToolStripMenuItem fileMenu;\n    private ToolStripMenuItem exitItem;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"MenuStrip example\";\n        ClientSize = new Size(360, 160);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        menuStrip1 = new MenuStrip();\n        fileMenu = new ToolStripMenuItem(\"&File\");\n        exitItem = new ToolStripMenuItem(\"E&xit\");",
+        "explain": "The ampersand marks the access key: Alt+F opens File."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        exitItem.ShortcutKeys = Keys.Control | Keys.Q;\n        exitItem.Click += ExitItem_Click;",
+        "explain": "ShortcutKeys adds a keyboard shortcut. The Click event runs the command."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        fileMenu.DropDownItems.Add(exitItem);\n        menuStrip1.Items.Add(fileMenu);\n        MainMenuStrip = menuStrip1;",
+        "explain": "Items are nested: the menu item holds the commands, the strip holds the menus. MainMenuStrip tells the form which menu is its main menu."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(menuStrip1);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void ExitItem_Click(object sender, EventArgs e)\n    {\n        Close();\n    }",
+        "explain": "Closes the form, which ends the program."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Separator and sub-menu",
+        "description": "Add a line between commands.",
+        "code": "fileMenu.DropDownItems.Add(new ToolStripSeparator());"
+      }
+    ]
+  },
+  {
+    "name": "ContextMenuStrip",
+    "title": "ContextMenuStrip example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private TextBox txtNotes;\n    private ContextMenuStrip ctxMenu;\n    private ToolStripMenuItem clearItem;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ContextMenuStrip example\";\n        ClientSize = new Size(360, 150);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        txtNotes = new TextBox();\n        txtNotes.Multiline = true;\n        txtNotes.Location = new Point(20, 20);\n        txtNotes.Size = new Size(300, 100);",
+        "explain": "A box that gets the menu."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        ctxMenu = new ContextMenuStrip();\n        clearItem = new ToolStripMenuItem(\"Clear\");\n        clearItem.Click += ClearItem_Click;\n        ctxMenu.Items.Add(clearItem);",
+        "explain": "The menu has a single command."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        txtNotes.ContextMenuStrip = ctxMenu;",
+        "explain": "Assigning the menu replaces the default right-click menu of the control."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(txtNotes);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void ClearItem_Click(object sender, EventArgs e)\n    {\n        txtNotes.Clear();\n    }",
+        "explain": "Runs when the user chooses Clear from the right-click menu."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Know which control was clicked",
+        "description": "SourceControl tells which control opened the menu.",
+        "code": "Control source = ctxMenu.SourceControl;"
+      }
+    ]
+  },
+  {
+    "name": "ToolStrip",
+    "title": "ToolStrip example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private ToolStrip toolStrip1;\n    private ToolStripButton tsbNew;\n    private ToolStripButton tsbOpen;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ToolStrip example\";\n        ClientSize = new Size(360, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        toolStrip1 = new ToolStrip();\n        toolStrip1.GripStyle = ToolStripGripStyle.Hidden;",
+        "explain": "Create the toolbar. It docks to the top of the form by default."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tsbNew = new ToolStripButton(\"New\");\n        tsbNew.DisplayStyle = ToolStripItemDisplayStyle.Text;\n        tsbNew.Click += ToolButton_Click;\n\n        tsbOpen = new ToolStripButton(\"Open\");\n        tsbOpen.DisplayStyle = ToolStripItemDisplayStyle.Text;\n        tsbOpen.Click += ToolButton_Click;",
+        "explain": "Two buttons that show only text. Both use the same handler."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        toolStrip1.Items.Add(tsbNew);\n        toolStrip1.Items.Add(tsbOpen);",
+        "explain": "Items holds everything shown on the toolbar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(toolStrip1);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void ToolButton_Click(object sender, EventArgs e)\n    {\n        ToolStripItem clicked = (ToolStripItem)sender;\n        MessageBox.Show(clicked.Text);\n    }",
+        "explain": "The sender is the item that was clicked, so one handler can serve many buttons."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Separator",
+        "description": "Add a vertical line between groups of buttons.",
+        "code": "toolStrip1.Items.Add(new ToolStripSeparator());"
+      }
+    ]
+  },
+  {
+    "name": "StatusStrip",
+    "title": "StatusStrip example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private StatusStrip statusStrip1;\n    private ToolStripStatusLabel lblStatus;\n    private Timer timer1;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"StatusStrip example\";\n        ClientSize = new Size(360, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        statusStrip1 = new StatusStrip();\n        lblStatus = new ToolStripStatusLabel(\"Ready\");\n        statusStrip1.Items.Add(lblStatus);",
+        "explain": "The status bar docks to the bottom of the form. A ToolStripStatusLabel shows text on it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        timer1 = new Timer();\n        timer1.Interval = 1000;\n        timer1.Tick += Timer1_Tick;\n        timer1.Start();",
+        "explain": "A timer updates the label every second."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(statusStrip1);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void Timer1_Tick(object sender, EventArgs e)\n    {\n        lblStatus.Text = DateTime.Now.ToLongTimeString();\n    }",
+        "explain": "Shows the current time in the status bar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Right-aligned label",
+        "description": "Spring makes a label fill the free space, which pushes later items to the right.",
+        "code": "lblStatus.Spring = true;"
+      }
+    ]
+  },
+  {
+    "name": "ToolStripButton",
+    "title": "ToolStripButton example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private ToolStrip toolStrip1;\n    private ToolStripButton tsbBold;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ToolStripButton example\";\n        ClientSize = new Size(360, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        toolStrip1 = new ToolStrip();",
+        "explain": "Create the toolbar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tsbBold = new ToolStripButton(\"Bold\");\n        tsbBold.DisplayStyle = ToolStripItemDisplayStyle.Text;\n        tsbBold.CheckOnClick = true;\n        tsbBold.ToolTipText = \"Toggle bold text\";",
+        "explain": "CheckOnClick turns the button into a toggle that stays pressed."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tsbBold.CheckedChanged += TsbBold_CheckedChanged;\n        toolStrip1.Items.Add(tsbBold);",
+        "explain": "Raised when the pressed state changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(toolStrip1);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void TsbBold_CheckedChanged(object sender, EventArgs e)\n    {\n        Font = new Font(Font, tsbBold.Checked ? FontStyle.Bold : FontStyle.Regular);\n    }",
+        "explain": "Changes the font of the form according to the button state."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Image button",
+        "description": "Show an icon instead of text.",
+        "code": "tsbBold.Image = Image.FromFile(\"bold.png\");\ntsbBold.DisplayStyle = ToolStripItemDisplayStyle.Image;"
+      }
+    ]
+  },
+  {
+    "name": "ToolStripLabel",
+    "title": "ToolStripLabel example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private ToolStrip toolStrip1;\n    private ToolStripLabel tslCaption;\n    private ToolStripLabel tslHelp;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ToolStripLabel example\";\n        ClientSize = new Size(360, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        toolStrip1 = new ToolStrip();\n        tslCaption = new ToolStripLabel(\"Status:\");",
+        "explain": "A plain label that captions the next item."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tslHelp = new ToolStripLabel(\"Help\");\n        tslHelp.IsLink = true;\n        tslHelp.Click += TslHelp_Click;",
+        "explain": "IsLink makes the label look and behave like a hyperlink."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        toolStrip1.Items.Add(tslCaption);\n        toolStrip1.Items.Add(tslHelp);",
+        "explain": "Both labels are placed on the toolbar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(toolStrip1);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void TslHelp_Click(object sender, EventArgs e)\n    {\n        MessageBox.Show(\"Open the help page here.\");\n    }",
+        "explain": "Runs when the user clicks the link label."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Right-aligned",
+        "description": "Place the label at the right end of the toolbar.",
+        "code": "tslHelp.Alignment = ToolStripItemAlignment.Right;"
+      }
+    ]
+  },
+  {
+    "name": "ToolStripComboBox",
+    "title": "ToolStripComboBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private ToolStrip toolStrip1;\n    private ToolStripComboBox tscZoom;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ToolStripComboBox example\";\n        ClientSize = new Size(360, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        toolStrip1 = new ToolStrip();\n        tscZoom = new ToolStripComboBox();",
+        "explain": "A combo box item for the toolbar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tscZoom.DropDownStyle = ComboBoxStyle.DropDownList;\n        tscZoom.Items.AddRange(new object[] { \"50%\", \"100%\", \"200%\" });\n        tscZoom.SelectedIndex = 1;",
+        "explain": "Only the listed zoom levels can be chosen. 100% is selected at start."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        tscZoom.SelectedIndexChanged += TscZoom_SelectedIndexChanged;\n        toolStrip1.Items.Add(tscZoom);",
+        "explain": "Raised when the user picks another entry."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(toolStrip1);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void TscZoom_SelectedIndexChanged(object sender, EventArgs e)\n    {\n        Text = \"Zoom: \" + tscZoom.SelectedItem;\n    }",
+        "explain": "SelectedItem is the chosen zoom level."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Reach the hosted control",
+        "description": "Use the inner ComboBox for properties the item does not expose.",
+        "code": "tscZoom.ComboBox.DropDownWidth = 160;"
+      }
+    ]
+  }
+]

@@ -4,57 +4,45 @@
     "events": [
       {
         "name": "CellClick",
-        "description": "Raised when any part of a cell is clicked.",
-        "delegate": "DataGridViewCellEventHandler",
-        "eventArgsType": "DataGridViewCellEventArgs",
-        "argumentsNote": "e.RowIndex and e.ColumnIndex identify the cell. RowIndex or ColumnIndex is -1 for a header.",
-        "useCase": "Show the details of the clicked row.",
-        "example": "// Subscribe once, for example in the form constructor:\ndgvCustomers.CellClick += dgvCustomers_CellClick;\n\nprivate void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)\n{\n    if (e.RowIndex >= 0)\n    {\n        string name = dgvCustomers.Rows[e.RowIndex].Cells[\"Name\"].Value?.ToString();\n        lblSelected.Text = \"Selected: \" + name;\n    }\n}"
+        "description": "The user clicks a cell, a header or a row header.",
+        "eventArgsType": "DataGridViewCellEventArgs (System.Windows.Forms)",
+        "useCase": "Open a detail view for the clicked row.",
+        "example": "// Subscribe once, for example in the form constructor\ndgvOrders.CellClick += DgvOrders_CellClick;\n\nprivate void DgvOrders_CellClick(object sender, DataGridViewCellEventArgs e)\n{\n    if (e.RowIndex >= 0)\n    {\n        MessageBox.Show(\"Row \" + e.RowIndex + \", column \" + e.ColumnIndex);\n    }\n}"
       },
       {
         "name": "CellValueChanged",
-        "description": "Raised when a cell's value changes and the edit is committed.",
-        "delegate": "DataGridViewCellEventHandler",
-        "eventArgsType": "DataGridViewCellEventArgs",
-        "argumentsNote": "e.RowIndex and e.ColumnIndex identify the cell whose value changed.",
-        "useCase": "Recalculate a total or mark the row as modified.",
-        "example": "// Subscribe once, for example in the form constructor:\ndgvCustomers.CellValueChanged += dgvCustomers_CellValueChanged;\n\nprivate void dgvCustomers_CellValueChanged(object sender, DataGridViewCellEventArgs e)\n{\n    if (e.RowIndex >= 0)\n    {\n        lblStatus.Text = \"Row \" + (e.RowIndex + 1) + \" was edited\";\n    }\n}"
+        "description": "The value of a cell changes after editing.",
+        "eventArgsType": "DataGridViewCellEventArgs (System.Windows.Forms)",
+        "useCase": "Recalculate a total when a quantity is edited.",
+        "example": "// Subscribe once, for example in the form constructor\ndgvOrders.CellValueChanged += DgvOrders_CellValueChanged;\n\nprivate void DgvOrders_CellValueChanged(object sender, DataGridViewCellEventArgs e)\n{\n    if (e.RowIndex >= 0)\n    {\n        this.Text = \"Edited row \" + e.RowIndex;\n    }\n}"
       },
       {
         "name": "CellEndEdit",
-        "description": "Raised when the user finishes editing a cell.",
-        "delegate": "DataGridViewCellEventHandler",
-        "eventArgsType": "DataGridViewCellEventArgs",
-        "argumentsNote": "e.RowIndex and e.ColumnIndex identify the cell that was edited.",
-        "useCase": "Validate the new value and show an error icon in the cell.",
-        "example": "// Subscribe once, for example in the form constructor:\ndgvCustomers.CellEndEdit += dgvCustomers_CellEndEdit;\n\nprivate void dgvCustomers_CellEndEdit(object sender, DataGridViewCellEventArgs e)\n{\n    var cell = dgvCustomers.Rows[e.RowIndex].Cells[e.ColumnIndex];\n    if (cell.Value == null || cell.Value.ToString().Trim().Length == 0)\n    {\n        cell.ErrorText = \"A value is required.\";\n    }\n    else\n    {\n        cell.ErrorText = string.Empty;\n    }\n}"
+        "description": "The user finishes editing a cell.",
+        "eventArgsType": "DataGridViewCellEventArgs (System.Windows.Forms)",
+        "useCase": "Validate the new value.",
+        "example": "// Subscribe once, for example in the form constructor\ndgvOrders.CellEndEdit += DgvOrders_CellEndEdit;\n\nprivate void DgvOrders_CellEndEdit(object sender, DataGridViewCellEventArgs e)\n{\n    MessageBox.Show(\"New value: \" + dgvOrders.Rows[e.RowIndex].Cells[e.ColumnIndex].Value);\n}"
       },
       {
         "name": "SelectionChanged",
-        "description": "Raised when the selected cells or rows change.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Enable Delete and Edit buttons only when a row is selected.",
-        "example": "// Subscribe once, for example in the form constructor:\ndgvCustomers.SelectionChanged += dgvCustomers_SelectionChanged;\n\nprivate void dgvCustomers_SelectionChanged(object sender, EventArgs e)\n{\n    btnDelete.Enabled = dgvCustomers.SelectedRows.Count > 0;\n}"
+        "description": "The selection of cells or rows changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Update a details panel for the selected row.",
+        "example": "// Subscribe once, for example in the form constructor\ndgvOrders.SelectionChanged += DgvOrders_SelectionChanged;\n\nprivate void DgvOrders_SelectionChanged(object sender, EventArgs e)\n{\n    this.Text = \"Selected rows: \" + dgvOrders.SelectedRows.Count;\n}"
       },
       {
         "name": "DataError",
-        "description": "Raised when the grid cannot convert or display a value, for example text typed into a number column.",
-        "delegate": "DataGridViewDataErrorEventHandler",
-        "eventArgsType": "DataGridViewDataErrorEventArgs",
-        "argumentsNote": "e.Exception describes the problem, e.RowIndex / e.ColumnIndex locate it, and e.ThrowException = false suppresses the default error dialog.",
-        "useCase": "Show a friendly message instead of the default exception dialog.",
-        "example": "// Subscribe once, for example in the form constructor:\ndgvCustomers.DataError += dgvCustomers_DataError;\n\nprivate void dgvCustomers_DataError(object sender, DataGridViewDataErrorEventArgs e)\n{\n    MessageBox.Show(\"Invalid value: \" + e.Exception.Message);\n    e.ThrowException = false;\n}"
+        "description": "A cell value cannot be converted or a data operation fails.",
+        "eventArgsType": "DataGridViewDataErrorEventArgs (System.Windows.Forms)",
+        "useCase": "Replace the default error dialog with your own message.",
+        "example": "// Subscribe once, for example in the form constructor\ndgvOrders.DataError += DgvOrders_DataError;\n\nprivate void DgvOrders_DataError(object sender, DataGridViewDataErrorEventArgs e)\n{\n    MessageBox.Show(\"Invalid value in row \" + e.RowIndex + \": \" + e.Exception.Message);\n    e.ThrowException = false;\n}"
       },
       {
         "name": "CellFormatting",
-        "description": "Raised just before a cell is painted, so you can change how its value looks.",
-        "delegate": "DataGridViewCellFormattingEventHandler",
-        "eventArgsType": "DataGridViewCellFormattingEventArgs",
-        "argumentsNote": "e.Value is the value being shown, e.CellStyle can be changed, e.FormattingApplied = true says you formatted it yourself.",
-        "useCase": "Show negative numbers in red.",
-        "example": "// Subscribe once, for example in the form constructor:\ndgvCustomers.CellFormatting += dgvCustomers_CellFormatting;\n\nprivate void dgvCustomers_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)\n{\n    if (dgvCustomers.Columns[e.ColumnIndex].Name == \"Balance\" && e.Value is decimal balance && balance < 0)\n    {\n        e.CellStyle.ForeColor = Color.Firebrick;\n    }\n}"
+        "description": "A cell is about to be displayed.",
+        "eventArgsType": "DataGridViewCellFormattingEventArgs (System.Windows.Forms)",
+        "useCase": "Show negative amounts in red.",
+        "example": "// Subscribe once, for example in the form constructor\ndgvOrders.CellFormatting += DgvOrders_CellFormatting;\n\nprivate void DgvOrders_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)\n{\n    if (e.Value is decimal amount && amount < 0)\n    {\n        e.CellStyle.ForeColor = Color.Red;\n    }\n}"
       }
     ]
   },
@@ -63,39 +51,31 @@
     "events": [
       {
         "name": "CurrentChanged",
-        "description": "Raised when the current item changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Show the details of the current record.",
-        "example": "// Subscribe once, for example in the form constructor:\nbsCustomers.CurrentChanged += bsCustomers_CurrentChanged;\n// assumes a Customer class with a Name property\n\nprivate void bsCustomers_CurrentChanged(object sender, EventArgs e)\n{\n    lblCurrent.Text = ((Customer)bsCustomers.Current)?.Name;\n}"
-      },
-      {
-        "name": "PositionChanged",
-        "description": "Raised when the Position property changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Show 'record 3 of 10'.",
-        "example": "// Subscribe once, for example in the form constructor:\nbsCustomers.PositionChanged += bsCustomers_PositionChanged;\n\nprivate void bsCustomers_PositionChanged(object sender, EventArgs e)\n{\n    lblPosition.Text = (bsCustomers.Position + 1) + \" of \" + bsCustomers.Count;\n}"
+        "description": "The current item changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Update controls that are not bound.",
+        "example": "// Subscribe once, for example in the form constructor\nbindingSource1.CurrentChanged += BindingSource1_CurrentChanged;\n\nprivate void BindingSource1_CurrentChanged(object sender, EventArgs e)\n{\n    this.Text = \"Current: \" + bindingSource1.Current;\n}"
       },
       {
         "name": "ListChanged",
-        "description": "Raised when the underlying list or one of its items changes.",
-        "delegate": "ListChangedEventHandler",
-        "eventArgsType": "ListChangedEventArgs",
-        "argumentsNote": "e.ListChangedType says what happened (ItemAdded, ItemDeleted, ItemChanged, Reset...) and e.NewIndex where.",
-        "useCase": "Refresh totals or counters when records are added or removed.",
-        "example": "// Subscribe once, for example in the form constructor:\nbsCustomers.ListChanged += bsCustomers_ListChanged;\n\nprivate void bsCustomers_ListChanged(object sender, ListChangedEventArgs e)\n{\n    lblCount.Text = bsCustomers.Count + \" customers\";\n}"
+        "description": "The list or an item in it changes.",
+        "eventArgsType": "ListChangedEventArgs (System.ComponentModel)",
+        "useCase": "Refresh totals when rows are added, removed or edited.",
+        "example": "// Subscribe once, for example in the form constructor\nbindingSource1.ListChanged += BindingSource1_ListChanged;\n\nprivate void BindingSource1_ListChanged(object sender, ListChangedEventArgs e)\n{\n    this.Text = \"List changed: \" + e.ListChangedType;\n}"
+      },
+      {
+        "name": "PositionChanged",
+        "description": "The Position property changes.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Show \"record 3 of 10\".",
+        "example": "// Subscribe once, for example in the form constructor\nbindingSource1.PositionChanged += BindingSource1_PositionChanged;\n\nprivate void BindingSource1_PositionChanged(object sender, EventArgs e)\n{\n    this.Text = \"Position: \" + bindingSource1.Position;\n}"
       },
       {
         "name": "DataSourceChanged",
-        "description": "Raised when the DataSource property changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Rebuild controls that depend on the data source.",
-        "example": "// Subscribe once, for example in the form constructor:\nbsCustomers.DataSourceChanged += bsCustomers_DataSourceChanged;\n\nprivate void bsCustomers_DataSourceChanged(object sender, EventArgs e)\n{\n    lblStatus.Text = \"Data source replaced\";\n}"
+        "description": "A new DataSource is assigned.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Rebuild the columns or reset filters.",
+        "example": "// Subscribe once, for example in the form constructor\nbindingSource1.DataSourceChanged += BindingSource1_DataSourceChanged;\n\nprivate void BindingSource1_DataSourceChanged(object sender, EventArgs e)\n{\n    MessageBox.Show(\"A new data source was assigned.\");\n}"
       }
     ]
   },
@@ -104,12 +84,10 @@
     "events": [
       {
         "name": "RefreshItems",
-        "description": "Raised when the navigator refreshes the state of its buttons, for example when the position or the count changes.",
-        "delegate": "EventHandler",
-        "eventArgsType": "EventArgs",
-        "argumentsNote": "No extra data. Use sender to find out which control raised the event.",
-        "useCase": "Update other controls to match the navigator.",
-        "example": "// Subscribe once, for example in the form constructor:\nbnCustomers.RefreshItems += bnCustomers_RefreshItems;\n\nprivate void bnCustomers_RefreshItems(object sender, EventArgs e)\n{\n    btnSave.Enabled = bnCustomers.BindingSource != null && bnCustomers.BindingSource.Count > 0;\n}"
+        "description": "The navigator updates the state of its buttons.",
+        "eventArgsType": "EventArgs (System)",
+        "useCase": "Enable or disable your own extra buttons at the same time.",
+        "example": "// Subscribe once, for example in the form constructor\nbindingNavigator1.RefreshItems += BindingNavigator1_RefreshItems;\n\nprivate void BindingNavigator1_RefreshItems(object sender, EventArgs e)\n{\n    this.Text = \"Navigator refreshed\";\n}"
       }
     ]
   }

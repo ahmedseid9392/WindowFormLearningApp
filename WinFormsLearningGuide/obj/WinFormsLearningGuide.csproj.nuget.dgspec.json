@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj": {}
+    "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase5\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj": {
+    "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase5\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj",
+        "projectUniqueName": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase5\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj",
         "projectName": "WinFormsLearningGuide",
-        "projectPath": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj",
+        "projectPath": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase5\\WinFormsLearningGuide\\WinFormsLearningGuide.csproj",
         "packagesPath": "C:\\Users\\AMD\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase3\\WinFormsLearningGuide\\obj\\",
+        "outputPath": "C:\\Users\\AMD\\Downloads\\WinFormsLearningGuide_Phase5\\WinFormsLearningGuide\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

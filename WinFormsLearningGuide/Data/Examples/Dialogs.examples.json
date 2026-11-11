@@ -1,0 +1,427 @@
+[
+  {
+    "name": "OpenFileDialog",
+    "title": "OpenFileDialog example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private Button btnOpen;\n    private Label lblFile;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"OpenFileDialog example\";\n        ClientSize = new Size(420, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        btnOpen = new Button();\n        btnOpen.Text = \"Open...\";\n        btnOpen.Location = new Point(20, 20);\n        btnOpen.Click += BtnOpen_Click;",
+        "explain": "A dialog is shown on request, so a button starts it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblFile = new Label();\n        lblFile.AutoSize = true;\n        lblFile.Location = new Point(20, 60);\n        lblFile.Text = \"No file chosen\";",
+        "explain": "A label shows the result."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(btnOpen);\n        Controls.Add(lblFile);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnOpen_Click(object sender, EventArgs e)\n    {\n        using (OpenFileDialog ofd = new OpenFileDialog())\n        {\n            ofd.Title = \"Choose a text file\";\n            ofd.Filter = \"Text files (*.txt)|*.txt|All files (*.*)|*.*\";\n            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);\n\n            if (ofd.ShowDialog() == DialogResult.OK)\n            {\n                lblFile.Text = ofd.FileName;\n            }\n        }\n    }",
+        "explain": "The dialog is created in a using block so it is disposed afterwards. ShowDialog blocks until the user closes it and returns OK when a file was chosen."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Several files",
+        "description": "Let the user choose more than one file.",
+        "code": "ofd.Multiselect = true;\n// afterwards read ofd.FileNames"
+      }
+    ]
+  },
+  {
+    "name": "SaveFileDialog",
+    "title": "SaveFileDialog example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.IO;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private TextBox txtContent;\n    private Button btnSave;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"SaveFileDialog example\";\n        ClientSize = new Size(380, 200);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        txtContent = new TextBox();\n        txtContent.Multiline = true;\n        txtContent.Location = new Point(20, 20);\n        txtContent.Size = new Size(320, 100);",
+        "explain": "The text that will be saved."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnSave = new Button();\n        btnSave.Text = \"Save as...\";\n        btnSave.Location = new Point(20, 130);\n        btnSave.Click += BtnSave_Click;",
+        "explain": "A button that starts the dialog."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(txtContent);\n        Controls.Add(btnSave);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnSave_Click(object sender, EventArgs e)\n    {\n        using (SaveFileDialog sfd = new SaveFileDialog())\n        {\n            sfd.Filter = \"Text file (*.txt)|*.txt\";\n            sfd.DefaultExt = \"txt\";\n            sfd.FileName = \"notes.txt\";\n\n            if (sfd.ShowDialog() == DialogResult.OK)\n            {\n                File.WriteAllText(sfd.FileName, txtContent.Text);\n            }\n        }\n    }",
+        "explain": "DefaultExt adds .txt when the user types no extension. The dialog only returns a name; your code writes the file."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Choose the folder first",
+        "description": "Start in a known folder.",
+        "code": "sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);"
+      }
+    ]
+  },
+  {
+    "name": "FolderBrowserDialog",
+    "title": "FolderBrowserDialog example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private Button btnBrowse;\n    private Label lblFolder;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"FolderBrowserDialog example\";\n        ClientSize = new Size(420, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        btnBrowse = new Button();\n        btnBrowse.Text = \"Browse...\";\n        btnBrowse.Location = new Point(20, 20);\n        btnBrowse.Click += BtnBrowse_Click;",
+        "explain": "A button that starts the dialog."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblFolder = new Label();\n        lblFolder.AutoSize = true;\n        lblFolder.Location = new Point(20, 60);\n        lblFolder.Text = \"No folder chosen\";",
+        "explain": "A label shows the result."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(btnBrowse);\n        Controls.Add(lblFolder);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnBrowse_Click(object sender, EventArgs e)\n    {\n        using (FolderBrowserDialog fbd = new FolderBrowserDialog())\n        {\n            fbd.Description = \"Choose the backup folder\";\n            fbd.UseDescriptionForTitle = true;\n\n            if (fbd.ShowDialog() == DialogResult.OK)\n            {\n                lblFolder.Text = fbd.SelectedPath;\n            }\n        }\n    }",
+        "explain": "Description tells the user what to choose; SelectedPath holds the folder after OK."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Start in a folder",
+        "description": "Preselect a folder.",
+        "code": "fbd.SelectedPath = @\"C:\\Backups\";"
+      }
+    ]
+  },
+  {
+    "name": "ColorDialog",
+    "title": "ColorDialog example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private Button btnColor;\n    private Panel pnlSample;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ColorDialog example\";\n        ClientSize = new Size(280, 150);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        pnlSample = new Panel();\n        pnlSample.Location = new Point(20, 60);\n        pnlSample.Size = new Size(200, 60);\n        pnlSample.BackColor = Color.SteelBlue;",
+        "explain": "A panel whose color the user changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnColor = new Button();\n        btnColor.Text = \"Choose color...\";\n        btnColor.Size = new Size(120, 30);\n        btnColor.Location = new Point(20, 20);\n        btnColor.Click += BtnColor_Click;",
+        "explain": "A button that starts the dialog."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(pnlSample);\n        Controls.Add(btnColor);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnColor_Click(object sender, EventArgs e)\n    {\n        using (ColorDialog cd = new ColorDialog())\n        {\n            cd.Color = pnlSample.BackColor;\n            cd.FullOpen = true;\n\n            if (cd.ShowDialog() == DialogResult.OK)\n            {\n                pnlSample.BackColor = cd.Color;\n            }\n        }\n    }",
+        "explain": "The dialog starts with the current color. After OK, the Color property holds the choice."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Basic palette only",
+        "description": "Do not allow custom colors.",
+        "code": "cd.AllowFullOpen = false;"
+      }
+    ]
+  },
+  {
+    "name": "FontDialog",
+    "title": "FontDialog example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private Button btnFont;\n    private Label lblSample;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"FontDialog example\";\n        ClientSize = new Size(320, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        lblSample = new Label();\n        lblSample.AutoSize = true;\n        lblSample.Text = \"The quick brown fox\";\n        lblSample.Location = new Point(20, 60);",
+        "explain": "The text whose font the user changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnFont = new Button();\n        btnFont.Text = \"Choose font...\";\n        btnFont.Size = new Size(120, 30);\n        btnFont.Location = new Point(20, 20);\n        btnFont.Click += BtnFont_Click;",
+        "explain": "A button that starts the dialog."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(lblSample);\n        Controls.Add(btnFont);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnFont_Click(object sender, EventArgs e)\n    {\n        using (FontDialog fd = new FontDialog())\n        {\n            fd.Font = lblSample.Font;\n            fd.ShowColor = true;\n            fd.Color = lblSample.ForeColor;\n\n            if (fd.ShowDialog() == DialogResult.OK)\n            {\n                lblSample.Font = fd.Font;\n                lblSample.ForeColor = fd.Color;\n            }\n        }\n    }",
+        "explain": "ShowColor adds a color list. After OK, Font and Color are applied to the label."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Limit the sizes",
+        "description": "Allow only a range of font sizes.",
+        "code": "fd.MinSize = 8;\nfd.MaxSize = 36;"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1835 @@
+[
+  {
+    "name": "Label",
+    "title": "Label example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private Label lblStatus;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"Label example\";\n        ClientSize = new Size(440, 240);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        lblStatus = new Label();\n        lblStatus.Name = \"lblStatus\";",
+        "explain": "Create the control with new and give it a Name so it can be recognised later."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblStatus.Text = \"Ready\";\n        lblStatus.AutoSize = false;\n        lblStatus.Size = new Size(300, 40);\n        lblStatus.Location = new Point(20, 20);",
+        "explain": "Text is the caption. With AutoSize off the Size is respected, and Location is the top-left corner inside the form."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblStatus.TextAlign = ContentAlignment.MiddleLeft;\n        lblStatus.BorderStyle = BorderStyle.FixedSingle;\n        lblStatus.BackColor = Color.White;",
+        "explain": "TextAlign positions the text inside the label. The border and the white background make the label area visible."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblStatus.Click += LblStatus_Click;",
+        "explain": "Subscribes to the Click event, so the handler below runs when the user clicks the label."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(lblStatus);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void LblStatus_Click(object sender, EventArgs e)\n    {\n        lblStatus.Text = \"Clicked at \" + DateTime.Now.ToLongTimeString();\n    }",
+        "explain": "The handler changes the label text. Events run on the UI thread, so it is safe to touch controls here."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Object initializer",
+        "description": "Create and configure a control in a single expression.",
+        "code": "Label lblStatus = new Label\n{\n    Name = \"lblStatus\",\n    Text = \"Ready\",\n    AutoSize = true,\n    Location = new Point(20, 20)\n};\nControls.Add(lblStatus);"
+      }
+    ]
+  },
+  {
+    "name": "Button",
+    "title": "Button example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private Button btnSubmit;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"Button example\";\n        ClientSize = new Size(300, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        btnSubmit = new Button();\n        btnSubmit.Name = \"btnSubmit\";",
+        "explain": "Create the button and name it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnSubmit.Text = \"Submit\";\n        btnSubmit.Size = new Size(120, 40);\n        btnSubmit.Location = new Point(30, 30);",
+        "explain": "Text is the caption; Size and Location place the button on the form."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnSubmit.FlatStyle = FlatStyle.Flat;\n        btnSubmit.BackColor = Color.SteelBlue;\n        btnSubmit.ForeColor = Color.White;",
+        "explain": "A flat button honours BackColor and ForeColor, so the custom colours are visible."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnSubmit.Click += BtnSubmit_Click;",
+        "explain": "Subscribes the handler to the Click event."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(btnSubmit);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnSubmit_Click(object sender, EventArgs e)\n    {\n        MessageBox.Show(\"Submitted successfully!\");\n    }",
+        "explain": "Runs when the user clicks the button or presses Space or Enter on it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Default button",
+        "description": "AcceptButton makes Enter press the button, wherever the focus is.",
+        "code": "AcceptButton = btnSubmit;"
+      },
+      {
+        "title": "Dialog button without a handler",
+        "description": "A DialogResult closes a dialog form by itself.",
+        "code": "Button btnOk = new Button { Text = \"OK\", DialogResult = DialogResult.OK };\nAcceptButton = btnOk;"
+      }
+    ]
+  },
+  {
+    "name": "TextBox",
+    "title": "TextBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private TextBox txtName;\n    private Label lblGreeting;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"TextBox example\";\n        ClientSize = new Size(340, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        txtName = new TextBox();\n        txtName.Name = \"txtName\";\n        txtName.Location = new Point(20, 20);\n        txtName.Width = 240;",
+        "explain": "Create the text box, name it and place it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        txtName.PlaceholderText = \"Type your name\";\n        txtName.MaxLength = 30;",
+        "explain": "PlaceholderText shows a gray hint while the box is empty. MaxLength limits what the user can type."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblGreeting = new Label();\n        lblGreeting.AutoSize = true;\n        lblGreeting.Location = new Point(20, 60);\n        lblGreeting.Text = \"Hello!\";",
+        "explain": "A label shows the result of what the user types."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        txtName.TextChanged += TxtName_TextChanged;",
+        "explain": "TextChanged is raised after every change of the text."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(txtName);\n        Controls.Add(lblGreeting);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void TxtName_TextChanged(object sender, EventArgs e)\n    {\n        lblGreeting.Text = \"Hello, \" + txtName.Text + \"!\";\n    }",
+        "explain": "Copies the current text into the label, so the greeting follows the typing."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Multiline text box",
+        "description": "A multiline box with a scroll bar for longer text.",
+        "code": "TextBox txtNotes = new TextBox();\ntxtNotes.Multiline = true;\ntxtNotes.ScrollBars = ScrollBars.Vertical;\ntxtNotes.Size = new Size(240, 100);"
+      },
+      {
+        "title": "Password box",
+        "description": "Hide what the user types.",
+        "code": "txtPassword.UseSystemPasswordChar = true;"
+      }
+    ]
+  },
+  {
+    "name": "RichTextBox",
+    "title": "RichTextBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private RichTextBox rtbEditor;\n    private Button btnBold;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"RichTextBox example\";\n        ClientSize = new Size(450, 290);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        rtbEditor = new RichTextBox();\n        rtbEditor.Location = new Point(20, 60);\n        rtbEditor.Size = new Size(400, 200);\n        rtbEditor.HideSelection = false;\n        rtbEditor.Text = \"Select some text, then press Bold.\";",
+        "explain": "The editor is created with a starting text. HideSelection = false keeps the selection visible while the button has the focus."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnBold = new Button();\n        btnBold.Text = \"Bold\";\n        btnBold.Location = new Point(20, 20);\n        btnBold.Click += BtnBold_Click;",
+        "explain": "A button that toggles bold formatting for the selected text."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(rtbEditor);\n        Controls.Add(btnBold);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnBold_Click(object sender, EventArgs e)\n    {\n        if (rtbEditor.SelectionFont == null)\n        {\n            return;\n        }\n\n        FontStyle style = rtbEditor.SelectionFont.Bold ? FontStyle.Regular : FontStyle.Bold;\n        rtbEditor.SelectionFont = new Font(rtbEditor.SelectionFont, style);\n    }",
+        "explain": "SelectionFont is null when the selection mixes fonts. Otherwise the handler flips the bold style and applies a new Font to the selection."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Load an RTF file",
+        "description": "Read formatted text from disk.",
+        "code": "rtbEditor.LoadFile(\"note.rtf\", RichTextBoxStreamType.RichText);"
+      }
+    ]
+  },
+  {
+    "name": "MaskedTextBox",
+    "title": "MaskedTextBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private MaskedTextBox mtbPhone;\n    private Button btnCheck;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"MaskedTextBox example\";\n        ClientSize = new Size(300, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        mtbPhone = new MaskedTextBox();\n        mtbPhone.Location = new Point(20, 20);\n        mtbPhone.Width = 160;",
+        "explain": "Create the masked box."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        mtbPhone.Mask = \"(000) 000-0000\";\n        mtbPhone.PromptChar = '_';",
+        "explain": "The mask defines the pattern. Each 0 is a required digit; the other characters are fixed text."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnCheck = new Button();\n        btnCheck.Text = \"Check\";\n        btnCheck.Location = new Point(20, 60);\n        btnCheck.Click += BtnCheck_Click;",
+        "explain": "A button that checks whether the number is complete."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(mtbPhone);\n        Controls.Add(btnCheck);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnCheck_Click(object sender, EventArgs e)\n    {\n        if (mtbPhone.MaskCompleted)\n        {\n            MessageBox.Show(\"Phone: \" + mtbPhone.Text);\n        }\n        else\n        {\n            MessageBox.Show(\"Please complete the phone number.\");\n        }\n    }",
+        "explain": "MaskCompleted is true when every required position of the mask has been filled."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Digits only",
+        "description": "Return only the typed digits instead of the formatted text.",
+        "code": "mtbPhone.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;"
+      }
+    ]
+  },
+  {
+    "name": "CheckBox",
+    "title": "CheckBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private CheckBox chkRemember;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"CheckBox example\";\n        ClientSize = new Size(300, 100);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        chkRemember = new CheckBox();\n        chkRemember.Text = \"Remember me\";\n        chkRemember.AutoSize = true;\n        chkRemember.Location = new Point(20, 20);",
+        "explain": "Create the check box. AutoSize lets it fit its text."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        chkRemember.Checked = true;",
+        "explain": "Checked is the on/off state. Setting it in code is the starting state."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        chkRemember.CheckedChanged += ChkRemember_CheckedChanged;",
+        "explain": "CheckedChanged is raised whenever the state changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(chkRemember);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void ChkRemember_CheckedChanged(object sender, EventArgs e)\n    {\n        Text = chkRemember.Checked ? \"Remembered\" : \"Not remembered\";\n    }",
+        "explain": "Reads Checked and shows the result in the form's title bar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Three states",
+        "description": "Allow an indeterminate state in addition to checked and unchecked.",
+        "code": "chkAll.ThreeState = true;\nchkAll.CheckState = CheckState.Indeterminate;"
+      }
+    ]
+  },
+  {
+    "name": "RadioButton",
+    "title": "RadioButton example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private GroupBox grpShipping;\n    private RadioButton rbStandard;\n    private RadioButton rbExpress;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"RadioButton example\";\n        ClientSize = new Size(260, 150);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        grpShipping = new GroupBox();\n        grpShipping.Text = \"Shipping\";\n        grpShipping.Location = new Point(20, 20);\n        grpShipping.Size = new Size(200, 100);",
+        "explain": "Radio buttons are grouped by their container, so a GroupBox holds one set of options."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        rbStandard = new RadioButton();\n        rbStandard.Text = \"Standard\";\n        rbStandard.Location = new Point(15, 25);\n        rbStandard.Checked = true;\n        rbStandard.CheckedChanged += RbShipping_CheckedChanged;",
+        "explain": "The first option is selected at start. Location is relative to the group box."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        rbExpress = new RadioButton();\n        rbExpress.Text = \"Express\";\n        rbExpress.Location = new Point(15, 55);\n        rbExpress.CheckedChanged += RbShipping_CheckedChanged;",
+        "explain": "Both options share one handler. Selecting this one automatically clears the other."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        grpShipping.Controls.Add(rbStandard);\n        grpShipping.Controls.Add(rbExpress);",
+        "explain": "The options become children of the group box instead of the form."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(grpShipping);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void RbShipping_CheckedChanged(object sender, EventArgs e)\n    {\n        RadioButton selected = (RadioButton)sender;\n        if (selected.Checked)\n        {\n            Text = \"Shipping: \" + selected.Text;\n        }\n    }",
+        "explain": "The event is raised for the option that was selected and for the one that was cleared, so the handler tests Checked."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Find the chosen option",
+        "description": "Look through the group instead of using events.",
+        "code": "foreach (RadioButton option in grpShipping.Controls.OfType<RadioButton>())\n{\n    if (option.Checked)\n    {\n        MessageBox.Show(option.Text);\n    }\n}"
+      }
+    ]
+  },
+  {
+    "name": "ComboBox",
+    "title": "ComboBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private ComboBox cboSize;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ComboBox example\";\n        ClientSize = new Size(300, 100);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        cboSize = new ComboBox();\n        cboSize.Location = new Point(20, 20);\n        cboSize.Width = 160;",
+        "explain": "Create the combo box."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        cboSize.DropDownStyle = ComboBoxStyle.DropDownList;",
+        "explain": "DropDownList allows only the listed entries. The user cannot type something else."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        cboSize.Items.AddRange(new object[] { \"Small\", \"Medium\", \"Large\" });\n        cboSize.SelectedIndex = 1;",
+        "explain": "Items holds the entries. SelectedIndex preselects the second one."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        cboSize.SelectedIndexChanged += CboSize_SelectedIndexChanged;",
+        "explain": "Raised when the selection changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(cboSize);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void CboSize_SelectedIndexChanged(object sender, EventArgs e)\n    {\n        Text = \"Selected: \" + cboSize.SelectedItem;\n    }",
+        "explain": "SelectedItem is the chosen entry, shown here in the title bar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Data binding",
+        "description": "Fill the list from a collection instead of adding items by hand.",
+        "code": "cboSize.DataSource = new List<string> { \"Small\", \"Medium\", \"Large\" };"
+      }
+    ]
+  },
+  {
+    "name": "ListBox",
+    "title": "ListBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private ListBox lstFiles;\n    private Button btnRemove;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ListBox example\";\n        ClientSize = new Size(260, 200);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        lstFiles = new ListBox();\n        lstFiles.Location = new Point(20, 20);\n        lstFiles.Size = new Size(200, 120);",
+        "explain": "Create the list box."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lstFiles.Items.Add(\"report.pdf\");\n        lstFiles.Items.Add(\"budget.xlsx\");\n        lstFiles.Items.Add(\"notes.txt\");\n        lstFiles.SelectionMode = SelectionMode.One;",
+        "explain": "Fill the list. SelectionMode.One allows a single selected entry."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnRemove = new Button();\n        btnRemove.Text = \"Remove\";\n        btnRemove.Location = new Point(20, 150);\n        btnRemove.Click += BtnRemove_Click;",
+        "explain": "A button that removes the selected entry."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(lstFiles);\n        Controls.Add(btnRemove);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnRemove_Click(object sender, EventArgs e)\n    {\n        if (lstFiles.SelectedIndex >= 0)\n        {\n            lstFiles.Items.RemoveAt(lstFiles.SelectedIndex);\n        }\n    }",
+        "explain": "SelectedIndex is -1 when nothing is selected, so the handler checks it before removing."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Multiple selection",
+        "description": "Let the user select several entries with Ctrl and Shift.",
+        "code": "lstFiles.SelectionMode = SelectionMode.MultiExtended;"
+      }
+    ]
+  },
+  {
+    "name": "CheckedListBox",
+    "title": "CheckedListBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private CheckedListBox clbFeatures;\n    private Button btnShow;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"CheckedListBox example\";\n        ClientSize = new Size(260, 200);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        clbFeatures = new CheckedListBox();\n        clbFeatures.Location = new Point(20, 20);\n        clbFeatures.Size = new Size(200, 100);\n        clbFeatures.CheckOnClick = true;",
+        "explain": "CheckOnClick ticks a box with one click instead of two."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        clbFeatures.Items.Add(\"Email alerts\", true);\n        clbFeatures.Items.Add(\"Weekly report\", false);\n        clbFeatures.Items.Add(\"Dark mode\", false);",
+        "explain": "Add(text, isChecked) creates an entry together with its starting state."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnShow = new Button();\n        btnShow.Text = \"Show choices\";\n        btnShow.Location = new Point(20, 130);\n        btnShow.Click += BtnShow_Click;",
+        "explain": "A button that lists the ticked entries."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(clbFeatures);\n        Controls.Add(btnShow);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnShow_Click(object sender, EventArgs e)\n    {\n        string result = \"\";\n        foreach (object item in clbFeatures.CheckedItems)\n        {\n            result += item + Environment.NewLine;\n        }\n\n        MessageBox.Show(result == \"\" ? \"Nothing selected.\" : result);\n    }",
+        "explain": "CheckedItems contains only the entries whose boxes are ticked."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Tick an entry by code",
+        "description": "Change a box without user interaction.",
+        "code": "clbFeatures.SetItemChecked(1, true);"
+      }
+    ]
+  },
+  {
+    "name": "PictureBox",
+    "title": "PictureBox example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private PictureBox picPreview;\n    private Button btnLoad;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"PictureBox example\";\n        ClientSize = new Size(360, 290);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        picPreview = new PictureBox();\n        picPreview.Location = new Point(20, 60);\n        picPreview.Size = new Size(300, 200);",
+        "explain": "Create the picture box with a fixed size."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        picPreview.SizeMode = PictureBoxSizeMode.Zoom;\n        picPreview.BorderStyle = BorderStyle.FixedSingle;",
+        "explain": "Zoom scales the picture to fit without distortion."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnLoad = new Button();\n        btnLoad.Text = \"Choose picture...\";\n        btnLoad.Size = new Size(140, 30);\n        btnLoad.Location = new Point(20, 20);\n        btnLoad.Click += BtnLoad_Click;",
+        "explain": "A button that lets the user pick a file."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(picPreview);\n        Controls.Add(btnLoad);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnLoad_Click(object sender, EventArgs e)\n    {\n        using (OpenFileDialog dialog = new OpenFileDialog())\n        {\n            dialog.Filter = \"Images|*.png;*.jpg;*.bmp\";\n            if (dialog.ShowDialog() == DialogResult.OK)\n            {\n                picPreview.Image = Image.FromFile(dialog.FileName);\n            }\n        }\n    }",
+        "explain": "An OpenFileDialog returns the path; Image.FromFile loads it and the Image property displays it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Load from a web address",
+        "description": "ImageLocation loads the picture without extra code.",
+        "code": "picPreview.ImageLocation = \"https://example.com/logo.png\";"
+      }
+    ]
+  },
+  {
+    "name": "DateTimePicker",
+    "title": "DateTimePicker example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private DateTimePicker dtpStart;\n    private Label lblDays;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"DateTimePicker example\";\n        ClientSize = new Size(300, 110);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        dtpStart = new DateTimePicker();\n        dtpStart.Location = new Point(20, 20);\n        dtpStart.Width = 200;",
+        "explain": "Create the picker."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        dtpStart.Format = DateTimePickerFormat.Short;\n        dtpStart.MinDate = DateTime.Today;",
+        "explain": "Short shows a compact date. MinDate stops users from choosing the past."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblDays = new Label();\n        lblDays.AutoSize = true;\n        lblDays.Location = new Point(20, 60);\n        lblDays.Text = \"0 days from today\";",
+        "explain": "A label that shows the result."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        dtpStart.ValueChanged += DtpStart_ValueChanged;",
+        "explain": "Raised whenever the chosen date changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(dtpStart);\n        Controls.Add(lblDays);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void DtpStart_ValueChanged(object sender, EventArgs e)\n    {\n        int days = (dtpStart.Value.Date - DateTime.Today).Days;\n        lblDays.Text = days + \" days from today\";\n    }",
+        "explain": "Subtracting two dates gives a TimeSpan; its Days property is shown in the label."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Custom format",
+        "description": "Display the date in your own pattern.",
+        "code": "dtpStart.Format = DateTimePickerFormat.Custom;\ndtpStart.CustomFormat = \"yyyy-MM-dd\";"
+      }
+    ]
+  },
+  {
+    "name": "MonthCalendar",
+    "title": "MonthCalendar example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private MonthCalendar calBooking;\n    private Label lblRange;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"MonthCalendar example\";\n        ClientSize = new Size(300, 240);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        calBooking = new MonthCalendar();\n        calBooking.Location = new Point(20, 20);",
+        "explain": "Create the calendar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        calBooking.MaxSelectionCount = 7;\n        calBooking.ShowToday = true;\n        calBooking.BoldedDates = new[] { DateTime.Today.AddDays(3) };",
+        "explain": "The user may select up to seven days. BoldedDates highlights days such as events."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblRange = new Label();\n        lblRange.AutoSize = true;\n        lblRange.Location = new Point(20, 200);",
+        "explain": "A label that shows the selected range."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        calBooking.DateChanged += CalBooking_DateChanged;",
+        "explain": "Raised while the selection changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(calBooking);\n        Controls.Add(lblRange);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void CalBooking_DateChanged(object sender, DateRangeEventArgs e)\n    {\n        lblRange.Text = e.Start.ToShortDateString() + \" - \" + e.End.ToShortDateString();\n    }",
+        "explain": "The event arguments carry the first and the last selected date."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Single date",
+        "description": "Allow only one day to be selected.",
+        "code": "calBooking.MaxSelectionCount = 1;"
+      }
+    ]
+  },
+  {
+    "name": "NumericUpDown",
+    "title": "NumericUpDown example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private NumericUpDown nudQty;\n    private Label lblTotal;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"NumericUpDown example\";\n        ClientSize = new Size(300, 110);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        nudQty = new NumericUpDown();\n        nudQty.Location = new Point(20, 20);\n        nudQty.Width = 80;",
+        "explain": "Create the control."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        nudQty.Minimum = 1;\n        nudQty.Maximum = 10;\n        nudQty.Value = 1;",
+        "explain": "Minimum and Maximum limit the number. Value is the starting number."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblTotal = new Label();\n        lblTotal.AutoSize = true;\n        lblTotal.Location = new Point(20, 60);\n        lblTotal.Text = \"Total: \" + (1 * 9.99M).ToString(\"C\");",
+        "explain": "A label that shows the price of the chosen quantity."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        nudQty.ValueChanged += NudQty_ValueChanged;",
+        "explain": "Raised whenever the number changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(nudQty);\n        Controls.Add(lblTotal);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void NudQty_ValueChanged(object sender, EventArgs e)\n    {\n        decimal total = nudQty.Value * 9.99M;\n        lblTotal.Text = \"Total: \" + total.ToString(\"C\");\n    }",
+        "explain": "Value is a decimal, so it can be multiplied by a price directly."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Two decimal places",
+        "description": "Use the control for prices.",
+        "code": "nudPrice.DecimalPlaces = 2;\nnudPrice.Increment = 0.5M;"
+      }
+    ]
+  },
+  {
+    "name": "ProgressBar",
+    "title": "ProgressBar example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private ProgressBar progress;\n    private Timer timer1;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ProgressBar example\";\n        ClientSize = new Size(360, 80);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        progress = new ProgressBar();\n        progress.Location = new Point(20, 20);\n        progress.Size = new Size(300, 24);",
+        "explain": "Create the bar."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        progress.Minimum = 0;\n        progress.Maximum = 100;\n        progress.Step = 5;",
+        "explain": "The range is 0 to 100 and PerformStep adds 5 each time."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        timer1 = new Timer();\n        timer1.Interval = 100;\n        timer1.Tick += Timer1_Tick;\n        timer1.Start();",
+        "explain": "A timer simulates work by advancing the bar ten times a second."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(progress);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void Timer1_Tick(object sender, EventArgs e)\n    {\n        progress.PerformStep();\n        if (progress.Value >= progress.Maximum)\n        {\n            timer1.Stop();\n        }\n    }",
+        "explain": "PerformStep adds Step to Value. The timer stops once the bar is full."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Unknown duration",
+        "description": "Use the marquee style when you cannot tell how long the work takes.",
+        "code": "progress.Style = ProgressBarStyle.Marquee;\nprogress.MarqueeAnimationSpeed = 30;"
+      }
+    ]
+  },
+  {
+    "name": "TrackBar",
+    "title": "TrackBar example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private TrackBar trkVolume;\n    private Label lblVolume;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"TrackBar example\";\n        ClientSize = new Size(300, 110);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        trkVolume = new TrackBar();\n        trkVolume.Location = new Point(20, 20);\n        trkVolume.Width = 250;",
+        "explain": "Create the slider."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        trkVolume.Minimum = 0;\n        trkVolume.Maximum = 100;\n        trkVolume.TickFrequency = 10;\n        trkVolume.Value = 50;",
+        "explain": "The range is 0 to 100 with a tick every 10 units, starting in the middle."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lblVolume = new Label();\n        lblVolume.AutoSize = true;\n        lblVolume.Location = new Point(20, 70);\n        lblVolume.Text = \"Volume: 50\";",
+        "explain": "A label that shows the value."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        trkVolume.ValueChanged += TrkVolume_ValueChanged;",
+        "explain": "Raised whenever the value changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(trkVolume);\n        Controls.Add(lblVolume);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void TrkVolume_ValueChanged(object sender, EventArgs e)\n    {\n        lblVolume.Text = \"Volume: \" + trkVolume.Value;\n    }",
+        "explain": "Value is the current slider position."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Vertical slider",
+        "description": "Turn the slider upright.",
+        "code": "trkVolume.Orientation = Orientation.Vertical;\ntrkVolume.Height = 150;"
+      }
+    ]
+  },
+  {
+    "name": "LinkLabel",
+    "title": "LinkLabel example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Diagnostics;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private LinkLabel lnkHelp;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"LinkLabel example\";\n        ClientSize = new Size(320, 80);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        lnkHelp = new LinkLabel();\n        lnkHelp.Text = \"Read the documentation online\";\n        lnkHelp.AutoSize = true;\n        lnkHelp.Location = new Point(20, 20);",
+        "explain": "By default the whole text is one link."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lnkHelp.LinkBehavior = LinkBehavior.HoverUnderline;",
+        "explain": "The text is underlined only while the pointer is over it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        lnkHelp.LinkClicked += LnkHelp_LinkClicked;",
+        "explain": "Raised when the user clicks a link."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(lnkHelp);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void LnkHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)\n    {\n        lnkHelp.LinkVisited = true;\n        Process.Start(new ProcessStartInfo(\"https://learn.microsoft.com\") { UseShellExecute = true });\n    }",
+        "explain": "LinkVisited changes the color of the link. UseShellExecute = true lets Windows open the address in the default browser."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Only part of the text",
+        "description": "Make just a few characters clickable.",
+        "code": "lnkTerms.Text = \"I accept the terms of use\";\nlnkTerms.LinkArea = new LinkArea(13, 12);"
+      }
+    ]
+  },
+  {
+    "name": "ToolTip",
+    "title": "ToolTip example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private ToolTip toolTip1;\n    private Button btnSave;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ToolTip example\";\n        ClientSize = new Size(260, 110);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        toolTip1 = new ToolTip();\n        toolTip1.InitialDelay = 300;\n        toolTip1.AutoPopDelay = 6000;\n        toolTip1.IsBalloon = true;",
+        "explain": "The ToolTip is a component and is not added to Controls. It shows after 0.3 seconds, for six seconds, as a balloon."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnSave = new Button();\n        btnSave.Text = \"Save\";\n        btnSave.Location = new Point(30, 30);",
+        "explain": "A button that gets a tip."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        toolTip1.ToolTipTitle = \"Save\";\n        toolTip1.SetToolTip(btnSave, \"Save the current document (Ctrl+S)\");",
+        "explain": "SetToolTip connects a text to a control. The title appears above the text."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(btnSave);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Show a tip from code",
+        "description": "Display a tip without waiting for the pointer.",
+        "code": "toolTip1.Show(\"Saved!\", btnSave, 2000);"
+      }
+    ]
+  },
+  {
+    "name": "ErrorProvider",
+    "title": "ErrorProvider example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.ComponentModel;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private TextBox txtName;\n    private TextBox txtEmail;\n    private ErrorProvider errorProvider1;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"ErrorProvider example\";\n        ClientSize = new Size(300, 120);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        errorProvider1 = new ErrorProvider();\n        errorProvider1.ContainerControl = this;",
+        "explain": "The provider needs to know its container form when it is created in code."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        txtName = new TextBox();\n        txtName.Location = new Point(20, 20);\n        txtName.Width = 200;",
+        "explain": "A first box, so the focus has somewhere to move to."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        txtEmail = new TextBox();\n        txtEmail.Location = new Point(20, 60);\n        txtEmail.Width = 200;\n        txtEmail.Validating += TxtEmail_Validating;",
+        "explain": "Validating is raised when the user leaves the box."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(txtName);\n        Controls.Add(txtEmail);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void TxtEmail_Validating(object sender, CancelEventArgs e)\n    {\n        if (!txtEmail.Text.Contains(\"@\"))\n        {\n            errorProvider1.SetError(txtEmail, \"Enter a valid e-mail address.\");\n        }\n        else\n        {\n            errorProvider1.SetError(txtEmail, \"\");\n        }\n    }",
+        "explain": "SetError shows an icon with a message next to the control. An empty string removes it."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Block leaving the box",
+        "description": "Keep the focus in the box until the value is valid.",
+        "code": "e.Cancel = true;"
+      }
+    ]
+  }
+]

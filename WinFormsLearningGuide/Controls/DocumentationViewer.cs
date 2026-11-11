@@ -22,7 +22,10 @@ public class DocumentationViewer : UserControl, IThemeable
     private readonly Button _btnNext = new Button();
     private readonly Button _btnFavorite = new Button();
     private readonly ScrollPanel _scroll = new ScrollPanel();
-    private readonly List<SectionCard> _cards = new List<SectionCard>();
+    private readonly List<Control> _sections = new List<Control>();   // one control per documentation section
+    private CodeViewer _codeViewer;
+    private bool _updating;
+    private const int CodeSectionNumber = 6;                          // "Complete C# Example" uses the code viewer
     private readonly SectionContentBuilder _contentBuilder = new SectionContentBuilder(new ControlPreviewService());
     private bool _layouting;
 
@@ -37,14 +40,24 @@ public class DocumentationViewer : UserControl, IThemeable
         _scroll.Dock = DockStyle.Fill;
         foreach (DocumentationSection section in DocumentationSection.All)
         {
-            var card = new SectionCard
+            Control control;
+            if (section.Number == CodeSectionNumber)
             {
-                Heading = section.Number + ". " + section.Title,
-                Badge = section.IsComplete ? "" : "Phase " + section.Phase
-            };
-            card.MouseEnter += (s, e) => FocusContent(true);
-            _cards.Add(card);
-            _scroll.Controls.Add(card);
+                _codeViewer = new CodeViewer();
+                _codeViewer.LayoutChanged += (s, e) => { if (!_updating) LayoutCards(); };
+                control = _codeViewer;
+            }
+            else
+            {
+                control = new SectionCard
+                {
+                    Heading = section.Number + ". " + section.Title,
+                    Badge = section.IsComplete ? "" : "Phase " + section.Phase
+                };
+            }
+            control.MouseEnter += (s, e) => FocusContent(true);
+            _sections.Add(control);
+            _scroll.Controls.Add(control);
         }
         _scroll.ClientSizeChanged += (s, e) => LayoutCards();
         _scroll.MouseEnter += (s, e) => FocusContent(true);
@@ -112,8 +125,21 @@ public class DocumentationViewer : UserControl, IThemeable
         _btnPrevious.Enabled = hasPrevious;
         _btnNext.Enabled = hasNext;
 
-        for (int i = 0; i < _cards.Count; i++)
-            _cards[i].SetBlocks(_contentBuilder.Build(doc, DocumentationSection.All[i]));
+        _updating = true;
+        try
+        {
+            for (int i = 0; i < _sections.Count; i++)
+            {
+                if (_sections[i] is SectionCard card)
+                    card.SetBlocks(_contentBuilder.Build(doc, DocumentationSection.All[i]));
+                else if (_sections[i] is CodeViewer viewer)
+                    viewer.ShowExample(doc);
+            }
+        }
+        finally
+        {
+            _updating = false;
+        }
 
         _scroll.AutoScrollPosition = Point.Empty;
         LayoutCards();
@@ -126,8 +152,8 @@ public class DocumentationViewer : UserControl, IThemeable
 
     public void ScrollToSection(int index)
     {
-        if (index < 0 || index >= _cards.Count) return;
-        int y = _cards[index].Top - _scroll.AutoScrollPosition.Y - ThemeHelper.Scale(this, 12);
+        if (index < 0 || index >= _sections.Count) return;
+        int y = _sections[index].Top - _scroll.AutoScrollPosition.Y - ThemeHelper.Scale(this, 12);
         _scroll.AutoScrollPosition = new Point(0, Math.Max(0, y));
         _scroll.Focus();
     }
@@ -136,8 +162,8 @@ public class DocumentationViewer : UserControl, IThemeable
 
     public void ApplyTheme(Theme theme)
     {
-        foreach (SectionCard card in _cards)
-            card.Invalidate();
+        foreach (Control section in _sections)
+            section.Invalidate();
     }
 
     // ------------------------------------------------------------------ internals
@@ -157,7 +183,7 @@ public class DocumentationViewer : UserControl, IThemeable
 
     private void LayoutCards()
     {
-        if (_layouting || _cards.Count == 0) return;
+        if (_layouting || _sections.Count == 0) return;
         _layouting = true;
         try
         {
@@ -172,11 +198,11 @@ public class DocumentationViewer : UserControl, IThemeable
                 int width = Math.Max(ThemeHelper.Scale(this, 260), basis - pad * 2);
 
                 int y = pad;
-                foreach (SectionCard card in _cards)
+                foreach (Control section in _sections)
                 {
-                    card.Width = width;
-                    card.Location = new Point(pad, y);
-                    y += card.Height + gap;
+                    section.Width = width;
+                    section.Location = new Point(pad, y);
+                    y += section.Height + gap;
                 }
 
                 _scroll.AutoScrollMinSize = new Size(0, y + pad - gap);

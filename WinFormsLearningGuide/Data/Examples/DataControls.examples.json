@@ -1,0 +1,305 @@
+[
+  {
+    "name": "DataGridView",
+    "title": "DataGridView example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Data;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private DataGridView dgvOrders;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"DataGridView example\";\n        ClientSize = new Size(420, 240);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        dgvOrders = new DataGridView();\n        dgvOrders.Dock = DockStyle.Fill;",
+        "explain": "Create the grid and let it fill the form."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        DataTable table = new DataTable();\n        table.Columns.Add(\"Customer\", typeof(string));\n        table.Columns.Add(\"Quantity\", typeof(int));\n        table.Rows.Add(\"Alice\", 3);\n        table.Rows.Add(\"Bob\", 5);\n        table.Rows.Add(\"Carla\", 2);",
+        "explain": "A DataTable is an easy source of sample data: two columns and three rows."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        dgvOrders.DataSource = table;\n        dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;\n        dgvOrders.SelectionMode = DataGridViewSelectionMode.FullRowSelect;\n        dgvOrders.AllowUserToAddRows = false;",
+        "explain": "Setting DataSource creates the columns. The other settings share the width, select whole rows and hide the new-row line."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        dgvOrders.SelectionChanged += DgvOrders_SelectionChanged;",
+        "explain": "Raised when the selection changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(dgvOrders);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void DgvOrders_SelectionChanged(object sender, EventArgs e)\n    {\n        if (dgvOrders.CurrentRow != null)\n        {\n            Text = \"Customer: \" + dgvOrders.CurrentRow.Cells[\"Customer\"].Value;\n        }\n    }",
+        "explain": "CurrentRow is the row with the focus. Cells are found by column name."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Define columns yourself",
+        "description": "Turn off the automatic columns and add your own.",
+        "code": "dgvOrders.AutoGenerateColumns = false;\ndgvOrders.Columns.Add(\"Name\", \"Customer\");"
+      }
+    ]
+  },
+  {
+    "name": "BindingSource",
+    "title": "BindingSource example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Data;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private DataGridView dgvOrders;\n    private TextBox txtCustomer;\n    private Button btnNext;\n    private BindingSource bindingSource1;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"BindingSource example\";\n        ClientSize = new Size(360, 200);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        DataTable table = new DataTable();\n        table.Columns.Add(\"Customer\", typeof(string));\n        table.Columns.Add(\"City\", typeof(string));\n        table.Rows.Add(\"Alice\", \"Paris\");\n        table.Rows.Add(\"Bob\", \"Rome\");\n        table.Rows.Add(\"Carla\", \"Oslo\");",
+        "explain": "Sample data for the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        bindingSource1 = new BindingSource();\n        bindingSource1.DataSource = table;",
+        "explain": "The BindingSource sits between the data and the controls and keeps track of the current record."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        dgvOrders = new DataGridView();\n        dgvOrders.Location = new Point(20, 20);\n        dgvOrders.Size = new Size(300, 120);\n        dgvOrders.DataSource = bindingSource1;",
+        "explain": "The grid shows all records."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        txtCustomer = new TextBox();\n        txtCustomer.Location = new Point(20, 150);\n        txtCustomer.DataBindings.Add(\"Text\", bindingSource1, \"Customer\");",
+        "explain": "The text box is bound to the Customer column of the current record, so it changes when the position changes."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        btnNext = new Button();\n        btnNext.Text = \"Next\";\n        btnNext.Location = new Point(140, 148);\n        btnNext.Click += BtnNext_Click;",
+        "explain": "A button that moves to the next record."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(dgvOrders);\n        Controls.Add(txtCustomer);\n        Controls.Add(btnNext);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void BtnNext_Click(object sender, EventArgs e)\n    {\n        bindingSource1.MoveNext();\n    }",
+        "explain": "MoveNext makes the next record current. The grid and the text box follow automatically."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Filter the records",
+        "description": "Show only matching rows (works with a DataTable).",
+        "code": "bindingSource1.Filter = \"City = 'Paris'\";"
+      }
+    ]
+  },
+  {
+    "name": "BindingNavigator",
+    "title": "BindingNavigator example",
+    "segments": [
+      {
+        "code": "using System;\nusing System.Data;\nusing System.Drawing;\nusing System.Windows.Forms;",
+        "explain": "using directives import the namespaces that contain Form, Size, Color and the other types used in the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "public class ExampleForm : Form\n{",
+        "explain": "The example is an ordinary form. Deriving from Form gives it a window, a Controls collection and a title bar."
+      },
+      {
+        "code": "    private DataGridView dgvOrders;\n    private BindingSource bindingSource1;\n    private BindingNavigator bindingNavigator1;",
+        "explain": "Fields keep the controls so that every method of the form can reach them, not only the method that creates them."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    public ExampleForm()\n    {\n        Text = \"BindingNavigator example\";\n        ClientSize = new Size(420, 240);\n        InitializeComponents();\n    }",
+        "explain": "The constructor sets the window title and size, then calls InitializeComponents to build the controls."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    private void InitializeComponents()\n    {",
+        "explain": "All creation and configuration happens in one method. Visual Studio's designer generates a method like this called InitializeComponent."
+      },
+      {
+        "code": "        DataTable table = new DataTable();\n        table.Columns.Add(\"Customer\", typeof(string));\n        table.Columns.Add(\"City\", typeof(string));\n        table.Rows.Add(\"Alice\", \"Paris\");\n        table.Rows.Add(\"Bob\", \"Rome\");\n        table.Rows.Add(\"Carla\", \"Oslo\");",
+        "explain": "Sample data for the example."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        bindingSource1 = new BindingSource();\n        bindingSource1.DataSource = table;",
+        "explain": "The navigator works on a BindingSource."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        dgvOrders = new DataGridView();\n        dgvOrders.Dock = DockStyle.Fill;\n        dgvOrders.DataSource = bindingSource1;",
+        "explain": "The grid shows the records and follows the navigator."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        bindingNavigator1 = new BindingNavigator(true);\n        bindingNavigator1.BindingSource = bindingSource1;",
+        "explain": "Passing true creates the standard buttons: first, previous, position, count, next, last, add and delete."
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "        Controls.Add(dgvOrders);\n        Controls.Add(bindingNavigator1);",
+        "explain": "Controls.Add makes each control a child of the form. A control that is created but never added is never displayed."
+      },
+      {
+        "code": "    }",
+        "explain": ""
+      },
+      {
+        "code": "",
+        "explain": ""
+      },
+      {
+        "code": "    [STAThread]\n    static void Main()\n    {\n        Application.EnableVisualStyles();\n        Application.Run(new ExampleForm());\n    }\n}",
+        "explain": "Main is the entry point. [STAThread] is required by Windows Forms; Application.Run shows the form and starts the message loop."
+      }
+    ],
+    "alternatives": [
+      {
+        "title": "Add the buttons later",
+        "description": "Create an empty navigator and add the standard items when you want.",
+        "code": "bindingNavigator1.AddStandardItems();"
+      }
+    ]
+  }
+]

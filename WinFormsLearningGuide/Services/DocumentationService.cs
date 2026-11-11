@@ -65,6 +65,7 @@ public class DocumentationService
         LoadProperties(dataFolder);
         LoadEvents(dataFolder);
         LoadMethods(dataFolder);
+        LoadExamples(dataFolder);
     }
 
     /// <summary>
@@ -151,106 +152,87 @@ public class DocumentationService
         }
     }
 
-    /// <summary>
-    /// Phase 4. Loads Data/Events/*.events.json (one entry per control, matched by name) and
-    /// Data/Events/Inherited.json (event sets shared by every Control or ToolStripItem).
-    /// Throws if an entry names an unknown control.
-    /// </summary>
+    private static IEnumerable<string> JsonFiles(string dataFolder, string subFolder, string pattern)
+    {
+        string folder = Path.Combine(dataFolder, subFolder);
+        if (!Directory.Exists(folder)) return new string[0];
+        return Directory.GetFiles(folder, pattern).OrderBy(p => p, StringComparer.OrdinalIgnoreCase).ToList();
+    }
+
+    private ControlDocumentation RequireControl(string name, string path)
+    {
+        ControlDocumentation doc = Find(name);
+        if (doc == null)
+            throw new InvalidDataException(Path.GetFileName(path) + " describes unknown control '" + name + "'.");
+        return doc;
+    }
+
+    private static string BaseSetName(ControlDocumentation doc)
+    {
+        if (doc.Inheritance.Contains("ToolStripItem")) return "ToolStripItem";
+        if (doc.Inheritance.Contains("Control")) return "Control";
+        return "";
+    }
+
+    /// <summary>Phase 4. Data/Events/*.events.json: the events of each control.</summary>
     private void LoadEvents(string dataFolder)
     {
-        string folder = Path.Combine(dataFolder, "Events");
-        if (!Directory.Exists(folder)) return;
-
-        foreach (string path in Directory.GetFiles(folder, "*.events.json").OrderBy(p => p, StringComparer.OrdinalIgnoreCase))
+        foreach (string path in JsonFiles(dataFolder, "Events", "*.events.json"))
         {
-            string fileName = Path.GetFileName(path);
             List<ControlEvents> items = ReadJson<List<ControlEvents>>(path);
             if (items == null) continue;
-
             foreach (ControlEvents entry in items)
-            {
-                ControlDocumentation doc = Find(entry.Name);
-                if (doc == null)
-                    throw new InvalidDataException("Events file " + fileName + " describes unknown control '" + entry.Name + "'.");
-                doc.Events = entry.Events ?? new List<EventDocumentation>();
-            }
-        }
-
-        var shared = new Dictionary<string, List<EventDocumentation>>(StringComparer.OrdinalIgnoreCase);
-        string inheritedPath = Path.Combine(folder, "Inherited.json");
-        if (File.Exists(inheritedPath))
-        {
-            List<ControlEvents> sets = ReadJson<List<ControlEvents>>(inheritedPath);
-            if (sets != null)
-                foreach (ControlEvents set in sets)
-                    shared[set.Name] = set.Events ?? new List<EventDocumentation>();
-        }
-
-        foreach (ControlDocumentation doc in _all)
-        {
-            string baseName = BaseClassFor(doc);
-            doc.MemberBase = baseName;
-            if (baseName.Length == 0) continue;
-            if (!shared.TryGetValue(baseName, out List<EventDocumentation> baseEvents)) continue;
-
-            // An event documented on the control itself replaces the shared entry of the same name.
-            doc.InheritedEvents = baseEvents
-                .Where(b => !doc.Events.Any(o => string.Equals(o.Name, b.Name, StringComparison.OrdinalIgnoreCase)))
-                .ToList();
+                RequireControl(entry.Name, path).Events = entry.Events ?? new List<EventDocumentation>();
         }
     }
 
-    /// <summary>
-    /// Phase 4. Loads Data/Methods/*.methods.json and Data/Methods/Inherited.json the same way as events.
-    /// </summary>
+    /// <summary>Phase 4. Data/Methods/*.methods.json plus Data/Methods/Inherited.json (shared Control / ToolStripItem methods).</summary>
     private void LoadMethods(string dataFolder)
     {
-        string folder = Path.Combine(dataFolder, "Methods");
-        if (!Directory.Exists(folder)) return;
-
-        foreach (string path in Directory.GetFiles(folder, "*.methods.json").OrderBy(p => p, StringComparer.OrdinalIgnoreCase))
+        foreach (string path in JsonFiles(dataFolder, "Methods", "*.methods.json"))
         {
-            string fileName = Path.GetFileName(path);
             List<ControlMethods> items = ReadJson<List<ControlMethods>>(path);
             if (items == null) continue;
-
             foreach (ControlMethods entry in items)
-            {
-                ControlDocumentation doc = Find(entry.Name);
-                if (doc == null)
-                    throw new InvalidDataException("Methods file " + fileName + " describes unknown control '" + entry.Name + "'.");
-                doc.Methods = entry.Methods ?? new List<MethodDocumentation>();
-            }
+                RequireControl(entry.Name, path).Methods = entry.Methods ?? new List<MethodDocumentation>();
         }
+
+        string inheritedPath = Path.Combine(dataFolder, "Methods", "Inherited.json");
+        if (!File.Exists(inheritedPath)) return;
+        List<ControlMethods> sets = ReadJson<List<ControlMethods>>(inheritedPath);
+        if (sets == null) return;
 
         var shared = new Dictionary<string, List<MethodDocumentation>>(StringComparer.OrdinalIgnoreCase);
-        string inheritedPath = Path.Combine(folder, "Inherited.json");
-        if (File.Exists(inheritedPath))
-        {
-            List<ControlMethods> sets = ReadJson<List<ControlMethods>>(inheritedPath);
-            if (sets != null)
-                foreach (ControlMethods set in sets)
-                    shared[set.Name] = set.Methods ?? new List<MethodDocumentation>();
-        }
+        foreach (ControlMethods entrySet in sets)
+            shared[entrySet.Name] = entrySet.Methods ?? new List<MethodDocumentation>();
 
         foreach (ControlDocumentation doc in _all)
         {
-            string baseName = BaseClassFor(doc);
-            doc.MemberBase = baseName;
+            string baseName = BaseSetName(doc);
             if (baseName.Length == 0) continue;
             if (!shared.TryGetValue(baseName, out List<MethodDocumentation> baseMethods)) continue;
-
             doc.InheritedMethods = baseMethods
                 .Where(b => !doc.Methods.Any(o => string.Equals(o.Name, b.Name, StringComparison.OrdinalIgnoreCase)))
                 .ToList();
         }
     }
 
-    private static string BaseClassFor(ControlDocumentation doc) =>
-        doc.Inheritance.Contains("ToolStripItem") ? "ToolStripItem"
-        : doc.Inheritance.Contains("Control") ? "Control"
-        : doc.Inheritance.Contains("Component") ? "Component"
-        : "";
+    /// <summary>Phase 5. Data/Examples/*.examples.json: one complete example program per control.</summary>
+    private void LoadExamples(string dataFolder)
+    {
+        foreach (string path in JsonFiles(dataFolder, "Examples", "*.examples.json"))
+        {
+            List<ControlExample> items = ReadJson<List<ControlExample>>(path);
+            if (items == null) continue;
+            foreach (ControlExample example in items)
+            {
+                ControlDocumentation doc = RequireControl(example.Name, path);
+                if (example.Segments == null || example.Segments.Count == 0)
+                    throw new InvalidDataException("The example for '" + example.Name + "' in " + Path.GetFileName(path) + " has no code.");
+                doc.Example = example;
+            }
+        }
+    }
 
     private static T ReadJson<T>(string path)
     {

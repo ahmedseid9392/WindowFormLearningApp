@@ -1,111 +1,35 @@
 [
   {
-    "name": "MenuStrip",
-    "methods": [
-      {
-        "name": "Items.Add",
-        "signature": "int Items.Add(ToolStripItem value)",
-        "returnType": "int",
-        "returnDescription": "The index of the new item.",
-        "description": "Adds a menu or other item to the end of the strip.",
-        "parameters": [
-          {
-            "name": "value",
-            "type": "ToolStripItem",
-            "description": "The item to add, usually a ToolStripMenuItem."
-          }
-        ],
-        "example": "menuMain.Items.Add(new ToolStripMenuItem(\"&File\"));",
-        "expectedEffect": "A File menu appears on the bar."
-      },
-      {
-        "name": "Items.AddRange",
-        "signature": "void Items.AddRange(ToolStripItem[] toolStripItems)",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Adds several items at once.",
-        "parameters": [
-          {
-            "name": "toolStripItems",
-            "type": "ToolStripItem[]",
-            "description": "The items to add."
-          }
-        ],
-        "example": "menuMain.Items.AddRange(new ToolStripItem[] { mnuFile, mnuEdit, mnuHelp });",
-        "expectedEffect": "All three menus appear."
-      },
-      {
-        "name": "GetItemAt",
-        "signature": "ToolStripItem GetItemAt(int x, int y)",
-        "returnType": "ToolStripItem",
-        "returnDescription": "The item at that point, or null.",
-        "description": "Finds the item under a point (relative to the strip).",
-        "parameters": [
-          {
-            "name": "x",
-            "type": "int",
-            "description": "X coordinate."
-          },
-          {
-            "name": "y",
-            "type": "int",
-            "description": "Y coordinate."
-          }
-        ],
-        "example": "ToolStripItem item = menuMain.GetItemAt(10, 5);",
-        "expectedEffect": "Returns the item at that position or null."
-      }
-    ]
-  },
-  {
     "name": "ContextMenuStrip",
     "methods": [
       {
         "name": "Show",
-        "signature": "void Show(Control control, Point position)",
         "returnType": "void",
-        "returnDescription": "",
-        "description": "Shows the menu at a position relative to a control.",
+        "signature": "void Show(Control control, Point position)",
+        "description": "Shows the menu at a position.",
         "parameters": [
           {
             "name": "control",
             "type": "Control",
-            "description": "The control the position refers to."
+            "description": "The control the position is relative to."
           },
           {
             "name": "position",
             "type": "Point",
-            "description": "Where to show the menu."
+            "description": "The position inside that control."
           }
         ],
-        "example": "ctxMenu.Show(btnMore, new Point(0, btnMore.Height));",
-        "expectedEffect": "The menu pops up below the button."
+        "returns": "Nothing.",
+        "example": "ctxMenu.Show(btnMore, new Point(0, btnMore.Height));"
       },
       {
         "name": "Close",
-        "signature": "void Close()",
         "returnType": "void",
-        "returnDescription": "",
+        "signature": "void Close()",
         "description": "Closes the menu.",
         "parameters": [],
-        "example": "ctxMenu.Close();",
-        "expectedEffect": "The menu disappears."
-      },
-      {
-        "name": "Items.Add",
-        "signature": "ToolStripItem Items.Add(string text)",
-        "returnType": "ToolStripItem",
-        "returnDescription": "The item that was created.",
-        "description": "Creates a menu item with the given text and adds it.",
-        "parameters": [
-          {
-            "name": "text",
-            "type": "string",
-            "description": "The caption of the new item."
-          }
-        ],
-        "example": "ToolStripItem copy = ctxMenu.Items.Add(\"Copy\");\ncopy.Click += (s, e) => txtEditor.Copy();",
-        "expectedEffect": "A \"Copy\" entry appears in the menu."
+        "returns": "Nothing.",
+        "example": "ctxMenu.Close();"
       }
     ]
   },
@@ -113,148 +37,33 @@
     "name": "ToolStrip",
     "methods": [
       {
-        "name": "Items.Add",
-        "signature": "int Items.Add(ToolStripItem value)",
-        "returnType": "int",
-        "returnDescription": "The index of the new item.",
-        "description": "Adds a button, label or other item to the end of the strip.",
-        "parameters": [
-          {
-            "name": "value",
-            "type": "ToolStripItem",
-            "description": "The item to add."
-          }
-        ],
-        "example": "toolMain.Items.Add(new ToolStripButton(\"Save\"));",
-        "expectedEffect": "A Save button appears on the toolbar."
-      },
-      {
-        "name": "Items.AddRange",
-        "signature": "void Items.AddRange(ToolStripItem[] toolStripItems)",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Adds several items at once.",
-        "parameters": [
-          {
-            "name": "toolStripItems",
-            "type": "ToolStripItem[]",
-            "description": "The items to add."
-          }
-        ],
-        "example": "toolMain.Items.AddRange(new ToolStripItem[] { tsbNew, tsbOpen, tsbSave });",
-        "expectedEffect": "All three buttons appear."
-      },
-      {
-        "name": "Items.Clear",
-        "signature": "void Items.Clear()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Removes all items from the strip. The removed items are not disposed.",
-        "parameters": [],
-        "example": "toolMain.Items.Clear();",
-        "expectedEffect": "The toolbar is empty."
-      },
-      {
         "name": "GetItemAt",
-        "signature": "ToolStripItem GetItemAt(int x, int y)",
         "returnType": "ToolStripItem",
-        "returnDescription": "The item at that point, or null.",
-        "description": "Finds the item under a point (relative to the strip).",
+        "signature": "ToolStripItem GetItemAt(Point point)",
+        "description": "Finds the item at a position.",
         "parameters": [
           {
-            "name": "x",
-            "type": "int",
-            "description": "X coordinate."
-          },
-          {
-            "name": "y",
-            "type": "int",
-            "description": "Y coordinate."
+            "name": "point",
+            "type": "Point",
+            "description": "A point in the strip's coordinates."
           }
         ],
-        "example": "ToolStripItem item = toolMain.GetItemAt(10, 5);",
-        "expectedEffect": "Returns the item at that position or null."
+        "returns": "The item, or null.",
+        "example": "ToolStripItem item = toolStrip1.GetItemAt(new Point(20, 10));"
       }
     ]
-  },
-  {
-    "name": "StatusStrip",
-    "methods": [
-      {
-        "name": "Items.Add",
-        "signature": "int Items.Add(ToolStripItem value)",
-        "returnType": "int",
-        "returnDescription": "The index of the new item.",
-        "description": "Adds a label, progress bar or other item to the status bar.",
-        "parameters": [
-          {
-            "name": "value",
-            "type": "ToolStripItem",
-            "description": "The item to add, for example a ToolStripStatusLabel."
-          }
-        ],
-        "example": "statusMain.Items.Add(new ToolStripStatusLabel(\"Ready\"));",
-        "expectedEffect": "\"Ready\" appears on the status bar."
-      }
-    ]
-  },
-  {
-    "name": "ToolStripButton",
-    "methods": []
-  },
-  {
-    "name": "ToolStripLabel",
-    "methods": []
   },
   {
     "name": "ToolStripComboBox",
     "methods": [
       {
-        "name": "Items.Add",
-        "signature": "int Items.Add(object item)",
-        "returnType": "int",
-        "returnDescription": "The index of the new item.",
-        "description": "Adds an item to the drop-down list.",
-        "parameters": [
-          {
-            "name": "item",
-            "type": "object",
-            "description": "The object to add."
-          }
-        ],
-        "example": "tscZoom.Items.Add(\"150%\");",
-        "expectedEffect": "\"150%\" appears in the list."
-      },
-      {
         "name": "SelectAll",
+        "returnType": "void",
         "signature": "void SelectAll()",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Selects all the text in the edit area.",
+        "description": "Selects all the text in the box.",
         "parameters": [],
-        "example": "tscZoom.SelectAll();",
-        "expectedEffect": "The text is highlighted (DropDown style only)."
-      },
-      {
-        "name": "Select",
-        "signature": "void Select(int start, int length)",
-        "returnType": "void",
-        "returnDescription": "",
-        "description": "Selects a range of characters in the edit area.",
-        "parameters": [
-          {
-            "name": "start",
-            "type": "int",
-            "description": "Index of the first character."
-          },
-          {
-            "name": "length",
-            "type": "int",
-            "description": "Number of characters."
-          }
-        ],
-        "example": "tscZoom.Select(0, 2);",
-        "expectedEffect": "The first two characters are highlighted."
+        "returns": "Nothing.",
+        "example": "tscZoom.SelectAll();"
       }
     ]
   }
